@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  ul, ol {
+    list-style: none;
+  }
 `;
 
 export default GlobalStyle;

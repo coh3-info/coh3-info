@@ -1,5 +1,7 @@
+import SquadDetails from '../components/squad-details-page/SquadDetails';
+
 const SquadDetailsPage = () => {
-  return <div>SquadDetailsPage</div>;
+  return <SquadDetails />;
 };
 
 export default SquadDetailsPage;

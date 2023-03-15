@@ -196,8 +196,14 @@ const OptionButton = styled.button`
   width: 36px;
   height: 36px;
   overflow: hidden;
-  border: none;
+  border: solid 1px #c4c4c4;
+  border-radius: 4px;
   background-color: transparent;
+
+  &:hover {
+    background-color: #dfdfdf;
+  }
+
   > img {
     width: 100%;
     height: 100%;

@@ -15,12 +15,10 @@ const SquadDetails = () => {
       <InfoWrapper>
         <ControllersContainer>
           <EntityStatsList />
-          <EntityStatsList />
         </ControllersContainer>
       </InfoWrapper>
       <InfoWrapper>
         <ControllersContainer>
-          <WeaponStatsList />
           <WeaponStatsList />
         </ControllersContainer>
       </InfoWrapper>

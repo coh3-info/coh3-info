@@ -14,12 +14,12 @@ const StatItem = ({ statName = '', leftValue = '', rightValue = '', subStats = [
   return (
     <StatItemWrapper>
       {hasSubStats ? (
-        <>
+        <StatWithSubStats>
           <StatName>{statName}</StatName>
           <SubStats>
             {subStats.map((subStat) => {
               return (
-                <SingleStat>
+                <SingleStat key={subStat.statName}>
                   <LeftValue>{subStat.leftValue}</LeftValue>
                   <SubStatName>{subStat.statName}</SubStatName>
                   <RightValue>{subStat.rightValue}</RightValue>
@@ -27,7 +27,7 @@ const StatItem = ({ statName = '', leftValue = '', rightValue = '', subStats = [
               );
             })}
           </SubStats>
-        </>
+        </StatWithSubStats>
       ) : (
         <SingleStat>
           <LeftValue>{leftValue}</LeftValue>
@@ -55,7 +55,8 @@ const StatName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 0.875rem;
 `;
 
 const Value = styled.div`
@@ -75,6 +76,10 @@ const RightValue = styled(Value)`
   align-items: center;
 `;
 
+const StatWithSubStats = styled.div`
+  /* margin-top: 4px; */
+`;
+
 const SubStats = styled.div`
   margin-top: 3px;
   display: flex;
@@ -83,5 +88,6 @@ const SubStats = styled.div`
 `;
 
 const SubStatName = styled(StatName)`
-  color: #b1b1b1;
+  color: #979797;
+  font-size: 0.815rem;
 `;

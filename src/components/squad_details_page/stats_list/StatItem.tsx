@@ -60,6 +60,7 @@ const StatName = styled.div`
 
 const Value = styled.div`
   flex-basis: 30%;
+  font-size: 0.875rem;
 `;
 
 const LeftValue = styled(Value)`

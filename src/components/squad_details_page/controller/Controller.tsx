@@ -8,6 +8,10 @@ import tempPortrait from '../../../images/american/infantiry/riflemen_us/rifleme
 import tempSquadSymbol from '../../../images/american/infantiry/riflemen_us/riflemen_us_symbol.png';
 import tempRaceMark from '../../../images/common/american.png';
 
+import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
+import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
+import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
+
 const Controller = () => {
   return (
     <ControllerWrapper>
@@ -53,7 +57,9 @@ const Controller = () => {
         <Options>
           <ul>
             <li>
-              <OptionButton>업그레이드1</OptionButton>
+              <OptionButton>
+                <img src={tempBarIcon} alt="bar" />
+              </OptionButton>
             </li>
           </ul>
         </Options>
@@ -61,26 +67,20 @@ const Controller = () => {
         <Options>
           <ul>
             <li>
-              <OptionButton>스킬1</OptionButton>
+              <OptionButton>
+                <img src={tempGrenadIcon} alt="bar" />
+              </OptionButton>
             </li>
             <li>
-              <OptionButton>스킬2</OptionButton>
-            </li>
-            <li>
-              <OptionButton>스킬3</OptionButton>
+              <OptionButton>
+                <img src={tempStickyBombIcon} alt="bar" />
+              </OptionButton>
             </li>
           </ul>
         </Options>
         <OptionName>건설</OptionName>
         <Options>
-          <ul>
-            <li>
-              <OptionButton>건설1</OptionButton>
-            </li>
-            <li>
-              <OptionButton>건설2</OptionButton>
-            </li>
-          </ul>
+          <ul></ul>
         </Options>
       </Info>
       <SelectorsContainer>
@@ -96,7 +96,8 @@ export default Controller;
 const ControllerWrapper = styled.div`
   width: 100%;
   max-width: 530px;
-  border: solid 1px #000;
+  border: solid 1px #979797;
+  border-radius: 6px;
   padding: 16px;
   font-size: 0.875rem;
 `;
@@ -142,7 +143,7 @@ const SquadName = styled.div`
   align-items: center;
   gap: 5px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 500;
 `;
 
 const ResourcesContainer = styled.div`
@@ -182,6 +183,7 @@ const OptionName = styled.div`
 `;
 
 const Options = styled.div`
+  height: 36px;
   grid-column: span 3;
 
   > ul {
@@ -194,7 +196,8 @@ const OptionButton = styled.button`
   width: 36px;
   height: 36px;
   overflow: hidden;
-
+  border: none;
+  background-color: transparent;
   > img {
     width: 100%;
     height: 100%;
@@ -211,7 +214,8 @@ const MockSelecter = styled.div`
   width: 100%;
   height: 30px;
   padding: 0 8px;
-  border: solid 1px #000;
+  border: solid 1px #979797;
+  border-radius: 6px;
   display: flex;
   align-items: center;
 `;

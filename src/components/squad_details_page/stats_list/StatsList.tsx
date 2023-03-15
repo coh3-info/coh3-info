@@ -30,7 +30,8 @@ const StatsListWrapper = styled.div`
   max-width: 530px;
   margin-top: 20px; //temp attribute 추후 수정하기
   padding: 16px;
-  border: solid 1px #000;
+  border: solid 1px #979797;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: 8px;

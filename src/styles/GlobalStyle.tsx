@@ -5,13 +5,15 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "pretendard", sans-serif;
+    font-family: "noto-sans-cjk-kr", sans-serif;
   }
 
   button {
     cursor: pointer;
   }
 
-  ul, ol {
+  li {
     list-style: none;
   }
 `;

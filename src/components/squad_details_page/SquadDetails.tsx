@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Controller from './controller/Controller';
+import EntityStatsList from './stats_list/EntityStatsList';
+import WeaponStatsList from './stats_list/WeaponStatsList';
 
 const SquadDetails = () => {
   return (
@@ -8,6 +10,18 @@ const SquadDetails = () => {
         <ControllersContainer>
           <Controller />
           <Controller />
+        </ControllersContainer>
+      </InfoWrapper>
+      <InfoWrapper>
+        <ControllersContainer>
+          <EntityStatsList />
+          <EntityStatsList />
+        </ControllersContainer>
+      </InfoWrapper>
+      <InfoWrapper>
+        <ControllersContainer>
+          <WeaponStatsList />
+          <WeaponStatsList />
         </ControllersContainer>
       </InfoWrapper>
     </SquadDetailsWrapper>

@@ -1,6 +1,4 @@
-import sherman from '../../../../ebps/races/american/vehicles/sherman_us';
-
-import type Squad from '../../../../../types/Squad';
+import type Squad from '../../../../types/Squad';
 
 const squad: Squad = {
   uniqueName: 'sherman_us',
@@ -19,7 +17,7 @@ const squad: Squad = {
   entities: [
     {
       num: 1,
-      entity: sherman,
+      entity: 'sherman_us',
     },
   ],
   reinforce: {

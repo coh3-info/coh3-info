@@ -1,4 +1,4 @@
-import type Entity from '../../../../../types/Entity';
+import type Entity from '../../../../types/Entity';
 
 const entity: Entity = {
   uniqueName: 'rifleman_us',

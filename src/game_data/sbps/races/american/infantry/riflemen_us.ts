@@ -1,6 +1,4 @@
-import riflemanUS from '../../../../ebps/races/american/infantry/rifleman_us';
-import riflemanSquadLeaderUS from '../../../../ebps/races/american/infantry/rifleman_squad_leader_us';
-import type Squad from '../../../../../types/Squad';
+import type Squad from '../../../../types/Squad';
 
 const squad: Squad = {
   uniqueName: 'riflemen_us',

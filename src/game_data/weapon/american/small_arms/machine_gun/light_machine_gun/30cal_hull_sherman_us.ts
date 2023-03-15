@@ -1,4 +1,4 @@
-import Weapon from '../../../../../../types/Weapon';
+import Weapon from '../../../../../types/Weapon';
 
 const weapon: Weapon = {
   uniqueName: '30cal_hull_sherman_us',

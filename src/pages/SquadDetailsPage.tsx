@@ -1,4 +1,4 @@
-import SquadDetails from '../components/squad-details-page/SquadDetails';
+import SquadDetails from '../components/squad_details_page/SquadDetails';
 
 const SquadDetailsPage = () => {
   return <SquadDetails />;

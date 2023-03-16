@@ -95,7 +95,6 @@ export default Controller;
 
 const ControllerWrapper = styled.div`
   width: 100%;
-  max-width: 530px;
   border: solid 1px #979797;
   border-radius: 6px;
   padding: 16px;

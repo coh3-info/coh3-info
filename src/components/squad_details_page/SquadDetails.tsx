@@ -11,16 +11,8 @@ const SquadDetails = () => {
           <Controller />
           <Controller />
         </ControllersContainer>
-      </InfoWrapper>
-      <InfoWrapper>
-        <ControllersContainer>
-          <EntityStatsList />
-        </ControllersContainer>
-      </InfoWrapper>
-      <InfoWrapper>
-        <ControllersContainer>
-          <WeaponStatsList />
-        </ControllersContainer>
+        <EntityStatsList />
+        <WeaponStatsList />
       </InfoWrapper>
     </SquadDetailsWrapper>
   );
@@ -29,16 +21,16 @@ const SquadDetails = () => {
 export default SquadDetails;
 
 const SquadDetailsWrapper = styled.div`
-  max-width: 1300px;
+  max-width: 1170px;
   margin: 0 auto;
-  padding-top: 20px;
+  padding: 20px 0;
 `;
 
 const InfoWrapper = styled.div`
-  max-width: 1080px;
+  max-width: 960px;
 `;
 
 const ControllersContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 10px;
 `;

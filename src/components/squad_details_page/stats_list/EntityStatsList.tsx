@@ -6,7 +6,7 @@ const EntityStatsList = () => {
   const statsList1: (Stat | StatWithSubStats)[] = [
     { statName: '체력', leftValue: '100', rightValue: '720' },
     { statName: '피격률', leftValue: '100%', rightValue: '2000%' },
-    { statName: '장갑', leftValue: '130 / 80 / 20', rightValue: '195 / 110 / 80' },
+    { statName: '장갑', leftValue: '1 / 1 / 1', rightValue: '195 / 110 / 80' },
     { statName: '충원비', leftValue: '26', rightValue: '0' },
     { statName: '충원시간', leftValue: '3', rightValue: '0' },
     { statName: '시야', leftValue: '35', rightValue: '35' },

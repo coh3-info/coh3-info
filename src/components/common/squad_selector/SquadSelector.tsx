@@ -1,13 +1,19 @@
-import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../state_store/store';
+import { addSquad } from '../../../state_store/features/selectorSlice';
+
 import SquadSelectorItem from './SquadSelectorItem';
 
 const SquadSelector = () => {
   const location = useLocation();
+  const testValue = useSelector((state: RootState) => state.selector.squadList);
+  const dispatch = useDispatch();
   const path = location.pathname;
-
   return (
     <SquadSelectorWrapper>
+      <button onClick={() => dispatch(addSquad({ uniqueName: 'hi요', name: '소총병 분대' }))}>test버튼</button>
       <Title>관심 분대</Title>
       <SquadListWrapper>
         <SquadList>
@@ -16,6 +22,9 @@ const SquadSelector = () => {
           <SquadSelectorItem squadName="M16 다연장 기관총 장착 장갑차" />
           <SquadSelectorItem squadName="네벨베르퍼 42 로켓발사기 운용반" />
           <SquadSelectorItem squadName="카노네 다 105/28 곡사포 운용반" />
+          {testValue.map((v, i) => (
+            <SquadSelectorItem key={i} squadName={v.name} />
+          ))}
         </SquadList>
       </SquadListWrapper>
       {path === '/' ? (

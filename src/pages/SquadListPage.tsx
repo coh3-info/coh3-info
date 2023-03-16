@@ -1,12 +1,7 @@
-import SquadSelector from '../components/common/squad_selector/SquadSelector';
+import SquadList from '../components/squad_list_page/SquadList';
 
 const SquadListPage = () => {
-  return (
-    <div>
-      SquadListPage
-      <SquadSelector />
-    </div>
-  );
+  return <SquadList />;
 };
 
 export default SquadListPage;

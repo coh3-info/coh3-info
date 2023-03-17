@@ -14,7 +14,7 @@ const initialState: InitialState = {
 };
 
 export const squadSelectorSlice = createSlice({
-  name: 'selector',
+  name: 'squadSelector',
   initialState,
   reducers: {
     addSquad: (state, action) => {

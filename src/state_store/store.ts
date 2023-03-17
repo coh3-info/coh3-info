@@ -3,7 +3,7 @@ import squadSelectorReducer from './features/squadSelectorSlice';
 
 const store = configureStore({
   reducer: {
-    selector: squadSelectorReducer,
+    squadSelector: squadSelectorReducer,
   },
 });
 

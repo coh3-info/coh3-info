@@ -7,7 +7,7 @@ import SquadSelectorItem from './SquadSelectorItem';
 
 const SquadSelector = () => {
   const location = useLocation();
-  const testValue = useSelector((state: RootState) => state.selector.squadList);
+  const testValue = useSelector((state: RootState) => state.squadSelector.squadList);
   const path = location.pathname;
   return (
     <SquadSelectorWrapper>

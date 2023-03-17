@@ -17,16 +17,7 @@ const squadHmgMg42GER: Squad = {
   captureRateMutiplier: 1,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [
-    {
-      num: 1,
-      entity: 'w_mg42_hmg_ger',
-    },
-    {
-      num: 4,
-      entity: 'crew_hmg_ger',
-    },
-  ],
+  entities: [],
   reinforce: {
     costPercentage: 0.38,
     timePercentage: 1,

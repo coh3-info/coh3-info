@@ -1,6 +1,9 @@
 import portrait from '../../../../../images/american/infantiry/riflemen_us/riflemen_us.png';
 import squadIcon from '../../../../../images/american/infantiry/riflemen_us/riflemen_us_symbol.png';
 
+import entityRiflemenSquadLeaderUS from '../../../ebps/american/infantry/rifleman_squad_leader_us';
+import entityRiflemanUS from '../../../ebps/american/infantry/rifleman_us';
+
 import type Squad from '../../../../types/Squad';
 
 const squadRiflemenUS: Squad = {
@@ -20,11 +23,11 @@ const squadRiflemenUS: Squad = {
   entities: [
     {
       num: 1,
-      entity: 'rifleman_squad_leader_us',
+      entity: entityRiflemenSquadLeaderUS,
     },
     {
       num: 5,
-      entity: 'rifleman_us',
+      entity: entityRiflemanUS,
     },
   ],
   reinforce: {

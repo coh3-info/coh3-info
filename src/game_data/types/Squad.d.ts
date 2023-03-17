@@ -1,6 +1,8 @@
+import Entity from './Entity';
+
 type Entities = {
   num: number;
-  entity: string;
+  entity: Entity;
 }[];
 
 export type Squad = {

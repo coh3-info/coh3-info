@@ -17,12 +17,7 @@ const squadGuastatoriAK: Squad = {
   captureRateMutiplier: 1.25,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [
-    {
-      num: 6,
-      entity: 'guastatori_ak',
-    },
-  ],
+  entities: [],
   reinforce: {
     costPercentage: 0.48,
     timePercentage: 0.625,

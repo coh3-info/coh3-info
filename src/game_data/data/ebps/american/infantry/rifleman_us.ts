@@ -1,6 +1,6 @@
 import type Entity from '../../../../types/Entity';
 
-const entity: Entity = {
+const entityRiflemanUS: Entity = {
   uniqueName: 'rifleman_us',
   type: 'infantry',
   weapons: ['garand_rifleman_us'],
@@ -25,4 +25,4 @@ const entity: Entity = {
   sight: 35,
 };
 
-export default entity;
+export default entityRiflemanUS;

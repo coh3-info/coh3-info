@@ -17,16 +17,7 @@ const squadMortar81mmUK: Squad = {
   captureRateMutiplier: 1,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [
-    {
-      num: 1,
-      entity: 'w_81mm_mortar_uk',
-    },
-    {
-      num: 4,
-      entity: 'crew_mortar_indian_uk',
-    },
-  ],
+  entities: [],
   reinforce: {
     costPercentage: 0.5,
     timePercentage: 1,

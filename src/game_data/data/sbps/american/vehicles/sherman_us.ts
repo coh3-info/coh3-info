@@ -1,6 +1,8 @@
 import portrait from '../../../../../images/american/vehicles/sherman_us/sherman_us.png';
 import squadIcon from '../../../../../images/american/vehicles/sherman_us/sherman_us_symbol.png';
 
+import entityShermanUS from '../../../ebps/american/vehicles/sherman_us';
+
 import type Squad from '../../../../types/Squad';
 
 const squadShermenUS: Squad = {
@@ -20,7 +22,7 @@ const squadShermenUS: Squad = {
   entities: [
     {
       num: 1,
-      entity: 'sherman_us',
+      entity: entityShermanUS,
     },
   ],
   reinforce: {

@@ -8,7 +8,7 @@ export type Squad = {
   nameEN: string;
   name: string;
   type: 'infantry' | 'team_weapon' | 'vehicle';
-  race: 'us_forces' | 'british_forces' | 'wehrmacht' | 'afrikakorps';
+  race: 'us_forces' | 'british_forces' | 'wehrmacht' | 'afrika_korps';
   imageUrl: {
     portrait: string;
     icon: string;

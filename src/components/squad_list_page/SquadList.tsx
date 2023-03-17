@@ -1,33 +1,21 @@
 import styled from 'styled-components';
+import { getSquadList } from '../../game_data/data_controller/sbps';
 
 import SquadSelector from '../common/squad_selector/SquadSelector';
 import SquadListHeader from './SquadListHeader';
 import SquadListItem from './SquadListItem';
 
 const SquadList = () => {
+  const squadList = getSquadList();
+
   return (
     <SquadListWrapper>
       <div>
         <SquadListHeader />
         <List>
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
-          <SquadListItem />
+          {squadList.map((squad) => {
+            return <SquadListItem squad={squad} />;
+          })}
         </List>
       </div>
       <SquadSelectorTrack>

@@ -6,7 +6,7 @@ import resourcePopulationIcon from '../../../images/common/resource_population.p
 
 import tempPortrait from '../../../images/american/infantiry/riflemen_us/riflemen_us.png';
 import tempSquadSymbol from '../../../images/american/infantiry/riflemen_us/riflemen_us_symbol.png';
-import tempRaceMark from '../../../images/common/american.png';
+import tempRaceMark from '../../../images/common/race_marks/american.png';
 
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';

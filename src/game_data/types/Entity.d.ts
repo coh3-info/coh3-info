@@ -1,6 +1,3 @@
-type Hardpoints = WeaponTable[];
-type WeaponTable = string[];
-
 type InfantryArmor = number;
 type VehicleArmor = {
   front: number;
@@ -11,7 +8,7 @@ type VehicleArmor = {
 type Entity = {
   uniqueName: string; //coh3 데이터의 파일 이름
   type: 'infantry' | 'team_weapon' | 'vehicle';
-  hardpoints: Hardpoints;
+  weapons: string[];
   cost: {
     fuel: number;
     manpower: number;

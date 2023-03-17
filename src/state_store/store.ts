@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import selectorReducer from './features/selectorSlice';
+import squadSelectorReducer from './features/squadSelectorSlice';
 
 const store = configureStore({
   reducer: {
-    selector: selectorReducer,
+    selector: squadSelectorReducer,
   },
 });
 

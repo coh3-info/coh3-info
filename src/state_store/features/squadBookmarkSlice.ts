@@ -13,8 +13,8 @@ const initialState: InitialState = {
   squadList: [],
 };
 
-export const squadSelectorSlice = createSlice({
-  name: 'squadSelector',
+export const squadBookmarkManagerSlice = createSlice({
+  name: 'squadBookmarkManager',
   initialState,
   reducers: {
     addSquad: (state, action) => {
@@ -23,6 +23,6 @@ export const squadSelectorSlice = createSlice({
   },
 });
 
-export const { addSquad } = squadSelectorSlice.actions;
+export const { addSquad } = squadBookmarkManagerSlice.actions;
 
-export default squadSelectorSlice.reducer;
+export default squadBookmarkManagerSlice.reducer;

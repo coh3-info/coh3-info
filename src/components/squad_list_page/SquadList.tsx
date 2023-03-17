@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { getSquadList } from '../../game_data/data_controller/sbps';
 
-import SquadSelector from '../common/squad_selector/SquadSelector';
+import SquadBookmarkManager from '../common/squad_bookmark_manage/SquadBookmarkManager';
 import SquadListHeader from './SquadListHeader';
 import SquadListItem from './SquadListItem';
 
@@ -18,9 +18,9 @@ const SquadList = () => {
           })}
         </List>
       </div>
-      <SquadSelectorTrack>
-        <SquadSelector />
-      </SquadSelectorTrack>
+      <SquadBookmarkManagerTrack>
+        <SquadBookmarkManager />
+      </SquadBookmarkManagerTrack>
     </SquadListWrapper>
   );
 };
@@ -39,7 +39,7 @@ const SquadListWrapper = styled.div`
   }
 `;
 
-const SquadSelectorTrack = styled.div`
+const SquadBookmarkManagerTrack = styled.div`
   margin-left: 10px;
 `;
 

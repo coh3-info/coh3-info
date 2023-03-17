@@ -5,11 +5,11 @@ type SelectedSquadItemProps = {
   squadName: string;
 };
 
-const SquadSelectorItem = ({ squadName }: SelectedSquadItemProps) => {
+const SquadBookmark = ({ squadName }: SelectedSquadItemProps) => {
   const location = useLocation();
   const path = location.pathname;
   return (
-    <SquadSelectorItemWrapper>
+    <SquadBookmarkWrapper>
       {path === '/details' && (
         <RadioButtonsContainer>
           <input type="radio" name="left" />
@@ -19,11 +19,11 @@ const SquadSelectorItem = ({ squadName }: SelectedSquadItemProps) => {
 
       <SquadName>{squadName}</SquadName>
       <RemoveButton>×</RemoveButton>
-    </SquadSelectorItemWrapper>
+    </SquadBookmarkWrapper>
   );
 };
 
-export default SquadSelectorItem;
+export default SquadBookmark;
 
 const RemoveButton = styled.button`
   width: 20px;
@@ -41,7 +41,7 @@ const RemoveButton = styled.button`
   }
 `;
 
-const SquadSelectorItemWrapper = styled.li`
+const SquadBookmarkWrapper = styled.li`
   display: flex;
   align-items: center;
   gap: 4px;

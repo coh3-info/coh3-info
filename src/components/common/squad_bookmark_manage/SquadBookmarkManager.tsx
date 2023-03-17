@@ -3,19 +3,19 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../state_store/store';
 
-import SquadSelectorItem from './SquadSelectorItem';
+import SquadBookmark from './SquadBookmark';
 
-const SquadSelector = () => {
+const SquadBookmarkManager = () => {
   const location = useLocation();
-  const testValue = useSelector((state: RootState) => state.squadSelector.squadList);
+  const testValue = useSelector((state: RootState) => state.squadBookmark.squadList);
   const path = location.pathname;
   return (
-    <SquadSelectorWrapper>
-      <Title>관심 분대</Title>
+    <SquadBookmarkManagerWrapper>
+      <Title>북마크</Title>
       <SquadListWrapper>
         <SquadList>
           {testValue.map((v, i) => (
-            <SquadSelectorItem key={i} squadName={v.name} />
+            <SquadBookmark key={i} squadName={v.name} />
           ))}
         </SquadList>
       </SquadListWrapper>
@@ -24,13 +24,13 @@ const SquadSelector = () => {
       ) : (
         <LinkToSquadListButton to="/">분대 목록 보기</LinkToSquadListButton>
       )}
-    </SquadSelectorWrapper>
+    </SquadBookmarkManagerWrapper>
   );
 };
 
-export default SquadSelector;
+export default SquadBookmarkManager;
 
-const SquadSelectorWrapper = styled.div`
+const SquadBookmarkManagerWrapper = styled.div`
   width: 200px;
   padding: 8px;
   border: solid 1px #979797;

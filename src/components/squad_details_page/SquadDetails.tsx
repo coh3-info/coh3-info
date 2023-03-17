@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import SquadSelector from '../common/squad_selector/SquadSelector';
+
+import SquadBookmarkManager from '../common/squad_bookmark_manage/SquadBookmarkManager';
 import Controller from './controller/Controller';
 import EntityStatsList from './stats_list/EntityStatsList';
 import WeaponStatsList from './stats_list/WeaponStatsList';
@@ -15,9 +16,9 @@ const SquadDetails = () => {
         <EntityStatsList />
         <WeaponStatsList />
       </InfoWrapper>
-      <SquadSelectorTrack>
-        <SquadSelector />
-      </SquadSelectorTrack>
+      <SquadBookmarkManagerTrack>
+        <SquadBookmarkManager />
+      </SquadBookmarkManagerTrack>
     </SquadDetailsWrapper>
   );
 };
@@ -41,6 +42,6 @@ const ControllersContainer = styled.div`
   gap: 10px;
 `;
 
-const SquadSelectorTrack = styled.div`
+const SquadBookmarkManagerTrack = styled.div`
   margin-left: 10px;
 `;

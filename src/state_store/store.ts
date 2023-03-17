@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import squadSelectorReducer from './features/squadSelectorSlice';
+import squadBookmarkReducer from './features/squadBookmarkSlice';
 
 const store = configureStore({
   reducer: {
-    squadSelector: squadSelectorReducer,
+    squadBookmark: squadBookmarkReducer,
   },
 });
 

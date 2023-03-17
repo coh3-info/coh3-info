@@ -4,26 +4,26 @@ import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
 import resourceFuelIcon from '../../../images/common/resource_fuel.png';
 import resourcePopulationIcon from '../../../images/common/resource_population.png';
 
-import tempPortrait from '../../../images/american/infantiry/riflemen_us/riflemen_us.png';
-import tempSquadSymbol from '../../../images/american/infantiry/riflemen_us/riflemen_us_symbol.png';
 import tempRaceMark from '../../../images/common/race_marks/american.png';
 
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
 
+import EntitySelector from './EntitySelector';
+
 const Controller = () => {
   return (
     <ControllerWrapper>
       <Info>
         <Portrait>
-          <img src={tempPortrait} alt="초상화" />
+          <img src="" alt="초상화" />
         </Portrait>
         <BasicInfo>
           <div>
             <SquadName>
               <SquadSymbol>
-                <img src={tempSquadSymbol} alt="분대 심볼" />
+                <img src="" alt="분대 심볼" />
               </SquadSymbol>
               소총병 분대
             </SquadName>
@@ -84,7 +84,7 @@ const Controller = () => {
         </Options>
       </Info>
       <SelectorsContainer>
-        <MockSelecter>분대구성원 선택</MockSelecter>
+        <EntitySelector entities={[]} />
         <MockSelecter>무기 선택</MockSelecter>
       </SelectorsContainer>
     </ControllerWrapper>

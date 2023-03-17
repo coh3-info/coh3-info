@@ -14,7 +14,7 @@ const SquadList = () => {
         <SquadListHeader />
         <List>
           {squadList.map((squad) => {
-            return <SquadListItem squad={squad} />;
+            return <SquadListItem key={squad.uniqueName} squad={squad} />;
           })}
         </List>
       </div>

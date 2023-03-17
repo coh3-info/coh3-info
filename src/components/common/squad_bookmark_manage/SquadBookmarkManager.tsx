@@ -7,15 +7,15 @@ import SquadBookmark from './SquadBookmark';
 
 const SquadBookmarkManager = () => {
   const location = useLocation();
-  const testValue = useSelector((state: RootState) => state.squadBookmark.squadList);
+  const bookmarkList = useSelector((state: RootState) => state.squadBookmark.bookmarkList);
   const path = location.pathname;
   return (
     <SquadBookmarkManagerWrapper>
       <Title>북마크</Title>
       <SquadListWrapper>
         <SquadList>
-          {testValue.map((v, i) => (
-            <SquadBookmark key={i} squadName={v.name} />
+          {bookmarkList.map((bookmark, i) => (
+            <SquadBookmark key={i} squadName={bookmark.squad.name} />
           ))}
         </SquadList>
       </SquadListWrapper>

@@ -1,16 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
+import Squad from '../../game_data/types/Squad';
 
-type SquadInSelector = {
-  uniqueName: string;
-  name: string;
+import tempSquadRiflemenUS from '../../game_data/data/sbps/american/infantry/riflemen_us';
+import tempSquadShermenUS from '../../game_data/data/sbps/american/vehicles/sherman_us';
+
+export type Bookmark = {
+  squad: Squad;
 };
 
 type InitialState = {
-  squadList: SquadInSelector[];
+  selectedBookmarkOnLeft: Bookmark;
+  selectedBookmarkOnRight: Bookmark;
+  bookmarkList: Bookmark[];
 };
 
 const initialState: InitialState = {
-  squadList: [],
+  selectedBookmarkOnLeft: { squad: tempSquadRiflemenUS },
+  selectedBookmarkOnRight: { squad: tempSquadShermenUS },
+  bookmarkList: [],
 };
 
 export const squadBookmarkManagerSlice = createSlice({
@@ -18,7 +25,7 @@ export const squadBookmarkManagerSlice = createSlice({
   initialState,
   reducers: {
     addSquad: (state, action) => {
-      state.squadList = [...state.squadList, action.payload];
+      state.bookmarkList = [...state.bookmarkList, action.payload];
     },
   },
 });

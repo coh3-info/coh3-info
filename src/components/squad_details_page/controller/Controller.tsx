@@ -11,23 +11,32 @@ import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
 
 import EntitySelector from './EntitySelector';
+import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
+import { getEntities } from '../../../game_data/util/sbps';
 
-const Controller = () => {
+type ControllerProps = {
+  bookmark: Bookmark;
+};
+
+const Controller = ({ bookmark }: ControllerProps) => {
+  const squad = bookmark.squad;
+  const entities = getEntities(squad);
+
   return (
     <ControllerWrapper>
       <Info>
         <Portrait>
-          <img src="" alt="초상화" />
+          <img src={squad.imageUrl.portrait} alt="초상화" />
         </Portrait>
         <BasicInfo>
           <div>
             <SquadName>
               <SquadSymbol>
-                <img src="" alt="분대 심볼" />
+                <img src={squad.imageUrl.icon} alt="분대 심볼" />
               </SquadSymbol>
-              소총병 분대
+              {squad.name}
             </SquadName>
-            <div>보병</div>
+            <div>{squad.type}</div>
           </div>
           <ResourcesContainer>
             <Resource>
@@ -84,7 +93,7 @@ const Controller = () => {
         </Options>
       </Info>
       <SelectorsContainer>
-        <EntitySelector entities={[]} />
+        <EntitySelector entities={entities} />
         <MockSelecter>무기 선택</MockSelecter>
       </SelectorsContainer>
     </ControllerWrapper>

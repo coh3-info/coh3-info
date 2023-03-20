@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import SquadBookmarkManager from '../common/squad_bookmark_manage/SquadBookmarkManager';
+import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
 import Controller from './controller/Controller';
 import EntityStatsList from './stats_list/EntityStatsList';
 import WeaponStatsList from './stats_list/WeaponStatsList';

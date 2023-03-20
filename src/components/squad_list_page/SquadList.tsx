@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { getSquadList } from '../../game_data/data_controller/sbps';
 
-import SquadBookmarkManager from '../common/squad_bookmark_manage/SquadBookmarkManager';
+import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
 import SquadListHeader from './SquadListHeader';
 import SquadListItem from './SquadListItem';
 

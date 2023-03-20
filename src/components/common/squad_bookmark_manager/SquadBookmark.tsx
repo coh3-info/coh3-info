@@ -29,8 +29,8 @@ const SquadBookmark = ({
     <SquadBookmarkWrapper>
       {path === '/details' && (
         <RadioButtonsContainer>
-          <input type="radio" name="left" onClick={() => selectBookmark(id, true)} checked={checkedLeft} />
-          <input type="radio" name="right" onClick={() => selectBookmark(id, false)} checked={checkedRight} />
+          <input type="radio" name="left" onChange={() => selectBookmark(id, true)} checked={checkedLeft} />
+          <input type="radio" name="right" onChange={() => selectBookmark(id, false)} checked={checkedRight} />
         </RadioButtonsContainer>
       )}
 

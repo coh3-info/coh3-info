@@ -1,22 +1,51 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../state_store/store';
+import {
+  removeBookmark as _removeBookmark,
+  selectBookmark as _selectBookmark,
+} from '../../../state_store/features/squadBookmarkSlice';
 
 import SquadBookmark from './SquadBookmark';
 
 const SquadBookmarkManager = () => {
+  const { bookmarkList, selectedBookmarkOnLeft, selectedBookmarkOnRight } = useSelector(
+    (state: RootState) => state.squadBookmark
+  );
+  const dispatch = useDispatch();
   const location = useLocation();
-  const bookmarkList = useSelector((state: RootState) => state.squadBookmark.bookmarkList);
   const path = location.pathname;
+
+  const removeBookmark = (id: string) => {
+    dispatch(_removeBookmark({ id }));
+  };
+
+  const selectBookmark = (id: string, isLeft: boolean) => {
+    dispatch(_selectBookmark({ id, isLeft }));
+  };
+
   return (
     <SquadBookmarkManagerWrapper>
       <Title>북마크</Title>
       <SquadListWrapper>
         <SquadList>
-          {bookmarkList.map((bookmark, i) => (
-            <SquadBookmark key={i} squadName={bookmark.squad.name} />
-          ))}
+          {bookmarkList.map((bookmark) => {
+            const isCheckedLeft = selectedBookmarkOnLeft !== null ? selectedBookmarkOnLeft.id === bookmark.id : false;
+            const isCheckedRight =
+              selectedBookmarkOnRight !== null ? selectedBookmarkOnRight.id === bookmark.id : false;
+
+            return (
+              <SquadBookmark
+                key={bookmark.id}
+                bookmark={bookmark}
+                removeBookmark={removeBookmark}
+                selectBookmark={selectBookmark}
+                checkedLeft={isCheckedLeft}
+                checkedRight={isCheckedRight}
+              />
+            );
+          })}
         </SquadList>
       </SquadListWrapper>
       {path === '/' ? (

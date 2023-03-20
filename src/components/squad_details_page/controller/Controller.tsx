@@ -15,87 +15,92 @@ import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice'
 import { getEntities } from '../../../game_data/util/sbps';
 
 type ControllerProps = {
-  bookmark: Bookmark;
+  bookmark: Bookmark | null;
 };
 
 const Controller = ({ bookmark }: ControllerProps) => {
-  const squad = bookmark.squad;
-  const entities = getEntities(squad);
+  const squad = bookmark !== null ? bookmark.squad : null;
 
   return (
     <ControllerWrapper>
-      <Info>
-        <Portrait>
-          <img src={squad.imageUrl.portrait} alt="초상화" />
-        </Portrait>
-        <BasicInfo>
-          <div>
-            <SquadName>
-              <SquadSymbol>
-                <img src={squad.imageUrl.icon} alt="분대 심볼" />
-              </SquadSymbol>
-              {squad.name}
-            </SquadName>
-            <div>{squad.type}</div>
-          </div>
-          <ResourcesContainer>
-            <Resource>
+      {squad !== null ? (
+        <>
+          <Info>
+            <Portrait>
+              <img src={squad.imageUrl.portrait} alt="초상화" />
+            </Portrait>
+            <BasicInfo>
               <div>
-                <img src={resourceManpowerIcon} alt="manpower icon" />
+                <SquadName>
+                  <SquadSymbol>
+                    <img src={squad.imageUrl.icon} alt="분대 심볼" />
+                  </SquadSymbol>
+                  {squad.name}
+                </SquadName>
+                <div>{squad.type}</div>
               </div>
-              200
-            </Resource>
-            <Resource>
-              <div>
-                <img src={resourceFuelIcon} alt="fuel icon" />
-              </div>
-              100
-            </Resource>
-            <Resource>
-              <div>
-                <img src={resourcePopulationIcon} alt="population icon" />
-              </div>
-              10
-            </Resource>
-          </ResourcesContainer>
-        </BasicInfo>
-        <RaceMark>
-          <img src={tempRaceMark} alt="진영 마크" />
-        </RaceMark>
-        <OptionName>업그레이드</OptionName>
-        <Options>
-          <ul>
-            <li>
-              <OptionButton>
-                <img src={tempBarIcon} alt="bar" />
-              </OptionButton>
-            </li>
-          </ul>
-        </Options>
-        <OptionName>스킬</OptionName>
-        <Options>
-          <ul>
-            <li>
-              <OptionButton>
-                <img src={tempGrenadIcon} alt="bar" />
-              </OptionButton>
-            </li>
-            <li>
-              <OptionButton>
-                <img src={tempStickyBombIcon} alt="bar" />
-              </OptionButton>
-            </li>
-          </ul>
-        </Options>
-        <OptionName>건설</OptionName>
-        <Options>
-          <ul></ul>
-        </Options>
-      </Info>
-      <SelectorsContainer>
-        <EntitySelector entities={entities} />
-        <MockSelecter>무기 선택</MockSelecter>
-      </SelectorsContainer>
+              <ResourcesContainer>
+                <Resource>
+                  <div>
+                    <img src={resourceManpowerIcon} alt="manpower icon" />
+                  </div>
+                  200
+                </Resource>
+                <Resource>
+                  <div>
+                    <img src={resourceFuelIcon} alt="fuel icon" />
+                  </div>
+                  100
+                </Resource>
+                <Resource>
+                  <div>
+                    <img src={resourcePopulationIcon} alt="population icon" />
+                  </div>
+                  10
+                </Resource>
+              </ResourcesContainer>
+            </BasicInfo>
+            <RaceMark>
+              <img src={tempRaceMark} alt="진영 마크" />
+            </RaceMark>
+            <OptionName>업그레이드</OptionName>
+            <Options>
+              <ul>
+                <li>
+                  <OptionButton>
+                    <img src={tempBarIcon} alt="bar" />
+                  </OptionButton>
+                </li>
+              </ul>
+            </Options>
+            <OptionName>스킬</OptionName>
+            <Options>
+              <ul>
+                <li>
+                  <OptionButton>
+                    <img src={tempGrenadIcon} alt="bar" />
+                  </OptionButton>
+                </li>
+                <li>
+                  <OptionButton>
+                    <img src={tempStickyBombIcon} alt="bar" />
+                  </OptionButton>
+                </li>
+              </ul>
+            </Options>
+            <OptionName>건설</OptionName>
+            <Options>
+              <ul></ul>
+            </Options>
+          </Info>
+          <SelectorsContainer>
+            <EntitySelector entities={getEntities(squad)} />
+            <MockSelecter>무기 선택</MockSelecter>
+          </SelectorsContainer>
+        </>
+      ) : (
+        <EmptyText>분대를 선택해 주세요.</EmptyText>
+      )}
     </ControllerWrapper>
   );
 };
@@ -232,4 +237,14 @@ const MockSelecter = styled.div`
   border-radius: 6px;
   display: flex;
   align-items: center;
+`;
+
+const EmptyText = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #979797;
+  font-size: 24px;
 `;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { addSquad } from '../../state_store/features/squadBookmarkSlice';
+import { addBookmark } from '../../state_store/features/squadBookmarkSlice';
 
 import type Squad from '../../game_data/types/Squad';
 
@@ -13,14 +13,12 @@ type SquadListItemProps = {
   squad: Squad;
 };
 
-const SquadListItem = ({
-  squad: {
-    uniqueName,
+const SquadListItem = ({ squad }: SquadListItemProps) => {
+  const {
     name,
     race,
     imageUrl: { portrait, icon },
-  },
-}: SquadListItemProps) => {
+  } = squad;
   const dispatch = useDispatch();
 
   const raceMarks = {
@@ -30,7 +28,7 @@ const SquadListItem = ({
     afrika_korps: afrikaKorpsRaceMark,
   };
   const addSquadToSquadSelector = () => {
-    dispatch(addSquad({ uniqueName, name }));
+    dispatch(addBookmark({ squad }));
   };
 
   return (

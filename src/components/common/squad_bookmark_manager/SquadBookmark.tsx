@@ -1,24 +1,41 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
 
 type SelectedSquadItemProps = {
-  squadName: string;
+  bookmark: Bookmark;
+  removeBookmark: (id: string) => void;
+  selectBookmark: (id: string, isLeft: boolean) => void;
+  checkedLeft: boolean;
+  checkedRight: boolean;
 };
 
-const SquadBookmark = ({ squadName }: SelectedSquadItemProps) => {
+const SquadBookmark = ({
+  bookmark,
+  removeBookmark,
+  selectBookmark,
+  checkedLeft,
+  checkedRight,
+}: SelectedSquadItemProps) => {
+  const {
+    id,
+    squad: { name: squadName },
+  } = bookmark;
+
   const location = useLocation();
   const path = location.pathname;
+
   return (
     <SquadBookmarkWrapper>
       {path === '/details' && (
         <RadioButtonsContainer>
-          <input type="radio" name="left" />
-          <input type="radio" name="right" />
+          <input type="radio" name="left" onClick={() => selectBookmark(id, true)} checked={checkedLeft} />
+          <input type="radio" name="right" onClick={() => selectBookmark(id, false)} checked={checkedRight} />
         </RadioButtonsContainer>
       )}
 
       <SquadName>{squadName}</SquadName>
-      <RemoveButton>×</RemoveButton>
+      <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
     </SquadBookmarkWrapper>
   );
 };

@@ -3,23 +3,21 @@ import Squad from '../../game_data/types/Squad';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import tempSquadRiflemenUS from '../../game_data/data/sbps/american/infantry/riflemen_us';
-import tempSquadShermenUS from '../../game_data/data/sbps/american/vehicles/sherman_us';
-
 export type Bookmark = {
   id: string;
   squad: Squad;
+  selectedEntityUniqueName: string;
 };
 
 type InitialState = {
-  selectedBookmarkOnLeft: Bookmark | null;
-  selectedBookmarkOnRight: Bookmark | null;
+  selectedBookmarkOnLeft: Bookmark | undefined;
+  selectedBookmarkOnRight: Bookmark | undefined;
   bookmarkList: Bookmark[];
 };
 
 const initialState: InitialState = {
-  selectedBookmarkOnLeft: null,
-  selectedBookmarkOnRight: null,
+  selectedBookmarkOnLeft: undefined,
+  selectedBookmarkOnRight: undefined,
   bookmarkList: [],
 };
 
@@ -31,6 +29,7 @@ export const squadBookmarkManagerSlice = createSlice({
       const newBookmark: Bookmark = {
         id: `${Date.now()}${state.bookmarkList.length}`,
         squad: action.payload.squad,
+        selectedEntityUniqueName: action.payload.squad.entities[0]?.entity.uniqueName,
       };
 
       if (state.bookmarkList.length === 0) {
@@ -67,9 +66,22 @@ export const squadBookmarkManagerSlice = createSlice({
         state.selectedBookmarkOnRight = bookmark;
       }
     },
+
+    selectEntity: (state, action: PayloadAction<{ uniqueName: string; isLeft: boolean }>) => {
+      const { uniqueName, isLeft } = action.payload;
+      if (isLeft) {
+        if (state.selectedBookmarkOnLeft !== undefined) {
+          state.selectedBookmarkOnLeft.selectedEntityUniqueName = uniqueName;
+        }
+      } else {
+        if (state.selectedBookmarkOnRight !== undefined) {
+          state.selectedBookmarkOnRight.selectedEntityUniqueName = uniqueName;
+        }
+      }
+    },
   },
 });
 
-export const { addBookmark, removeBookmark, selectBookmark } = squadBookmarkManagerSlice.actions;
+export const { addBookmark, removeBookmark, selectBookmark, selectEntity } = squadBookmarkManagerSlice.actions;
 
 export default squadBookmarkManagerSlice.reducer;

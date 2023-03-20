@@ -13,24 +13,12 @@ const StatsList = ({ statsList1 = [], statsList2 = [] }: StatsListProps) => {
     <StatsListWrapper>
       <List>
         {statsList1.map((stat) => {
-          if ('subStats' in stat) {
-            const { statName, subStats } = stat;
-            return <StatItem key={statName} statName={statName} subStats={subStats}></StatItem>;
-          } else {
-            const { statName, leftValue, rightValue } = stat as Stat;
-            return <StatItem key={statName} statName={statName} leftValue={leftValue} rightValue={rightValue} />;
-          }
+          return <StatItem key={stat.statName} stat={stat}></StatItem>;
         })}
       </List>
       <List>
         {statsList2.map((stat) => {
-          if ('subStats' in stat) {
-            const { statName, subStats } = stat;
-            return <StatItem key={statName} statName={statName} subStats={subStats}></StatItem>;
-          } else {
-            const { statName, leftValue, rightValue } = stat as Stat;
-            return <StatItem key={statName} statName={statName} leftValue={leftValue} rightValue={rightValue} />;
-          }
+          return <StatItem key={stat.statName} stat={stat}></StatItem>;
         })}
       </List>
     </StatsListWrapper>

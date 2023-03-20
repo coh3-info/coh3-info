@@ -1,28 +1,35 @@
 import styled from 'styled-components';
-import type { StatValue, Stat } from './stat';
+import type { Stat, StatValue } from './stat';
 
 type StatItemProps = {
-  statName: string;
-  leftValue?: StatValue;
-  rightValue?: StatValue;
-  subStats?: Stat[];
+  stat: Stat;
 };
 
-const StatItem = ({ statName = '', leftValue = '', rightValue = '', subStats = [] }: StatItemProps) => {
-  const hasSubStats = subStats.length !== 0;
+const StatItem = ({ stat }: StatItemProps) => {
+  const getValue = (value: StatValue) => {
+    if (stat.unit === 'percentage' && typeof value === 'number') {
+      return `${value * 100}%`;
+    }
+
+    if (stat.unit === 'degree' && typeof value === 'number') {
+      return `${value}˚`;
+    }
+
+    return value;
+  };
 
   return (
     <StatItemWrapper>
-      {hasSubStats ? (
+      {'headers' in stat ? (
         <StatWithSubStats>
-          <StatName>{statName}</StatName>
+          <StatName>{stat.statName}</StatName>
           <SubStats>
-            {subStats.map((subStat) => {
+            {stat.headers.map((header, i) => {
               return (
-                <SingleStat key={subStat.statName}>
-                  <LeftValue>{subStat.leftValue}</LeftValue>
-                  <SubStatName>{subStat.statName}</SubStatName>
-                  <RightValue>{subStat.rightValue}</RightValue>
+                <SingleStat key={header}>
+                  <LeftValue>{getValue(stat.leftValues[i])}</LeftValue>
+                  <SubStatName>{header}</SubStatName>
+                  <RightValue>{getValue(stat.rightValues[i])}</RightValue>
                 </SingleStat>
               );
             })}
@@ -30,9 +37,9 @@ const StatItem = ({ statName = '', leftValue = '', rightValue = '', subStats = [
         </StatWithSubStats>
       ) : (
         <SingleStat>
-          <LeftValue>{leftValue}</LeftValue>
-          <StatName>{statName}</StatName>
-          <RightValue>{rightValue}</RightValue>
+          <LeftValue>{getValue(stat.leftValue)}</LeftValue>
+          <StatName>{stat.statName}</StatName>
+          <RightValue>{getValue(stat.rightValue)}</RightValue>
         </SingleStat>
       )}
     </StatItemWrapper>

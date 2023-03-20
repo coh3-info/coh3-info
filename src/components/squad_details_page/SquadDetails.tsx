@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
@@ -9,18 +11,25 @@ import WeaponStatsList from './stats_list/WeaponStatsList';
 import type { RootState } from '../../state_store/store';
 
 const SquadDetails = () => {
-  const leftBookmark = useSelector((state: RootState) => state.squadBookmark.selectedBookmarkOnLeft);
-  const rightBookmark = useSelector((state: RootState) => state.squadBookmark.selectedBookmarkOnRight);
+  const navigate = useNavigate();
+  const { selectedBookmarkOnLeft, selectedBookmarkOnRight, bookmarkList } = useSelector(
+    (state: RootState) => state.squadBookmark
+  );
 
+  useEffect(() => {
+    if (bookmarkList.length === 0) {
+      navigate('/');
+    }
+  }, []);
   return (
     <SquadDetailsWrapper>
       <InfoWrapper>
         <ControllersContainer>
-          <Controller bookmark={leftBookmark} />
-          <Controller bookmark={rightBookmark} />
+          <Controller isLeft />
+          <Controller />
         </ControllersContainer>
-        <EntityStatsList />
-        <WeaponStatsList />
+        <EntityStatsList leftBookmark={selectedBookmarkOnLeft} rightBookmark={selectedBookmarkOnRight} />
+        {/* <WeaponStatsList /> */}
       </InfoWrapper>
       <SquadBookmarkManagerTrack>
         <SquadBookmarkManager />

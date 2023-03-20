@@ -3,14 +3,16 @@ import Entity from '../../../game_data/types/Entity';
 
 type EntitySelectorProps = {
   entities: Entity[];
+  value: string;
+  selectEntity: (uniqueName: string) => void;
 };
 
-const EntitySelector = ({ entities }: EntitySelectorProps) => {
+const EntitySelector = ({ entities, value, selectEntity }: EntitySelectorProps) => {
   return (
-    <EntitySelectorWrapper>
-      {entities.map((entity, i) => {
+    <EntitySelectorWrapper disabled={entities.length <= 1} value={value} onChange={(e) => selectEntity(e.target.value)}>
+      {entities.map((entity) => {
         return (
-          <option key={entity.uniqueName} value={i}>
+          <option key={entity.uniqueName} value={entity.uniqueName}>
             {entity.uniqueName}
           </option>
         );
@@ -30,4 +32,9 @@ const EntitySelectorWrapper = styled.select`
   display: flex;
   align-items: center;
   outline: none;
+
+  &:disabled {
+    color: inherit;
+    appearance: none;
+  }
 `;

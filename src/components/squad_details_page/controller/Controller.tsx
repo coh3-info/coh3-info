@@ -1,29 +1,44 @@
 import styled from 'styled-components';
+import { getEntities } from '../../../game_data/util/sbps';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectEntity as _selectEntity } from '../../../state_store/features/squadBookmarkSlice';
 
 import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
 import resourceFuelIcon from '../../../images/common/resource_fuel.png';
 import resourcePopulationIcon from '../../../images/common/resource_population.png';
 
-import tempRaceMark from '../../../images/common/race_marks/american.png';
+import EntitySelector from './EntitySelector';
+
+import type { RootState } from '../../../state_store/store';
 
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
-
-import EntitySelector from './EntitySelector';
-import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
-import { getEntities } from '../../../game_data/util/sbps';
+import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
 
 type ControllerProps = {
-  bookmark: Bookmark | null;
+  isLeft?: boolean;
 };
 
-const Controller = ({ bookmark }: ControllerProps) => {
-  const squad = bookmark !== null ? bookmark.squad : null;
+const Controller = ({ isLeft = false }: ControllerProps) => {
+  const dispatch = useDispatch();
+  const bookmark = useSelector((state: RootState) => {
+    if (isLeft) {
+      return state.squadBookmark.selectedBookmarkOnLeft;
+    } else {
+      return state.squadBookmark.selectedBookmarkOnRight;
+    }
+  });
+
+  const squad = bookmark?.squad;
+
+  const selectEntity = (uniqueName: string) => {
+    dispatch(_selectEntity({ uniqueName, isLeft }));
+  };
 
   return (
     <ControllerWrapper>
-      {squad !== null ? (
+      {squad !== undefined && bookmark !== undefined ? (
         <>
           <Info>
             <Portrait>
@@ -44,13 +59,21 @@ const Controller = ({ bookmark }: ControllerProps) => {
                   <div>
                     <img src={resourceManpowerIcon} alt="manpower icon" />
                   </div>
-                  200
+                  {Math.round(
+                    squad.entities.reduce((sum, entity) => {
+                      return sum + entity.num * entity.entity.cost.manpower;
+                    }, 0)
+                  )}
                 </Resource>
                 <Resource>
                   <div>
                     <img src={resourceFuelIcon} alt="fuel icon" />
                   </div>
-                  100
+                  {Math.round(
+                    squad.entities.reduce((sum, entity) => {
+                      return sum + entity.num * entity.entity.cost.fuel;
+                    }, 0)
+                  )}
                 </Resource>
                 <Resource>
                   <div>
@@ -61,7 +84,7 @@ const Controller = ({ bookmark }: ControllerProps) => {
               </ResourcesContainer>
             </BasicInfo>
             <RaceMark>
-              <img src={tempRaceMark} alt="진영 마크" />
+              <img src={getRaceMarkUrl(squad.race)} alt="진영 마크" />
             </RaceMark>
             <OptionName>업그레이드</OptionName>
             <Options>
@@ -94,7 +117,11 @@ const Controller = ({ bookmark }: ControllerProps) => {
             </Options>
           </Info>
           <SelectorsContainer>
-            <EntitySelector entities={getEntities(squad)} />
+            <EntitySelector
+              entities={getEntities(squad)}
+              value={bookmark.selectedEntityUniqueName}
+              selectEntity={selectEntity}
+            />
             <MockSelecter>무기 선택</MockSelecter>
           </SelectorsContainer>
         </>

@@ -31,9 +31,10 @@ const SquadBookmarkManager = () => {
       <SquadListWrapper>
         <SquadList>
           {bookmarkList.map((bookmark) => {
-            const isCheckedLeft = selectedBookmarkOnLeft !== null ? selectedBookmarkOnLeft.id === bookmark.id : false;
+            const isCheckedLeft =
+              selectedBookmarkOnLeft !== undefined ? selectedBookmarkOnLeft.id === bookmark.id : false;
             const isCheckedRight =
-              selectedBookmarkOnRight !== null ? selectedBookmarkOnRight.id === bookmark.id : false;
+              selectedBookmarkOnRight !== undefined ? selectedBookmarkOnRight.id === bookmark.id : false;
 
             return (
               <SquadBookmark

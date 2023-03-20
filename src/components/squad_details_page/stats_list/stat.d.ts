@@ -1,12 +1,20 @@
-export type StatValue = string | number | boolean;
+export type StatValue = string | number | boolean | undefined;
 
-export type Stat = {
+type BasicStat = {
   statName: string;
-  leftValue?: StatValue;
-  rightValue?: StatValue;
+  unit?: 'percentage' | 'degree';
 };
+
+export type StatWithSingleValue = {
+  leftValue: StatValue;
+  rightValue: StatValue;
+} & BasicStat;
 
 export type StatWithSubStats = {
-  statName: string;
-  subStats?: Stat[];
-};
+  headers: string[];
+  separator?: '/' | '~';
+  leftValues: StatValue[];
+  rightValues: StatValue[];
+} & BasicStat;
+
+export type Stat = StatWithSingleValue | StatWithSubStats;

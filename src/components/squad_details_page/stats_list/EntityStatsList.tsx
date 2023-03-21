@@ -1,7 +1,7 @@
-import StatsList from './StatsList';
+import StatsList from './StatList';
 import { getEntity } from '../../../util/squad';
 
-import type { Stat } from './stat';
+import type { Stat, StatGroup } from './stat';
 import type Entity from '../../../types/game_data/entity';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 
@@ -25,44 +25,47 @@ const EntityStatsList = ({ leftBookmark, rightBookmark }: EntityStatsListProps) 
   const rightEntity =
     rightBookmark !== undefined ? getEntity(rightBookmark?.squad, rightBookmark?.selectedEntityUniqueName) : undefined;
 
-  const statsList1: Stat[] = [
-    { statName: '체력', leftValue: leftEntity?.hitpoints, rightValue: rightEntity?.hitpoints },
-    { statName: '피격률', leftValue: leftEntity?.targetSize, rightValue: rightEntity?.targetSize, unit: 'percentage' },
-    {
-      statName: '장갑',
-      headers: ['전면', '측면', '후면'],
-      leftValues: getArmor(leftEntity),
-      rightValues: getArmor(rightEntity),
-    },
-    { statName: '충원비', leftValue: 26, rightValue: 0 },
-    { statName: '충원시간', leftValue: 3, rightValue: 0 },
-    { statName: '시야', leftValue: leftEntity?.sight, rightValue: rightEntity?.sight },
-    { statName: '은신탐지거리', leftValue: leftEntity?.detect, rightValue: rightEntity?.detect },
+  const statList1: (Stat | StatGroup)[] = [
+    { name: '체력', leftValue: leftEntity?.hitpoints, rightValue: rightEntity?.hitpoints },
+    { name: '피격률', leftValue: leftEntity?.targetSize, rightValue: rightEntity?.targetSize, unit: 'percentage' },
+    { name: '장갑', leftValue: getArmor(leftEntity), rightValue: getArmor(rightEntity), separator: '/' },
+    { name: '충원비', leftValue: 26, rightValue: 0 },
+    { name: '충원시간', leftValue: 3, rightValue: 0 },
+    { name: '시야', leftValue: leftEntity?.sight, rightValue: rightEntity?.sight },
+    { name: '은신탐지거리', leftValue: leftEntity?.detect, rightValue: rightEntity?.detect },
   ];
 
-  const statsList2: Stat[] = [
+  const statList2: (Stat | StatGroup)[] = [
     {
-      statName: '전진속도',
-      headers: ['최고속도', '가속도', '감속도'],
-      leftValues: [leftEntity?.moving.maxSpeed, leftEntity?.moving.acceleration, leftEntity?.moving.deceleration],
-      rightValues: [rightEntity?.moving.maxSpeed, rightEntity?.moving.acceleration, rightEntity?.moving.deceleration],
-    },
-    {
-      statName: '후진속도',
-      headers: ['최고속도', '가속도', '감속도'],
-      leftValues: [
-        leftEntity?.moving.reverseMaxSpeed,
-        leftEntity?.moving.reverseAcceleration,
-        leftEntity?.moving.reverseDeceleration,
-      ],
-      rightValues: [
-        rightEntity?.moving.reverseMaxSpeed,
-        rightEntity?.moving.reverseAcceleration,
-        rightEntity?.moving.reverseDeceleration,
+      name: '전진속도',
+      stats: [
+        { name: '최고속도', leftValue: leftEntity?.moving.maxSpeed, rightValue: rightEntity?.moving.maxSpeed },
+        { name: '가속도', leftValue: leftEntity?.moving.acceleration, rightValue: rightEntity?.moving.acceleration },
+        { name: '감속도', leftValue: leftEntity?.moving.deceleration, rightValue: rightEntity?.moving.deceleration },
       ],
     },
     {
-      statName: '선회속도',
+      name: '후진속도',
+      stats: [
+        {
+          name: '최고속도',
+          leftValue: leftEntity?.moving.reverseMaxSpeed,
+          rightValue: rightEntity?.moving.reverseMaxSpeed,
+        },
+        {
+          name: '가속도',
+          leftValue: leftEntity?.moving.reverseAcceleration,
+          rightValue: rightEntity?.moving.reverseAcceleration,
+        },
+        {
+          name: '감속도',
+          leftValue: leftEntity?.moving.reverseDeceleration,
+          rightValue: rightEntity?.moving.reverseDeceleration,
+        },
+      ],
+    },
+    {
+      name: '선회속도',
       leftValue: leftEntity?.moving.rotaionRate,
       rightValue: rightEntity?.moving.rotaionRate,
       unit: 'degree',
@@ -71,7 +74,7 @@ const EntityStatsList = ({ leftBookmark, rightBookmark }: EntityStatsListProps) 
 
   return (
     <>
-      <StatsList statsList1={statsList1} statsList2={statsList2} />
+      <StatsList statList1={statList1} statList2={statList2} />
     </>
   );
 };

@@ -1,47 +1,47 @@
-import styled from 'styled-components';
-import type { Stat, StatValue } from './stat';
+import styled, { css } from 'styled-components';
+import type { Stat, UnitOfStat } from './stat';
+
+const convertToUnitString = (value: number, unit: UnitOfStat): string => {
+  if (unit === 'percentage') {
+    return `${value * 100}%`;
+  } else {
+    return `${value}˚`;
+  }
+};
+
+const getValue = (stat: Stat, position: 'left' | 'right') => {
+  const value = position === 'left' ? stat.leftValue : stat.rightValue;
+
+  if (Array.isArray(value) && 'separator' in stat) {
+    if (stat.separator === '~' && value[0] === value[1]) {
+      return value[0];
+    }
+
+    return value.join(` ${stat.separator} `);
+  }
+
+  if (typeof value === 'number' && stat.unit !== undefined) {
+    return convertToUnitString(value, stat.unit);
+  }
+
+  if (typeof value === 'boolean') {
+    return value ? '가능' : '불가';
+  }
+
+  return value;
+};
 
 type StatItemProps = {
   stat: Stat;
+  isInGroup?: boolean;
 };
 
-const StatItem = ({ stat }: StatItemProps) => {
-  const getValue = (value: StatValue) => {
-    if (stat.unit === 'percentage' && typeof value === 'number') {
-      return `${value * 100}%`;
-    }
-
-    if (stat.unit === 'degree' && typeof value === 'number') {
-      return `${value}˚`;
-    }
-
-    return value;
-  };
-
+const StatItem = ({ stat, isInGroup = false }: StatItemProps) => {
   return (
     <StatItemWrapper>
-      {'headers' in stat ? (
-        <StatWithSubStats>
-          <StatName>{stat.statName}</StatName>
-          <SubStats>
-            {stat.headers.map((header, i) => {
-              return (
-                <SingleStat key={header}>
-                  <LeftValue>{getValue(stat.leftValues[i])}</LeftValue>
-                  <SubStatName>{header}</SubStatName>
-                  <RightValue>{getValue(stat.rightValues[i])}</RightValue>
-                </SingleStat>
-              );
-            })}
-          </SubStats>
-        </StatWithSubStats>
-      ) : (
-        <SingleStat>
-          <LeftValue>{getValue(stat.leftValue)}</LeftValue>
-          <StatName>{stat.statName}</StatName>
-          <RightValue>{getValue(stat.rightValue)}</RightValue>
-        </SingleStat>
-      )}
+      <LeftValue>{getValue(stat, 'left')}</LeftValue>
+      <StatName isInGroup={isInGroup}>{stat.name}</StatName>
+      <RightValue>{getValue(stat, 'right')}</RightValue>
     </StatItemWrapper>
   );
 };
@@ -50,20 +50,24 @@ export default StatItem;
 
 const StatItemWrapper = styled.li`
   max-width: 100%;
-`;
-
-const SingleStat = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const StatName = styled.div`
+const StatName = styled.div<{ isInGroup: boolean }>`
   flex-basis: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 500;
   font-size: 0.875rem;
+
+  ${({ isInGroup }) =>
+    isInGroup &&
+    css`
+      color: #979797;
+      font-size: 0.815rem;
+    `}
 `;
 
 const Value = styled.div`
@@ -81,20 +85,4 @@ const RightValue = styled(Value)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-`;
-
-const StatWithSubStats = styled.div`
-  /* margin-top: 4px; */
-`;
-
-const SubStats = styled.div`
-  margin-top: 3px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-`;
-
-const SubStatName = styled(StatName)`
-  color: #979797;
-  font-size: 0.815rem;
 `;

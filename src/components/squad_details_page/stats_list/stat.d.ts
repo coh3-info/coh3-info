@@ -1,20 +1,26 @@
 export type StatValue = string | number | boolean | undefined;
+export type UnitOfStat = 'percentage' | 'degree';
+export type SeparatorOfStat = '/' | '~';
 
 type BasicStat = {
-  statName: string;
-  unit?: 'percentage' | 'degree';
+  name: string;
+  unit?: UnitOfStat;
 };
 
-export type StatWithSingleValue = {
+type StatOfValues = {
+  leftValue: StatValue[];
+  rightValue: StatValue[];
+  separator: SeparatorOfStat;
+} & BasicStat;
+
+type StatOfSingleValue = {
   leftValue: StatValue;
   rightValue: StatValue;
 } & BasicStat;
 
-export type StatWithSubStats = {
-  headers: string[];
-  separator?: '/' | '~';
-  leftValues: StatValue[];
-  rightValues: StatValue[];
-} & BasicStat;
+export type Stat = StatOfSingleValue | StatOfValues;
 
-export type Stat = StatWithSingleValue | StatWithSubStats;
+export type StatGroup = {
+  name: string;
+  stats: Stat[];
+};

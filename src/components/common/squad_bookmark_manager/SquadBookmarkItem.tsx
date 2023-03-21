@@ -1,16 +1,16 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
+import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 
 type SelectedSquadItemProps = {
-  bookmark: Bookmark;
+  bookmark: SquadBookmark;
   removeBookmark: (id: string) => void;
   selectBookmark: (id: string, isLeft: boolean) => void;
   checkedLeft: boolean;
   checkedRight: boolean;
 };
 
-const SquadBookmark = ({
+const SquadBookmarkItem = ({
   bookmark,
   removeBookmark,
   selectBookmark,
@@ -26,7 +26,7 @@ const SquadBookmark = ({
   const path = location.pathname;
 
   return (
-    <SquadBookmarkWrapper>
+    <SquadBookmarkItemWrapper>
       {path === '/details' && (
         <RadioButtonsContainer>
           <input type="radio" name="left" onChange={() => selectBookmark(id, true)} checked={checkedLeft} />
@@ -36,11 +36,11 @@ const SquadBookmark = ({
 
       <SquadName>{squadName}</SquadName>
       <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
-    </SquadBookmarkWrapper>
+    </SquadBookmarkItemWrapper>
   );
 };
 
-export default SquadBookmark;
+export default SquadBookmarkItem;
 
 const RemoveButton = styled.button`
   width: 20px;
@@ -58,7 +58,7 @@ const RemoveButton = styled.button`
   }
 `;
 
-const SquadBookmarkWrapper = styled.li`
+const SquadBookmarkItemWrapper = styled.li`
   display: flex;
   align-items: center;
   gap: 4px;

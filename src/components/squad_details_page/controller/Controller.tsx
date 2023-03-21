@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { getEntities } from '../../../util/squad';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectEntity as _selectEntity } from '../../../state_store/features/squadBookmarkSlice';
+import { selectEntity as _selectEntity } from '../../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
 
 import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
@@ -24,9 +24,9 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
   const dispatch = useDispatch();
   const bookmark = useSelector((state: RootState) => {
     if (isLeft) {
-      return state.squadBookmark.selectedBookmarkOnLeft;
+      return state.squadBookmarkManager.selectedBookmarkOnLeft;
     } else {
-      return state.squadBookmark.selectedBookmarkOnRight;
+      return state.squadBookmarkManager.selectedBookmarkOnRight;
     }
   });
 

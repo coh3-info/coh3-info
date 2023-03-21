@@ -13,7 +13,7 @@ import type { RootState } from '../../state_store/store';
 const SquadDetails = () => {
   const navigate = useNavigate();
   const { selectedBookmarkOnLeft, selectedBookmarkOnRight, bookmarkList } = useSelector(
-    (state: RootState) => state.squadBookmark
+    (state: RootState) => state.squadBookmarkManager
   );
 
   useEffect(() => {

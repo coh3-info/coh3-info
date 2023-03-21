@@ -5,13 +5,13 @@ import { RootState } from '../../../state_store/store';
 import {
   removeBookmark as _removeBookmark,
   selectBookmark as _selectBookmark,
-} from '../../../state_store/features/squadBookmarkSlice';
+} from '../../../state_store/slice/squad_bookmark_manager';
 
-import SquadBookmark from './SquadBookmark';
+import SquadBookmark from './SquadBookmarkItem';
 
 const SquadBookmarkManager = () => {
   const { bookmarkList, selectedBookmarkOnLeft, selectedBookmarkOnRight } = useSelector(
-    (state: RootState) => state.squadBookmark
+    (state: RootState) => state.squadBookmarkManager
   );
   const dispatch = useDispatch();
   const location = useLocation();

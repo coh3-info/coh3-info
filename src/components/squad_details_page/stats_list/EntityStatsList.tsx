@@ -1,13 +1,13 @@
 import StatsList from './StatsList';
+import { getEntity } from '../../../util/squad';
 
 import type { Stat } from './stat';
 import type Entity from '../../../types/game_data/entity';
-import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
-import { getEntity } from '../../../util/squad';
+import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 
 type EntityStatsListProps = {
-  leftBookmark: Bookmark | undefined;
-  rightBookmark: Bookmark | undefined;
+  leftBookmark: SquadBookmark | undefined;
+  rightBookmark: SquadBookmark | undefined;
 };
 
 const getArmor = (entity: Entity | undefined) => {

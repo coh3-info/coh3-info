@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { addBookmark } from '../../state_store/features/squadBookmarkSlice';
+import { addBookmark } from '../../state_store/slice/squad_bookmark_manager';
 
 import type Squad from '../../types/game_data/squad';
 

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Squad from '../../game_data/types/Squad';
+import Squad from '../../types/Squad';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 

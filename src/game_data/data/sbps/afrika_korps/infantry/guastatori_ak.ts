@@ -1,7 +1,7 @@
 import portrait from '../../../../../images/afrika_korps/infantry/guastatori_ak/guastatori_ak.png';
 import squadIcon from '../../../../../images/afrika_korps/infantry/guastatori_ak/guastatori_ak_symbol.png';
 
-import type Squad from '../../../../types/Squad';
+import type Squad from '../../../../../types/Squad';
 
 const squadGuastatoriAK: Squad = {
   uniqueName: 'guastatori_ak',

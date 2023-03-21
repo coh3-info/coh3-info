@@ -1,4 +1,4 @@
-import Weapon from '../../../../../types/Weapon';
+import type Weapon from '../../../../../../types/game_data/weapon';
 
 const weapon: Weapon = {
   uniqueName: '75mm_sherman_us',

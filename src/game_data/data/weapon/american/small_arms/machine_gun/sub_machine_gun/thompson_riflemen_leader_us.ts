@@ -1,4 +1,4 @@
-import Weapon from '../../../../../../types/Weapon';
+import Weapon from '../../../../../../../types/game_data/weapon';
 
 const weapon: Weapon = {
   uniqueName: 'tompson_riflemen_leader_us',

@@ -1,7 +1,7 @@
 import portrait from '../../../../../images/british/team_weapons/mortar_81mm_uk/mortar_81mm_uk.png';
 import squadIcon from '../../../../../images/british/team_weapons/mortar_81mm_uk/mortar_81mm_uk_symbol.png';
 
-import type Squad from '../../../../types/Squad';
+import type Squad from '../../../../../types/Squad';
 
 const squadMortar81mmUK: Squad = {
   uniqueName: 'mortar_81mm_uk',

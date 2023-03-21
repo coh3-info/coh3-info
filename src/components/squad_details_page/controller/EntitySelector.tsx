@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Entity from '../../../game_data/types/Entity';
+import Entity from '../../../types/game_data/entity';
 
 type EntitySelectorProps = {
   entities: Entity[];

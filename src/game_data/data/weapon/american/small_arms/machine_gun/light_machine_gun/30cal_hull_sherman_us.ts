@@ -1,4 +1,4 @@
-import Weapon from '../../../../../../types/Weapon';
+import type Weapon from '../../../../../../../types/game_data/weapon';
 
 const weapon: Weapon = {
   uniqueName: '30cal_hull_sherman_us',

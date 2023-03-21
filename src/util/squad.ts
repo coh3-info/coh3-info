@@ -1,4 +1,4 @@
-import type Squad from '../game_data/types/Squad';
+import type Squad from '../types/game_data/squad';
 
 export const getEntities = (squad: Squad) => {
   return squad.entities.map((entity) => {

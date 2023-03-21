@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { getEntities } from '../../../util/squad';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectEntity as _selectEntity } from '../../../state_store/features/squadBookmarkSlice';
+import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
 
 import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
 import resourceFuelIcon from '../../../images/common/resource_fuel.png';
@@ -14,7 +15,6 @@ import type { RootState } from '../../../state_store/store';
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
-import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
 
 type ControllerProps = {
   isLeft?: boolean;

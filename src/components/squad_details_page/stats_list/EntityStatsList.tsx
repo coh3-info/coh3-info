@@ -1,7 +1,7 @@
 import StatsList from './StatsList';
 
 import type { Stat } from './stat';
-import type Entity from '../../../game_data/types/Entity';
+import type Entity from '../../../types/game_data/entity';
 import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
 import { getEntity } from '../../../util/squad';
 

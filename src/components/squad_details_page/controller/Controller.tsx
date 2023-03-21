@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getEntities } from '../../../game_data/util/sbps';
+import { getEntities } from '../../../util/squad';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectEntity as _selectEntity } from '../../../state_store/features/squadBookmarkSlice';
 

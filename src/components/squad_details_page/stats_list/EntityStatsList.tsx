@@ -3,7 +3,7 @@ import StatsList from './StatsList';
 import type { Stat } from './stat';
 import type Entity from '../../../game_data/types/Entity';
 import type { Bookmark } from '../../../state_store/features/squadBookmarkSlice';
-import { getEntity } from '../../../game_data/util/sbps';
+import { getEntity } from '../../../util/squad';
 
 type EntityStatsListProps = {
   leftBookmark: Bookmark | undefined;

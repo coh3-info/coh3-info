@@ -1,6 +1,6 @@
 import type Weapon from '../../../../../../types/game_data/weapon';
 
-const weapon: Weapon = {
+const weapon75mmShermanUS: Weapon = {
   uniqueName: '75mm_sherman_us',
   name: '75mm gun',
   accuracy: {
@@ -145,4 +145,4 @@ const weapon: Weapon = {
   },
 };
 
-export default weapon;
+export default weapon75mmShermanUS;

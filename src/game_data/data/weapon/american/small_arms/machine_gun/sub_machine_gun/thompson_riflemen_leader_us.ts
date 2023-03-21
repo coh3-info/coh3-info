@@ -1,6 +1,6 @@
 import Weapon from '../../../../../../../types/game_data/weapon';
 
-const weapon: Weapon = {
+const weaponTompsonRiflemenLeaderUS: Weapon = {
   uniqueName: 'tompson_riflemen_leader_us',
   name: 'Tompson SMG',
   accuracy: {
@@ -142,4 +142,4 @@ const weapon: Weapon = {
   },
 };
 
-export default weapon;
+export default weaponTompsonRiflemenLeaderUS;

@@ -15,7 +15,7 @@ const StatList = ({ statList1 = [], statList2 = [] }: StatListProps) => {
       <List>
         {statList1.map((stat) => {
           if ('stats' in stat) {
-            return <StatItemGroup statGroup={stat} />;
+            return <StatItemGroup key={stat.name} statGroup={stat} />;
           }
           return <StatItem key={stat.name} stat={stat}></StatItem>;
         })}
@@ -23,7 +23,7 @@ const StatList = ({ statList1 = [], statList2 = [] }: StatListProps) => {
       <List>
         {statList2.map((stat) => {
           if ('stats' in stat) {
-            return <StatItemGroup statGroup={stat} />;
+            return <StatItemGroup key={stat.name} statGroup={stat} />;
           }
           return <StatItem key={stat.name} stat={stat}></StatItem>;
         })}

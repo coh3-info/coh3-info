@@ -1,14 +1,10 @@
 import StatsList from './StatList';
 import { getEntity } from '../../../util/squad';
+import { useSelector } from 'react-redux';
 
 import type { Stat, StatGroup } from './stat';
 import type Entity from '../../../types/game_data/entity';
-import type { SquadBookmark } from '../../../types/bookmark/bookmark';
-
-type EntityStatsListProps = {
-  leftBookmark: SquadBookmark | undefined;
-  rightBookmark: SquadBookmark | undefined;
-};
+import type { RootState } from '../../../state_store/store';
 
 const getArmor = (entity: Entity | undefined) => {
   const armor = entity?.armor;
@@ -19,7 +15,11 @@ const getArmor = (entity: Entity | undefined) => {
   return [front, side, rear];
 };
 
-const EntityStatsList = ({ leftBookmark, rightBookmark }: EntityStatsListProps) => {
+const EntityStatsList = () => {
+  const { selectedBookmarkOnLeft: leftBookmark, selectedBookmarkOnRight: rightBookmark } = useSelector(
+    (state: RootState) => state.squadBookmarkManager
+  );
+
   const leftEntity =
     leftBookmark !== undefined ? getEntity(leftBookmark.squad, leftBookmark.selectedEntityUniqueName) : undefined;
   const rightEntity =
@@ -29,8 +29,26 @@ const EntityStatsList = ({ leftBookmark, rightBookmark }: EntityStatsListProps) 
     { name: '체력', leftValue: leftEntity?.hitpoints, rightValue: rightEntity?.hitpoints },
     { name: '피격률', leftValue: leftEntity?.targetSize, rightValue: rightEntity?.targetSize, unit: 'percentage' },
     { name: '장갑', leftValue: getArmor(leftEntity), rightValue: getArmor(rightEntity), separator: '/' },
-    { name: '충원비', leftValue: 26, rightValue: 0 },
-    { name: '충원시간', leftValue: 3, rightValue: 0 },
+    {
+      name: '충원비',
+      leftValue:
+        leftEntity &&
+        leftBookmark &&
+        Math.round(leftEntity?.cost.manpower * leftBookmark?.squad.reinforce.costPercentage),
+      rightValue:
+        rightEntity &&
+        rightBookmark &&
+        Math.round(rightEntity?.cost.manpower * rightBookmark?.squad.reinforce.costPercentage),
+    },
+    {
+      name: '충원시간',
+      leftValue:
+        leftEntity && leftBookmark && Math.round(leftEntity?.cost.time * leftBookmark?.squad.reinforce.timePercentage),
+      rightValue:
+        rightEntity &&
+        rightBookmark &&
+        Math.round(rightEntity?.cost.time * rightBookmark?.squad.reinforce.timePercentage),
+    },
     { name: '시야', leftValue: leftEntity?.sight, rightValue: rightEntity?.sight },
     { name: '은신탐지거리', leftValue: leftEntity?.detect, rightValue: rightEntity?.detect },
   ];

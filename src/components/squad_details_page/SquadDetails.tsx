@@ -28,7 +28,7 @@ const SquadDetails = () => {
           <Controller isLeft />
           <Controller />
         </ControllersContainer>
-        <EntityStatsList leftBookmark={selectedBookmarkOnLeft} rightBookmark={selectedBookmarkOnRight} />
+        <EntityStatsList />
         <WeaponStatsList />
       </InfoWrapper>
       <SquadBookmarkManagerTrack>

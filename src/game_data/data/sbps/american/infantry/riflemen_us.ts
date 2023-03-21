@@ -4,7 +4,7 @@ import squadIcon from '../../../../../images/american/infantiry/riflemen_us/rifl
 import entityRiflemenSquadLeaderUS from '../../../ebps/american/infantry/rifleman_squad_leader_us';
 import entityRiflemanUS from '../../../ebps/american/infantry/rifleman_us';
 
-import type Squad from '../../../../../types/Squad';
+import type Squad from '../../../../../types/game_data/squad';
 
 const squadRiflemenUS: Squad = {
   uniqueName: 'riflemen_us',

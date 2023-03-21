@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addBookmark } from '../../state_store/features/squadBookmarkSlice';
 
-import type Squad from '../../types/Squad';
+import type Squad from '../../types/game_data/squad';
 
 import americanRaceMark from '../../images/common/race_marks/american.png';
 import britishRaceMark from '../../images/common/race_marks/british.png';

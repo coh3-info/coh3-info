@@ -3,7 +3,7 @@ import squadIcon from '../../../../../images/american/vehicles/sherman_us/sherma
 
 import entityShermanUS from '../../../ebps/american/vehicles/sherman_us';
 
-import type Squad from '../../../../../types/Squad';
+import type Squad from '../../../../../types/game_data/squad';
 
 const squadShermenUS: Squad = {
   uniqueName: 'sherman_us',

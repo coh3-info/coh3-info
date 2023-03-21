@@ -1,7 +1,7 @@
 import portrait from '../../../../../images/german/team_weapons/hmg_mg42_ger/hmg_mg42_ger.png';
 import squadIcon from '../../../../../images/german/team_weapons/hmg_mg42_ger/hmg_mg42_ger_symbol.png';
 
-import type Squad from '../../../../../types/Squad';
+import type Squad from '../../../../../types/game_data/squad';
 
 const squadHmgMg42GER: Squad = {
   uniqueName: 'hmg_mg42_ger',

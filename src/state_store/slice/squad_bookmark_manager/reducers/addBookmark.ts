@@ -1,4 +1,5 @@
 import { getSquad } from '../../../../util/game_data/squad/squadsController';
+import { getEntity } from '../../../../util/game_data/entity/entitiesController';
 
 import type { PayloadAction, CaseReducer } from '@reduxjs/toolkit';
 import type { SquadBookmark } from '../../../../types/bookmark/bookmark';
@@ -10,10 +11,17 @@ const addBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<{
 ) => {
   const { squadId } = action.payload;
   const squad = getSquad(squadId);
+
+  const entityId = squad?.loadout[0].entityId;
+  const entity = getEntity(entityId || '');
+
+  const weaponId = entity?.weapons[0];
+
   const newBookmark: SquadBookmark = {
     id: `${Date.now()}${state.bookmarkList.length}`,
     squadId,
-    selectedEntityId: squad?.loadout[0].entityId || '',
+    selectedEntityId: entityId || '',
+    selectedWeaponId: weaponId || '',
   };
 
   if (state.bookmarkList.length === 0) {

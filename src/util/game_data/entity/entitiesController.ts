@@ -15,3 +15,11 @@ export const getEntity = (id: string) => {
 
   return entity;
 };
+
+export const getWeaponsForEntity = (entityId: string) => {
+  const entity = getEntity(entityId);
+
+  if (entity === undefined) return [];
+
+  return entity.weapons;
+};

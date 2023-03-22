@@ -20,8 +20,8 @@ export const getSquad = (id: string) => {
   return sqaud;
 };
 
-export const getLoadoutOfSquad = (id: string) => {
-  const squad = getSquad(id);
+export const getLoadoutOfSquad = (squadId: string) => {
+  const squad = getSquad(squadId);
 
   if (squad !== undefined) {
     const loadout = squad.loadout.map((data) => {

@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { getLoadoutOfSquad } from '../../../util/game_data/squad/squadsController';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectEntity as _selectEntity } from '../../../state_store/slice/squad_bookmark_manager';
+import {
+  selectEntity as _selectEntity,
+  selectWeapon as _selectWeapon,
+} from '../../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
 
 import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
 import resourceFuelIcon from '../../../images/common/resource_fuel.png';
 import resourcePopulationIcon from '../../../images/common/resource_population.png';
-
-import EntitySelector from './EntitySelector';
 
 import type { RootState } from '../../../state_store/store';
 
@@ -16,7 +17,8 @@ import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
 import { getSquad } from '../../../util/game_data/squad/squadsController';
-import { getEntity } from '../../../util/game_data/entity/entitiesController';
+import { getEntity, getWeaponsForEntity } from '../../../util/game_data/entity/entitiesController';
+import SelectorInController from './SelectorInController';
 
 type ControllerProps = {
   isLeft?: boolean;
@@ -33,9 +35,15 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
   });
 
   const squad = bookmark !== undefined ? getSquad(bookmark.squadId) : undefined;
+  const loadout = squad !== undefined ? getLoadoutOfSquad(squad.id) : [];
+  const weaponsForEntity = bookmark !== undefined ? getWeaponsForEntity(bookmark.selectedEntityId) : [];
 
   const selectEntity = (id: string) => {
     dispatch(_selectEntity({ id, isLeft }));
+  };
+
+  const selectWeapon = (id: string) => {
+    dispatch(_selectWeapon({ id, isLeft }));
   };
 
   return (
@@ -122,12 +130,16 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
             </Options>
           </Info>
           <SelectorsContainer>
-            <EntitySelector
-              entityIds={getLoadoutOfSquad(squad.id).map((data) => data.entityId)}
-              value={bookmark.selectedEntityId}
-              selectEntity={selectEntity}
+            <SelectorInController
+              options={loadout.map((data) => ({ name: data.entityId, value: data.entityId }))}
+              defaultValue={bookmark.selectedEntityId}
+              selectOption={selectEntity}
             />
-            <MockSelecter>무기 선택</MockSelecter>
+            <SelectorInController
+              options={weaponsForEntity.map((weapon) => ({ name: weapon, value: weapon }))}
+              defaultValue={bookmark.selectedWeaponId}
+              selectOption={selectWeapon}
+            />
           </SelectorsContainer>
         </>
       ) : (
@@ -259,16 +271,6 @@ const SelectorsContainer = styled.div`
   margin-top: 20px;
   display: flex;
   gap: 10px;
-`;
-
-const MockSelecter = styled.div`
-  width: 100%;
-  height: 30px;
-  padding: 0 8px;
-  border: solid 1px #979797;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
 `;
 
 const EmptyText = styled.div`

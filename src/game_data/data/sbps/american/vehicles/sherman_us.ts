@@ -25,6 +25,9 @@ const squadShermenUS: Squad = {
       entity: entityShermanUS,
     },
   ],
+  population: {
+    pop: 0,
+  },
   reinforce: {
     costPercentage: 0.5,
     timePercentage: 1,

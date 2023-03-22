@@ -25,6 +25,9 @@ const entityShermanUS: Entity = {
     maxSpeed: 5.25,
     reverseMaxSpeed: 0,
   },
+  population: {
+    pop: 12,
+  },
   detect: 10,
   sight: 35,
 };

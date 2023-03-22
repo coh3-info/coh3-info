@@ -7,7 +7,7 @@ type VehicleArmor = {
 
 type Entity = {
   uniqueName: string; //coh3 데이터의 파일 이름
-  type: 'infantry' | 'team_weapon' | 'vehicle';
+  type: 'infantry' | 'crew' | 'vehicle' | 'weapon';
   weapons: string[];
   cost: {
     fuel: number;
@@ -25,6 +25,9 @@ type Entity = {
     rotaionRate: number; //초당 회전 각도
     maxSpeed: number;
     reverseMaxSpeed: number;
+  };
+  population: {
+    pop: number;
   };
   detect: number; //탐지거리
   sight: number;

@@ -20,6 +20,9 @@ export type Squad = {
   revertRateMutiplier: number;
   constructions: [];
   entities: Entities;
+  population: {
+    pop: number;
+  };
   reinforce: {
     costPercentage: number;
     timePercentage: number;

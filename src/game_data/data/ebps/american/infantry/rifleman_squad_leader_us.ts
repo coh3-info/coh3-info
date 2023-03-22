@@ -21,6 +21,9 @@ const entityRiflemenSquadLeaderUS: Entity = {
     maxSpeed: 3.6,
     reverseMaxSpeed: 0,
   },
+  population: {
+    pop: 1,
+  },
   detect: 10,
   sight: 35,
 };

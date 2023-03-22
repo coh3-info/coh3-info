@@ -1,17 +1,17 @@
 import type Entity from '../../../../../types/game_data/entity';
 
-const entityRiflemanUS: Entity = {
-  uniqueName: 'rifleman_us',
-  type: 'infantry',
-  weapons: ['garand_rifleman_us'],
+const entityCrewMortarIndianUK: Entity = {
+  uniqueName: 'crew_mortar_indian_uk',
+  type: 'crew',
+  weapons: ['lee_enfield_crew_uk'],
   cost: {
+    manpower: 45,
     fuel: 0,
-    manpower: 43.34,
-    time: 3.33,
+    time: 5,
   },
   armor: 1,
-  hitpoints: 100,
-  targetSize: 1,
+  hitpoints: 80,
+  targetSize: 1.33,
   moving: {
     acceleration: -1,
     deceleration: -1,
@@ -28,4 +28,4 @@ const entityRiflemanUS: Entity = {
   sight: 35,
 };
 
-export default entityRiflemanUS;
+export default entityCrewMortarIndianUK;

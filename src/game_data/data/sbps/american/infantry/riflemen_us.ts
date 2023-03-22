@@ -30,6 +30,9 @@ const squadRiflemenUS: Squad = {
       entity: entityRiflemanUS,
     },
   ],
+  population: {
+    pop: 1,
+  },
   reinforce: {
     costPercentage: 0.6,
     timePercentage: 1.2,

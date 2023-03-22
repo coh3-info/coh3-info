@@ -2,6 +2,7 @@ import portrait from '../../../../../images/afrika_korps/infantry/guastatori_ak/
 import squadIcon from '../../../../../images/afrika_korps/infantry/guastatori_ak/guastatori_ak_symbol.png';
 
 import type Squad from '../../../../../types/game_data/squad';
+import entityGuastatoriAK from '../../../ebps/afrika_korps/infantry/guastatori_ak';
 
 const squadGuastatoriAK: Squad = {
   uniqueName: 'guastatori_ak',
@@ -17,7 +18,10 @@ const squadGuastatoriAK: Squad = {
   captureRateMutiplier: 1.25,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [],
+  entities: [{ num: 6, entity: entityGuastatoriAK }],
+  population: {
+    pop: 4,
+  },
   reinforce: {
     costPercentage: 0.48,
     timePercentage: 0.625,

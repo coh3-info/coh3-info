@@ -1,7 +1,7 @@
 import type Weapon from '../../../../../../types/game_data/weapon';
 
 const weapon75mmShermanUS: Weapon = {
-  uniqueName: '75mm_sherman_us',
+  id: '75mm_sherman_us',
   name: '75mm gun',
   accuracy: {
     far: 0.045,

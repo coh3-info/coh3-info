@@ -6,7 +6,7 @@ import entityCrewMortarIndianUK from '../../../ebps/british/team_weapons/crew_mo
 import entityW81mmMortarUK from '../../../ebps/british/weapons/w_81mm_mortar_uk';
 
 const squadMortar81mmUK: Squad = {
-  uniqueName: 'mortar_81mm_uk',
+  id: 'mortar_81mm_uk',
   nameEN: 'ML 3-inch Mortar Team',
   name: 'ML 3인치 박격포 운용반',
   type: 'team_weapon',
@@ -19,11 +19,11 @@ const squadMortar81mmUK: Squad = {
   captureRateMutiplier: 1,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [
-    { num: 1, entity: entityW81mmMortarUK },
+  loadout: [
+    { num: 1, entityId: 'w_81mm_mortar_uk' },
     {
       num: 4,
-      entity: entityCrewMortarIndianUK,
+      entityId: 'crew_mortar_indian_uk',
     },
   ],
   population: {

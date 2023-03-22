@@ -1,7 +1,7 @@
 import type Entity from '../../../../../types/game_data/entity';
 
 const entityRiflemanUS: Entity = {
-  uniqueName: 'rifleman_us',
+  id: 'rifleman_us',
   type: 'infantry',
   weapons: ['garand_rifleman_us'],
   cost: {

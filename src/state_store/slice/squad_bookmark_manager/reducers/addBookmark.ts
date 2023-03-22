@@ -1,13 +1,19 @@
-import type Squad from '../../../../types/game_data/squad';
+import { getSquad } from '../../../../util/game_data/squad/squadsController';
+
 import type { PayloadAction, CaseReducer } from '@reduxjs/toolkit';
 import type { SquadBookmark } from '../../../../types/bookmark/bookmark';
 import type { SquadBookmarkManagerInitialState } from '..';
 
-const addBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<{ squad: Squad }>> = (state, action) => {
+const addBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<{ squadId: string }>> = (
+  state,
+  action
+) => {
+  const { squadId } = action.payload;
+  const squad = getSquad(squadId);
   const newBookmark: SquadBookmark = {
     id: `${Date.now()}${state.bookmarkList.length}`,
-    squad: action.payload.squad,
-    selectedEntityUniqueName: action.payload.squad.entities[0]?.entity.uniqueName,
+    squadId,
+    selectedEntityId: squad?.loadout[0].entityId || '',
   };
 
   if (state.bookmarkList.length === 0) {

@@ -15,6 +15,7 @@ type SquadListItemProps = {
 
 const SquadListItem = ({ squad }: SquadListItemProps) => {
   const {
+    id,
     name,
     race,
     imageUrl: { portrait, icon },
@@ -27,8 +28,9 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
     wehrmacht: germanRaceMark,
     afrika_korps: afrikaKorpsRaceMark,
   };
+
   const addSquadToSquadSelector = () => {
-    dispatch(addBookmark({ squad }));
+    dispatch(addBookmark({ squadId: id }));
   };
 
   return (

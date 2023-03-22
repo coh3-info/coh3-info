@@ -1,18 +1,18 @@
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { SquadBookmarkManagerInitialState } from '..';
 
-const selectEntity: CaseReducer<
-  SquadBookmarkManagerInitialState,
-  PayloadAction<{ uniqueName: string; isLeft: boolean }>
-> = (state, action) => {
-  const { uniqueName, isLeft } = action.payload;
+const selectEntity: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<{ id: string; isLeft: boolean }>> = (
+  state,
+  action
+) => {
+  const { id, isLeft } = action.payload;
   if (isLeft) {
     if (state.selectedBookmarkOnLeft !== undefined) {
-      state.selectedBookmarkOnLeft.selectedEntityUniqueName = uniqueName;
+      state.selectedBookmarkOnLeft.selectedEntityId = id;
     }
   } else {
     if (state.selectedBookmarkOnRight !== undefined) {
-      state.selectedBookmarkOnRight.selectedEntityUniqueName = uniqueName;
+      state.selectedBookmarkOnRight.selectedEntityId = id;
     }
   }
 };

@@ -1,13 +1,10 @@
 import portrait from '../../../../../images/american/infantiry/riflemen_us/riflemen_us.png';
 import squadIcon from '../../../../../images/american/infantiry/riflemen_us/riflemen_us_symbol.png';
 
-import entityRiflemenSquadLeaderUS from '../../../ebps/american/infantry/rifleman_squad_leader_us';
-import entityRiflemanUS from '../../../ebps/american/infantry/rifleman_us';
-
 import type Squad from '../../../../../types/game_data/squad';
 
 const squadRiflemenUS: Squad = {
-  uniqueName: 'riflemen_us',
+  id: 'riflemen_us',
   nameEN: 'Riflemen Squad',
   name: '소총병 분대',
   type: 'infantry',
@@ -20,14 +17,14 @@ const squadRiflemenUS: Squad = {
   captureRateMutiplier: 1.25,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [
+  loadout: [
     {
       num: 1,
-      entity: entityRiflemenSquadLeaderUS,
+      entityId: 'rifleman_squad_leader_us',
     },
     {
       num: 5,
-      entity: entityRiflemanUS,
+      entityId: 'rifleman_us',
     },
   ],
   population: {

@@ -6,7 +6,7 @@ type VehicleArmor = {
 };
 
 type Entity = {
-  uniqueName: string; //coh3 데이터의 파일 이름
+  id: string; //coh3 데이터의 파일 이름
   type: 'infantry' | 'crew' | 'vehicle' | 'weapon';
   weapons: string[];
   cost: {

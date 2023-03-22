@@ -1,7 +1,7 @@
 import type Entity from '../../../../../types/game_data/entity';
 
 const entityGuastatoriAK: Entity = {
-  uniqueName: 'guastatori_ak',
+  id: 'guastatori_ak',
   type: 'infantry',
   weapons: ['beretta_m38_guastatori_ak'],
   cost: {

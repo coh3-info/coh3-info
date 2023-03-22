@@ -1,7 +1,7 @@
 import type Weapon from '../../../../../../../types/game_data/weapon';
 
 const weapon30CalCoaxialShermanUS: Weapon = {
-  uniqueName: '30cal_coaxial_sherman_us',
+  id: '30cal_coaxial_sherman_us',
   name: '30cal coaxial LMG',
   accuracy: {
     far: 0.1,

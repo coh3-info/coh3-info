@@ -1,19 +1,22 @@
 import styled from 'styled-components';
-import Entity from '../../../types/game_data/entity';
 
 type EntitySelectorProps = {
-  entities: Entity[];
+  entityIds: string[];
   value: string;
   selectEntity: (uniqueName: string) => void;
 };
 
-const EntitySelector = ({ entities, value, selectEntity }: EntitySelectorProps) => {
+const EntitySelector = ({ entityIds, value, selectEntity }: EntitySelectorProps) => {
   return (
-    <EntitySelectorWrapper disabled={entities.length <= 1} value={value} onChange={(e) => selectEntity(e.target.value)}>
-      {entities.map((entity) => {
+    <EntitySelectorWrapper
+      disabled={entityIds.length <= 1}
+      value={value}
+      onChange={(e) => selectEntity(e.target.value)}
+    >
+      {entityIds.map((entityId) => {
         return (
-          <option key={entity.uniqueName} value={entity.uniqueName}>
-            {entity.uniqueName}
+          <option key={entityId} value={entityId}>
+            {entityId}
           </option>
         );
       })}

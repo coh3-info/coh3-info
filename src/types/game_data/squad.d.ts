@@ -1,12 +1,12 @@
 import Entity from './entity';
 
-type Entities = {
+type LoadoutData = {
   num: number;
-  entity: Entity;
-}[];
+  entityId: string;
+};
 
 export type Squad = {
-  uniqueName: string; //coh3 데이터의 파일 이름
+  id: string; //coh3 데이터의 파일 이름
   nameEN: string;
   name: string;
   type: 'infantry' | 'team_weapon' | 'vehicle';
@@ -19,7 +19,7 @@ export type Squad = {
   captureRateMutiplier: number;
   revertRateMutiplier: number;
   constructions: [];
-  entities: Entities;
+  loadout: LoadoutData[];
   population: {
     pop: number;
   };

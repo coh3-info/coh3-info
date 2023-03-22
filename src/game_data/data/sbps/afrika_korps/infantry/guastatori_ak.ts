@@ -5,7 +5,7 @@ import type Squad from '../../../../../types/game_data/squad';
 import entityGuastatoriAK from '../../../ebps/afrika_korps/infantry/guastatori_ak';
 
 const squadGuastatoriAK: Squad = {
-  uniqueName: 'guastatori_ak',
+  id: 'guastatori_ak',
   nameEN: 'Guastatori Squad',
   name: '이탈리아 공병 분대',
   type: 'infantry',
@@ -18,7 +18,7 @@ const squadGuastatoriAK: Squad = {
   captureRateMutiplier: 1.25,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [{ num: 6, entity: entityGuastatoriAK }],
+  loadout: [{ num: 6, entityId: 'guastatori_ak' }],
   population: {
     pop: 4,
   },

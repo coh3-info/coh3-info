@@ -1,7 +1,7 @@
 import type Entity from '../../../../../types/game_data/entity';
 
 const entityW81mmMortarUK: Entity = {
-  uniqueName: 'w_81mm_mortar_uk',
+  id: 'w_81mm_mortar_uk',
   type: 'weapon',
   weapons: ['81mm_mortar_uk'],
   cost: {

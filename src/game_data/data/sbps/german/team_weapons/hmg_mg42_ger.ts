@@ -6,7 +6,7 @@ import entityCrewHmgGER from '../../../ebps/german/team_weapons/crew_hmg_ger';
 import entityWMg42HmgGER from '../../../ebps/german/weapons/w_mg42_hmg_ger';
 
 const squadHmgMg42GER: Squad = {
-  uniqueName: 'hmg_mg42_ger',
+  id: 'hmg_mg42_ger',
   nameEN: 'MG42 Machine Gun Team',
   name: 'MG42 기관총 운용반',
   type: 'team_weapon',
@@ -19,9 +19,9 @@ const squadHmgMg42GER: Squad = {
   captureRateMutiplier: 1,
   revertRateMutiplier: 1,
   constructions: [],
-  entities: [
-    { num: 1, entity: entityWMg42HmgGER },
-    { num: 4, entity: entityCrewHmgGER },
+  loadout: [
+    { num: 1, entityId: 'w_mg42_hmg_ger' },
+    { num: 4, entityId: 'crew_hmg_ger' },
   ],
   population: {
     pop: 3,

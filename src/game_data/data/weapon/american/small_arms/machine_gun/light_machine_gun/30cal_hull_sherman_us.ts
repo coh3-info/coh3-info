@@ -1,7 +1,7 @@
 import type Weapon from '../../../../../../../types/game_data/weapon';
 
 const weapon30CalHullShermanUS: Weapon = {
-  uniqueName: '30cal_hull_sherman_us',
+  id: '30cal_hull_sherman_us',
   name: '30cal hull LMG',
   accuracy: {
     far: 0.1,

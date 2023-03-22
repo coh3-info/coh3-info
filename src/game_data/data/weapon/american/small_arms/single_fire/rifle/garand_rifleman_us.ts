@@ -1,7 +1,7 @@
 import type Weapon from '../../../../../../../types/game_data/weapon';
 
 const weaponGarandRiflemanUS: Weapon = {
-  uniqueName: 'garand_rifleman_us',
+  id: 'garand_rifleman_us',
   name: 'M1 Garand',
   accuracy: {
     far: 0.55,

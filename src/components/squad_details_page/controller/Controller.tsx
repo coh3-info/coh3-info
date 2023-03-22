@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getEntities } from '../../../util/squad';
+import { getLoadoutOfSquad } from '../../../util/game_data/squad/squadsController';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectEntity as _selectEntity } from '../../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
@@ -15,6 +15,8 @@ import type { RootState } from '../../../state_store/store';
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
+import { getSquad } from '../../../util/game_data/squad/squadsController';
+import { getEntity } from '../../../util/game_data/entity/entitiesController';
 
 type ControllerProps = {
   isLeft?: boolean;
@@ -30,10 +32,10 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
     }
   });
 
-  const squad = bookmark?.squad;
+  const squad = bookmark !== undefined ? getSquad(bookmark.squadId) : undefined;
 
-  const selectEntity = (uniqueName: string) => {
-    dispatch(_selectEntity({ uniqueName, isLeft }));
+  const selectEntity = (id: string) => {
+    dispatch(_selectEntity({ id, isLeft }));
   };
 
   return (
@@ -60,8 +62,9 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
                     <img src={resourceManpowerIcon} alt="manpower icon" />
                   </div>
                   {Math.round(
-                    squad.entities.reduce((sum, entity) => {
-                      return sum + entity.num * entity.entity.cost.manpower;
+                    squad.loadout.reduce((sum, data) => {
+                      const entity = getEntity(data.entityId);
+                      return sum + data.num * Number(entity?.cost.manpower);
                     }, 0)
                   )}
                 </Resource>
@@ -70,8 +73,10 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
                     <img src={resourceFuelIcon} alt="fuel icon" />
                   </div>
                   {Math.round(
-                    squad.entities.reduce((sum, entity) => {
-                      return sum + entity.num * entity.entity.cost.fuel;
+                    squad.loadout.reduce((sum, data) => {
+                      const entity = getEntity(data.entityId);
+
+                      return sum + data.num * Number(entity?.cost.fuel);
                     }, 0)
                   )}
                 </Resource>
@@ -118,8 +123,8 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
           </Info>
           <SelectorsContainer>
             <EntitySelector
-              entities={getEntities(squad)}
-              value={bookmark.selectedEntityUniqueName}
+              entityIds={getLoadoutOfSquad(squad.id).map((data) => data.entityId)}
+              value={bookmark.selectedEntityId}
               selectEntity={selectEntity}
             />
             <MockSelecter>무기 선택</MockSelecter>

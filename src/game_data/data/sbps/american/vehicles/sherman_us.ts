@@ -6,7 +6,7 @@ import entityShermanUS from '../../../ebps/american/vehicles/sherman_us';
 import type Squad from '../../../../../types/game_data/squad';
 
 const squadShermenUS: Squad = {
-  uniqueName: 'sherman_us',
+  id: 'sherman_us',
   nameEN: 'M4A1 Sherman Medium Tank',
   name: 'M4A1 셔먼 중형전차',
   type: 'vehicle',
@@ -19,10 +19,10 @@ const squadShermenUS: Squad = {
   captureRateMutiplier: 0,
   revertRateMutiplier: 0,
   constructions: [],
-  entities: [
+  loadout: [
     {
       num: 1,
-      entity: entityShermanUS,
+      entityId: 'sherman_us',
     },
   ],
   population: {

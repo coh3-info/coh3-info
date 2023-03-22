@@ -21,7 +21,7 @@ type RectangleArea = {
 };
 
 type Weapon = {
-  uniqueName: string; //coh3 데이터의 파일 이름
+  id: string; //coh3 데이터의 파일 이름
   name: string;
   accuracy: Distance;
   aim: {

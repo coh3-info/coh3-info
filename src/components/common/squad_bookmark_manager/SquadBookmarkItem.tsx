@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
+import { getSquad } from '../../../util/game_data/squad/squadsController';
 
 type SelectedSquadItemProps = {
   bookmark: SquadBookmark;
@@ -17,13 +18,10 @@ const SquadBookmarkItem = ({
   checkedLeft,
   checkedRight,
 }: SelectedSquadItemProps) => {
-  const {
-    id,
-    squad: { name: squadName },
-  } = bookmark;
-
   const location = useLocation();
   const path = location.pathname;
+  const { id, squadId } = bookmark;
+  const squad = getSquad(squadId);
 
   return (
     <SquadBookmarkItemWrapper>
@@ -34,7 +32,7 @@ const SquadBookmarkItem = ({
         </RadioButtonsContainer>
       )}
 
-      <SquadName>{squadName}</SquadName>
+      <SquadName>{squad?.name}</SquadName>
       <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
     </SquadBookmarkItemWrapper>
   );

@@ -1,6 +1,6 @@
-import type WeaponData from '../../../../../../../types/game_data/weapon';
+import type Weapon from '../../../../../../../types/game_data/weapon';
 
-const weaponGarandRiflemanUS: WeaponData = {
+const weaponGarandRiflemanUS: Weapon = {
   id: 'garand_rifleman_us',
   name: 'M1 Garand',
   accuracy: {

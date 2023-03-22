@@ -1,4 +1,4 @@
-import type SquadData from '../../../types/game_data/squad';
+import type Squad from '../../../types/game_data/squad';
 
 //US Forces
 import squadRiflemenUS from '../../../game_data/data/sbps/american/infantry/riflemen_us';
@@ -13,6 +13,6 @@ import squadHmgMg42GER from '../../../game_data/data/sbps/german/team_weapons/hm
 //Afrika Korps
 import squadGuastatoriAK from '../../../game_data/data/sbps/afrika_korps/infantry/guastatori_ak';
 
-const squads: SquadData[] = [squadRiflemenUS, squadShermenUS, squadGuastatoriAK, squadMortar81mmUK, squadHmgMg42GER];
+const squads: Squad[] = [squadRiflemenUS, squadShermenUS, squadGuastatoriAK, squadMortar81mmUK, squadHmgMg42GER];
 
 export default squads;

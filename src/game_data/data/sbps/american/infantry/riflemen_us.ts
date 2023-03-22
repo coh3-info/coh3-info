@@ -1,9 +1,9 @@
 import portrait from '../../../../../images/american/infantiry/riflemen_us/riflemen_us.png';
 import squadIcon from '../../../../../images/american/infantiry/riflemen_us/riflemen_us_symbol.png';
 
-import type SquadData from '../../../../../types/game_data/squad';
+import type Squad from '../../../../../types/game_data/squad';
 
-const squadRiflemenUS: SquadData = {
+const squadRiflemenUS: Squad = {
   id: 'riflemen_us',
   nameEN: 'Riflemen Squad',
   name: '소총병 분대',

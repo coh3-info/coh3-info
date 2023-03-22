@@ -4,10 +4,10 @@ import { getSquad } from '../../../util/game_data/squad/squadsController';
 import { useSelector } from 'react-redux';
 
 import type { Stat, StatGroup } from './stat';
-import type EntityData from '../../../types/game_data/entity';
+import type Entity from '../../../types/game_data/entity';
 import type { RootState } from '../../../state_store/store';
 
-const getArmor = (entity: EntityData | undefined) => {
+const getArmor = (entity: Entity | undefined) => {
   const armor = entity?.armor;
   if (armor === undefined) return [];
 

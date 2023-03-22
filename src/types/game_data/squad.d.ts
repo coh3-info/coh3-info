@@ -3,7 +3,7 @@ type LoadoutData = {
   entityId: string;
 };
 
-export type SquadData = {
+export type Squad = {
   id: string; //coh3 데이터의 파일 이름
   nameEN: string;
   name: string;
@@ -28,4 +28,4 @@ export type SquadData = {
   upgrades: [];
 };
 
-export default SquadData;
+export default Squad;

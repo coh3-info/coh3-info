@@ -1,9 +1,9 @@
 import portrait from '../../../../../images/afrika_korps/infantry/guastatori_ak/guastatori_ak.png';
 import squadIcon from '../../../../../images/afrika_korps/infantry/guastatori_ak/guastatori_ak_symbol.png';
 
-import type SquadData from '../../../../../types/game_data/squad';
+import type Squad from '../../../../../types/game_data/squad';
 
-const squadGuastatoriAK: SquadData = {
+const squadGuastatoriAK: Squad = {
   id: 'guastatori_ak',
   nameEN: 'Guastatori Squad',
   name: '이탈리아 공병 분대',

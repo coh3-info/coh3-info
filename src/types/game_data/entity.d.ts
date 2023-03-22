@@ -5,7 +5,7 @@ type VehicleArmor = {
   rear: number;
 };
 
-type EntityData = {
+type Entity = {
   id: string; //coh3 데이터의 파일 이름
   type: 'infantry' | 'crew' | 'vehicle' | 'weapon';
   weapons: string[];
@@ -33,4 +33,4 @@ type EntityData = {
   sight: number;
 };
 
-export default EntityData;
+export default Entity;

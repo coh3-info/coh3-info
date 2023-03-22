@@ -1,4 +1,4 @@
-import type WeaponData from '../../../types/game_data/weapon';
+import type Weapon from '../../../types/game_data/weapon';
 
 //US Forces
 import weaponGarandRiflemanUS from '../../../game_data/data/weapon/american/small_arms/single_fire/rifle/garand_rifleman_us';
@@ -13,7 +13,7 @@ import weapon30CalHullShermanUS from '../../../game_data/data/weapon/american/sm
 
 //Afrika Korps
 
-const weapons: WeaponData[] = [
+const weapons: Weapon[] = [
   weaponGarandRiflemanUS,
   weaponTompsonRiflemenLeaderUS,
   weapon75mmShermanUS,

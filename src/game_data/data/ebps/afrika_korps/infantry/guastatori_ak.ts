@@ -1,6 +1,6 @@
-import type EntityData from '../../../../../types/game_data/entity';
+import type Entity from '../../../../../types/game_data/entity';
 
-const entityGuastatoriAK: EntityData = {
+const entityGuastatoriAK: Entity = {
   id: 'guastatori_ak',
   type: 'infantry',
   weapons: ['beretta_m38_guastatori_ak'],

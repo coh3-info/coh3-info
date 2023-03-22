@@ -1,9 +1,9 @@
 import portrait from '../../../../../images/american/vehicles/sherman_us/sherman_us.png';
 import squadIcon from '../../../../../images/american/vehicles/sherman_us/sherman_us_symbol.png';
 
-import type SquadData from '../../../../../types/game_data/squad';
+import type Squad from '../../../../../types/game_data/squad';
 
-const squadShermenUS: SquadData = {
+const squadShermenUS: Squad = {
   id: 'sherman_us',
   nameEN: 'M4A1 Sherman Medium Tank',
   name: 'M4A1 셔먼 중형전차',

@@ -1,6 +1,6 @@
-import type EntityData from '../../../../../types/game_data/entity';
+import type Entity from '../../../../../types/game_data/entity';
 
-const entityCrewMortarIndianUK: EntityData = {
+const entityCrewMortarIndianUK: Entity = {
   id: 'crew_mortar_indian_uk',
   type: 'crew',
   weapons: ['lee_enfield_crew_uk'],

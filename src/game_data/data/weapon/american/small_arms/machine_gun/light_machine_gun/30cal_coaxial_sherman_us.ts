@@ -1,6 +1,6 @@
-import type Weapon from '../../../../../../../types/game_data/weapon';
+import type WeaponData from '../../../../../../../types/game_data/weapon';
 
-const weapon30CalCoaxialShermanUS: Weapon = {
+const weapon30CalCoaxialShermanUS: WeaponData = {
   id: '30cal_coaxial_sherman_us',
   name: '30cal coaxial LMG',
   accuracy: {

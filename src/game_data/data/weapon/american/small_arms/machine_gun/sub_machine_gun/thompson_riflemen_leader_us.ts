@@ -1,6 +1,6 @@
-import Weapon from '../../../../../../../types/game_data/weapon';
+import WeaponData from '../../../../../../../types/game_data/weapon';
 
-const weaponTompsonRiflemenLeaderUS: Weapon = {
+const weaponTompsonRiflemenLeaderUS: WeaponData = {
   id: 'tompson_riflemen_leader_us',
   name: 'Tompson SMG',
   accuracy: {

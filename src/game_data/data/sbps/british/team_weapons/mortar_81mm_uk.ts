@@ -1,11 +1,9 @@
 import portrait from '../../../../../images/british/team_weapons/mortar_81mm_uk/mortar_81mm_uk.png';
 import squadIcon from '../../../../../images/british/team_weapons/mortar_81mm_uk/mortar_81mm_uk_symbol.png';
 
-import type Squad from '../../../../../types/game_data/squad';
-import entityCrewMortarIndianUK from '../../../ebps/british/team_weapons/crew_mortar_indian_uk';
-import entityW81mmMortarUK from '../../../ebps/british/weapons/w_81mm_mortar_uk';
+import type SquadData from '../../../../../types/game_data/squad';
 
-const squadMortar81mmUK: Squad = {
+const squadMortar81mmUK: SquadData = {
   id: 'mortar_81mm_uk',
   nameEN: 'ML 3-inch Mortar Team',
   name: 'ML 3인치 박격포 운용반',

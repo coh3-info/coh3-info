@@ -1,6 +1,6 @@
-import type Weapon from '../../../../../../../types/game_data/weapon';
+import type WeaponData from '../../../../../../../types/game_data/weapon';
 
-const weapon30CalHullShermanUS: Weapon = {
+const weapon30CalHullShermanUS: WeaponData = {
   id: '30cal_hull_sherman_us',
   name: '30cal hull LMG',
   accuracy: {

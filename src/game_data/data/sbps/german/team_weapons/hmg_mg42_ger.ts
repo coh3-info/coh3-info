@@ -1,11 +1,9 @@
 import portrait from '../../../../../images/german/team_weapons/hmg_mg42_ger/hmg_mg42_ger.png';
 import squadIcon from '../../../../../images/german/team_weapons/hmg_mg42_ger/hmg_mg42_ger_symbol.png';
 
-import type Squad from '../../../../../types/game_data/squad';
-import entityCrewHmgGER from '../../../ebps/german/team_weapons/crew_hmg_ger';
-import entityWMg42HmgGER from '../../../ebps/german/weapons/w_mg42_hmg_ger';
+import type SquadData from '../../../../../types/game_data/squad';
 
-const squadHmgMg42GER: Squad = {
+const squadHmgMg42GER: SquadData = {
   id: 'hmg_mg42_ger',
   nameEN: 'MG42 Machine Gun Team',
   name: 'MG42 기관총 운용반',

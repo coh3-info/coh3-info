@@ -1,4 +1,4 @@
-import type Entity from '../../../types/game_data/entity';
+import type EntityData from '../../../types/game_data/entity';
 
 //US Forces
 import entityRiflemanUS from '../../../game_data/data/ebps/american/infantry/rifleman_us';
@@ -16,7 +16,7 @@ import entityWMg42HmgGER from '../../../game_data/data/ebps/german/weapons/w_mg4
 //Afrika Korps
 import entityGuastatoriAK from '../../../game_data/data/ebps/afrika_korps/infantry/guastatori_ak';
 
-const squads: Entity[] = [
+const entities: EntityData[] = [
   entityRiflemanUS,
   entityRiflemenSquadLeaderUS,
   entityShermanUS,
@@ -30,4 +30,4 @@ const squads: Entity[] = [
   entityGuastatoriAK,
 ];
 
-export default squads;
+export default entities;

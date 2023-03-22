@@ -1,11 +1,9 @@
-import Entity from './entity';
-
 type LoadoutData = {
   num: number;
   entityId: string;
 };
 
-export type Squad = {
+export type SquadData = {
   id: string; //coh3 데이터의 파일 이름
   nameEN: string;
   name: string;
@@ -30,4 +28,4 @@ export type Squad = {
   upgrades: [];
 };
 
-export default Squad;
+export default SquadData;

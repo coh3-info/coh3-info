@@ -20,7 +20,7 @@ type RectangleArea = {
   width: number;
 };
 
-type Weapon = {
+type WeaponData = {
   id: string; //coh3 데이터의 파일 이름
   name: string;
   accuracy: Distance;
@@ -93,4 +93,4 @@ type Weapon = {
   };
 };
 
-export default Weapon;
+export default WeaponData;

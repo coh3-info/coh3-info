@@ -9,7 +9,9 @@ import type { RootState } from '../../../state_store/store';
 
 const getArmor = (entity: Entity | undefined) => {
   const armor = entity?.armor;
-  if (armor === undefined || typeof armor === 'number') {
+  if (armor === undefined) return [];
+
+  if (typeof armor === 'number') {
     return [armor, armor, armor];
   }
   const { front, side, rear } = armor;
@@ -32,23 +34,15 @@ const EntityStatsList = () => {
     { name: '장갑', leftValue: getArmor(leftEntity), rightValue: getArmor(rightEntity), separator: '/' },
     {
       name: '충원비',
-      leftValue:
-        leftEntity &&
-        leftBookmark &&
-        Math.round(leftEntity?.cost.manpower * Number(leftSquad?.reinforce.costPercentage)),
+      leftValue: leftEntity && leftSquad && Math.round(leftEntity.cost.manpower * leftSquad.reinforce.costPercentage),
       rightValue:
-        rightEntity &&
-        rightBookmark &&
-        Math.round(rightEntity?.cost.manpower * Number(rightSquad?.reinforce.costPercentage)),
+        rightEntity && rightSquad && Math.round(rightEntity?.cost.manpower * rightSquad.reinforce.costPercentage),
     },
     {
       name: '충원시간',
-      leftValue:
-        leftEntity && leftBookmark && Math.round(leftEntity?.cost.time * Number(leftSquad?.reinforce.timePercentage)),
+      leftValue: leftEntity && leftSquad && Math.round(leftEntity?.cost.time * leftSquad?.reinforce.timePercentage),
       rightValue:
-        rightEntity &&
-        rightBookmark &&
-        Math.round(rightEntity?.cost.time * Number(rightSquad?.reinforce.timePercentage)),
+        rightEntity && rightSquad && Math.round(rightEntity?.cost.time * rightSquad?.reinforce.timePercentage),
     },
     { name: '시야', leftValue: leftEntity?.sight, rightValue: rightEntity?.sight },
     { name: '은신탐지거리', leftValue: leftEntity?.detect, rightValue: rightEntity?.detect },

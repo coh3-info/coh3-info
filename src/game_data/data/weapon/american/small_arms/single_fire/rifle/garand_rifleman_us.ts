@@ -4,9 +4,9 @@ const weaponGarandRiflemanUS: Weapon = {
   id: 'garand_rifleman_us',
   name: 'M1 Garand',
   accuracy: {
-    far: 0.55,
+    far: 0.29,
     mid: 0.5,
-    near: 0.29,
+    near: 0.55,
   },
   aim: {
     aimTimeMultiplier: {
@@ -34,7 +34,9 @@ const weaponGarandRiflemanUS: Weapon = {
       mid: 1,
       near: 1,
     },
-    areaInfo: null,
+    areaInfo: {
+      areaType: 'none',
+    },
     damageMultiplier: {
       far: 0.25,
       mid: 0.625,

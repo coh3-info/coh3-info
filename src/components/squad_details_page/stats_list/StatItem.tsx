@@ -3,7 +3,7 @@ import type { Stat, UnitOfStat } from './stat';
 
 const convertToUnitString = (value: number, unit: UnitOfStat): string => {
   if (unit === 'percentage') {
-    return `${value * 100}%`;
+    return `${Number((value * 100).toFixed(2))}%`;
   } else {
     return `${value}˚`;
   }
@@ -22,6 +22,10 @@ const getValue = (stat: Stat, position: 'left' | 'right') => {
 
   if (typeof value === 'number' && stat.unit !== undefined) {
     return convertToUnitString(value, stat.unit);
+  }
+
+  if (typeof value === 'number' && stat.unit === undefined && stat.decimalPlaces !== undefined) {
+    return Number(value.toFixed(stat.decimalPlaces));
   }
 
   if (typeof value === 'boolean') {

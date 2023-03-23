@@ -5,6 +5,7 @@ export type SeparatorOfStat = '/' | '~';
 type BasicStat = {
   name: string;
   unit?: UnitOfStat;
+  decimalPlaces?: number;
 };
 
 type StatOfValues = {

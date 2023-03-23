@@ -34,7 +34,9 @@ const weaponTompsonRiflemenLeaderUS: Weapon = {
       mid: 1,
       near: 1,
     },
-    areaInfo: null,
+    areaInfo: {
+      areaType: 'none',
+    },
     damageMultiplier: {
       far: 0.25,
       mid: 0.625,

@@ -1,174 +1,288 @@
 import StatsList from './StatList';
-
 import type { Stat, StatGroup } from './stat';
+import WeaponStats from '../../../util/stats/class/WeaponStats';
+
+import tempWeaponTompsonRiflemenLeaderUS from '../../../game_data/data/weapon/american/small_arms/machine_gun/sub_machine_gun/thompson_riflemen_leader_us';
+import tempWeaponGarandRiflemanUS from '../../../game_data/data/weapon/american/small_arms/single_fire/rifle/garand_rifleman_us';
+import weapon30CalCoaxialShermanUS from '../../../game_data/data/weapon/american/small_arms/machine_gun/light_machine_gun/30cal_coaxial_sherman_us';
+import weapon30CalHullShermanUS from '../../../game_data/data/weapon/american/small_arms/machine_gun/light_machine_gun/30cal_hull_sherman_us';
+import weapon75mmShermanUS from '../../../game_data/data/weapon/american/ballistric_weapon/tank_gun/75mm_sherman_us';
 
 const WeaponStatsList = () => {
+  const leftWeapon = new WeaponStats(weapon75mmShermanUS);
+  const rightWeapon = new WeaponStats(tempWeaponGarandRiflemanUS);
+
   const statList1: (Stat | StatGroup)[] = [
-    { name: '공격력', leftValue: 3, rightValue: 120 },
-    { name: '비관통 공격력', leftValue: 0, rightValue: 18 },
-    { name: '사거리', leftValue: [0, 35], rightValue: [0, 35], separator: '~' },
+    { name: '공격력', leftValue: leftWeapon.damage, rightValue: rightWeapon.damage },
+    { name: '비관통 공격력', leftValue: leftWeapon.deflectionDamage, rightValue: rightWeapon.deflectionDamage },
+    {
+      name: '사거리',
+      leftValue: [leftWeapon.range.min, leftWeapon.range.max],
+      rightValue: [rightWeapon.range.min, leftWeapon.range.max],
+      separator: '~',
+    },
     {
       name: '거리 정의',
       stats: [
-        { name: '근거리', leftValue: 7, rightValue: 10 },
-        { name: '중거리', leftValue: 25, rightValue: 25 },
-        { name: '원거리', leftValue: 35, rightValue: 40 },
+        { name: '근거리', leftValue: leftWeapon.distance.near, rightValue: rightWeapon.distance.near },
+        { name: '중거리', leftValue: leftWeapon.distance.mid, rightValue: rightWeapon.distance.mid },
+        { name: '원거리', leftValue: leftWeapon.distance.far, rightValue: rightWeapon.distance.far },
       ],
     },
     {
       name: '관통력',
       stats: [
-        { name: '근거리', leftValue: 1, rightValue: 180 },
-        { name: '중거리', leftValue: 1, rightValue: 125 },
-        { name: '원거리', leftValue: 1, rightValue: 110 },
+        { name: '근거리', leftValue: leftWeapon.penetration.near, rightValue: rightWeapon.penetration.near },
+        { name: '중거리', leftValue: leftWeapon.penetration.mid, rightValue: rightWeapon.penetration.mid },
+        { name: '원거리', leftValue: leftWeapon.penetration.far, rightValue: rightWeapon.penetration.far },
       ],
     },
     {
       name: '명중률',
       stats: [
-        { name: '근거리', leftValue: 0.42, rightValue: 0.075, unit: 'percentage' },
-        { name: '중거리', leftValue: 0.375, rightValue: 0.0563, unit: 'percentage' },
-        { name: '원거리', leftValue: 0.22, rightValue: 0.045, unit: 'percentage' },
+        {
+          name: '근거리',
+          leftValue: leftWeapon.accuracy.near,
+          rightValue: rightWeapon.accuracy.near,
+          unit: 'percentage',
+        },
+        {
+          name: '중거리',
+          leftValue: leftWeapon.accuracy.mid,
+          rightValue: rightWeapon.accuracy.mid,
+          unit: 'percentage',
+        },
+        {
+          name: '원거리',
+          leftValue: leftWeapon.accuracy.far,
+          rightValue: rightWeapon.accuracy.far,
+          unit: 'percentage',
+        },
       ],
     },
     {
-      name: '쿨다운(초)',
+      name: '첫 격발 속도(초)',
       stats: [
-        { name: '근거리', leftValue: [1.5, 2], rightValue: [0, 0], separator: '~' },
-        { name: '중거리', leftValue: [2.25, 3], rightValue: [0, 0], separator: '~' },
-        { name: '원거리', leftValue: [3, 4], rightValue: [0, 0], separator: '~' },
+        {
+          name: '근거리',
+          leftValue: [leftWeapon.firstFireTime.near.min, leftWeapon.firstFireTime.near.max],
+          rightValue: [rightWeapon.firstFireTime.near.min, rightWeapon.firstFireTime.near.max],
+          separator: '~',
+        },
+        {
+          name: '중거리',
+          leftValue: [leftWeapon.firstFireTime.mid.min, leftWeapon.firstFireTime.mid.max],
+          rightValue: [rightWeapon.firstFireTime.mid.min, rightWeapon.firstFireTime.mid.max],
+          separator: '~',
+        },
+        {
+          name: '원거리',
+          leftValue: [leftWeapon.firstFireTime.far.min, leftWeapon.firstFireTime.far.max],
+          rightValue: [rightWeapon.firstFireTime.far.min, rightWeapon.firstFireTime.far.max],
+          separator: '~',
+        },
       ],
     },
     {
-      name: '첫발 조준 시간(초)',
+      name: 'DPS',
       stats: [
-        { name: '근거리', leftValue: [0.15, 0.15], rightValue: [0.125, 0.125], separator: '~' },
-        { name: '중거리', leftValue: [0.3, 0.3], rightValue: [0.125, 0.125], separator: '~' },
-        { name: '원거리', leftValue: [0.6, 0.6], rightValue: [0.125, 0.125], separator: '~' },
+        { name: '근거리', leftValue: leftWeapon.dps.near, rightValue: rightWeapon.dps.near, decimalPlaces: 2 },
+        { name: '중거리', leftValue: leftWeapon.dps.mid, rightValue: rightWeapon.dps.mid, decimalPlaces: 2 },
+        { name: '원거리', leftValue: leftWeapon.dps.far, rightValue: rightWeapon.dps.far, decimalPlaces: 2 },
       ],
     },
     {
-      name: '조준 시간(초)',
+      name: 'RPM',
       stats: [
-        { name: '근거리', leftValue: [0.375, 0.25], rightValue: [0.125, 0.125], separator: '~' },
-        { name: '중거리', leftValue: [0.25, 0.5], rightValue: [0.125, 0.125], separator: '~' },
-        { name: '원거리', leftValue: [0.5, 1], rightValue: [0.125, 0.125], separator: '~' },
-      ],
-    },
-    { name: '연사 가능 여부', leftValue: true, rightValue: false },
-    {
-      name: '연사 시간(초)',
-      stats: [
-        { name: '근거리', leftValue: [0.75, 0.75], rightValue: [0, 0], separator: '~' },
-        { name: '중거리', leftValue: [0.5625, 0.5625], rightValue: [0, 0], separator: '~' },
-        { name: '원거리', leftValue: [0.375, 0.375], rightValue: [0, 0], separator: '~' },
-      ],
-    },
-    {
-      name: '연사력',
-      stats: [
-        { name: '근거리', leftValue: [10, 10], rightValue: [0, 0], separator: '~' },
-        { name: '중거리', leftValue: [10, 10], rightValue: [0, 0], separator: '~' },
-        { name: '원거리', leftValue: [10, 10], rightValue: [0, 0], separator: '~' },
-      ],
-    },
-    {
-      name: '사격 전후 시간(초)',
-      stats: [
-        { name: '사격 전', leftValue: 0, rightValue: 0 },
-        { name: '사격 후', leftValue: 0, rightValue: 0.875 },
-      ],
-    },
-    {
-      name: '재장전 시간(초)',
-      stats: [
-        { name: '근거리', leftValue: [2.9, 3], rightValue: [4, 5], separator: '~' },
-        { name: '중거리', leftValue: [2.9, 3], rightValue: [4, 5], separator: '~' },
-        { name: '원거리', leftValue: [2.9, 3], rightValue: [4, 5], separator: '~' },
-      ],
-    },
-    { name: '재장전 주기', leftValue: [2, 2], rightValue: [0, 0], separator: '~' },
-  ];
-
-  const statList2: (Stat | StatGroup)[] = [
-    { name: '범위 형태', leftValue: '없음', rightValue: '원' },
-    { name: '범위 반경', leftValue: 0, rightValue: 4.5 },
-    {
-      name: '범위 거리 정의',
-      stats: [
-        { name: '근거리', leftValue: 0, rightValue: 0.25, separator: '~' },
-        { name: '중거리', leftValue: 0, rightValue: 0.75, separator: '~' },
-        { name: '원거리', leftValue: 0, rightValue: 4.5, separator: '~' },
-      ],
-    },
-    {
-      name: '범위 데미지',
-      stats: [
-        { name: '근거리', leftValue: 0, rightValue: 96 },
-        { name: '중거리', leftValue: 0, rightValue: 30 },
-        { name: '원거리', leftValue: 0, rightValue: 18 },
-      ],
-    },
-    { name: '분대 당 최대 피해 인원수', leftValue: 0, rightValue: 3 },
-    {
-      name: '범위 명중률',
-      stats: [
-        { name: '근거리', leftValue: 0, rightValue: 5, unit: 'percentage' },
-        { name: '중거리', leftValue: 0, rightValue: 5, unit: 'percentage' },
-        { name: '원거리', leftValue: 0, rightValue: 5, unit: 'percentage' },
-      ],
-    },
-    {
-      name: '범위 관통력',
-      stats: [
-        { name: '근거리', leftValue: 0, rightValue: 10 },
-        { name: '중거리', leftValue: 0, rightValue: 10 },
-        { name: '원거리', leftValue: 0, rightValue: 10 },
-      ],
-    },
-    {
-      name: '산탄도',
-      stats: [
-        { name: '각도', leftValue: 1.5, rightValue: 10 },
-        { name: '최대 거리', leftValue: 5, rightValue: 6 },
-        { name: '거리 offset', leftValue: 0.4, rightValue: 0.25 },
-        { name: '거리 비율', leftValue: 0.8, rightValue: 1 },
-        { name: '안개 속 각도 배율', leftValue: 1, rightValue: 1.25, unit: 'percentage' },
-        { name: '안개 속 거리 배율', leftValue: 1, rightValue: 1.25, unit: 'percentage' },
-        { name: '이동 중 각도 배율', leftValue: 1, rightValue: 1.25, unit: 'percentage' },
-        { name: '이동 중 거리 배율', leftValue: 1, rightValue: 1.25, unit: 'percentage' },
-      ],
-    },
-    {
-      name: '무기 셋팅',
-      stats: [
-        { name: '거치 시간', leftValue: 0, rightValue: 0 },
-        { name: '해체 시간', leftValue: 0, rightValue: 0 },
-      ],
-    },
-    {
-      name: '제압',
-      stats: [
-        { name: '제압력', leftValue: 0, rightValue: 0 },
-        { name: '제압 범위', leftValue: 0, rightValue: 0 },
-        { name: '범위 제압력 배율', leftValue: 0, rightValue: 0 },
-      ],
-    },
-    {
-      name: 'tracking',
-      stats: [
-        { name: '왼쪽 사격각', leftValue: -90, rightValue: -180 },
-        { name: '오른쪽 사격각', leftValue: 90, rightValue: 180 },
-        { name: '포탑 선회속도', leftValue: 360, rightValue: 40, unit: 'degree' },
+        { name: '근거리', leftValue: leftWeapon.rpm.near, rightValue: rightWeapon.rpm.near, decimalPlaces: 2 },
+        { name: '중거리', leftValue: leftWeapon.rpm.mid, rightValue: rightWeapon.rpm.mid, decimalPlaces: 2 },
+        { name: '원거리', leftValue: leftWeapon.rpm.far, rightValue: rightWeapon.rpm.far, decimalPlaces: 2 },
       ],
     },
     {
       name: '이동사격',
       stats: [
-        { name: '이동사격 가능 여부', leftValue: true, rightValue: true },
-        { name: '연사시간 배율', leftValue: 0.85, rightValue: 0.75, unit: 'percentage' },
-        { name: '명중률 배율', leftValue: 1, rightValue: 1, unit: 'percentage' },
-        { name: '쿨다운 배율', leftValue: 1, rightValue: 1, unit: 'percentage' },
+        {
+          name: '이동사격 가능 여부',
+          leftValue: leftWeapon.moving.canFireWhileMoving,
+          rightValue: rightWeapon.moving.canFireWhileMoving,
+        },
+        {
+          name: '명중률 보정',
+          leftValue: leftWeapon.moving.accuracyMultiplier,
+          rightValue: rightWeapon.moving.accuracyMultiplier,
+          unit: 'percentage',
+        },
+        {
+          name: '쿨다운 보정',
+          leftValue: leftWeapon.moving.cooldownMultiplier,
+          rightValue: rightWeapon.moving.cooldownMultiplier,
+          unit: 'percentage',
+        },
+        {
+          name: '연사시간 보정',
+          leftValue: leftWeapon.moving.burstMultiplier,
+          rightValue: rightWeapon.moving.burstMultiplier,
+          unit: 'percentage',
+        },
+      ],
+    },
+  ];
+
+  const statList2: (Stat | StatGroup)[] = [
+    {
+      name: '범위 정보',
+      stats: [
+        {
+          name: '범위 형태',
+          leftValue: leftWeapon.areaEffect.areaInfo.areaType,
+          rightValue: rightWeapon.areaEffect.areaInfo.areaType,
+        },
+        {
+          name: '범위 반경',
+          leftValue: leftWeapon.areaEffect.areaInfo.radius,
+          rightValue: rightWeapon.areaEffect.areaInfo.radius,
+        },
+        {
+          name: '범위 길이',
+          leftValue: leftWeapon.areaEffect.areaInfo.length,
+          rightValue: rightWeapon.areaEffect.areaInfo.length,
+        },
+        {
+          name: '범위 넓이',
+          leftValue: leftWeapon.areaEffect.areaInfo.width,
+          rightValue: rightWeapon.areaEffect.areaInfo.width,
+        },
+      ],
+    },
+    {
+      name: '범위 거리 정의',
+      stats: [
+        {
+          name: '근거리',
+          leftValue: leftWeapon.areaEffect.distance.near,
+          rightValue: rightWeapon.areaEffect.distance.near,
+        },
+        {
+          name: '중거리',
+          leftValue: leftWeapon.areaEffect.distance.mid,
+          rightValue: rightWeapon.areaEffect.distance.mid,
+        },
+        {
+          name: '원거리',
+          leftValue: leftWeapon.areaEffect.distance.far,
+          rightValue: rightWeapon.areaEffect.distance.far,
+        },
+      ],
+    },
+    {
+      name: '범위 데미지',
+      stats: [
+        {
+          name: '근거리',
+          leftValue: leftWeapon.areaEffect.damage.near,
+          rightValue: rightWeapon.areaEffect.damage.near,
+        },
+        {
+          name: '중거리',
+          leftValue: leftWeapon.areaEffect.damage.mid,
+          rightValue: rightWeapon.areaEffect.damage.mid,
+        },
+        {
+          name: '원거리',
+          leftValue: leftWeapon.areaEffect.damage.far,
+          rightValue: rightWeapon.areaEffect.damage.far,
+        },
+      ],
+    },
+    {
+      name: '분대 당 최대 피해 인원수',
+      leftValue: leftWeapon.areaEffect.maxMember,
+      rightValue: rightWeapon.areaEffect.maxMember,
+    },
+    {
+      name: '산탄도',
+      stats: [
+        { name: '각도', leftValue: leftWeapon.scatter.angle, rightValue: rightWeapon.scatter.angle },
+        {
+          name: '거리 비율',
+          leftValue: leftWeapon.scatter.distanceRatio,
+          rightValue: rightWeapon.scatter.distanceRatio,
+        },
+        { name: '최대 거리', leftValue: leftWeapon.scatter.distanceMax, rightValue: rightWeapon.scatter.distanceMax },
+        {
+          name: '거리 offset',
+          leftValue: leftWeapon.scatter.distanceOffset,
+          rightValue: rightWeapon.scatter.distanceOffset,
+        },
+        {
+          name: '안개 속 각도 배율',
+          leftValue: leftWeapon.scatter.fowAngleMultiplier,
+          rightValue: rightWeapon.scatter.fowAngleMultiplier,
+          unit: 'percentage',
+        },
+        {
+          name: '안개 속 거리 배율',
+          leftValue: leftWeapon.scatter.fowDistanceMultiplier,
+          rightValue: rightWeapon.scatter.fowDistanceMultiplier,
+          unit: 'percentage',
+        },
+        {
+          name: '이동 중 각도 배율',
+          leftValue: leftWeapon.scatter.movementAngleMultiplier,
+          rightValue: rightWeapon.scatter.movementAngleMultiplier,
+          unit: 'percentage',
+        },
+        {
+          name: '이동 중 거리 배율',
+          leftValue: leftWeapon.scatter.movementDistanceMultiplier,
+          rightValue: rightWeapon.scatter.movementDistanceMultiplier,
+          unit: 'percentage',
+        },
+      ],
+    },
+    {
+      name: '무기 셋팅',
+      stats: [
+        { name: '거치 시간', leftValue: leftWeapon.settingTime.setup, rightValue: rightWeapon.settingTime.setup },
+        { name: '해체 시간', leftValue: leftWeapon.settingTime.teardown, rightValue: rightWeapon.settingTime.teardown },
+      ],
+    },
+    {
+      name: '제압',
+      stats: [
+        { name: '제압력', leftValue: leftWeapon.suppression.amount, rightValue: rightWeapon.suppression.amount },
+        {
+          name: '제압 범위',
+          leftValue: leftWeapon.suppression.nearbyRadius,
+          rightValue: rightWeapon.suppression.nearbyRadius,
+        },
+        {
+          name: '범위 제압력 배율',
+          leftValue: leftWeapon.suppression.nearbyMultiplier,
+          rightValue: rightWeapon.suppression.nearbyMultiplier,
+        },
+      ],
+    },
+    {
+      name: 'tracking',
+      stats: [
+        {
+          name: '왼쪽 사격각',
+          leftValue: leftWeapon.tracking.maxLeftAngle,
+          rightValue: rightWeapon.tracking.maxLeftAngle,
+        },
+        {
+          name: '오른쪽 사격각',
+          leftValue: leftWeapon.tracking.maxRightAngle,
+          rightValue: rightWeapon.tracking.maxRightAngle,
+        },
+        {
+          name: '포탑 선회속도',
+          leftValue: leftWeapon.tracking.speedHorizontal,
+          rightValue: rightWeapon.tracking.speedHorizontal,
+          unit: 'degree',
+        },
       ],
     },
   ];

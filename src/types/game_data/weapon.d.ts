@@ -9,6 +9,10 @@ type MinMax = {
   min: number;
 };
 
+type NoneArea = {
+  areaType: 'none';
+};
+
 type CircleArea = {
   areaType: 'circle';
   radius: number;
@@ -19,6 +23,8 @@ type RectangleArea = {
   lenght: number;
   width: number;
 };
+
+type Area = NoneArea | CircleArea | RectangleArea;
 
 type Weapon = {
   id: string; //coh3 데이터의 파일 이름
@@ -32,7 +38,7 @@ type Weapon = {
   areaEffect: {
     accuracy: Distance;
     penetration: Distance;
-    areaInfo: CircleArea | RectangleArea | null;
+    areaInfo: Area;
     damageMultiplier: Distance;
     maxMember: number;
     distance: Distance;

@@ -7,9 +7,11 @@ import tempWeaponGarandRiflemanUS from '../../../game_data/data/weapon/american/
 import weapon30CalCoaxialShermanUS from '../../../game_data/data/weapon/american/small_arms/machine_gun/light_machine_gun/30cal_coaxial_sherman_us';
 import weapon30CalHullShermanUS from '../../../game_data/data/weapon/american/small_arms/machine_gun/light_machine_gun/30cal_hull_sherman_us';
 import weapon75mmShermanUS from '../../../game_data/data/weapon/american/ballistric_weapon/tank_gun/75mm_sherman_us';
+import weaponBerettaM38GuastatoriAK from '../../../game_data/data/weapon/afrika_korps/small_arms/machine_gun/sub_machine_gun/beretta_m38_guastatori_ak';
+import weaponLeeEnfieldCrewUK from '../../../game_data/data/weapon/british/small_arms/single_fire/rifle/lee_enfield_crew_uk';
 
 const WeaponStatsList = () => {
-  const leftWeapon = new WeaponStats(weapon75mmShermanUS);
+  const leftWeapon = new WeaponStats(weaponLeeEnfieldCrewUK);
   const rightWeapon = new WeaponStats(tempWeaponGarandRiflemanUS);
 
   const statList1: (Stat | StatGroup)[] = [

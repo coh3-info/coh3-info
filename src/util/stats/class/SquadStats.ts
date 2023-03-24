@@ -17,7 +17,18 @@ class SquadStats {
 
       if (entityData === undefined) return loadout;
 
-      return [...loadout, { num, entity: new EntityStats(entityData) }];
+      const { costPercentage, timePercentage } = data.reinforce;
+
+      return [
+        ...loadout,
+        {
+          num,
+          entity: new EntityStats(entityData, {
+            cost: costPercentage,
+            time: timePercentage,
+          }),
+        },
+      ];
     }, init);
   }
 

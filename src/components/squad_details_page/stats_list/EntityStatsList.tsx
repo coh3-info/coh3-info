@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux';
 import type { Stat, StatGroup } from './stat';
 import type Entity from '../../../types/game_data/entity';
 import type { RootState } from '../../../state_store/store';
+import EntityStats from '../../../util/stats/class/EntityStats';
 
-const getArmor = (entity: Entity | undefined) => {
+const getArmor = (entity: EntityStats | undefined) => {
   const armor = entity?.armor;
   if (armor === undefined) return [];
 
@@ -25,8 +26,22 @@ const EntityStatsList = () => {
 
   const leftSquad = leftBookmark !== undefined ? getSquad(leftBookmark.squadId) : undefined;
   const rightSquad = rightBookmark !== undefined ? getSquad(rightBookmark.squadId) : undefined;
-  const leftEntity = leftBookmark !== undefined ? getEntity(leftBookmark.selectedEntityId) : undefined;
-  const rightEntity = rightBookmark !== undefined ? getEntity(rightBookmark.selectedEntityId) : undefined;
+  const _leftEntity = leftBookmark !== undefined ? getEntity(leftBookmark.selectedEntityId) : undefined;
+  const _rightEntity = rightBookmark !== undefined ? getEntity(rightBookmark.selectedEntityId) : undefined;
+  const leftEntity =
+    _leftEntity !== undefined
+      ? new EntityStats(_leftEntity, {
+          cost: leftSquad?.reinforce.costPercentage ?? 0,
+          time: leftSquad?.reinforce.timePercentage ?? 0,
+        })
+      : undefined;
+  const rightEntity =
+    _rightEntity !== undefined
+      ? new EntityStats(_rightEntity, {
+          cost: rightSquad?.reinforce.costPercentage ?? 0,
+          time: rightSquad?.reinforce.timePercentage ?? 0,
+        })
+      : undefined;
 
   const statList1: (Stat | StatGroup)[] = [
     { name: '체력', leftValue: leftEntity?.hitpoints, rightValue: rightEntity?.hitpoints },
@@ -34,15 +49,13 @@ const EntityStatsList = () => {
     { name: '장갑', leftValue: getArmor(leftEntity), rightValue: getArmor(rightEntity), separator: '/' },
     {
       name: '충원비',
-      leftValue: leftEntity && leftSquad && Math.round(leftEntity.cost.manpower * leftSquad.reinforce.costPercentage),
-      rightValue:
-        rightEntity && rightSquad && Math.round(rightEntity?.cost.manpower * rightSquad.reinforce.costPercentage),
+      leftValue: leftEntity?.reinforce.cost,
+      rightValue: rightEntity?.reinforce.cost,
     },
     {
       name: '충원시간',
-      leftValue: leftEntity && leftSquad && Math.round(leftEntity?.cost.time * leftSquad?.reinforce.timePercentage),
-      rightValue:
-        rightEntity && rightSquad && Math.round(rightEntity?.cost.time * rightSquad?.reinforce.timePercentage),
+      leftValue: leftEntity?.reinforce.time,
+      rightValue: rightEntity?.reinforce.time,
     },
     { name: '시야', leftValue: leftEntity?.sight, rightValue: rightEntity?.sight },
     { name: '은신탐지거리', leftValue: leftEntity?.detect, rightValue: rightEntity?.detect },

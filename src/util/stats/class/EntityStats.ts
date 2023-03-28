@@ -25,41 +25,30 @@ class EntityStats {
   }
 
   get hitpoints() {
-    return this.data.hitpoints;
+    return this.data.health.hitpoints;
   }
 
   get targetSize() {
-    return this.data.targetSize;
+    return this.data.health.targetSize;
   }
 
   get armor() {
-    return this.data.armor;
+    return this.data.health.armor;
   }
 
   get reinforce() {
     const {
-      type: entityType,
       cost: { manpower, time },
     } = this.data;
 
-    if (entityType === 'crew' || entityType === 'infantry') {
-      return {
-        cost: Math.round(manpower * this.reinforceMultiplier.cost),
-        time: Math.round(time * this.reinforceMultiplier.time),
-      };
-    }
     return {
-      cost: undefined,
-      time: undefined,
+      cost: Math.round(manpower * this.reinforceMultiplier.cost),
+      time: Math.round(time * this.reinforceMultiplier.time),
     };
   }
 
   get sight() {
     return this.data.sight;
-  }
-
-  get detect() {
-    return this.data.detect;
   }
 
   get moving() {

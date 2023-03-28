@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import squadBookmarkManagerReducer from './slice/squad_bookmark_manager';
+import gameDataReducer from './slice/game_data';
 
 const store = configureStore({
   reducer: {
     squadBookmarkManager: squadBookmarkManagerReducer,
+    gameData: gameDataReducer,
   },
 });
 

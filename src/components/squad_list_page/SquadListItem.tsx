@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { addBookmark } from '../../state_store/slice/squad_bookmark_manager';
+import getRaceMarkUrl from '../../util/getRaceMarksUrl';
 
 import type Squad from '../../types/game_data/squad';
-
-import americanRaceMark from '../../images/common/race_marks/american.png';
-import britishRaceMark from '../../images/common/race_marks/british.png';
-import germanRaceMark from '../../images/common/race_marks/german.png';
-import afrikaKorpsRaceMark from '../../images/common/race_marks/afrika_korps.png';
 
 type SquadListItemProps = {
   squad: Squad;
@@ -16,18 +12,11 @@ type SquadListItemProps = {
 const SquadListItem = ({ squad }: SquadListItemProps) => {
   const {
     id,
-    name,
+    nameKO,
     race,
-    imageUrl: { portrait, icon },
+    imageUrl: { icon, symbolIcon },
   } = squad;
   const dispatch = useDispatch();
-
-  const raceMarks = {
-    us_forces: americanRaceMark,
-    british_forces: britishRaceMark,
-    wehrmacht: germanRaceMark,
-    afrika_korps: afrikaKorpsRaceMark,
-  };
 
   const addSquadToSquadSelector = () => {
     dispatch(addBookmark({ squadId: id }));
@@ -36,15 +25,15 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
   return (
     <SquadListItemWrapper onClick={addSquadToSquadSelector}>
       <RaceMark>
-        <img src={raceMarks[race]} alt={`${race} 마크`} />
+        <img src={getRaceMarkUrl(race)} alt={`${race} 마크`} />
       </RaceMark>
       <SquadProtrait>
-        <img src={portrait} />
+        <img src={`images/icons/${icon}.png`} />
       </SquadProtrait>
       <SquadIcon>
-        <img src={icon} alt={`${name} 아이콘`} />
+        <img src={`images/icons/${symbolIcon}.png`} alt={`${nameKO} 심볼 아이콘`} />
       </SquadIcon>
-      <SquadName>{name}</SquadName>
+      <SquadName>{nameKO === '' ? '------ ' + id : nameKO}</SquadName>
       <SquadType>대보병 / 주력</SquadType>
     </SquadListItemWrapper>
   );

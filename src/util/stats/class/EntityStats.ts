@@ -1,11 +1,10 @@
 import WeaponStats from './WeaponStats';
-import { getWeapon } from '../../game_data/weapon/weaponsController';
 
 import type Entity from '../../../types/game_data/entity';
 
 class EntityStats {
   private readonly data: Entity;
-  private readonly _weapons: WeaponStats[];
+  // private readonly _weapons: WeaponStats[];
   private readonly reinforceMultiplier: {
     cost: number;
     time: number;
@@ -16,13 +15,13 @@ class EntityStats {
     this.reinforceMultiplier = reinforceMultiplier;
 
     const init: WeaponStats[] = [];
-    this._weapons = data.weapons.reduce((weapons, weaponId) => {
-      const weaponData = getWeapon(weaponId);
+    // this._weapons = data.weapons.reduce((weapons, weaponId) => {
+    //   const weaponData = getWeapon(weaponId);
 
-      if (weaponData === undefined) return weapons;
+    //   if (weaponData === undefined) return weapons;
 
-      return [...weapons, new WeaponStats(weaponData)];
-    }, init);
+    //   return [...weapons, new WeaponStats(weaponData)];
+    // }, init);
   }
 
   get hitpoints() {
@@ -67,15 +66,15 @@ class EntityStats {
     return this.data.moving;
   }
 
-  get weapons() {
-    return this._weapons;
-  }
+  // get weapons() {
+  //   return this._weapons;
+  // }
 
-  getWeapon(weaponId: string) {
-    return this.weapons.find((weapon) => {
-      return weapon.id === weaponId;
-    });
-  }
+  // getWeapon(weaponId: string) {
+  //   return this.weapons.find((weapon) => {
+  //     return weapon.id === weaponId;
+  //   });
+  // }
 }
 
 export default EntityStats;

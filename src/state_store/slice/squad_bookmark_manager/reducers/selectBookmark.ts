@@ -13,9 +13,9 @@ const selectBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadActio
   if (bookmark === undefined) {
     console.error('해당 id의 bookmark가 존재하지 않습니다.');
   } else if (isLeft) {
-    state.selectedBookmarkOnLeft = bookmark;
+    state.bookmarkOnLeft = bookmark;
   } else {
-    state.selectedBookmarkOnRight = bookmark;
+    state.bookmarkOnRight = bookmark;
   }
 };
 

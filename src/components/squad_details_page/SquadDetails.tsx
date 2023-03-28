@@ -12,7 +12,7 @@ import type { RootState } from '../../state_store/store';
 
 const SquadDetails = () => {
   const navigate = useNavigate();
-  const { selectedBookmarkOnLeft, selectedBookmarkOnRight, bookmarkList } = useSelector(
+  const { bookmarkOnLeft, bookmarkOnRight, bookmarkList } = useSelector(
     (state: RootState) => state.squadBookmarkManager
   );
 

@@ -10,7 +10,7 @@ import {
 import SquadBookmark from './SquadBookmarkItem';
 
 const SquadBookmarkManager = () => {
-  const { bookmarkList, selectedBookmarkOnLeft, selectedBookmarkOnRight } = useSelector(
+  const { bookmarkList, bookmarkOnLeft, bookmarkOnRight } = useSelector(
     (state: RootState) => state.squadBookmarkManager
   );
   const dispatch = useDispatch();
@@ -31,10 +31,8 @@ const SquadBookmarkManager = () => {
       <SquadListWrapper>
         <SquadList>
           {bookmarkList.map((bookmark) => {
-            const isCheckedLeft =
-              selectedBookmarkOnLeft !== undefined ? selectedBookmarkOnLeft.id === bookmark.id : false;
-            const isCheckedRight =
-              selectedBookmarkOnRight !== undefined ? selectedBookmarkOnRight.id === bookmark.id : false;
+            const isCheckedLeft = bookmarkOnLeft !== undefined ? bookmarkOnLeft.id === bookmark.id : false;
+            const isCheckedRight = bookmarkOnRight !== undefined ? bookmarkOnRight.id === bookmark.id : false;
 
             return (
               <SquadBookmark

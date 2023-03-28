@@ -7,12 +7,12 @@ const selectWeapon: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<
 ) => {
   const { id, isLeft } = action.payload;
   if (isLeft) {
-    if (state.selectedBookmarkOnLeft !== undefined) {
-      state.selectedBookmarkOnLeft.selectedWeaponId = id;
+    if (state.bookmarkOnRight !== undefined) {
+      state.bookmarkOnRight.selectedWeaponId = id;
     }
   } else {
-    if (state.selectedBookmarkOnRight !== undefined) {
-      state.selectedBookmarkOnRight.selectedWeaponId = id;
+    if (state.bookmarkOnRight !== undefined) {
+      state.bookmarkOnRight.selectedWeaponId = id;
     }
   }
 };

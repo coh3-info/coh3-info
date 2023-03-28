@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { RootState } from '../../../state_store/store';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
-import { getSquad } from '../../../util/game_data/squad/squadsController';
+import { useSelector } from 'react-redux';
 
 type SelectedSquadItemProps = {
   bookmark: SquadBookmark;
@@ -21,7 +22,8 @@ const SquadBookmarkItem = ({
   const location = useLocation();
   const path = location.pathname;
   const { id, squadId } = bookmark;
-  const squad = getSquad(squadId);
+  const sbps = useSelector((state: RootState) => state.gameData.sbps);
+  const squad = sbps[squadId];
 
   return (
     <SquadBookmarkItemWrapper>
@@ -32,7 +34,7 @@ const SquadBookmarkItem = ({
         </RadioButtonsContainer>
       )}
 
-      <SquadName>{squad?.name}</SquadName>
+      <SquadName>{squad.nameKO}</SquadName>
       <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
     </SquadBookmarkItemWrapper>
   );

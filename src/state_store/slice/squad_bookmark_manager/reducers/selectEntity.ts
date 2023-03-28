@@ -7,12 +7,12 @@ const selectEntity: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<
 ) => {
   const { id, isLeft } = action.payload;
   if (isLeft) {
-    if (state.selectedBookmarkOnLeft !== undefined) {
-      state.selectedBookmarkOnLeft.selectedEntityId = id;
+    if (state.bookmarkOnLeft !== undefined) {
+      state.bookmarkOnLeft.selectedEntityId = id;
     }
   } else {
-    if (state.selectedBookmarkOnRight !== undefined) {
-      state.selectedBookmarkOnRight.selectedEntityId = id;
+    if (state.bookmarkOnRight !== undefined) {
+      state.bookmarkOnRight.selectedEntityId = id;
     }
   }
 };

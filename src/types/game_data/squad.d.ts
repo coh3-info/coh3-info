@@ -1,31 +1,52 @@
-type LoadoutData = {
-  num: number;
-  entityId: string;
-};
+type Race = 'americans' | 'british' | 'british_africa' | 'germans' | 'afrika_korps' | '';
 
-export type Squad = {
-  id: string; //coh3 데이터의 파일 이름
-  nameEN: string;
-  name: string;
-  type: 'infantry' | 'team_weapon' | 'vehicle';
-  race: 'us_forces' | 'british_forces' | 'wehrmacht' | 'afrika_korps';
+interface LoadoutData {
+  num: number; // sbps/squad_loadout_ext/unit_list/[loadout_data]/num
+  entityId: string /* sbps/squad_loadout_ext/unit_list/[loadout_data]/type 경로의 파일 이름
+  .../type 값이 'ebps/races/american/infantry/rifleman_us'라면 entityId = 'rifleman_us' */;
+}
+
+interface Squad {
+  id: string; // 데이터의 파일 이름
+  name: string; // squad 영어 이름
+  nameKO: string; // squad 한글 이름
+  category: 'infantry' | 'team_weapons' | 'vehicles' | '';
+  race: Race; // sbps/squad_type_ext/squad_race_type_list/squad_race_type
   imageUrl: {
-    portrait: string;
-    icon: string;
+    icon: string; // sbps/squad_ui_ext/race_list/[race_data]/info/icon_name
+    symbolIcon: string; // sbps/squad_ui_ext/race_list/[race_data]/info/symbol_icon_name
   };
   abilities: [];
-  captureRateMutiplier: number;
-  revertRateMutiplier: number;
+  captureStrategicPoint: {
+    captureRateMutiplier: number; // sbps/squad_capture_strategic_point_ext/capture_rate_multiplier
+    revertRateMutiplier: number; // sbps/squad_capture_strategic_point_ext/revert_rate_multiplier
+  };
   constructions: [];
   loadout: LoadoutData[];
   population: {
-    pop: number;
+    personnelPop: number; // sbps/squad_population_ext/personnel_pop
   };
   reinforce: {
-    costPercentage: number;
-    timePercentage: number;
+    costPercentage: number; // sbps/squad_reinforce_ext/time_cost_percentage/cost_percentage
+    timePercentage: number; // sbps/squad_reinforce_ext/time_cost_percentage/time_percentage
   };
   upgrades: [];
-};
+  inventory: {
+    canPickUpItems: boolean; // sbps/squad_inventory_ext/can_pick_up_items
+    categoryCapacity: {
+      //-1 = infinite, 0 ~ n = finite
+      casualty: number; // sbps/squad_inventory_ext/category_capacity/casualty
+      default: number; // sbps/squad_inventory_ext/category_capacity/default
+      special: number; // sbps/squad_inventory_ext/category_capacity/special
+      upgrade: number; // sbps/squad_inventory_ext/category_capacity/upgrade
+    };
+  };
+}
+
+interface Sbps {
+  [key: string]: Squad;
+}
+
+export { Race, Sbps };
 
 export default Squad;

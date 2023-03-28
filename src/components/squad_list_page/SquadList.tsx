@@ -1,19 +1,22 @@
 import styled from 'styled-components';
-import { getSquads } from '../../util/game_data/squad/squadsController';
+import type Squad from '../../types/game_data/squad';
 
 import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
 import SquadListHeader from './SquadListHeader';
 import SquadListItem from './SquadListItem';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../state_store/store';
 
 const SquadList = () => {
-  const squadList = getSquads();
+  const sbps = useSelector((state: RootState) => state.gameData.sbps);
+  const squads: Squad[] = Object.values(sbps);
 
   return (
     <SquadListWrapper>
       <div>
         <SquadListHeader />
         <List>
-          {squadList.map((squad) => {
+          {squads.map((squad) => {
             return <SquadListItem key={squad.id} squad={squad} />;
           })}
         </List>

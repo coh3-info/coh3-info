@@ -8,14 +8,14 @@ import _selectWeapon from './reducers/selectWeapon';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 
 export type SquadBookmarkManagerInitialState = {
-  selectedBookmarkOnLeft: SquadBookmark | undefined;
-  selectedBookmarkOnRight: SquadBookmark | undefined;
+  bookmarkOnLeft: SquadBookmark | undefined;
+  bookmarkOnRight: SquadBookmark | undefined;
   bookmarkList: SquadBookmark[];
 };
 
 const initialState: SquadBookmarkManagerInitialState = {
-  selectedBookmarkOnLeft: undefined,
-  selectedBookmarkOnRight: undefined,
+  bookmarkOnLeft: undefined,
+  bookmarkOnRight: undefined,
   bookmarkList: [],
 };
 

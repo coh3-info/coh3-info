@@ -1,14 +1,20 @@
-import raceMarkUSForces from '../images/common/race_marks/american.png';
-import raceMarkBritishForces from '../images/common/race_marks/british.png';
-import raceMarkWehrmacht from '../images/common/race_marks/german.png';
-import raceMarkAfrikaKorps from '../images/common/race_marks/afrika_korps.png';
+import type { Race } from '../types/game_data/squad';
 
-const getRaceMarkUrl = (race: 'us_forces' | 'british_forces' | 'wehrmacht' | 'afrika_korps') => {
+const getRaceMarkUrl = (race: Race) => {
+  if (race === '') {
+    return '';
+  }
+  const afrikaKorpsMark = 'images/icons/common/races/afrika_korps.png';
+  const americansMark = 'images/icons/common/races/american.png';
+  const britishMark = 'images/icons/common/races/british.png';
+  const germansMark = 'images/icons/common/races/german.png';
+
   const raceUrlTable = {
-    us_forces: raceMarkUSForces,
-    british_forces: raceMarkBritishForces,
-    wehrmacht: raceMarkWehrmacht,
-    afrika_korps: raceMarkAfrikaKorps,
+    americans: americansMark,
+    british: britishMark,
+    british_africa: britishMark,
+    germans: germansMark,
+    afrika_korps: afrikaKorpsMark,
   };
   return raceUrlTable[race];
 };

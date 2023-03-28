@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { getLoadoutOfSquad } from '../../../util/game_data/squad/squadsController';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectEntity as _selectEntity,
@@ -11,14 +10,14 @@ import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
 import resourceFuelIcon from '../../../images/common/resource_fuel.png';
 import resourcePopulationIcon from '../../../images/common/resource_population.png';
 
+import SelectorInController from './SelectorInController';
+
+import type Squad from '../../../types/game_data/squad';
 import type { RootState } from '../../../state_store/store';
 
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
 import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
-import { getSquad } from '../../../util/game_data/squad/squadsController';
-import { getEntity, getWeaponsForEntity } from '../../../util/game_data/entity/entitiesController';
-import SelectorInController from './SelectorInController';
 
 type ControllerProps = {
   isLeft?: boolean;
@@ -28,15 +27,16 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
   const dispatch = useDispatch();
   const bookmark = useSelector((state: RootState) => {
     if (isLeft) {
-      return state.squadBookmarkManager.selectedBookmarkOnLeft;
+      return state.squadBookmarkManager.bookmarkOnLeft;
     } else {
-      return state.squadBookmarkManager.selectedBookmarkOnRight;
+      return state.squadBookmarkManager.bookmarkOnRight;
     }
   });
 
-  const squad = bookmark !== undefined ? getSquad(bookmark.squadId) : undefined;
-  const loadout = squad !== undefined ? getLoadoutOfSquad(squad.id) : [];
-  const weaponsForEntity = bookmark !== undefined ? getWeaponsForEntity(bookmark.selectedEntityId) : [];
+  const tempSquad = useSelector((state: RootState) => state.gameData.sbps['riflemen_us']);
+  const squad: Squad | undefined = tempSquad;
+  const loadout: { num: number; entityId: string }[] = [];
+  const weaponsForEntity: string[] = [];
 
   const selectEntity = (id: string) => {
     dispatch(_selectEntity({ id, isLeft }));
@@ -52,7 +52,7 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
         <>
           <Info>
             <Portrait>
-              <img src={squad.imageUrl.portrait} alt="초상화" />
+              <img src={squad.imageUrl.icon} alt="초상화" />
             </Portrait>
             <BasicInfo>
               <div>
@@ -62,31 +62,20 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
                   </SquadSymbol>
                   {squad.name}
                 </SquadName>
-                <div>{squad.type}</div>
+                <div>{squad.category}</div>
               </div>
               <ResourcesContainer>
                 <Resource>
                   <div>
                     <img src={resourceManpowerIcon} alt="manpower icon" />
                   </div>
-                  {Math.round(
-                    squad.loadout.reduce((sum, data) => {
-                      const entity = getEntity(data.entityId);
-                      return sum + data.num * Number(entity?.cost.manpower);
-                    }, 0)
-                  )}
+                  260
                 </Resource>
                 <Resource>
                   <div>
                     <img src={resourceFuelIcon} alt="fuel icon" />
                   </div>
-                  {Math.round(
-                    squad.loadout.reduce((sum, data) => {
-                      const entity = getEntity(data.entityId);
-
-                      return sum + data.num * Number(entity?.cost.fuel);
-                    }, 0)
-                  )}
+                  0
                 </Resource>
                 <Resource>
                   <div>

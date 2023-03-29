@@ -4,8 +4,6 @@ import { traverseData } from '../common/traversingData';
 import type Entity from '../../../../types/game_data/entity';
 import type { Ebps } from '../../../../types/game_data/entity';
 
-const tempSet = new Set();
-
 const mapEbps = async (): Promise<Ebps> => {
   const mappedEbps: Ebps = {};
 
@@ -53,7 +51,6 @@ const mapEntity = (entityId: string, file: any) => {
   for (const extension of file.extensions) {
     const { exts } = extension;
     const templateId = exts.template_reference.value.split('\\')[1];
-    tempSet.add(templateId);
 
     switch (templateId) {
       case 'combat_ext':

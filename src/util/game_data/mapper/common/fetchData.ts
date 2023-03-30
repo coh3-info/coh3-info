@@ -12,6 +12,6 @@ export const fetchEbps = async () => {
   return await fetchData('/game_data/ebps.json');
 };
 
-export const fetchWeapon = async () => {
+export const fetchWeapons = async () => {
   return await fetchData('/game_data/weapon.json');
 };

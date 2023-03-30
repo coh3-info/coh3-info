@@ -20,10 +20,10 @@ class WeaponStats {
     return this.data.damage;
   }
 
-  get deflectionDamage() {
-    const { damage, deflectionDamageMultiplier } = this.data;
-    return damage * deflectionDamageMultiplier;
-  }
+  // get deflectionDamage() {
+  //   const { damage, deflection:{deflectionDamageMultiplier} } = this.data;
+  //   return damage * deflectionDamageMultiplier;
+  // }
 
   get range() {
     const { min, max } = this.data.range;
@@ -44,7 +44,7 @@ class WeaponStats {
 
   get firstFireTime() {
     const {
-      windUp,
+      fire: { windUp },
       aim: { readyAimTime, aimTimeMultiplier },
     } = this.data;
     return calcMinMaxByDistance(readyAimTime, aimTimeMultiplier, windUp);
@@ -103,17 +103,17 @@ class WeaponStats {
     const frequencyAverage = calcAverageOfMinMax(this.data.reload.frequency);
     return {
       near:
-        (fireAimTimeAverage.near + burstTimeAverage.near + this.data.windUp + this.data.windDown) *
+        (fireAimTimeAverage.near + burstTimeAverage.near + this.data.fire.windUp + this.data.fire.windDown) *
           (frequencyAverage + 1) +
         cooldownAverage.near * (frequencyAverage + 1) +
         reloadTimeAverage.near,
       mid:
-        (fireAimTimeAverage.mid + burstTimeAverage.mid + this.data.windUp + this.data.windDown) *
+        (fireAimTimeAverage.mid + burstTimeAverage.mid + this.data.fire.windUp + this.data.fire.windDown) *
           (frequencyAverage + 1) +
         cooldownAverage.mid * (frequencyAverage + 1) +
         reloadTimeAverage.mid,
       far:
-        (fireAimTimeAverage.far + burstTimeAverage.far + this.data.windUp + this.data.windDown) *
+        (fireAimTimeAverage.far + burstTimeAverage.far + this.data.fire.windUp + this.data.fire.windDown) *
           (frequencyAverage + 1) +
         cooldownAverage.far * (frequencyAverage + 1) +
         reloadTimeAverage.far,
@@ -151,10 +151,11 @@ class WeaponStats {
 
   private get damagePerFireCycle() {
     const { accuracy, damage } = this.data;
+    const damageAverage = calcAverageOfMinMax(damage);
     return {
-      near: this.shotsPerFireCycle.near * accuracy.near * damage,
-      mid: this.shotsPerFireCycle.mid * accuracy.mid * damage,
-      far: this.shotsPerFireCycle.far * accuracy.far * damage,
+      near: this.shotsPerFireCycle.near * accuracy.near * damageAverage,
+      mid: this.shotsPerFireCycle.mid * accuracy.mid * damageAverage,
+      far: this.shotsPerFireCycle.far * accuracy.far * damageAverage,
     };
   }
 
@@ -178,29 +179,29 @@ class WeaponStats {
     return this.data.moving;
   }
 
-  get areaEffect() {
-    const { areaInfo, distance, damageMultiplier, maxMember } = this.data.areaEffect;
+  // get areaEffect() {
+  //   const { areaInfo, distance, damageMultiplier, maxMember } = this.data.areaEffect;
 
-    return {
-      areaInfo: {
-        areaType: areaInfo.areaType,
-        radius: areaInfo.areaType === 'circle' ? areaInfo.radius : undefined,
-        length: areaInfo.areaType === 'rectangle' ? areaInfo.lenght : undefined,
-        width: areaInfo.areaType === 'rectangle' ? areaInfo.width : undefined,
-      },
-      distance: {
-        near: areaInfo.areaType !== 'none' ? distance.near : undefined,
-        mid: areaInfo.areaType !== 'none' ? distance.mid : undefined,
-        far: areaInfo.areaType !== 'none' ? distance.far : undefined,
-      },
-      maxMember: areaInfo.areaType !== 'none' ? maxMember : undefined,
-      damage: {
-        near: areaInfo.areaType !== 'none' ? this.data.damage * damageMultiplier.near : undefined,
-        mid: areaInfo.areaType !== 'none' ? this.data.damage * damageMultiplier.mid : undefined,
-        far: areaInfo.areaType !== 'none' ? this.data.damage * damageMultiplier.far : undefined,
-      },
-    };
-  }
+  //   return {
+  //     areaInfo: {
+  //       areaType: areaInfo.areaType,
+  //       radius: areaInfo.areaType === 'circle' ? areaInfo.radius : undefined,
+  //       length: areaInfo.areaType === 'rectangle' ? areaInfo.lenght : undefined,
+  //       width: areaInfo.areaType === 'rectangle' ? areaInfo.width : undefined,
+  //     },
+  //     distance: {
+  //       near: areaInfo.areaType !== 'none' ? distance.near : undefined,
+  //       mid: areaInfo.areaType !== 'none' ? distance.mid : undefined,
+  //       far: areaInfo.areaType !== 'none' ? distance.far : undefined,
+  //     },
+  //     maxMember: areaInfo.areaType !== 'none' ? maxMember : undefined,
+  //     damage: {
+  //       near: areaInfo.areaType !== 'none' ? this.data.damage * damageMultiplier.near : undefined,
+  //       mid: areaInfo.areaType !== 'none' ? this.data.damage * damageMultiplier.mid : undefined,
+  //       far: areaInfo.areaType !== 'none' ? this.data.damage * damageMultiplier.far : undefined,
+  //     },
+  //   };
+  // }
 
   get scatter() {
     return this.data.scatter;

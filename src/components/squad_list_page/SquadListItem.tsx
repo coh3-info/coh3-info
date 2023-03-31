@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addBookmark } from '../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../util/getRaceMarksUrl';
 
+import { useCreateUnit } from '../../hooks/game_data/gameData';
 import type Squad from '../../types/game_data/squad';
 
 type SquadListItemProps = {
@@ -17,9 +18,12 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
     imageUrl: { icon, symbolIcon },
   } = squad;
   const dispatch = useDispatch();
+  const createUnit = useCreateUnit();
 
   const addSquadToSquadSelector = () => {
-    dispatch(addBookmark({ squadId: id }));
+    const unit = createUnit(id);
+
+    dispatch(addBookmark({ unit }));
   };
 
   return (
@@ -28,10 +32,10 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
         <img src={getRaceMarkUrl(race)} alt={`${race} 마크`} />
       </RaceMark>
       <SquadProtrait>
-        <img src={`images/icons/${icon}.png`} />
+        <img src={icon} />
       </SquadProtrait>
       <SquadIcon>
-        <img src={`images/icons/${symbolIcon}.png`} alt={`${nameKO} 심볼 아이콘`} />
+        <img src={symbolIcon} alt={`${nameKO} 심볼 아이콘`} />
       </SquadIcon>
       <SquadName>{nameKO === '' ? '------ ' + id : nameKO}</SquadName>
       <SquadType>대보병 / 주력</SquadType>

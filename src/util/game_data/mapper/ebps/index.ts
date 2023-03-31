@@ -1,8 +1,8 @@
 import { fetchEbps } from '../common/fetchData';
 import { traverseData } from '../common/traversingData';
+import { createInitEntity, createInitWeaponEntity } from '../../init_data_creator/initDataCreator';
 
-import type Entity from '../../../../types/game_data/entity';
-import type { Ebps } from '../../../../types/game_data/entity';
+import type { Ebp, Entity, Ebps, Category, WeaponEntity } from '../../../../types/game_data/entity';
 
 const mapEbps = async (): Promise<Ebps> => {
   const mappedEbps: Ebps = {};
@@ -27,7 +27,14 @@ const mapEbps = async (): Promise<Ebps> => {
           for (const dataName in ebps.races[race][category]) {
             const data = ebps.races[race][category][dataName];
             traverseData(data, dataName, (file, fileName) => {
-              const entity = mapEntity(fileName, file);
+              let entityCategory: Category = 'normal';
+              if (category === 'team_weapons') {
+                entityCategory = 'team_weapon';
+              } else if (category === 'weapons') {
+                entityCategory = 'weapon';
+              }
+
+              const entity = mapEntity(fileName, file, { category: entityCategory });
               mappedEbps[fileName] = entity;
             });
           }
@@ -41,8 +48,18 @@ const mapEbps = async (): Promise<Ebps> => {
 
 export default mapEbps;
 
-const mapEntity = (entityId: string, file: any) => {
-  const entity: Entity = createInitEntity(entityId);
+interface AdditionalData {
+  category: Category;
+}
+
+const mapEntity = (entityId: string, file: any, additionalData: AdditionalData) => {
+  let entity: Entity | WeaponEntity;
+  if (additionalData.category === 'weapon') {
+    entity = createInitWeaponEntity(entityId);
+  } else {
+    entity = createInitEntity(entityId);
+    entity.category = additionalData.category;
+  }
 
   if (file.extensions === undefined) {
     throw new Error(`extensions가 존재하지 않는 객체입니다. id: ${entityId}`);
@@ -53,98 +70,55 @@ const mapEntity = (entityId: string, file: any) => {
     const templateId = exts.template_reference.value.split('\\')[1];
 
     switch (templateId) {
-      case 'combat_ext':
-        mapCombat(entity, exts);
-        break;
-      case 'health_ext':
-        mapHealth(entity, exts);
-        break;
-      case 'moving_ext':
-        mapMoving(entity, exts);
-        break;
-      case 'sight_ext':
-        mapSight(entity, exts);
-        break;
       case 'cost_ext':
         mapCost(entity, exts);
         break;
-      case 'population_ext':
-        mapPopulation(entity, exts);
+
+      case 'health_ext':
+        mapHealth(entity, exts);
         break;
+
       case 'sim_inventory_item_ext':
         mapSimInventoryItem(entity, exts);
         break;
-      case 'weapon_ext':
-        mapWeapon(entity, exts);
-        break;
+    }
+
+    if (entity.category === 'weapon') {
+      switch (templateId) {
+        case 'weapon_ext':
+          mapWeapon(entity, exts);
+          break;
+      }
+    } else {
+      switch (templateId) {
+        case 'combat_ext':
+          mapCombat(entity, exts);
+          break;
+
+        case 'moving_ext':
+          mapMoving(entity, exts);
+          break;
+
+        case 'sight_ext':
+          mapSight(entity, exts);
+          break;
+
+        case 'population_ext':
+          mapPopulation(entity, exts);
+          break;
+      }
     }
   }
   return entity;
 };
 
-const createInitEntity = (id: string): Entity => {
-  return {
-    id,
-    hardpoints: [],
-    cost: {
-      fuel: 0,
-      manpower: 0,
-      time: 0,
-    },
-    health: {
-      armor: 0,
-      hitpoints: 0,
-      targetSize: 0,
-    },
-    moving: {
-      acceleration: 0,
-      deceleration: 0,
-      reverseAcceleration: 0,
-      reverseDeceleration: 0,
-      rotationRate: 0,
-      speedScalingTable: {
-        defaultSpeed: 0,
-        maxSpeed: 0,
-        minSpeed: 0,
-        reverseMaxSpeed: 0,
-      },
-    },
-    population: {
-      personnelPop: 0,
-    },
-    sight: {
-      detectCamouflage: {
-        global: 0,
-        mine: 0,
-        unit: 0,
-      },
-      sightPackage: {
-        outerRadius: 0,
-      },
-    },
-    simInventoryItem: {
-      capacityRequired: 0,
-      category: '',
-      ownershipAttributes: {
-        dropOnDeathChance: 0,
-      },
-    },
-  };
+const mapCost = (entity: Ebp, exts: any) => {
+  entity.cost.manpower = exts.time_cost.cost.manpower;
+  entity.cost.fuel = exts.time_cost.cost.fuel;
+  entity.cost.time = exts.time_cost.time_seconds;
 };
 
-const mapCombat = (entity: Entity, exts: any) => {
-  exts.hardpoints.forEach(({ hardpoint }: any) => {
-    hardpoint.weapon_table.forEach(({ weapon }: any) => {
-      const ebpPath = weapon.weapon_entity_attachment.entity_attach_data.ebp.instance_reference;
-      if (ebpPath === undefined || ebpPath.length === 0) return;
-
-      const splitedEbpPath = ebpPath.split('/');
-      entity.hardpoints.push(splitedEbpPath[splitedEbpPath.length - 1]);
-    });
-  });
-};
-
-const mapHealth = (entity: Entity, exts: any) => {
+const mapHealth = (entity: Ebp, exts: any) => {
   const armorTemplate = exts.armor_layout_option.template_reference.value;
   const splitedArmorTemplate = armorTemplate.split('\\');
   //armorType = 'armor_layout_uniform' | 'armor_layout_front_rear_side' | 'armor_layout_front_rear'
@@ -163,6 +137,27 @@ const mapHealth = (entity: Entity, exts: any) => {
 
   entity.health.hitpoints = exts.hitpoints;
   entity.health.targetSize = exts.target_size;
+};
+
+const mapSimInventoryItem = (entity: Ebp, exts: any) => {
+  const capacityRequired = exts.simulation_item.capacity_required;
+  const category = exts.simulation_item.category;
+  const dropOnDeathChance = exts.simulation_item.ownership_attributes.drop_on_death_chance;
+
+  entity.simInventoryItem.capacityRequired = capacityRequired;
+  entity.simInventoryItem.category = category;
+  entity.simInventoryItem.ownershipAttributes.dropOnDeathChance = dropOnDeathChance;
+};
+
+const mapCombat = (entity: Entity, exts: any) => {
+  exts.hardpoints.forEach(({ hardpoint }: any) => {
+    const ebpPath =
+      hardpoint.weapon_table[0]?.weapon.weapon_entity_attachment.entity_attach_data.ebp.instance_reference;
+    if (ebpPath === undefined || ebpPath.length === 0) return;
+
+    const splitedEbpPath = ebpPath.split('/');
+    entity.hardpoints.push(splitedEbpPath[splitedEbpPath.length - 1]);
+  });
 };
 
 const mapMoving = (entity: Entity, exts: any) => {
@@ -185,27 +180,11 @@ const mapSight = (entity: Entity, exts: any) => {
   entity.sight.sightPackage.outerRadius = exts.sight_package.outer_radius;
 };
 
-const mapCost = (entity: Entity, exts: any) => {
-  entity.cost.manpower = exts.time_cost.cost.manpower;
-  entity.cost.fuel = exts.time_cost.cost.fuel;
-  entity.cost.time = exts.time_cost.time_seconds;
-};
-
 const mapPopulation = (entity: Entity, exts: any) => {
   entity.population.personnelPop = exts.personnel_pop;
 };
 
-const mapSimInventoryItem = (entity: Entity, exts: any) => {
-  const capacityRequired = exts.simulation_item.capacity_required;
-  const category = exts.simulation_item.category;
-  const dropOnDeathChance = exts.simulation_item.ownership_attributes.drop_on_death_chance;
-
-  entity.simInventoryItem.capacityRequired = capacityRequired;
-  entity.simInventoryItem.category = category;
-  entity.simInventoryItem.ownershipAttributes.dropOnDeathChance = dropOnDeathChance;
-};
-
-const mapWeapon = (entity: Entity, exts: any) => {
+const mapWeapon = (entity: WeaponEntity, exts: any) => {
   const weaponRef = exts.weapon.instance_reference;
   const splitedWeaponRef = weaponRef.split('/');
   const weaponId = splitedWeaponRef[splitedWeaponRef.length - 1];

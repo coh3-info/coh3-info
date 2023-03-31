@@ -1,17 +1,18 @@
 import type { PayloadAction, CaseReducer } from '@reduxjs/toolkit';
 import type { SquadBookmark } from '../../../../types/bookmark/bookmark';
 import type { SquadBookmarkManagerInitialState } from '..';
+import type Unit from '../../../../types/game_data/unit';
 
 interface Payload {
-  squadId: string;
+  unit: Unit;
 }
 
 const addBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<Payload>> = (state, action) => {
-  const { squadId } = action.payload;
+  const { unit } = action.payload;
 
   const newBookmark: SquadBookmark = {
     id: `${Date.now()}${state.bookmarkList.length}`,
-    squadId,
+    unit,
     selectedEntityId: '',
     selectedWeaponId: '',
   };

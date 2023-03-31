@@ -1,6 +1,6 @@
 import StatsList from './StatList';
 import type { Stat, StatGroup } from './stat';
-import WeaponStats from '../../../util/stats/class/WeaponStats';
+// import WeaponStats from '../../../util/stats/class/WeaponStats';
 
 const WeaponStatsList = () => {
   // const leftWeapon

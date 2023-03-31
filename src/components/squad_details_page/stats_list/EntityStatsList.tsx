@@ -4,18 +4,17 @@ import { useSelector } from 'react-redux';
 import type { Stat, StatGroup } from './stat';
 import type Entity from '../../../types/game_data/entity';
 import type { RootState } from '../../../state_store/store';
-import EntityStats from '../../../util/stats/class/EntityStats';
 
-const getArmor = (entity: EntityStats | undefined) => {
-  const armor = entity?.armor;
-  if (armor === undefined) return [];
+// const getArmor = (entity: EntityStats | undefined) => {
+//   const armor = entity?.armor;
+//   if (armor === undefined) return [];
 
-  if (typeof armor === 'number') {
-    return [armor, armor, armor];
-  }
-  const { front, side, rear } = armor;
-  return [front, side, rear];
-};
+//   if (typeof armor === 'number') {
+//     return [armor, armor, armor];
+//   }
+//   const { front, side, rear } = armor;
+//   return [front, side, rear];
+// };
 
 const EntityStatsList = () => {
   const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);

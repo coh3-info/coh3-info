@@ -5,26 +5,25 @@ import {
   selectWeapon as _selectWeapon,
 } from '../../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
+import { getSquadResource } from '../../../util/stats/squad';
+import ResourceCard from './ResourceCard';
 
-import resourceManpowerIcon from '../../../images/common/resource_manpower.png';
-import resourceFuelIcon from '../../../images/common/resource_fuel.png';
-import resourcePopulationIcon from '../../../images/common/resource_population.png';
-
-import SelectorInController from './SelectorInController';
-
-import type Squad from '../../../types/game_data/squad';
 import type { RootState } from '../../../state_store/store';
 
 import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
-import tempGrenadIcon from '../../../images/american/abilities/grenade_riflemen_us.png';
-import tempStickyBombIcon from '../../../images/american/abilities/sticky_bomb_riflemen_us.png';
 
-type ControllerProps = {
-  isLeft?: boolean;
+const SQUAD_CATEGORY_KO_TABLE = {
+  infantry: '보병',
+  team_weapons: '지원화기',
+  vehicles: '차량',
+  '': '',
 };
 
+interface ControllerProps {
+  isLeft?: boolean;
+}
+
 const Controller = ({ isLeft = false }: ControllerProps) => {
-  const dispatch = useDispatch();
   const bookmark = useSelector((state: RootState) => {
     if (isLeft) {
       return state.squadBookmarkManager.bookmarkOnLeft;
@@ -33,18 +32,9 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
     }
   });
 
-  const tempSquad = useSelector((state: RootState) => state.gameData.sbps['riflemen_us']);
-  const squad: Squad | undefined = tempSquad;
-  const loadout: { num: number; entityId: string }[] = [];
-  const weaponsForEntity: string[] = [];
+  const squad = bookmark?.unit.squad;
 
-  const selectEntity = (id: string) => {
-    dispatch(_selectEntity({ id, isLeft }));
-  };
-
-  const selectWeapon = (id: string) => {
-    dispatch(_selectWeapon({ id, isLeft }));
-  };
+  const squadResource = bookmark && getSquadResource(bookmark?.unit);
 
   return (
     <ControllerWrapper>
@@ -58,31 +48,16 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
               <div>
                 <SquadName>
                   <SquadSymbol>
-                    <img src={squad.imageUrl.icon} alt="분대 심볼" />
+                    <img src={squad.imageUrl.symbolIcon} alt="분대 심볼" />
                   </SquadSymbol>
-                  {squad.name}
+                  {squad.nameKO}
                 </SquadName>
-                <div>{squad.category}</div>
+                <div>{SQUAD_CATEGORY_KO_TABLE[squad.category]}</div>
               </div>
               <ResourcesContainer>
-                <Resource>
-                  <div>
-                    <img src={resourceManpowerIcon} alt="manpower icon" />
-                  </div>
-                  260
-                </Resource>
-                <Resource>
-                  <div>
-                    <img src={resourceFuelIcon} alt="fuel icon" />
-                  </div>
-                  0
-                </Resource>
-                <Resource>
-                  <div>
-                    <img src={resourcePopulationIcon} alt="population icon" />
-                  </div>
-                  10
-                </Resource>
+                <ResourceCard type="manpower" value={squadResource?.manpower ?? 0} />
+                <ResourceCard type="fuel" value={squadResource?.fuel ?? 0} />
+                <ResourceCard type="population" value={squadResource?.pop ?? 0} />
               </ResourcesContainer>
             </BasicInfo>
             <RaceMark>
@@ -98,38 +73,7 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
                 </li>
               </ul>
             </Options>
-            <OptionName>스킬</OptionName>
-            <Options>
-              <ul>
-                <li>
-                  <OptionButton>
-                    <img src={tempGrenadIcon} alt="bar" />
-                  </OptionButton>
-                </li>
-                <li>
-                  <OptionButton>
-                    <img src={tempStickyBombIcon} alt="bar" />
-                  </OptionButton>
-                </li>
-              </ul>
-            </Options>
-            <OptionName>건설</OptionName>
-            <Options>
-              <ul></ul>
-            </Options>
           </Info>
-          <SelectorsContainer>
-            <SelectorInController
-              options={loadout.map((data) => ({ name: data.entityId, value: data.entityId }))}
-              defaultValue={bookmark.selectedEntityId}
-              selectOption={selectEntity}
-            />
-            <SelectorInController
-              options={weaponsForEntity.map((weapon) => ({ name: weapon, value: weapon }))}
-              defaultValue={bookmark.selectedWeaponId}
-              selectOption={selectWeapon}
-            />
-          </SelectorsContainer>
         </>
       ) : (
         <EmptyText>분대를 선택해 주세요.</EmptyText>

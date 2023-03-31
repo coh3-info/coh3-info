@@ -1,4 +1,4 @@
-type InfantryArmor = number;
+type Armor = number;
 
 interface VehicleArmor {
   front: number;
@@ -6,10 +6,35 @@ interface VehicleArmor {
   rear: number;
 }
 
+type Category = 'normal' | 'team_weapon' | 'weapon';
 type InventoryItemCategory = 'casualty' | 'default' | 'upgrade' | 'special' | '';
 
-interface Entity {
+interface Ebp {
   id: string; //데이터의 파일 이름
+  category: Category;
+  cost: {
+    fuel: number; //epbs/cost_ext/time_cost/cost/fuel
+    manpower: number; //epbs/cost_ext/time_cost/cost/manpower
+    time: number; //epbs/cost_ext/time_cost/time_seconds
+  };
+
+  health: {
+    armor: Armor | VehicleArmor; //ebps/health_ext/armor_layout_option/
+    hitpoints: number; //ebps/health_ext/hitpoints
+    targetSize: number; //ebps/health_ext/target_size
+  };
+
+  simInventoryItem: {
+    capacityRequired: number; //ebps/sim_inventory_item_ext/simulation_item/capacity_required
+    category: InventoryItemCategory; //ebps/sim_inventory_item_ext/simulation_item/category
+    ownershipAttributes: {
+      dropOnDeathChance: number; //ebps/sim_inventory_item_ext/simulation_item/ownership_attributes/drop_on_death_chance
+    };
+  };
+}
+
+interface Entity extends Ebp {
+  category: 'normal' | 'team_weapon';
   hardpoints: string[] /* ebps/combat_ext/hardpoints/[n.hardpoint]/weapon_table/1.weapon/weapon_entity_attachment/entity_attach_data/ebp의 값인 경로의 파일이름
     각 hardpoint의 1.weapon만 사용합니다.
     예) sherman_us
@@ -17,16 +42,7 @@ interface Entity {
     2.hardpoint/.../ebp = 'ebps\races\american\weapons\small_arms\machine_guns\light_machine_gun\w_30cal_coaxial_sherman_us'
     ...
     일 때 hardpoints = ['w_75mm_sherman_us', 'w_30cal_coaxial_sherman_us', ...]; */;
-  cost: {
-    fuel: number; //epbs/cost_ext/time_cost/cost/fuel
-    manpower: number; //epbs/cost_ext/time_cost/cost/manpower
-    time: number; //epbs/cost_ext/time_cost/time_seconds
-  };
-  health: {
-    armor: InfantryArmor | VehicleArmor; //ebps/health_ext/armor_layout_option/
-    hitpoints: number; //ebps/health_ext/hitpoints
-    targetSize: number; //ebps/health_ext/target_size
-  };
+
   moving: {
     acceleration: number; //ebps/moving_ext/acceleration
     deceleration: number; //ebps/moving_ext/deceleration
@@ -43,9 +59,11 @@ interface Entity {
       reverseMaxSpeed: number; //ebps/moving_ext/speed_scaling_table/reverse_max_speed
     };
   };
+
   population: {
     personnelPop: number; //ebps/population_ext/personnel_pop
   };
+
   sight: {
     detectCamouflage: {
       global: number; //ebps/sight/detect_camouflage/tp_global
@@ -57,25 +75,21 @@ interface Entity {
       outerRadius: number; //ebps/sight/sight_package/outer_radius
     };
   };
-  simInventoryItem: {
-    capacityRequired: number; //ebps/sim_inventory_item_ext/simulation_item/capacity_required
-    category: InventoryItemCategory; //ebps/sim_inventory_item_ext/simulation_item/category
-    ownershipAttributes: {
-      dropOnDeathChance: number; //ebps/sim_inventory_item_ext/simulation_item/ownership_attributes/drop_on_death_chance
-    };
-  };
+}
 
-  weapon?: string /*id가 w_로 시작하는 entity만 weapon속성을 가지고 있습니다.
-    ebps/weapon_ext/weapon의 값인 경로의 파일이름
-    예) w_garand_rifleman_us
-    ebps/weapon_ext/weapon = 'weapon\american\small_arms\single_fire\rifle\garand_rifleman_us'
-    일 때 weapon = 'garand_rifleman_us' */;
+interface WeaponEntity extends Ebp {
+  category: 'weapon';
+  weapon: string /*id가 w_로 시작하는 entity만 weapon속성을 가지고 있습니다.
+  ebps/weapon_ext/weapon의 값인 경로의 파일이름
+  예) w_garand_rifleman_us
+  ebps/weapon_ext/weapon = 'weapon\american\small_arms\single_fire\rifle\garand_rifleman_us'
+  일 때 weapon = 'garand_rifleman_us' */;
 }
 
 interface Ebps {
-  [key: string]: Entity;
+  [key: string]: Entity | WeaponEntity;
 }
 
-export { Ebps, InventoryItemCategory };
+export { Ebp, Entity, WeaponEntity, Ebps, Category, InventoryItemCategory };
 
 export default Entity;

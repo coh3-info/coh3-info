@@ -1,6 +1,6 @@
 import { fetchSbps } from '../common/fetchData';
 import { traverseData } from '../common/traversingData';
-
+import { createInitSquad } from '../../init_data_creator/initDataCreator';
 import { getMissingSquadData } from './missingSquadDataTable';
 
 import type { MissingSquadData } from './missingSquadDataTable';
@@ -85,44 +85,6 @@ const mapSquad = (squadId: string, file: any, additionalData: AdditionalData): S
   return squad;
 };
 
-const createInitSquad = (id: string): Squad => {
-  return {
-    id,
-    name: '',
-    nameKO: '',
-    category: '',
-    race: '',
-    imageUrl: {
-      icon: '',
-      symbolIcon: '',
-    },
-    abilities: [],
-    captureStrategicPoint: {
-      captureRateMutiplier: 0,
-      revertRateMutiplier: 0,
-    },
-    constructions: [],
-    loadout: [],
-    population: {
-      personnelPop: 0,
-    },
-    reinforce: {
-      costPercentage: 0,
-      timePercentage: 0,
-    },
-    upgrades: [],
-    inventory: {
-      canPickUpItems: false,
-      categoryCapacity: {
-        casualty: 0,
-        default: 0,
-        special: 0,
-        upgrade: 0,
-      },
-    },
-  };
-};
-
 const mapCaptureStrategicPoint = (squad: Squad, squadexts: any) => {
   squad.captureStrategicPoint.captureRateMutiplier = squadexts.capture_rate_multiplier;
   squad.captureStrategicPoint.revertRateMutiplier = squadexts.revert_rate_multiplier;
@@ -153,8 +115,8 @@ const mapUI = (squad: Squad, squadexts: any) => {
   const info = squadexts.race_list[0].race_data.info;
   const { icon_name, symbol_icon_name } = info;
 
-  squad.imageUrl.icon = icon_name;
-  squad.imageUrl.symbolIcon = symbol_icon_name;
+  squad.imageUrl.icon = `images/icons/${icon_name}.png`;
+  squad.imageUrl.symbolIcon = `images/icons/${symbol_icon_name}.png`;
 };
 
 const mapType = (squad: Squad, squadexts: any) => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { StatGroup } from './stat';
+import { StatGroup } from './stat.d';
 import StatItem from './StatItem';
 
 type StatItemsGroupProps = {

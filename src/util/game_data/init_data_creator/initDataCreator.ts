@@ -1,7 +1,7 @@
 import type Squad from '../../../types/game_data/squad';
 import type Entity from '../../../types/game_data/entity';
 import type Weapon from '../../../types/game_data/weapon';
-import { Ebp, WeaponEntity } from '../../../types/game_data/entity';
+import { WeaponEntity } from '../../../types/game_data/entity';
 
 const createInitSquad = (id: string): Squad => {
   return {
@@ -41,7 +41,7 @@ const createInitSquad = (id: string): Squad => {
   };
 };
 
-const createEbp = (id: string): Ebp => {
+const createInitEntity = (id: string): Entity => {
   return {
     id,
     category: 'normal',
@@ -55,21 +55,6 @@ const createEbp = (id: string): Ebp => {
       hitpoints: 0,
       targetSize: 0,
     },
-    simInventoryItem: {
-      capacityRequired: 0,
-      category: '',
-      ownershipAttributes: {
-        dropOnDeathChance: 0,
-      },
-    },
-  };
-};
-
-const createInitEntity = (id: string): Entity => {
-  const ebp = createEbp(id);
-  return {
-    ...ebp,
-    category: 'normal',
     hardpoints: [],
     moving: {
       acceleration: 0,
@@ -97,13 +82,20 @@ const createInitEntity = (id: string): Entity => {
         outerRadius: 0,
       },
     },
+    simInventoryItem: {
+      capacityRequired: 0,
+      category: '',
+      ownershipAttributes: {
+        dropOnDeathChance: 0,
+      },
+    },
   };
 };
 
 const createInitWeaponEntity = (id: string): WeaponEntity => {
-  const ebp = createEbp(id);
+  const entity = createInitEntity(id);
   return {
-    ...ebp,
+    ...entity,
     category: 'weapon',
     weapon: '',
   };

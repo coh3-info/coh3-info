@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import StatItem from './StatItem';
 
-import type { Stat, StatGroup } from './stat';
+import type { Stat, StatGroup } from './stat.d';
 import StatItemGroup from './StatItemGroup';
 
 type StatListProps = {

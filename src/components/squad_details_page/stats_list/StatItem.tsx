@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import type { Stat, UnitOfStat } from './stat';
+import type { Stat, UnitOfStat } from './stat.d';
 
 const convertToUnitString = (value: number, unit: UnitOfStat): string => {
   if (unit === 'percentage') {

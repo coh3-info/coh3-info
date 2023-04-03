@@ -63,9 +63,9 @@ const WeaponStatsList = () => {
         ],
       ],
 
-      ['연사 시간', (t) => [t?.burst.rateOfFire.min, t?.burst.rateOfFire.max], { separator: '~' }],
+      ['연사력', (t) => [t?.burst.rateOfFire.min, t?.burst.rateOfFire.max], { separator: '~' }],
       [
-        '연사 시간 보정',
+        '연사력 보정',
         [
           ['근거리', (t) => t?.burst.rateOfFireMultiplier.near],
           ['중거리', (t) => t?.burst.rateOfFireMultiplier.mid],

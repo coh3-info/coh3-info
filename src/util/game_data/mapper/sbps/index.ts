@@ -94,8 +94,10 @@ const mapLoadout = (squad: Squad, squadexts: any) => {
   for (const loadout of squadexts.unit_list) {
     const splitReferencePath = loadout.loadout_data.type.instance_reference.split('/');
     const entityId = splitReferencePath[splitReferencePath.length - 1];
+
     squad.loadout.push({
-      num: loadout.loadout_data.num,
+      //sherman_76mm_us에 num이 누락되어 있습니다. num을 계산하여 NaN이 반환되는 것을 방지하기 위해 값 1을 넣어줍니다.
+      num: loadout.loadout_data.num ?? 1,
       entityId,
     });
   }

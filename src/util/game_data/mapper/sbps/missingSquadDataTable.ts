@@ -471,6 +471,170 @@ const missingSquadDataTable: MissingSquadDataTable = {
     name: 'M3 Stuart Light Tank',
     nameKO: 'M3 스튜어트 경전차',
   },
+
+  //german - infantry
+  fallschirmjagers_ger: {
+    id: 'fallschirmjagers_ger',
+    name: 'Fallschirmjäger Squad',
+    nameKO: '강하엽병 분대',
+  },
+  fallschirmpioneers_ger: {
+    id: 'fallschirmpioneers_ger',
+    name: 'Fallschirmpioneer Squad',
+    nameKO: '강하공병대',
+  },
+  grenadier_ger: {
+    id: 'grenadier_ger',
+    name: 'Grenadier Squad',
+    nameKO: '척탄병 분대',
+  },
+  jaeger_ger: {
+    id: 'jaeger_ger',
+    name: 'Jäger Squad',
+    nameKO: '엽병 분대',
+  },
+  panzergrenadier_ger: {
+    id: 'panzergrenadier_ger',
+    name: 'Panzergrenadier Squad',
+    nameKO: '기갑척탄병 분대',
+  },
+  pioneer_ger: {
+    id: 'pioneer_ger',
+    name: 'Pioneer Squad',
+    nameKO: '공병대',
+  },
+  sniper_ger: {
+    id: 'sniper_ger',
+    name: 'Sniper',
+    nameKO: '저격수',
+  },
+  stormtrooper_ger: {
+    id: 'stormtrooper_ger',
+    name: 'Stoßtruppen Squad',
+    nameKO: '충격보병 분대',
+  },
+
+  //german - team_weapons
+  aa_gun_20mm_ger: {
+    id: 'aa_gun_20mm_ger',
+    name: 'Flak 30 Anti-aircraft Gun Team',
+    nameKO: 'Flak 30 대공포 운용반',
+  },
+  at_gun_75mm_ger: {
+    id: 'at_gun_75mm_ger',
+    name: 'Pak 40 Anti-tank Gun Team',
+    nameKO: 'Pak 40 대전차포 운용반',
+  },
+  at_gun_lg40_ger: {
+    id: 'at_gun_lg40_ger',
+    name: 'LG40 Anti-tank Gun Team',
+    nameKO: 'LG40 대전차포 운용반',
+  },
+  hmg_mg42_ger: {
+    id: 'hmg_mg42_ger',
+    name: 'MG42 Machine Gun Team',
+    nameKO: 'MG42 기관총 운용반',
+  },
+  mortar_81mm_ger: {
+    id: 'mortar_81mm_ger',
+    name: 'GrW34 Mortar team',
+    nameKO: 'GrW 34 박격포 운용반',
+  },
+  nebelwerfer_150mm_ger: {
+    id: 'nebelwerfer_150mm_ger',
+    name: 'Nebelwerfer 42 Rocket Launcher Team',
+    nameKO: '네벨베르퍼 42 로켓발사기 운용반',
+  },
+
+  //german - vehicles
+  armored_car_8_rad_ger: {
+    id: 'armored_car_8_rad_ger',
+    name: '8 Rad Armored Car',
+    nameKO: '8륜 장갑차',
+  },
+  armored_car_ger: {
+    id: 'armored_car_ger',
+    name: '221 Scout Car',
+    nameKO: '221 정찰 차량',
+  },
+  brummbar_ger: {
+    id: 'brummbar_ger',
+    name: 'Sturmpanzer IV Brummbär',
+    nameKO: '스톰판처 IV 브룸베어',
+  },
+  halftrack_ger: {
+    id: 'halftrack_ger',
+    name: '251 Medium Carrier',
+    nameKO: '251 중형 수송차량',
+  },
+  halftrack_medical_ger: {
+    id: 'halftrack_medical_ger',
+    name: 'Medical Half-track',
+    nameKO: '반궤도 구급장갑차',
+  },
+  halftrack_stummel_ger: {
+    id: 'halftrack_stummel_ger',
+    name: 'Stummel Half-track',
+    nameKO: '스툼멜 반궤도차량',
+  },
+  kettenkrad_ger: {
+    id: 'kettenkrad_ger',
+    name: 'Kettenkrad Recon Vehicle',
+    nameKO: '케텐크라트 정찰차량',
+  },
+  marder_iii_ger: {
+    id: 'marder_iii_ger',
+    name: 'Marder III M Tank Destroyer',
+    nameKO: '마르더 III M형 구축전차',
+  },
+  panther_ger: {
+    id: 'panther_ger',
+    name: 'Panther Heavy Tank',
+    nameKO: '판터 중전차',
+  },
+  panzer_iv_cmd_ger: {
+    id: 'panzer_iv_cmd_ger',
+    name: 'Command Panzer IV Medium Tank',
+    nameKO: '4호 중형 지휘전차',
+  },
+  panzer_iv_ger: {
+    id: 'panzer_iv_ger',
+    name: 'Panzer IV Medium Tank',
+    nameKO: '4호 중형전차',
+  },
+  stug_iii_d_ger: {
+    id: 'stug_iii_d_ger',
+    name: 'StuG III D Assault Gun',
+    nameKO: '스터그 III D형 돌격포',
+  },
+  stug_iii_ger: {
+    id: 'stug_iii_ger',
+    name: 'StuG III G Assault Gun',
+    nameKO: '스터그 III G형 돌격포',
+  },
+  tiger_ger: {
+    id: 'tiger_ger',
+    name: 'Tiger Heavy Tank',
+    nameKO: '티거 중전차',
+  },
+
+  truck_2_5_ger: {
+    id: 'truck_2_5_ger',
+    name: '2.5-tonne Utility Truck',
+    nameKO: '2.5톤 다용도 트럭',
+  },
+
+  wespe_ger: {
+    id: 'wespe_ger',
+    name: 'Wespe Self-propelled Artillery',
+    nameKO: '베스페 자주포',
+  },
+
+  wirbelwind_ger: {
+    id: 'wirbelwind_ger',
+    name: 'Wirbelwind Flakpanzer',
+    nameKO: '비르벤빌트 대공전차',
+  },
 };
 
 export const getMissingSquadData = (squadId: string) => {

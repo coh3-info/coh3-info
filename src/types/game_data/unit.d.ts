@@ -2,17 +2,24 @@ import Entity, { WeaponEntity } from './entity';
 import Squad from './squad';
 import Weapon from './weapon';
 
-interface LoadOutData {
+interface UnitLoadOutData {
   num: number;
-  entity: Entity | WeaponEntity;
-  weapons: Weapon[];
+  entityId: string;
+  weaponIds: string[];
 }
 
-export type Loadout = LoadOutData[];
+export type UnitLoadout = UnitLoadOutData[];
 
-interface Unit {
+export type WeaponPair = [WeaponEntity, Weapon];
+
+export interface Unit {
+  loadout: UnitLoadout;
   squad: Squad;
-  loadout: Loadout;
-}
 
-export default Unit;
+  /**각 UnitLoadOutData의 entityId에 해당하는 모든 Entity를 포함합니다. WeaponEntity도 포함될 수 있습니다.*/
+  entities: (Entity | WeaponEntity)[];
+
+  /**각 UnitLoadOutData의 entityId에 해당하는 모든 Entity의 hardpoints로부터 얻을 수 있는 모든 WeaponEntity와 WeaponEnity에 연결된 Weapon을 한쌍으로 묶은 튜플을 포함합니다.
+   * UnitLoadOutData의 Entity가 WeaponEntity일 경우도 있습니다.*/
+  weaponPairs: WeaponPair[];
+}

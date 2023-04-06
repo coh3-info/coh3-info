@@ -3,19 +3,33 @@ import StatsList from './StatList';
 import type { Stat, StatGroup } from './stat.d';
 import type { RootState } from '../../../state_store/store';
 import { createStatList } from './stat';
-import Weapon from '../../../types/game_data/weapon';
+import type { WeaponStats } from '../../../types/stats/weaponStats';
+import styled from 'styled-components';
+import WeaponSelector from './WeaponSelector';
 
 const WeaponStatsList = () => {
   const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
-  const leftWeapon = bookmarkOnLeft?.unit.loadout[0].weapons[0];
-  const rightWeapon = bookmarkOnRight?.unit.loadout[0].weapons[0];
+  const leftWeaponId = bookmarkOnLeft?.selectedWeaponId ?? '';
+  const rightWeaponId = bookmarkOnRight?.selectedWeaponId ?? '';
 
-  const statList1: (Stat | StatGroup)[] = createStatList<Weapon | undefined>(
+  const leftWeapon = bookmarkOnLeft?.unit.weapons.find((weapon) => weapon.id === leftWeaponId);
+  const rightWeapon = bookmarkOnRight?.unit.weapons.find((weapon) => weapon.id === rightWeaponId);
+
+  const weaponOptionsOnLeft =
+    bookmarkOnLeft?.unit.weapons.map((weapon) => {
+      return { name: weapon.id, value: weapon.id };
+    }) ?? [];
+
+  const weaponOptionsOnRight =
+    bookmarkOnRight?.unit.weapons.map((weapon) => {
+      return { name: weapon.id, value: weapon.id };
+    }) ?? [];
+
+  const statList1: (Stat | StatGroup)[] = createStatList<WeaponStats | undefined>(
     [leftWeapon, rightWeapon],
     [
-      ['id', (t) => t?.id],
       ['공격력', (t) => [t?.damage.min, t?.damage.max], { separator: '~' }],
-      ['비관통 공격력', (t) => t?.deflection.deflectionDamageMultiplier],
+      ['비관통 공격력', (t) => [t?.deflectionDamage.min, t?.deflectionDamage.max], { separator: '~' }],
       ['사거리', (t) => [t?.range.min, t?.range.max], { separator: '~' }],
       [
         '거리 정의',
@@ -91,7 +105,7 @@ const WeaponStatsList = () => {
     ]
   );
 
-  const statList2: (Stat | StatGroup)[] = createStatList<Weapon | undefined>(
+  const statList2: (Stat | StatGroup)[] = createStatList<WeaponStats | undefined>(
     [leftWeapon, rightWeapon],
     [
       ['범위', [['범위 형태', (t) => t?.areaEffect.areaInfo.areaType]]],
@@ -154,8 +168,8 @@ const WeaponStatsList = () => {
       [
         '무기 셋팅',
         [
-          ['거치 시간', (t) => t?.setup.duration],
-          ['해체 시간', (t) => t?.teardown.duration],
+          ['거치 시간', (t) => t?.settingTime.setup],
+          ['해체 시간', (t) => t?.settingTime.teardown],
         ],
       ],
       [
@@ -187,10 +201,24 @@ const WeaponStatsList = () => {
   );
 
   return (
-    <>
+    <WeaponStatsListWrapper>
+      <WeaponSelectorContainer>
+        <WeaponSelector options={weaponOptionsOnLeft} defaultValue={leftWeaponId} position="left" />
+        <WeaponSelector options={weaponOptionsOnRight} defaultValue={rightWeaponId} position="right" />
+      </WeaponSelectorContainer>
       <StatsList statList1={statList1} statList2={statList2} />
-    </>
+    </WeaponStatsListWrapper>
   );
 };
 
 export default WeaponStatsList;
+
+const WeaponStatsListWrapper = styled.section`
+  margin-top: 20px;
+`;
+
+const WeaponSelectorContainer = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+`;

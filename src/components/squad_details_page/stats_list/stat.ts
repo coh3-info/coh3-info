@@ -1,9 +1,8 @@
-import type Entity from '../../../types/game_data/entity';
-import type { WeaponEntity } from '../../../types/game_data/entity';
-import type Weapon from '../../../types/game_data/weapon';
+import type EntityStats from '../../../types/stats/entityStats';
+import { WeaponStats } from '../../../types/stats/weaponStats';
 import type { SeparatorOfStat, Stat, StatGroup, StatValue, UnitOfStat } from './stat.d';
 
-type Target = Entity | WeaponEntity | Weapon | undefined;
+type Target = EntityStats | WeaponStats | undefined;
 type GetValue<T extends Target> = (target: T) => StatValue | StatValue[];
 
 interface Options {

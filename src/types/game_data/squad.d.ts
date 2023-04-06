@@ -1,4 +1,5 @@
-type Race = 'americans' | 'british' | 'british_africa' | 'germans' | 'afrika_korps' | '';
+export type Race = 'americans' | 'british' | 'british_africa' | 'germans' | 'afrika_korps' | '';
+export type SquadCategory = 'infantry' | 'team_weapons' | 'vehicles' | '';
 
 interface LoadoutData {
   num: number; // sbps/squad_loadout_ext/unit_list/[loadout_data]/num
@@ -10,7 +11,7 @@ interface Squad {
   id: string; // 데이터의 파일 이름
   name: string; // squad 영어 이름
   nameKO: string; // squad 한글 이름
-  category: 'infantry' | 'team_weapons' | 'vehicles' | '';
+  category: SquadCategory;
   race: Race; // sbps/squad_type_ext/squad_race_type_list/squad_race_type
   imageUrl: {
     icon: string; // sbps/squad_ui_ext/race_list/[race_data]/info/icon_name
@@ -43,10 +44,8 @@ interface Squad {
   };
 }
 
-interface Sbps {
+export interface Sbps {
   [key: string]: Squad;
 }
-
-export { Race, Sbps };
 
 export default Squad;

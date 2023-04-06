@@ -7,6 +7,7 @@ import mapEbps from './util/game_data/mapper/ebps';
 import { useDispatch } from 'react-redux';
 import { setEbps, setSbps, setWeapons } from './state_store/slice/game_data';
 import mapWeapons from './util/game_data/mapper/weapon';
+import { createUnit } from './util/game_data/unit';
 
 const App = () => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
-import type Unit from '../game_data/unit';
+import type UnitStats from '../stats/unitStats';
 
 export type SquadBookmark = {
   id: string;
   selectedEntityId: string;
   selectedWeaponId: string;
-  unit: Unit;
+  unit: UnitStats;
 };

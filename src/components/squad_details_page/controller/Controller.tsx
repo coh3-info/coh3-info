@@ -5,7 +5,6 @@ import {
   selectWeapon as _selectWeapon,
 } from '../../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
-import { getSquadResource } from '../../../util/stats/squad';
 import ResourceCard from './ResourceCard';
 
 import type { RootState } from '../../../state_store/store';
@@ -34,8 +33,6 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
 
   const squad = bookmark?.unit.squad;
 
-  const squadResource = bookmark && getSquadResource(bookmark?.unit);
-
   return (
     <ControllerWrapper>
       {squad !== undefined && bookmark !== undefined ? (
@@ -55,9 +52,9 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
                 <div>{SQUAD_CATEGORY_KO_TABLE[squad.category]}</div>
               </div>
               <ResourcesContainer>
-                <ResourceCard type="manpower" value={squadResource?.manpower ?? 0} />
-                <ResourceCard type="fuel" value={squadResource?.fuel ?? 0} />
-                <ResourceCard type="population" value={squadResource?.pop ?? 0} />
+                <ResourceCard type="manpower" value={squad.cost.manpower} />
+                <ResourceCard type="fuel" value={squad.cost.fuel} />
+                <ResourceCard type="population" value={squad.cost.population} />
               </ResourcesContainer>
             </BasicInfo>
             <RaceMark>

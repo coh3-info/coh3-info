@@ -27,7 +27,7 @@ interface RectangleArea {
   width: number;
 }
 
-type Area = NoneArea | CircleArea | RectangleArea;
+export type Area = NoneArea | CircleArea | RectangleArea;
 
 interface Weapon {
   /** 데이터 파일이름 */

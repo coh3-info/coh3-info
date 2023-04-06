@@ -1,4 +1,4 @@
-type Armor = number;
+type NormalArmor = number;
 
 interface VehicleArmor {
   front: number;
@@ -6,10 +6,11 @@ interface VehicleArmor {
   rear: number;
 }
 
-type EntityCategory = 'normal' | 'team_weapon' | 'weapon';
-type InventoryItemCategory = 'casualty' | 'default' | 'upgrade' | 'special' | '';
+export type Armor = NormalArmor | VehicleArmor;
+export type EntityCategory = 'normal' | 'team_weapon' | 'weapon';
+export type InventoryItemCategory = 'casualty' | 'default' | 'upgrade' | 'special' | '';
 
-interface Entity {
+export interface Entity {
   id: string; //데이터의 파일 이름
   category: 'normal' | 'team_weapon';
   cost: {
@@ -27,7 +28,7 @@ interface Entity {
     일 때 hardpoints = ['w_75mm_sherman_us', 'w_30cal_coaxial_sherman_us', ...]; */;
 
   health: {
-    armor: Armor | VehicleArmor; //ebps/health_ext/armor_layout_option/
+    armor: NormalArmor | VehicleArmor; //ebps/health_ext/armor_layout_option/
     hitpoints: number; //ebps/health_ext/hitpoints
     targetSize: number; //ebps/health_ext/target_size
   };
@@ -74,7 +75,7 @@ interface Entity {
   };
 }
 
-interface WeaponEntity extends Entity {
+export interface WeaponEntity extends Entity {
   category: 'weapon';
   weapon: string /*id가 w_로 시작하는 entity만 weapon속성을 가지고 있습니다.
   ebps/weapon_ext/weapon의 값인 경로의 파일이름
@@ -83,10 +84,8 @@ interface WeaponEntity extends Entity {
   일 때 weapon = 'garand_rifleman_us' */;
 }
 
-interface Ebps {
+export interface Ebps {
   [key: string]: Entity | WeaponEntity;
 }
-
-export { Ebps, Entity, WeaponEntity, EntityCategory, InventoryItemCategory };
 
 export default Entity;

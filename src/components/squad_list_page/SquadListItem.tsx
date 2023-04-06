@@ -5,6 +5,7 @@ import getRaceMarkUrl from '../../util/getRaceMarksUrl';
 
 import { useCreateUnit } from '../../hooks/game_data/gameData';
 import type Squad from '../../types/game_data/squad';
+import { createUnitStats } from '../../util/stats/unitStats';
 
 type SquadListItemProps = {
   squad: Squad;
@@ -22,8 +23,13 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
 
   const addSquadToSquadSelector = () => {
     const unit = createUnit(id);
-
-    dispatch(addBookmark({ unit }));
+    if (unit === undefined) return;
+    const unitStats = createUnitStats(unit);
+    if (unit !== undefined) {
+      dispatch(addBookmark({ unit: unitStats }));
+    } else {
+      console.error(new Error('unit이 undefined입니다.'));
+    }
   };
 
   return (

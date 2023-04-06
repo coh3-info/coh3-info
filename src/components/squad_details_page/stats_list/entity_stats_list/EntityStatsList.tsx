@@ -43,7 +43,6 @@ const EntityStatsList = () => {
     }) ?? [];
 
   const statList1 = createEntityStatList1([leftEntity, rightEntity]);
-
   const statList2 = createEntityStatList2([leftEntity, rightEntity]);
 
   return (

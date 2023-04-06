@@ -39,7 +39,7 @@ interface Weapon {
    */
   accuracy: Distance;
 
-  /** 조준 시간에 관련된 데이터 */
+  /** 조준 시간 데이터 */
   aim: {
     /** 조준 시간 보정치 <br/>
      *
@@ -60,12 +60,52 @@ interface Weapon {
      */
     readyAimTime: MinMax;
   };
+
+  /** 범위 피해 데이터 */
   areaEffect: {
+    /** 범위 피해 명중률 <br/>
+     *
+     * 대부분 무기의 near, mid, far값이 모두 5 또는 15입니다. 이는 범위안에 있다면 거의 확정적으로 피해를 준다고 볼 수 있습니다.
+     * 값이 5가 아닌경우는 거의 1입니다. 이는 범위안에 있어도 상대의 피격률에 따라 피해를 주지 못할 수 있습니다.
+     * 보통 37mm_greyhound_us, 20mm_aa_gun_ger같은 비교적 범위 피해 규모가 작은 무기의 값이 1인경우가 많습니다.
+     * @data_path weapon/weapon_bag/area_effect/accuracy
+     */
     accuracy: Distance;
+
+    /** 범위 피해 관통력 <br/>
+     *
+     * 범위 피해 관통력은 항상 상대의 전면 장갑(front armor)으로 계산합니다.
+     * @data_path weapon/weapon_bag/area_effect/penetration
+     */
     penetration: Distance;
+
+    /** 범위의 형태 및 크기 정보 <br/>
+     *
+     * areaInfo의 template_reference의 종류는 circle_area_option,  rectangle_area_option, point_area_option 총 3가지가 있습니다.
+     * 폭파형 무기는 circle_area_option, 화염방사기와 항공기의 기총소사는 rectangle_area_option, 범위피해가 없는 무기는 point_area_option입니다.
+     * @data_path weapon/weapon_bag/area_effeact/area_info
+     */
     areaInfo: Area;
+
+    /** 공격력 보정치 <br/>
+     *
+     * 중심부로부터의 거리에 따라 이 값이 damage값과 곱하여 범위 공격력을 구합니다.
+     * @data_path weapon/weapon_bag/area_effeact/damage
+     */
     damageMultiplier: Distance;
+
+    /** 분대 당 최대 피해 인원 <br/>
+     *
+     * 한번의 공격으로 피해를 줄 수 있는 분대 당 최대 인원 수 입니다.
+     * 만약 값이 3일 때 상대 분대의 구성원이 모두 범위내에 있더라도 3명의 구성원에게만 피해를 줄 수 있습니다.
+     * 값이 음수라면 제한없음을 의미합니다.
+     */
     maxMember: number;
+
+    /** 범위 피해 거리 정의 <br/>
+     *
+     * areaEffect의 near, mid, far값은 모두 distance의 near, mid, far거리에서의 값을 의미합니다.
+     */
     distance: Distance;
   };
 

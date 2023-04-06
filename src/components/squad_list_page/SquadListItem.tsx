@@ -14,6 +14,7 @@ type SquadListItemProps = {
 const SquadListItem = ({ squad }: SquadListItemProps) => {
   const {
     id,
+    name,
     nameKO,
     race,
     imageUrl: { icon, symbolIcon },
@@ -43,7 +44,10 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
       <SquadIcon>
         <img src={symbolIcon} alt={`${nameKO} 심볼 아이콘`} />
       </SquadIcon>
-      <SquadName>{nameKO === '' ? '------ ' + id : nameKO}</SquadName>
+      <SquadNameContainer>
+        <SquadNameKO>{nameKO}</SquadNameKO>
+        <SquadName>{name}</SquadName>
+      </SquadNameContainer>
       <SquadType>대보병 / 주력</SquadType>
     </SquadListItemWrapper>
   );
@@ -92,7 +96,14 @@ const SquadIcon = styled(ImgContainer)`
   height: 36px;
 `;
 
-const SquadName = styled.div``;
+const SquadNameContainer = styled.div``;
+
+const SquadNameKO = styled.div``;
+
+const SquadName = styled.div`
+  font-size: 0.75rem;
+  color: #979797;
+`;
 
 const SquadType = styled.div`
   font-size: 0.875rem;

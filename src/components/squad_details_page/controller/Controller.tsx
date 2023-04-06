@@ -43,12 +43,15 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
             </Portrait>
             <BasicInfo>
               <div>
-                <SquadName>
+                <SquadTitle>
                   <SquadSymbol>
                     <img src={squad.imageUrl.symbolIcon} alt="분대 심볼" />
                   </SquadSymbol>
-                  {squad.nameKO}
-                </SquadName>
+                  <SquadNameContainer>
+                    <SquadNameKO>{squad.nameKO}</SquadNameKO>
+                    <SquadName>{squad.name}</SquadName>
+                  </SquadNameContainer>
+                </SquadTitle>
                 <div>{SQUAD_CATEGORY_KO_TABLE[squad.category]}</div>
               </div>
               <ResourcesContainer>
@@ -125,7 +128,7 @@ const SquadSymbol = styled.div`
   }
 `;
 
-const SquadName = styled.div`
+const SquadTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
@@ -133,24 +136,20 @@ const SquadName = styled.div`
   font-weight: 500;
 `;
 
+const SquadName = styled.div`
+  font-size: 0.75rem;
+  color: #979797;
+`;
+
+const SquadNameContainer = styled.div``;
+
+const SquadNameKO = styled.div`
+  word-break: keep-all;
+`;
+
 const ResourcesContainer = styled.div`
   display: flex;
   gap: 8px;
-`;
-
-const Resource = styled.div`
-  display: flex;
-  gap: 4px;
-
-  > div {
-    width: 20px;
-    height: 20px;
-
-    > img {
-      width: 100%;
-      height: 100%;
-    }
-  }
 `;
 
 const RaceMark = styled.div`
@@ -195,12 +194,6 @@ const OptionButton = styled.button`
     width: 100%;
     height: 100%;
   }
-`;
-
-const SelectorsContainer = styled.div`
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
 `;
 
 const EmptyText = styled.div`

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { selectEntity, selectWeapon } from '../../../state_store/slice/squad_bookmark_manager';
+import { selectWeapon } from '../../../../state_store/slice/squad_bookmark_manager';
 
 type WeaponSelectorProps = {
   options: {

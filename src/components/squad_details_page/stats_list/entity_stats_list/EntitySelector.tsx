@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { selectEntity } from '../../../state_store/slice/squad_bookmark_manager';
+import { selectEntity } from '../../../../state_store/slice/squad_bookmark_manager';
 
 type EntitySelectorProps = {
   options: {

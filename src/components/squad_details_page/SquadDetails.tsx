@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
 import Controller from './controller/Controller';
-import EntityStatsList from './stats_list/EntityStatsList';
-import WeaponStatsList from './stats_list/WeaponStatsList';
+import EntityStatsList from './stats_list/entity_stats_list/EntityStatsList';
+import WeaponStatsList from './stats_list/weapon_stat_list/WeaponStatsList';
 
 import type { RootState } from '../../state_store/store';
 

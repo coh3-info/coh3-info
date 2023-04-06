@@ -1,6 +1,12 @@
 import type EntityStats from '../../../types/stats/entityStats';
 import { WeaponStats } from '../../../types/stats/weaponStats';
-import type { SeparatorOfStat, Stat, StatGroup, StatValue, UnitOfStat } from './stat.d';
+import type {
+  SeparatorOfStat,
+  Stat,
+  StatGroup,
+  StatValue,
+  UnitOfStat,
+} from '../../../types/for_components/squad_details_page/stat';
 
 type Target = EntityStats | WeaponStats | undefined;
 type GetValue<T extends Target> = (target: T) => StatValue | StatValue[];
@@ -14,7 +20,7 @@ type Name = string;
 
 type StatFormat<T extends Target> = [Name, GetValue<T>, Options?];
 type StatGroupFormat<T extends Target> = [Name, StatFormat<T>[]];
-type StatListFormat<T extends Target> = (StatFormat<T> | StatGroupFormat<T>)[];
+export type StatListFormat<T extends Target> = (StatFormat<T> | StatGroupFormat<T>)[];
 
 type CreateStat = <T extends Target>(name: string, targets: T[], getValue: GetValue<T>, options?: Options) => Stat;
 type CreateStatGroup = <T extends Target>(groupName: string, targets: T[], statFormats: StatFormat<T>[]) => StatGroup;

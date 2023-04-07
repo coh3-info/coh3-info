@@ -1,6 +1,4 @@
-/**
- * 거리 값 입니다.
- */
+/** 거리 값*/
 interface Distance {
   far: number;
   mid: number;
@@ -32,6 +30,7 @@ export type Area = NoneArea | CircleArea | RectangleArea;
 interface Weapon {
   /** 데이터 파일이름 */
   id: string;
+
   name: string;
 
   /** 명중률
@@ -66,7 +65,7 @@ interface Weapon {
     /** 범위 피해 명중률 <br/>
      *
      * 대부분 무기의 near, mid, far값이 모두 5 또는 15입니다. 이는 범위안에 있다면 거의 확정적으로 피해를 준다고 볼 수 있습니다.
-     * 값이 5가 아닌경우는 거의 1입니다. 이는 범위안에 있어도 상대의 피격률에 따라 피해를 주지 못할 수 있습니다.
+     * 값이 5 또는 15가 아닌경우는 거의 1입니다. 이는 범위안에 있어도 상대의 피격률(Entity.health.targetSize)에 따라 피해를 주지 못할 수 있습니다.
      * 보통 37mm_greyhound_us, 20mm_aa_gun_ger같은 비교적 범위 피해 규모가 작은 무기의 값이 1인경우가 많습니다.
      * @data_path weapon/weapon_bag/area_effect/accuracy
      */
@@ -105,6 +104,7 @@ interface Weapon {
     /** 범위 피해 거리 정의 <br/>
      *
      * areaEffect의 near, mid, far값은 모두 distance의 near, mid, far거리에서의 값을 의미합니다.
+     * 예를들어 distance.near값이 2이고 damageMultiplier.near값이 0.84라면 이는 '중심부로부터 거리 2에서 공격력 보정치는 0.84'를 의미합니다.
      */
     distance: Distance;
   };

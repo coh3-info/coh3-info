@@ -17,7 +17,13 @@ const getEntity = (entityId: string, ebps: Ebps): Entity | WeaponEntity | undefi
 
 const getWeaponEntity = (weaponEntityId: string, ebps: Ebps): WeaponEntity | undefined => {
   const weaponEntity = ebps[weaponEntityId];
-  return weaponEntity !== undefined && weaponEntity.category === 'weapon' ? weaponEntity : undefined;
+  if (weaponEntity === undefined) {
+    throw new Error(`epbs에 ${weaponEntityId}가 없습니다.`);
+  } else if (weaponEntity.category !== 'weapon') {
+    throw new Error(`${weaponEntityId}는 WeaponEntity가 아닙니다.`);
+  } else {
+    return weaponEntity;
+  }
 };
 
 const getWeapon = (weaponId: string, weapons: Weapons): Weapon | undefined => {
@@ -61,7 +67,7 @@ const getWeaponPairsOfSquad = (
 
   const weaponEntitiesOfSquad = entities.reduce((result, entity) => {
     const weaponEntities = getWeaponEntitiesOfEntity(entity, ebps);
-    if (weaponEntities === undefined) return [...result, weaponEntities];
+    if (weaponEntities === undefined) return [...result, undefined];
     return [...result, ...weaponEntities];
   }, init);
 
@@ -105,12 +111,16 @@ export const createUnit = (squadId: string, data: Data): Unit | undefined => {
   const { sbps, ebps, weapons } = data;
 
   const squad = getSquad(squadId, sbps);
-  if (squad === undefined) return undefined;
+  if (squad === undefined) {
+    console.error(new Error(`sbps에 ${squadId}가 존재하지 않습니다.`));
+    return undefined;
+  }
 
   const entities = getEntitiesOfSquad(squad, ebps);
   if (entities === undefined) return undefined;
 
   const weaponPairs = getWeaponPairsOfSquad(entities, ebps, weapons);
+
   if (weaponPairs === undefined) return undefined;
 
   const loadout = getLoadout(squad, { ebps: data.ebps, weapons: data.weapons });

@@ -19,7 +19,7 @@ const addBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<P
     id: `${Date.now()}${state.bookmarkList.length}`,
     unit,
     selectedEntityId: initSelectedEntityId,
-    selectedWeaponId: unit.weapons[0].id,
+    selectedWeaponId: unit.weapons[0]?.id ?? '',
   };
 
   if (state.bookmarkList.length === 0) {

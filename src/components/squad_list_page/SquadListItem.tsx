@@ -19,22 +19,20 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
     race,
     imageUrl: { icon, symbolIcon },
   } = squad;
+
   const dispatch = useDispatch();
   const createUnit = useCreateUnit();
 
-  const addSquadToSquadSelector = () => {
+  const onAddBookmark = () => {
     const unit = createUnit(id);
-    if (unit === undefined) return;
+    if (unit === undefined) return console.error(new Error('unit이 undefined입니다.'));
+
     const unitStats = createUnitStats(unit);
-    if (unit !== undefined) {
-      dispatch(addBookmark({ unit: unitStats }));
-    } else {
-      console.error(new Error('unit이 undefined입니다.'));
-    }
+    dispatch(addBookmark({ unit: unitStats }));
   };
 
   return (
-    <SquadListItemWrapper onClick={addSquadToSquadSelector}>
+    <SquadListItemWrapper onClick={onAddBookmark}>
       <RaceMark>
         <img src={getRaceMarkUrl(race)} alt={`${race} 마크`} />
       </RaceMark>

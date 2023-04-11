@@ -1,13 +1,23 @@
-import { useEffect } from 'react';
-
 import router from './pages/router';
+import { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import mapSbps from './util/game_data/mapper/sbps';
-import mapEbps from './util/game_data/mapper/ebps';
 import { useDispatch } from 'react-redux';
 import { setEbps, setSbps, setWeapons } from './state_store/slice/game_data';
+import mapSbps from './util/game_data/mapper/sbps';
+import mapEbps from './util/game_data/mapper/ebps';
 import mapWeapons from './util/game_data/mapper/weapon';
-import { createUnit } from './util/game_data/unit';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const App = () => {
   const dispatch = useDispatch();

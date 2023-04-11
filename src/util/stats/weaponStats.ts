@@ -21,12 +21,18 @@ export const createWeaponStats = (weaponEntity: WeaponEntity, weapon: Weapon): W
       max: weapon.range.max,
       distance: weapon.range.distance,
     },
+
     penetration: weapon.penetration,
     accuracy: weapon.accuracy,
     aim: weapon.aim,
     burst: weapon.burst,
     cooldown: weapon.cooldown,
     fire: weapon.fire,
+    reload: {
+      duration: weapon.reload.duration,
+      durationMultiplier: weapon.reload.durationMultiplier,
+      frequency: weapon.reload.frequency,
+    },
     areaEffect: weapon.areaEffect,
     scatter: weapon.scatter,
     settingTime: {

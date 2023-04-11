@@ -46,6 +46,11 @@ export interface WeaponStats {
     windUp: number;
     windDown: number;
   };
+  reload: {
+    duration: MinMax;
+    durationMultiplier: Distance;
+    frequency: MinMax;
+  };
   areaEffect: {
     areaInfo: Area;
     distance: Distance;

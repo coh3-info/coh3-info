@@ -103,7 +103,7 @@ const mapWeapon = (weaponId: string, file: any): Weapon => {
   }
 
   if (burst !== undefined) {
-    weapon.burst.canBurst = burst.can_burst;
+    weapon.burst.canBurst = burst.can_burst === 'True' ? true : false;
 
     weapon.burst.duration.min = burst.duration.min;
     weapon.burst.duration.max = burst.duration.max;

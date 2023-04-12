@@ -132,7 +132,7 @@ export const getAccuracyReadingsByDistance = (weapon: WeaponStats, targetSize?: 
   return accuracyReadings.map((accuracy) => calcAccuracy(accuracy, targetSize));
 };
 
-const getPenetrationReadingsByDistance = (weapon: WeaponStats) => {
+export const getPenetrationReadingsByDistance = (weapon: WeaponStats) => {
   const penetrationReadings = getReadingsByDistance(weapon.range, weapon.range.distance, weapon.penetration);
   return penetrationReadings;
 };

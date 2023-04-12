@@ -12,7 +12,7 @@ import RPMComparator from './comparator/RPMComparator';
 import AccuracyComparator from './comparator/AccuracyComparator';
 import { useState } from 'react';
 import DPSComparator from './comparator/DPSComparator';
-import PenetrationChanceComparator from './comparator/PenetrationChanceComparator';
+import PenetrationComparator from './comparator/PenetrationComparator';
 
 const WeaponStatsList = () => {
   const [comparator, setComparator] = useState<'rpm' | 'accuracy' | 'dps' | 'penetration'>('dps');
@@ -46,11 +46,9 @@ const WeaponStatsList = () => {
       <AccuracyComparator weapon1={leftWeapon} weapon2={rightWeapon} entity1={leftEntity} entity2={rightEntity} />
     ),
     penetration: (
-      <PenetrationChanceComparator
-        weapon1={leftWeapon}
-        weapon2={rightWeapon}
-        entity1={leftEntity}
-        entity2={rightEntity}
+      <PenetrationComparator
+        data1={{ weapon: leftWeapon, entity: leftEntity }}
+        data2={{ weapon: rightWeapon, entity: rightEntity }}
       />
     ),
   };

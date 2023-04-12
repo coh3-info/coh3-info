@@ -157,39 +157,39 @@ const RaceMark = styled.div`
   }
 `;
 
-const OptionName = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`;
+// const OptionName = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+// `;
 
-const Options = styled.div`
-  height: 36px;
-  grid-column: span 3;
+// const Options = styled.div`
+//   height: 36px;
+//   grid-column: span 3;
 
-  > ul {
-    display: flex;
-    gap: 10px;
-  }
-`;
+//   > ul {
+//     display: flex;
+//     gap: 10px;
+//   }
+// `;
 
-const OptionButton = styled.button`
-  width: 36px;
-  height: 36px;
-  overflow: hidden;
-  border: solid 1px #c4c4c4;
-  border-radius: 4px;
-  background-color: transparent;
+// const OptionButton = styled.button`
+//   width: 36px;
+//   height: 36px;
+//   overflow: hidden;
+//   border: solid 1px #c4c4c4;
+//   border-radius: 4px;
+//   background-color: transparent;
 
-  &:hover {
-    background-color: #dfdfdf;
-  }
+//   &:hover {
+//     background-color: #dfdfdf;
+//   }
 
-  > img {
-    width: 100%;
-    height: 100%;
-  }
-`;
+//   > img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
 const EmptyText = styled.div`
   width: 100%;

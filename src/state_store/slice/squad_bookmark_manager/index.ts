@@ -4,6 +4,7 @@ import _removeBookmark from './reducers/removeBookmark';
 import _selectBookmark from './reducers/selectBookmark';
 import _selectEntity from './reducers/selectEntity';
 import _selectWeapon from './reducers/selectWeapon';
+import _removeAllBookmarks from './reducers/removeAllBookmarks';
 
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 
@@ -25,13 +26,14 @@ export const squadBookmarkManagerSlice = createSlice({
   reducers: {
     addBookmark: _addBookmark,
     removeBookmark: _removeBookmark,
+    removeAllBookmarks: _removeAllBookmarks,
     selectBookmark: _selectBookmark,
     selectEntity: _selectEntity,
     selectWeapon: _selectWeapon,
   },
 });
 
-export const { addBookmark, removeBookmark, selectBookmark, selectEntity, selectWeapon } =
+export const { addBookmark, removeBookmark, selectBookmark, selectEntity, selectWeapon, removeAllBookmarks } =
   squadBookmarkManagerSlice.actions;
 
 export default squadBookmarkManagerSlice.reducer;

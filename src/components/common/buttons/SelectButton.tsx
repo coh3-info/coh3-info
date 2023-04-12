@@ -4,21 +4,23 @@ type SelectButtonType = 'radio' | 'checkbox';
 
 interface SelectButtonProps {
   type?: SelectButtonType;
-  id?: string;
+  id: string;
+  value?: string;
   name?: string;
-  value: string;
   checked?: boolean;
   onSelect: (value: string) => void;
+  color?: string;
 }
 
-const ComparationRadiobutton = ({
+const SelectButton = ({
   type = 'checkbox',
-  value,
-  id = value,
+  id,
+  value = id,
   name = '',
   checked = false,
   onSelect,
   children,
+  color,
 }: React.PropsWithChildren<SelectButtonProps>) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSelect(e.target.value);
@@ -26,7 +28,7 @@ const ComparationRadiobutton = ({
 
   return (
     <>
-      <Input type={type} id={id} value={value} name={name} onChange={onChange} checked={checked} />
+      <Input type={type} id={id} value={value} name={name} onChange={onChange} checked={checked} color={color} />
       <Label type={type} htmlFor={id}>
         {children}
       </Label>
@@ -34,15 +36,14 @@ const ComparationRadiobutton = ({
   );
 };
 
-export default ComparationRadiobutton;
+export default SelectButton;
 
-const Input = styled.input`
+const Input = styled.input<{ color?: string }>`
   display: none;
 
   &:checked + label::before {
-    /* background-clip: padding-box; */
-    padding: 3px;
-    background: radial-gradient(#000 3px, transparent 3px);
+    background: radial-gradient(${({ color }) => color ?? '#000'} 3px, transparent 3px);
+    border-color: ${({ color }) => color ?? '#000'};
   }
 `;
 

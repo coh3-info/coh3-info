@@ -63,7 +63,7 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
             <RaceMark>
               <img src={getRaceMarkUrl(squad.race)} alt="진영 마크" />
             </RaceMark>
-            <OptionName>업그레이드</OptionName>
+            {/* <OptionName>업그레이드</OptionName>
             <Options>
               <ul>
                 <li>
@@ -72,7 +72,7 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
                   </OptionButton>
                 </li>
               </ul>
-            </Options>
+            </Options> */}
           </Info>
         </>
       ) : (
@@ -96,12 +96,11 @@ const Info = styled.div`
   display: grid;
   grid-template: repeat(4, max-content) / max-content 1fr 1fr max-content;
   column-gap: 20px;
-  row-gap: 10px;
 `;
 
 const Portrait = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 
   > img {
     width: 100%;
@@ -153,8 +152,8 @@ const ResourcesContainer = styled.div`
 `;
 
 const RaceMark = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 
   > img {
     width: 100%;

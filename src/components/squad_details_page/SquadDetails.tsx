@@ -49,7 +49,7 @@ const SquadDetailsWrapper = styled.div`
 
 const InfoWrapper = styled.div`
   width: 100%;
-  max-width: 960px;
+  max-width: 920px;
 `;
 
 const ControllersContainer = styled.div`

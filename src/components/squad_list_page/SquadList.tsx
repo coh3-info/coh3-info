@@ -38,7 +38,7 @@ const SquadListWrapper = styled.div`
 
   > div:first-child {
     width: 100%;
-    max-width: 960px;
+    max-width: 920px;
   }
 `;
 

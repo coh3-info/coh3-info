@@ -79,7 +79,7 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
         <SelectButtonContainer>
           <SelectButton
             type="radio"
-            value="penetration"
+            id="penetration"
             name={RADIO_NAME}
             onSelect={onSelect}
             checked={selected === 'penetration'}
@@ -89,13 +89,13 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
         </SelectButtonContainer>
         <SelectorCategory>관통 확률</SelectorCategory>
         <SelectButtonContainer>
-          <SelectButton type="radio" value="front" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'front'}>
+          <SelectButton type="radio" id="front" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'front'}>
             전면
           </SelectButton>
-          <SelectButton type="radio" value="side" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'side'}>
+          <SelectButton type="radio" id="side" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'side'}>
             측면
           </SelectButton>
-          <SelectButton type="radio" value="rear" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'rear'}>
+          <SelectButton type="radio" id="rear" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'rear'}>
             후면
           </SelectButton>
         </SelectButtonContainer>

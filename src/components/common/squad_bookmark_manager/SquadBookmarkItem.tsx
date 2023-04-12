@@ -1,6 +1,9 @@
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
+import SelectButton from '../buttons/SelectButton';
+import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
+import { ImgContainer } from '../styles/ImgContainer.style';
 
 type SelectedSquadItemProps = {
   bookmark: SquadBookmark;
@@ -28,11 +31,30 @@ const SquadBookmarkItem = ({
     <SquadBookmarkItemWrapper>
       {path === '/details' && (
         <RadioButtonsContainer>
-          <input type="radio" name="left" onChange={() => selectBookmark(id, true)} checked={checkedLeft} />
-          <input type="radio" name="right" onChange={() => selectBookmark(id, false)} checked={checkedRight} />
+          <SelectButton
+            type="radio"
+            id={`${bookmark.id}left`}
+            name="bookmark-left"
+            onSelect={() => selectBookmark(id, true)}
+            checked={checkedLeft}
+            color="#5f68c8"
+          />
+          <SelectButton
+            type="radio"
+            id={`${bookmark.id}right`}
+            name="bookmark-right"
+            onSelect={() => selectBookmark(id, false)}
+            checked={checkedRight}
+            color="#ff5e5e"
+          />
         </RadioButtonsContainer>
       )}
-
+      <RaceIcon>
+        <img src={getRaceMarkUrl(squad.race)} />
+      </RaceIcon>
+      <SymbolIcon>
+        <img src={squad.imageUrl.symbolIcon} />
+      </SymbolIcon>
       <SquadName>{squad.nameKO}</SquadName>
       <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
     </SquadBookmarkItemWrapper>
@@ -77,6 +99,18 @@ const RadioButtonsContainer = styled.div`
   > input[type='radio'] {
     cursor: pointer;
   }
+`;
+
+const RaceIcon = styled(ImgContainer)`
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+`;
+
+const SymbolIcon = styled(ImgContainer)`
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
 `;
 
 const SquadName = styled.div`

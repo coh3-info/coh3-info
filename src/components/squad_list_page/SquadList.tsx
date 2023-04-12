@@ -13,14 +13,22 @@ const SquadList = () => {
 
   return (
     <SquadListWrapper>
-      <div>
+      <ContentsContainer>
         <SquadListHeader />
-        <List>
-          {squads.map((squad) => {
-            return <SquadListItem key={squad.id} squad={squad} />;
-          })}
-        </List>
-      </div>
+        {squads.length > 0 ? (
+          <ListContainer>
+            <List>
+              {squads.map((squad) => {
+                return <SquadListItem key={squad.id} squad={squad} />;
+              })}
+            </List>
+          </ListContainer>
+        ) : (
+          <LoaderContainer>
+            <Loader />
+          </LoaderContainer>
+        )}
+      </ContentsContainer>
       <SquadBookmarkManagerTrack>
         <SquadBookmarkManager />
       </SquadBookmarkManagerTrack>
@@ -35,19 +43,48 @@ const SquadListWrapper = styled.div`
   margin: 0 auto;
   padding: 20px 0;
   display: flex;
+`;
 
-  > div:first-child {
-    width: 100%;
-    max-width: 920px;
-  }
+const ContentsContainer = styled.section`
+  width: 100%;
+  max-width: 920px;
 `;
 
 const SquadBookmarkManagerTrack = styled.div`
   margin-left: 10px;
 `;
 
-const List = styled.ul`
+const ListContainer = styled.div`
   margin-top: 20px;
+`;
+
+const List = styled.ul`
   border: solid 1px #c4c4c4;
   border-radius: 4px;
+`;
+
+const LoaderContainer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+`;
+
+const Loader = styled.div`
+  height: 50px;
+  width: 50px;
+  border: 3px solid #979797;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-radius: 100%;
+
+  animation: loading-spin 800ms infinite linear;
+
+  @keyframes loading-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
 `;

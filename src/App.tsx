@@ -28,7 +28,7 @@ const App = () => {
       dispatch(setEbps({ ebps }));
       dispatch(setWeapons({ weapons }));
     });
-  }, []);
+  }, [dispatch]);
   return (
     <div className="App">
       <RouterProvider router={router} />

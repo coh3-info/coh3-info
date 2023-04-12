@@ -37,7 +37,7 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
         <img src={getRaceMarkUrl(race)} alt={`${race} 마크`} />
       </RaceMark>
       <SquadProtrait>
-        <img src={icon} />
+        <img src={icon} alt={`${nameKO} 아이콘`} />
       </SquadProtrait>
       <SquadIcon>
         <img src={symbolIcon} alt={`${nameKO} 심볼 아이콘`} />

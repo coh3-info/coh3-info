@@ -12,15 +12,13 @@ import type { RootState } from '../../state_store/store';
 
 const SquadDetails = () => {
   const navigate = useNavigate();
-  const { bookmarkOnLeft, bookmarkOnRight, bookmarkList } = useSelector(
-    (state: RootState) => state.squadBookmarkManager
-  );
+  const { bookmarkList } = useSelector((state: RootState) => state.squadBookmarkManager);
 
   useEffect(() => {
     if (bookmarkList.length === 0) {
       navigate('/');
     }
-  }, []);
+  }, [bookmarkList, navigate]);
   return (
     <SquadDetailsWrapper>
       <InfoWrapper>

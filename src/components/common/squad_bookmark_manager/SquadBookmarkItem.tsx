@@ -50,10 +50,10 @@ const SquadBookmarkItem = ({
         </RadioButtonsContainer>
       )}
       <RaceIcon>
-        <img src={getRaceMarkUrl(squad.race)} />
+        <img src={getRaceMarkUrl(squad.race)} alt={`${squad.race} 아이콘`} />
       </RaceIcon>
       <SymbolIcon>
-        <img src={squad.imageUrl.symbolIcon} />
+        <img src={squad.imageUrl.symbolIcon} alt={`${squad.nameKO} 심볼 아이콘`} />
       </SymbolIcon>
       <SquadName>{squad.nameKO}</SquadName>
       <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>

@@ -1,15 +1,11 @@
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectEntity as _selectEntity,
-  selectWeapon as _selectWeapon,
-} from '../../../state_store/slice/squad_bookmark_manager';
+import { useSelector } from 'react-redux';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
 import ResourceCard from './ResourceCard';
 
 import type { RootState } from '../../../state_store/store';
 
-import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
+// import tempBarIcon from '../../../images/american/upgrades/bar_riflemen_us.png';
 
 const SQUAD_CATEGORY_KO_TABLE = {
   infantry: '보병',

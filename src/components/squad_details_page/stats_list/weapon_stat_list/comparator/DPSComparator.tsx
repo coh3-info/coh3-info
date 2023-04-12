@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import RPMChartOfTwoWeapons from '../../../../common/charts/RPMChartOfTwoWeapons';
 
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
 import { getDPSReadingsByDistance } from '../../../../../util/calculator/weapon';

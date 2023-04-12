@@ -1,28 +1,13 @@
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-
 import StatsList from '../StatList';
 import EntitySelector from './EntitySelector';
-
-import type EntityStats from '../../../../types/stats/entityStats';
-import type { Stat, StatGroup } from '../../../../types/for_components/squad_details_page/stat';
 import type { RootState } from '../../../../state_store/store';
-import { createStatList } from '../../../../util/for_components/squad_details_page/stat';
+
 import {
   createEntityStatList1,
   createEntityStatList2,
 } from '../../../../util/for_components/squad_details_page/entityStatsList';
-
-const getArmor = (entity: EntityStats | undefined) => {
-  const armor = entity?.armor;
-  if (armor === undefined) return [];
-
-  if (typeof armor === 'number') {
-    return [armor, armor, armor];
-  }
-  const { front, side, rear } = armor;
-  return [front, side, rear];
-};
 
 const EntityStatsList = () => {
   const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);

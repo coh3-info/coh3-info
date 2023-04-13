@@ -11,12 +11,14 @@ import { useState } from 'react';
 export interface Filters {
   race: string[];
   category: string[];
+  filter: string[];
 }
 
 const SquadList = () => {
   const [filters, setFilters] = useState<Filters>({
     race: [],
     category: [],
+    filter: [],
   });
 
   const sbps = useSelector((state: RootState) => state.gameData.sbps);
@@ -28,8 +30,16 @@ const SquadList = () => {
 
     const isMatchRace = raceFilters.length > 0 ? raceFilters.includes(squad.race) : true;
     const isMatchCategory = categoryFilters.length > 0 ? categoryFilters.includes(squad.category) : true;
+    let isMatchFilter = filters.filter.length > 0 ? false : true;
 
-    return isMatchRace && isMatchCategory;
+    for (const filter of filters.filter) {
+      if (squad.filters.includes(filter)) {
+        isMatchFilter = true;
+        break;
+      }
+    }
+
+    return isMatchRace && isMatchCategory && isMatchFilter;
   });
 
   return (

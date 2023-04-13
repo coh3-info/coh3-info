@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SelectButton from '../common/buttons/SelectButton';
+import { FILTER_TABLE } from '../../util/filter/filter';
 
 import type { Filters } from './SquadList';
 
@@ -37,6 +38,22 @@ const SquadListHeader = ({ filters, setFilters }: SquadListHeaderProps) => {
     const newFilters = {
       ...filters,
       category: filters.category.filter((category) => category !== value),
+    };
+    setFilters(newFilters);
+  };
+
+  const onSelectFilter = (value: string) => {
+    const newFilters = {
+      ...filters,
+      filter: [...filters.filter, value],
+    };
+
+    setFilters(newFilters);
+  };
+  const onDeselectFilter = (value: string) => {
+    const newFilters = {
+      ...filters,
+      filter: filters.filter.filter((filter) => filter !== value),
     };
     setFilters(newFilters);
   };
@@ -84,7 +101,7 @@ const SquadListHeader = ({ filters, setFilters }: SquadListHeaderProps) => {
         </CheckboxesContainer>
       </Category>
       <Category>
-        <CategoryName>분대 타입</CategoryName>
+        <CategoryName>분류</CategoryName>
         <CheckboxesContainer>
           <SelectButton
             id="filter-category-infantry"
@@ -115,9 +132,27 @@ const SquadListHeader = ({ filters, setFilters }: SquadListHeaderProps) => {
           </SelectButton>
         </CheckboxesContainer>
       </Category>
-      <div>
+      <Category>
+        <CategoryName>타입</CategoryName>
+        <CheckboxesContainer>
+          {Object.values(FILTER_TABLE).map((filter) => {
+            return (
+              <SelectButton
+                id={`filter-${filter.en}`}
+                value={filter.en}
+                onSelect={onSelectFilter}
+                onDeselect={onDeselectFilter}
+                checked={filters.filter.includes(filter.en)}
+              >
+                {filter.ko}
+              </SelectButton>
+            );
+          })}
+        </CheckboxesContainer>
+      </Category>
+      {/* <div>
         <input placeholder="분대 이름으로 검색" />
-      </div>
+      </div> */}
     </SquadListHeaderWrapper>
   );
 };
@@ -135,6 +170,7 @@ const SquadListHeaderWrapper = styled.div`
 
 const Category = styled.div`
   display: flex;
+  word-break: keep-all;
 `;
 
 const CategoryName = styled.div`
@@ -144,4 +180,5 @@ const CategoryName = styled.div`
 const CheckboxesContainer = styled.div`
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 `;

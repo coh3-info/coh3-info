@@ -20,8 +20,24 @@ const calcAverage = (...nums: number[]) => {
   return sum / nums.length;
 };
 
-const calcAccuracy = (accuracy: number, targetSize?: number) => {
-  const hitChance = accuracy * (targetSize ?? 1);
+interface AccuracyMultipliers {
+  targetSize?: number;
+  moving?: {
+    canFireWhileMoving: boolean;
+    accuracyMultiplier: number;
+  };
+}
+
+const calcAccuracy = (accuracy: number, multipliers?: AccuracyMultipliers) => {
+  const targetSize = multipliers?.targetSize ?? 1;
+  let accuracyMultiplierWhileMoving = 1;
+
+  if (multipliers?.moving !== undefined) {
+    const { canFireWhileMoving, accuracyMultiplier } = multipliers.moving;
+    accuracyMultiplierWhileMoving = canFireWhileMoving ? accuracyMultiplier : 0;
+  }
+
+  const hitChance = accuracy * targetSize * accuracyMultiplierWhileMoving;
   if (hitChance > 1) return 1;
   return hitChance;
 };
@@ -127,9 +143,9 @@ export const getReadingsByDistance = (range: MinMax, distance: Distance, multipl
   return [...fromZeroToMin, ...fromMinToNear, ...fromNearToMid, ...fromMidToFar, ...fromFarToMax];
 };
 
-export const getAccuracyReadingsByDistance = (weapon: WeaponStats, targetSize?: number) => {
+export const getAccuracyReadingsByDistance = (weapon: WeaponStats, multipliers?: AccuracyMultipliers) => {
   const accuracyReadings = getReadingsByDistance(weapon.range, weapon.range.distance, weapon.accuracy);
-  return accuracyReadings.map((accuracy) => calcAccuracy(accuracy, targetSize));
+  return accuracyReadings.map((accuracy) => calcAccuracy(accuracy, multipliers));
 };
 
 export const getPenetrationReadingsByDistance = (weapon: WeaponStats) => {

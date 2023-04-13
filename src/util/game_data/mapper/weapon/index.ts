@@ -151,7 +151,7 @@ const mapWeapon = (weaponId: string, file: any): Weapon => {
   }
 
   if (moving !== undefined) {
-    weapon.moving.canFireWhileMoving = moving.can_fire_while_moving;
+    weapon.moving.canFireWhileMoving = moving.can_fire_while_moving === 'True' ? true : false;
     weapon.moving.accuracyMultiplier = moving.accuracy_multiplier;
     weapon.moving.cooldownMultiplier = moving.cooldown_multiplier;
     weapon.moving.burstMultiplier = moving.burst_multiplier;

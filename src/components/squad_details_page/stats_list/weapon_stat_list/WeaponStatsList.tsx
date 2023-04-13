@@ -13,9 +13,11 @@ import AccuracyComparator from './comparator/AccuracyComparator';
 import { useState } from 'react';
 import DPSComparator from './comparator/DPSComparator';
 import PenetrationComparator from './comparator/PenetrationComparator';
+import SelectButton from '../../../common/buttons/SelectButton';
 
 const WeaponStatsList = () => {
   const [comparator, setComparator] = useState<'rpm' | 'accuracy' | 'dps' | 'penetration'>('dps');
+  const [isBriefly, setIsBriefly] = useState(true);
   const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
 
   const leftEntityId = bookmarkOnLeft?.selectedEntityId ?? '';
@@ -36,8 +38,8 @@ const WeaponStatsList = () => {
     );
   });
 
-  const statList1 = createWeaponStatList1([leftWeapon, rightWeapon]);
-  const statList2 = createWeaponStatList2([leftWeapon, rightWeapon]);
+  const statList1 = createWeaponStatList1([leftWeapon, rightWeapon], isBriefly);
+  const statList2 = createWeaponStatList2([leftWeapon, rightWeapon], isBriefly);
 
   const comparatorsTable = {
     dps: <DPSComparator weapon1={leftWeapon} weapon2={rightWeapon} />,
@@ -77,6 +79,14 @@ const WeaponStatsList = () => {
       <ComparatorContainter>{comparatorsTable[comparator]}</ComparatorContainter>
 
       <StatsList statList1={statList1} statList2={statList2} />
+      <MoreButtonContainer>
+        <SelectButton type="radio" id="weapon-stat-list-brief" onSelect={() => setIsBriefly(true)} checked={isBriefly}>
+          간략히
+        </SelectButton>
+        <SelectButton type="radio" id="weapon-stat-list-more" onSelect={() => setIsBriefly(false)} checked={!isBriefly}>
+          자세히
+        </SelectButton>
+      </MoreButtonContainer>
     </WeaponStatsListWrapper>
   );
 };
@@ -114,5 +124,16 @@ const NavButton = styled.button<{ isSelected: boolean }>`
 
   &:hover {
     background-color: #dfdfdf;
+  }
+`;
+
+const MoreButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+
+  > button {
+    background-color: transparent;
+    border: none;
   }
 `;

@@ -89,7 +89,31 @@ const mapWeapon = (weaponId: string, file: any): Weapon => {
     weapon.areaEffect.penetration.mid = area_effect.aoe_penetration.mid;
     weapon.areaEffect.penetration.far = area_effect.aoe_penetration.far;
 
-    // weapon.areaEffect.areaInfo = 다시 작성
+    const splitedTemplateReferenceValue = area_effect.area_info.template_reference.value.split('\\');
+    const areaType = splitedTemplateReferenceValue[splitedTemplateReferenceValue.length - 1];
+    console.log(area_effect.area_info);
+    switch (areaType) {
+      case 'point_area_option':
+        weapon.areaEffect.areaInfo.areaType = 'none';
+        break;
+      case 'circle_area_option':
+        const circleAreaInfo = {
+          areaType: 'circle' as const,
+          radius: area_effect.area_info.outer_radius,
+        };
+
+        weapon.areaEffect.areaInfo = circleAreaInfo;
+        break;
+      case 'rectangle_area_option':
+        const rectangleAreaInfo = {
+          areaType: 'rectangle' as const,
+          width: area_effect.area_info.width,
+          length: area_effect.area_info.outer_length,
+        };
+
+        weapon.areaEffect.areaInfo = rectangleAreaInfo;
+        break;
+    }
 
     weapon.areaEffect.damageMultiplier.near = area_effect.damage.near;
     weapon.areaEffect.damageMultiplier.mid = area_effect.damage.mid;

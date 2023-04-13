@@ -11,6 +11,10 @@ const createWeaponStatList = (
   return createStatList<WeaponStats | undefined>(entities, format);
 };
 
+const getAreaTypeKO = (areaType: 'circle' | 'none' | 'rectangle') => {
+  return { none: '범위 없음', circle: '원', rectangle: '사각형' }[areaType];
+};
+
 const weaponStatList1: StatListFormat<WeaponStats | undefined> = [
   ['공격력', (t) => [t?.damage.min, t?.damage.max], { separator: '~' }],
   ['비관통 공격력', (t) => [t?.deflectionDamage.min, t?.deflectionDamage.max], { separator: '~' }],
@@ -99,7 +103,15 @@ const weaponStatList2: StatListFormat<WeaponStats | undefined> = [
     ],
   ],
   ['재장전 주기', (t) => [t?.reload.frequency.min, t?.reload.frequency.max], { separator: '~' }],
-  ['범위', [['범위 형태', (t) => t?.areaEffect.areaInfo.areaType]]],
+  [
+    '범위 크기',
+    [
+      ['범위 형태', (t) => (t ? getAreaTypeKO(t?.areaEffect.areaInfo.areaType) : undefined)],
+      ['범위 반지름', (t) => (t?.areaEffect.areaInfo.areaType === 'circle' ? t.areaEffect.areaInfo.radius : 0)],
+      ['범위 폭', (t) => (t?.areaEffect.areaInfo.areaType === 'rectangle' ? t.areaEffect.areaInfo.width : 0)],
+      ['범위 길이', (t) => (t?.areaEffect.areaInfo.areaType === 'rectangle' ? t.areaEffect.areaInfo.length : 0)],
+    ],
+  ],
   // {
   //   name: '범위 정보',
   //   stats: [

@@ -21,7 +21,7 @@ interface CircleArea {
 
 interface RectangleArea {
   areaType: 'rectangle';
-  lenght: number;
+  length: number;
   width: number;
 }
 

@@ -6,15 +6,36 @@ import SquadListHeader from './SquadListHeader';
 import SquadListItem from './SquadListItem';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state_store/store';
+import { useState } from 'react';
+
+export interface Filters {
+  race: string[];
+  category: string[];
+}
 
 const SquadList = () => {
+  const [filters, setFilters] = useState<Filters>({
+    race: [],
+    category: [],
+  });
+
   const sbps = useSelector((state: RootState) => state.gameData.sbps);
-  const squads: Squad[] = Object.values(sbps);
+  const _squads: Squad[] = Object.values(sbps);
+
+  const squads = _squads.filter((squad) => {
+    const raceFilters = filters.race;
+    const categoryFilters = filters.category;
+
+    const isMatchRace = raceFilters.length > 0 ? raceFilters.includes(squad.race) : true;
+    const isMatchCategory = categoryFilters.length > 0 ? categoryFilters.includes(squad.category) : true;
+
+    return isMatchRace && isMatchCategory;
+  });
 
   return (
     <SquadListWrapper>
       <ContentsContainer>
-        <SquadListHeader />
+        <SquadListHeader filters={filters} setFilters={setFilters} />
         {squads.length > 0 ? (
           <ListContainer>
             <List>

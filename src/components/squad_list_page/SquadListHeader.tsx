@@ -1,45 +1,118 @@
 import styled from 'styled-components';
+import SelectButton from '../common/buttons/SelectButton';
 
-const SquadListHeader = () => {
+import type { Filters } from './SquadList';
+
+interface SquadListHeaderProps {
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+}
+
+const SquadListHeader = ({ filters, setFilters }: SquadListHeaderProps) => {
+  const onSelectRace = (value: string) => {
+    const newFilters = {
+      ...filters,
+      race: [...filters.race, value],
+    };
+
+    setFilters(newFilters);
+  };
+  const onDeselectRace = (value: string) => {
+    const newFilters = {
+      ...filters,
+      race: filters.race.filter((race) => race !== value),
+    };
+    setFilters(newFilters);
+  };
+
+  const onSelectCategory = (value: string) => {
+    const newFilters = {
+      ...filters,
+      category: [...filters.category, value],
+    };
+
+    setFilters(newFilters);
+  };
+  const onDeselectCategory = (value: string) => {
+    const newFilters = {
+      ...filters,
+      category: filters.category.filter((category) => category !== value),
+    };
+    setFilters(newFilters);
+  };
   return (
     <SquadListHeaderWrapper>
       <Category>
         <CategoryName>진영</CategoryName>
         <CheckboxesContainer>
-          <div>
-            <input id="us_forces" type="checkbox" />
-            <label htmlFor="us_forces">미국</label>
-          </div>
-          <div>
-            <input id="british_forces" type="checkbox" />
-
-            <label htmlFor="british_forces">영국</label>
-          </div>
-          <div>
-            <input id="wehrmacht" type="checkbox" />
-            <label htmlFor="wehrmacht">독일 국방군</label>
-          </div>
-          <div>
-            <input id="afrikakorps" type="checkbox" />
-            <label htmlFor="afrikakorps">아프리카 군단</label>
-          </div>
+          <SelectButton
+            id="filter-race-americans"
+            value="americans"
+            onSelect={onSelectRace}
+            onDeselect={onDeselectRace}
+            checked={filters.race.includes('americans')}
+          >
+            미국
+          </SelectButton>
+          <SelectButton
+            id="filter-race-british"
+            value="british_africa"
+            onSelect={onSelectRace}
+            onDeselect={onDeselectRace}
+            checked={filters.race.includes('british_africa')}
+          >
+            영국
+          </SelectButton>
+          <SelectButton
+            id="filter-race-germans"
+            value="germans"
+            onSelect={onSelectRace}
+            onDeselect={onDeselectRace}
+            checked={filters.race.includes('germans')}
+          >
+            독일 국방군
+          </SelectButton>
+          <SelectButton
+            id="filter-race-afrika_korps"
+            value="afrika_korps"
+            onSelect={onSelectRace}
+            onDeselect={onDeselectRace}
+            checked={filters.race.includes('afrika_korps')}
+          >
+            아프리카 군단
+          </SelectButton>
         </CheckboxesContainer>
       </Category>
       <Category>
         <CategoryName>분대 타입</CategoryName>
         <CheckboxesContainer>
-          <div>
-            <input id="infantry" type="checkbox" />
-            <label htmlFor="infantry">보병</label>
-          </div>
-          <div>
-            <input id="team_weapon" type="checkbox" />
-            <label htmlFor="team_weapon">지원화기</label>
-          </div>
-          <div>
-            <input id="vehicle" type="checkbox" />
-            <label htmlFor="vehicle">차량</label>
-          </div>
+          <SelectButton
+            id="filter-category-infantry"
+            value="infantry"
+            onSelect={onSelectCategory}
+            onDeselect={onDeselectCategory}
+            checked={filters.category.includes('infantry')}
+          >
+            보병
+          </SelectButton>
+          <SelectButton
+            id="filter-category-team_weapons"
+            value="team_weapons"
+            onSelect={onSelectCategory}
+            onDeselect={onDeselectCategory}
+            checked={filters.category.includes('team_weapons')}
+          >
+            지원화기
+          </SelectButton>
+          <SelectButton
+            id="filter-category-vehicles"
+            value="vehicles"
+            onSelect={onSelectCategory}
+            onDeselect={onDeselectCategory}
+            checked={filters.category.includes('vehicles')}
+          >
+            차량
+          </SelectButton>
         </CheckboxesContainer>
       </Category>
       <div>

@@ -38,6 +38,7 @@ const createInitSquad = (id: string): Squad => {
         upgrade: 0,
       },
     },
+    filters: [],
   };
 };
 

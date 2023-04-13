@@ -9,6 +9,7 @@ interface SelectButtonProps {
   name?: string;
   checked?: boolean;
   onSelect: (value: string) => void;
+  onDeselect?: (value: string) => void;
   color?: string;
 }
 
@@ -19,11 +20,16 @@ const SelectButton = ({
   name = '',
   checked = false,
   onSelect,
+  onDeselect = onSelect,
   children,
   color,
 }: React.PropsWithChildren<SelectButtonProps>) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onSelect(e.target.value);
+    if (e.target.checked) {
+      onSelect(e.target.value);
+    } else {
+      onDeselect(e.target.value);
+    }
   };
 
   return (

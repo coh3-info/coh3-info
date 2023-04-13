@@ -91,7 +91,6 @@ const mapWeapon = (weaponId: string, file: any): Weapon => {
 
     const splitedTemplateReferenceValue = area_effect.area_info.template_reference.value.split('\\');
     const areaType = splitedTemplateReferenceValue[splitedTemplateReferenceValue.length - 1];
-    console.log(area_effect.area_info);
     switch (areaType) {
       case 'point_area_option':
         weapon.areaEffect.areaInfo.areaType = 'none';

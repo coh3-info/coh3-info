@@ -42,6 +42,7 @@ interface Squad {
       upgrade: number; // sbps/squad_inventory_ext/category_capacity/upgrade
     };
   };
+  filters: string[];
 }
 
 export interface Sbps {

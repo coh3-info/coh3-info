@@ -48,6 +48,7 @@ const mapSquad = (squadId: string, file: any, additionalData: AdditionalData): S
   squad.name = additionalData.name;
   squad.nameKO = additionalData.nameKO;
   squad.category = additionalData.category;
+  squad.filters.push(additionalData.category);
 
   if (file.extensions === undefined) {
     throw new Error(`extensions가 존재하지 않는 객체입니다. id: ${squadId}`);
@@ -122,8 +123,10 @@ const mapUI = (squad: Squad, squadexts: any) => {
 };
 
 const mapType = (squad: Squad, squadexts: any) => {
-  const raceType = squadexts.squad_race_type_list[0].squad_race_type.instance_reference;
-  squad.race = raceType.split('/')[1];
+  const raceTypeRef = squadexts.squad_race_type_list[0].squad_race_type.instance_reference;
+  const raceType = raceTypeRef.split('/')[1];
+  squad.race = raceType;
+  squad.filters.push(raceType);
 };
 
 const mapInventory = (squad: Squad, squadexts: any) => {

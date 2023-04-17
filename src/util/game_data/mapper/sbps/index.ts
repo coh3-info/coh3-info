@@ -49,6 +49,7 @@ const mapSquad = (squadId: string, file: any, additionalData: AdditionalData): S
   squad.nameKO = additionalData.nameKO;
   squad.category = additionalData.category;
   squad.filters = additionalData.filters ?? [];
+  squad.ui.briefText = additionalData.briefText ?? '';
 
   if (file.extensions === undefined) {
     throw new Error(`extensions가 존재하지 않는 객체입니다. id: ${squadId}`);

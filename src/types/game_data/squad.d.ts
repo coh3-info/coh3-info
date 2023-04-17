@@ -17,6 +17,9 @@ export interface Squad {
     icon: string; // sbps/squad_ui_ext/race_list/[race_data]/info/icon_name
     symbolIcon: string; // sbps/squad_ui_ext/race_list/[race_data]/info/symbol_icon_name
   };
+  ui: {
+    briefText: string;
+  };
   abilities: [];
   captureStrategicPoint: {
     captureRateMutiplier: number; // sbps/squad_capture_strategic_point_ext/capture_rate_multiplier

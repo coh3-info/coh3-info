@@ -14,6 +14,9 @@ export const createInitSquad = (id: string): Squad => {
       icon: '',
       symbolIcon: '',
     },
+    ui: {
+      briefText: '',
+    },
     abilities: [],
     captureStrategicPoint: {
       captureRateMutiplier: 0,

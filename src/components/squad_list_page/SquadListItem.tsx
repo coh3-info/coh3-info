@@ -18,6 +18,7 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
     nameKO,
     race,
     imageUrl: { icon, symbolIcon },
+    ui: { briefText },
   } = squad;
 
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const SquadListItem = ({ squad }: SquadListItemProps) => {
         <SquadNameKO>{nameKO}</SquadNameKO>
         <SquadName>{name}</SquadName>
       </SquadNameContainer>
-      <SquadType>대보병 / 주력</SquadType>
+      <SquadType>{briefText}</SquadType>
     </SquadListItemWrapper>
   );
 };

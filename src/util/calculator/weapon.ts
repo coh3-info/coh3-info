@@ -1,3 +1,4 @@
+import EntityStats from '../../types/stats/entityStats';
 import { WeaponStats } from '../../types/stats/weaponStats';
 
 interface MinMax {
@@ -54,6 +55,18 @@ const calcPenetrationChance = (penetration: number, armor: number) => {
   return penetrationChance;
 };
 
+/** 격발 한번의 공격력 기대치를 구합니다.
+ *
+ * 예를 들어 공격력 120, 명중률 0.7(70%), 관통확률 0.6(60%)이라면, 공격력 기대치는 50.4입니다.
+ * @param damage 공격력
+ * @param accuracy 명중률, undefined = 명중률 미적용
+ * @param penetrationChance 관통확률, undefined = 관통확률 미적용
+ * @return 공격력 기대치
+ */
+const calcExpectedDamage = (damage: number, accuracy: number = 1, penetrationChance: number = 1) => {
+  return damage * accuracy * penetrationChance;
+};
+
 const calcOneFireTime = (aimTime: number, windUp: number, burstDuration: number, windDown: number) => {
   return aimTime + windUp + burstDuration + windDown;
 };
@@ -87,8 +100,9 @@ const calcRPM = (fireCycleTime: number, roundsPerCycle: number) => {
   return (60 / fireCycleTime) * roundsPerCycle;
 };
 
-const calcDPS = (damage: number, accuracy: number, rpm: number) => {
-  return (damage * accuracy * rpm) / 60;
+const calcDPS = (rpm: number, expectedDamage: number) => {
+  const rps = rpm / 60;
+  return expectedDamage * rps;
 };
 
 /**한 구간의 거리에 따른 값들을 반환합니다.
@@ -143,7 +157,23 @@ export const getReadingsByDistance = (range: MinMax, distance: Distance, multipl
   return [...fromZeroToMin, ...fromMinToNear, ...fromNearToMid, ...fromMidToFar, ...fromFarToMax];
 };
 
-export const getAccuracyReadingsByDistance = (weapon: WeaponStats, multipliers?: AccuracyMultipliers) => {
+export const getAccuracyReadingsByDistance = (
+  weapon: WeaponStats,
+  options?: { target?: EntityStats; isMoving?: boolean }
+) => {
+  const {
+    moving: { canFireWhileMoving, accuracyMultiplier },
+  } = weapon;
+
+  const multipliers: AccuracyMultipliers = {
+    targetSize: options?.target?.targetSize,
+    moving: options?.isMoving
+      ? {
+          canFireWhileMoving,
+          accuracyMultiplier,
+        }
+      : undefined,
+  };
   const accuracyReadings = getReadingsByDistance(weapon.range, weapon.range.distance, weapon.accuracy);
   return accuracyReadings.map((accuracy) => calcAccuracy(accuracy, multipliers));
 };
@@ -153,10 +183,16 @@ export const getPenetrationReadingsByDistance = (weapon: WeaponStats) => {
   return penetrationReadings;
 };
 
-export const getPenetrationChanceReadings = (weapon: WeaponStats, targetArmor: number) => {
+export const getPenetrationChanceReadings = (
+  weapon: WeaponStats,
+  target: EntityStats,
+  armorDirection: 'front' | 'side' | 'rear'
+) => {
+  const armor = typeof target.armor === 'number' ? target.armor : target.armor[armorDirection];
+
   const penetrationReadings = getPenetrationReadingsByDistance(weapon);
   const penetrationChanceReadings = penetrationReadings.map((penetration) => {
-    return calcPenetrationChance(penetration, targetArmor);
+    return calcPenetrationChance(penetration, armor);
   });
 
   return penetrationChanceReadings;
@@ -175,16 +211,21 @@ const getAimTimeReadingsByDitance = (weapon: WeaponStats) => {
   return aimTimeReadings;
 };
 
-const getBurstDurationReadingsByDitance = (weapon: WeaponStats) => {
+const getBurstDurationReadingsByDitance = (weapon: WeaponStats, isMoving = false) => {
   const {
     range,
     burst: { canBurst, duration, durationMultiplier },
+    moving: { canFireWhileMoving, burstMultiplier },
   } = weapon;
   const burstDurationAverage = calcAverage(duration.min, duration.max);
   const burstDurationMultipliers = getReadingsByDistance(range, range.distance, durationMultiplier);
-  const burstDurationReadings = burstDurationMultipliers.map((multiplier) =>
-    modifyStat(burstDurationAverage, canBurst ? multiplier : 0)
-  );
+  const burstDurationReadings = burstDurationMultipliers.map((multiplier) => {
+    let burstDurationReading = modifyStat(burstDurationAverage, canBurst ? multiplier : 0);
+    if (isMoving) {
+      burstDurationReading = modifyStat(burstDurationReading, canFireWhileMoving ? burstMultiplier : 0);
+    }
+    return burstDurationReading;
+  });
 
   return burstDurationReadings;
 };
@@ -203,14 +244,21 @@ const getRateOfFireReadingsByDitance = (weapon: WeaponStats) => {
   return rateOfFireReadings;
 };
 
-const getCooldownReadingsByDistance = (weapon: WeaponStats) => {
+const getCooldownReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
   const {
     range,
     cooldown: { duration, durationMultiplier },
+    moving: { canFireWhileMoving, cooldownMultiplier },
   } = weapon;
   const cooldownAverage = calcAverage(duration.min, duration.max);
   const cooldownMultipliers = getReadingsByDistance(range, range.distance, durationMultiplier);
-  const cooldownReadings = cooldownMultipliers.map((multiplier) => modifyStat(cooldownAverage, multiplier));
+  const cooldownReadings = cooldownMultipliers.map((multiplier) => {
+    let cooldownReading = modifyStat(cooldownAverage, multiplier);
+    if (isMoving) {
+      cooldownReading = modifyStat(cooldownReading, canFireWhileMoving ? cooldownMultiplier : 0);
+    }
+    return cooldownReading;
+  });
 
   return cooldownReadings;
 };
@@ -229,12 +277,12 @@ const getReloadDurationReadingsByDistance = (weapon: WeaponStats) => {
   return reloadDurationReadings;
 };
 
-const getOneFireTimeReadingsByDistance = (weapon: WeaponStats) => {
+const getOneFireTimeReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
   const {
     fire: { windUp, windDown },
   } = weapon;
   const aimTimeReadings = getAimTimeReadingsByDitance(weapon);
-  const burstDurationReadings = getBurstDurationReadingsByDitance(weapon);
+  const burstDurationReadings = getBurstDurationReadingsByDitance(weapon, isMoving);
 
   const oneFireTimeReadings = aimTimeReadings.map((aimTime, i) => {
     const burstDuration = burstDurationReadings[i];
@@ -244,9 +292,9 @@ const getOneFireTimeReadingsByDistance = (weapon: WeaponStats) => {
   return oneFireTimeReadings;
 };
 
-const getOneFireTimeWithCooldownReadingsByDistance = (weapon: WeaponStats) => {
-  const oneFireTimeReadings = getOneFireTimeReadingsByDistance(weapon);
-  const cooldownReadings = getCooldownReadingsByDistance(weapon);
+const getOneFireTimeWithCooldownReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
+  const oneFireTimeReadings = getOneFireTimeReadingsByDistance(weapon, isMoving);
+  const cooldownReadings = getCooldownReadingsByDistance(weapon, isMoving);
 
   const oneFireTimeWithCooldownRedings = oneFireTimeReadings.map((oneFireTime, i) => {
     const cooldown = cooldownReadings[i];
@@ -256,8 +304,8 @@ const getOneFireTimeWithCooldownReadingsByDistance = (weapon: WeaponStats) => {
   return oneFireTimeWithCooldownRedings;
 };
 
-const getOneFireTimeWithReloadReadingsByDistance = (weapon: WeaponStats) => {
-  const oneFireTimeReadings = getOneFireTimeReadingsByDistance(weapon);
+const getOneFireTimeWithReloadReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
+  const oneFireTimeReadings = getOneFireTimeReadingsByDistance(weapon, isMoving);
   const reloadDurationReadings = getReloadDurationReadingsByDistance(weapon);
 
   const oneFireTimeWithReloadReadings = oneFireTimeReadings.map((oneFireTime, i) => {
@@ -268,11 +316,11 @@ const getOneFireTimeWithReloadReadingsByDistance = (weapon: WeaponStats) => {
   return oneFireTimeWithReloadReadings;
 };
 
-const getFireCycleTimeReadingsByDistance = (weapon: WeaponStats) => {
+const getFireCycleTimeReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
   const { frequency } = weapon.reload;
   const frequencyAverage = calcAverage(frequency.min, frequency.max);
-  const oneFireTimeWithCooldownReadings = getOneFireTimeWithCooldownReadingsByDistance(weapon);
-  const oneFireTimeWithReloadReadings = getOneFireTimeWithReloadReadingsByDistance(weapon);
+  const oneFireTimeWithCooldownReadings = getOneFireTimeWithCooldownReadingsByDistance(weapon, isMoving);
+  const oneFireTimeWithReloadReadings = getOneFireTimeWithReloadReadingsByDistance(weapon, isMoving);
 
   const fireCycleTimeReadings = oneFireTimeWithCooldownReadings.map((oneFireTimeWithCooldown, i) => {
     const oneFireTimeWithReload = oneFireTimeWithReloadReadings[i];
@@ -282,10 +330,10 @@ const getFireCycleTimeReadingsByDistance = (weapon: WeaponStats) => {
   return fireCycleTimeReadings;
 };
 
-const getRoundsPerFireReadingsByDistance = (weapon: WeaponStats) => {
+const getRoundsPerFireReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
   const { canBurst } = weapon.burst;
 
-  const burstDurationReadings = getBurstDurationReadingsByDitance(weapon);
+  const burstDurationReadings = getBurstDurationReadingsByDitance(weapon, isMoving);
   const ratesOfFire = getRateOfFireReadingsByDitance(weapon);
   const roundsPerFireReadings = burstDurationReadings.map((burstDuration, i) => {
     const rateOfFire = ratesOfFire[i];
@@ -295,23 +343,23 @@ const getRoundsPerFireReadingsByDistance = (weapon: WeaponStats) => {
   return roundsPerFireReadings;
 };
 
-const getRoundsPerCycleReadingsByDistance = (weapon: WeaponStats) => {
+const getRoundsPerCycleReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
   const { frequency } = weapon.reload;
 
   const frequencyAverage = calcAverage(frequency.min, frequency.max);
 
-  const roundsPerFireReadings = getRoundsPerFireReadingsByDistance(weapon);
+  const roundsPerFireReadings = getRoundsPerFireReadingsByDistance(weapon, isMoving);
 
-  const roundsPerCycleReadings = roundsPerFireReadings.map((roundsPerFire, i) => {
+  const roundsPerCycleReadings = roundsPerFireReadings.map((roundsPerFire) => {
     return calcRoundsPerCycle(roundsPerFire, frequencyAverage);
   });
 
   return roundsPerCycleReadings;
 };
 
-export const getRPMReadingsByDistance = (weapon: WeaponStats) => {
-  const fireCycleTimeReadings = getFireCycleTimeReadingsByDistance(weapon);
-  const roundsPerCycleReadings = getRoundsPerCycleReadingsByDistance(weapon);
+export const getRPMReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
+  const fireCycleTimeReadings = getFireCycleTimeReadingsByDistance(weapon, isMoving);
+  const roundsPerCycleReadings = getRoundsPerCycleReadingsByDistance(weapon, isMoving);
 
   const rpmReadings = fireCycleTimeReadings.map((fireCycleTime, i) => {
     const roundPerCycle = roundsPerCycleReadings[i];
@@ -322,18 +370,39 @@ export const getRPMReadingsByDistance = (weapon: WeaponStats) => {
   return rpmReadings;
 };
 
-export const getDPSReadingsByDistance = (weapon: WeaponStats) => {
+interface DPSOptions {
+  target?: {
+    entity: EntityStats;
+    isAppliedTargetSize?: boolean;
+    armorDirection?: 'front' | 'side' | 'rear';
+  };
+  isMoving?: boolean;
+}
+export const getDPSReadingsByDistance = (weapon: WeaponStats, options?: DPSOptions) => {
   const { damage } = weapon;
+  const target = options?.target?.entity;
+  const isAppliedTargetSize = options?.target?.isAppliedTargetSize;
+  const armorDirection = options?.target?.armorDirection;
+  const isMoving = options?.isMoving;
 
   const damageAverage = calcAverage(damage.min, damage.max);
 
-  const accuracyReadings = getAccuracyReadingsByDistance(weapon);
+  const accuracyReadings = getAccuracyReadingsByDistance(weapon, {
+    target: isAppliedTargetSize ? target : undefined,
+    isMoving,
+  });
+
+  const penetrationChanceReadings =
+    armorDirection && target ? getPenetrationChanceReadings(weapon, target, armorDirection) : [];
+
   const rpmReadings = getRPMReadingsByDistance(weapon);
 
   const dpsReadings = rpmReadings.map((rpm, i) => {
     const accuracy = accuracyReadings[i];
+    const penetrationChance = penetrationChanceReadings[i];
+    const expectedDamage = calcExpectedDamage(damageAverage, accuracy, armorDirection && penetrationChance);
 
-    return calcDPS(damageAverage, accuracy, rpm);
+    return calcDPS(rpm, expectedDamage);
   });
 
   return dpsReadings;

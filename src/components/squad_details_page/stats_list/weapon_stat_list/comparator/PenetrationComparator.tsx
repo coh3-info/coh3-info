@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { getPenetrationChanceReadings, getPenetrationReadingsByDistance } from '../../../../../util/calculator/weapon';
+import { useState } from 'react';
+
+import SelectButton from '../../../../common/buttons/SelectButton';
+import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
-import PenetrationChanceChartOfTwoWeapons from '../../../../common/charts/PenetrationChanceChartOfTwoWeapons';
 import type EntityStats from '../../../../../types/stats/entityStats';
-import { useState } from 'react';
-import PenetrationChartOfTwoWeapons from '../../../../common/charts/PenetrationChartOfTwoWeapons';
-import SelectButton from '../../../../common/buttons/SelectButton';
 
 const RADIO_NAME = 'penetration-radio-buton';
 
@@ -27,45 +27,26 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
   let weapon1PenetrationReadings: number[] = [];
   let weapon2PenetrationReadings: number[] = [];
 
-  if (data1.weapon !== undefined) {
-    weapon1PenetrationReadings = getPenetrationReadingsByDistance(data1.weapon);
-  }
-
-  if (data2.weapon !== undefined) {
-    weapon2PenetrationReadings = getPenetrationReadingsByDistance(data2.weapon);
-  }
-
-  let weapon1PenetrationChanceReadings: number[] = [];
-  let weapon2PenetrationChanceReadings: number[] = [];
-
-  const getArmor = (entity: EntityStats) => {
-    if (typeof entity.armor === 'number') {
-      return entity.armor;
+  if (selected === 'penetration') {
+    if (data1.weapon !== undefined) {
+      weapon1PenetrationReadings = getPenetrationReadingsByDistance(data1.weapon);
     }
-    switch (selected) {
-      case 'front':
-        return entity.armor.front;
-      case 'side':
-        return entity.armor.side;
-      default:
-        return entity.armor.rear;
+
+    if (data2.weapon !== undefined) {
+      weapon2PenetrationReadings = getPenetrationReadingsByDistance(data2.weapon);
     }
-  };
+  } else if (selected === 'front' || selected === 'side' || selected === 'rear') {
+    if (data1.weapon !== undefined && data2.entity !== undefined) {
+      weapon1PenetrationReadings = getPenetrationChanceReadings(data1.weapon, data2.entity, selected).map(
+        (accuracy) => accuracy * 100
+      );
+    }
 
-  if (data1.weapon !== undefined && data2.entity !== undefined) {
-    const armor = getArmor(data2.entity);
-
-    weapon1PenetrationChanceReadings = getPenetrationChanceReadings(data1.weapon, armor).map(
-      (accuracy) => accuracy * 100
-    );
-  }
-
-  if (data2.weapon !== undefined && data1.entity !== undefined) {
-    const armor = getArmor(data1.entity);
-
-    weapon2PenetrationChanceReadings = getPenetrationChanceReadings(data2.weapon, armor).map(
-      (accuracy) => accuracy * 100
-    );
+    if (data2.weapon !== undefined && data1.entity !== undefined) {
+      weapon2PenetrationReadings = getPenetrationChanceReadings(data2.weapon, data1.entity, selected).map(
+        (accuracy) => accuracy * 100
+      );
+    }
   }
 
   const onSelect = (value: string) => {
@@ -79,7 +60,8 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
         <SelectButtonContainer>
           <SelectButton
             type="radio"
-            id="penetration"
+            id="penetration-comparator-penetration"
+            value="penetration"
             name={RADIO_NAME}
             onSelect={onSelect}
             checked={selected === 'penetration'}
@@ -89,28 +71,56 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
         </SelectButtonContainer>
         <SelectorCategory>관통 확률</SelectorCategory>
         <SelectButtonContainer>
-          <SelectButton type="radio" id="front" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'front'}>
+          <SelectButton
+            type="radio"
+            id="penetration-comparator-front"
+            value="front"
+            name={RADIO_NAME}
+            onSelect={onSelect}
+            checked={selected === 'front'}
+          >
             전면
           </SelectButton>
-          <SelectButton type="radio" id="side" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'side'}>
+          <SelectButton
+            type="radio"
+            id="penetration-comparator-side"
+            value="side"
+            name={RADIO_NAME}
+            onSelect={onSelect}
+            checked={selected === 'side'}
+          >
             측면
           </SelectButton>
-          <SelectButton type="radio" id="rear" name={RADIO_NAME} onSelect={onSelect} checked={selected === 'rear'}>
+          <SelectButton
+            type="radio"
+            id="penetration-comparator-rear"
+            value="rear"
+            name={RADIO_NAME}
+            onSelect={onSelect}
+            checked={selected === 'rear'}
+          >
             후면
           </SelectButton>
         </SelectButtonContainer>
       </ComparatorHeader>
-      {selected === 'penetration' ? (
-        <PenetrationChartOfTwoWeapons
-          data1={{ label: data1.weapon?.id ?? '', data: weapon1PenetrationReadings }}
-          data2={{ label: data2.weapon?.id ?? '', data: weapon2PenetrationReadings }}
-        />
-      ) : (
-        <PenetrationChanceChartOfTwoWeapons
-          data1={{ label: data1.weapon?.id ?? '', data: weapon1PenetrationChanceReadings }}
-          data2={{ label: data2.weapon?.id ?? '', data: weapon2PenetrationChanceReadings }}
-        />
-      )}
+
+      <LineChartOfTwo
+        labels={(weapon1PenetrationReadings.length > weapon2PenetrationReadings.length
+          ? weapon1PenetrationReadings
+          : weapon2PenetrationReadings
+        ).map((_, i) => i)}
+        data1={{ label: data1.weapon?.id ?? '', data: weapon1PenetrationReadings }}
+        data2={{ label: data2.weapon?.id ?? '', data: weapon2PenetrationReadings }}
+        axesOptions={{
+          x: {
+            title: '거리',
+          },
+          y: {
+            suggestedMax: selected === 'penetration' ? 50 : 100,
+            title: selected === 'penetration' ? '관통력' : '관통확률(%)',
+          },
+        }}
+      />
     </PenetrationComparatorWrapper>
   );
 };

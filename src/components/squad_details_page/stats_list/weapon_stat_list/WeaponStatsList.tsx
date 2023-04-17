@@ -42,7 +42,12 @@ const WeaponStatsList = () => {
   const statList2 = createWeaponStatList2([leftWeapon, rightWeapon], isBriefly);
 
   const comparatorsTable = {
-    dps: <DPSComparator weapon1={leftWeapon} weapon2={rightWeapon} />,
+    dps: (
+      <DPSComparator
+        data1={{ weapon: leftWeapon, entity: leftEntity }}
+        data2={{ weapon: rightWeapon, entity: rightEntity }}
+      />
+    ),
     rpm: <RPMComparator weapon1={leftWeapon} weapon2={rightWeapon} />,
     accuracy: (
       <AccuracyComparator weapon1={leftWeapon} weapon2={rightWeapon} entity1={leftEntity} entity2={rightEntity} />

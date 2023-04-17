@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { getAccuracyReadingsByDistance } from '../../../../../util/calculator/weapon';
-import AccuracyChartOfTwoWeapons from '../../../../common/charts/AccuracyChartOfTwoWeapons';
 
-import type { WeaponStats } from '../../../../../types/stats/weaponStats';
 import EntityStats from '../../../../../types/stats/entityStats';
 import SelectButton from '../../../../common/buttons/SelectButton';
-import { useState } from 'react';
+import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
+
+import type { WeaponStats } from '../../../../../types/stats/weaponStats';
 
 interface AccuracyComparatorProps {
   weapon1: WeaponStats | undefined;
@@ -21,30 +22,20 @@ const AccuracyComparator = ({ weapon1, weapon2, entity1, entity2 }: AccuracyComp
   let weapon2AccuracyReadings: number[] = [];
 
   if (weapon1 !== undefined && entity2 !== undefined) {
-    const multipliers = {
-      targetSize: isAppliedTargetSize ? entity2.targetSize : undefined,
-      moving: isAppliedMoving
-        ? {
-            canFireWhileMoving: weapon1.moving.canFireWhileMoving,
-            accuracyMultiplier: weapon1.moving.accuracyMultiplier,
-          }
-        : undefined,
+    const options = {
+      target: isAppliedTargetSize ? entity2 : undefined,
+      isMoving: isAppliedMoving,
     };
 
-    weapon1AccuracyReadings = getAccuracyReadingsByDistance(weapon1, multipliers).map((accuracy) => accuracy * 100);
+    weapon1AccuracyReadings = getAccuracyReadingsByDistance(weapon1, options).map((accuracy) => accuracy * 100);
   }
 
   if (weapon2 !== undefined && entity1 !== undefined) {
-    const multipliers = {
-      targetSize: isAppliedTargetSize ? entity1.targetSize : undefined,
-      moving: isAppliedMoving
-        ? {
-            canFireWhileMoving: weapon2.moving.canFireWhileMoving,
-            accuracyMultiplier: weapon2.moving.accuracyMultiplier,
-          }
-        : undefined,
+    const options = {
+      target: isAppliedTargetSize ? entity1 : undefined,
+      isMoving: isAppliedMoving,
     };
-    weapon2AccuracyReadings = getAccuracyReadingsByDistance(weapon2, multipliers).map((accuracy) => accuracy * 100);
+    weapon2AccuracyReadings = getAccuracyReadingsByDistance(weapon2, options).map((accuracy) => accuracy * 100);
   }
 
   const onApplyTargetSize = () => {
@@ -67,9 +58,22 @@ const AccuracyComparator = ({ weapon1, weapon2, entity1, entity2 }: AccuracyComp
           </SelectButton>
         </SelectButtonContainer>
       </ComparatorHeader>
-      <AccuracyChartOfTwoWeapons
+      <LineChartOfTwo
+        labels={(weapon1AccuracyReadings.length > weapon2AccuracyReadings.length
+          ? weapon1AccuracyReadings
+          : weapon2AccuracyReadings
+        ).map((_, i) => i)}
         data1={{ label: weapon1?.id ?? '', data: weapon1AccuracyReadings }}
         data2={{ label: weapon2?.id ?? '', data: weapon2AccuracyReadings }}
+        axesOptions={{
+          x: {
+            title: '거리',
+          },
+          y: {
+            suggestedMax: 100,
+            title: '명중률(%)',
+          },
+        }}
       />
     </AccuracyComparatorWrapper>
   );
@@ -87,11 +91,6 @@ const ComparatorHeader = styled.div`
   display: grid;
   grid-template: repeat(2, max-content) / repeat(2, max-content);
   column-gap: 10px;
-`;
-
-const SelectorCategory = styled.h3`
-  font-size: 0.875rem;
-  font-weight: 500;
 `;
 
 const SelectButtonContainer = styled.div`

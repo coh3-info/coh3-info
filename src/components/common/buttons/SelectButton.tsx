@@ -59,6 +59,7 @@ const Label = styled.label<{ type: SelectButtonType }>`
   align-items: center;
   gap: 3px;
   font-size: 0.875rem;
+  user-select: none;
 
   &:hover {
     cursor: pointer;

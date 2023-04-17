@@ -8,12 +8,20 @@ type GameDataInitialState = {
   sbps: Sbps;
   ebps: Ebps;
   weapons: Weapons;
+  isDoneSbps: boolean;
+  isDoneEbps: boolean;
+  isDoneWeapons: boolean;
+  isDoneAll: boolean;
 };
 
 const initialState: GameDataInitialState = {
   sbps: {},
   ebps: {},
   weapons: {},
+  isDoneSbps: false,
+  isDoneEbps: false,
+  isDoneWeapons: false,
+  isDoneAll: false,
 };
 
 const gameDataSlice = createSlice({
@@ -29,9 +37,21 @@ const gameDataSlice = createSlice({
     setWeapons(state, action: PayloadAction<{ weapons: Weapons }>) {
       state.weapons = action.payload.weapons;
     },
+    doneSbps(state) {
+      state.isDoneSbps = true;
+    },
+    doneEbps(state) {
+      state.isDoneEbps = true;
+    },
+    doneWeapons(state) {
+      state.isDoneWeapons = true;
+    },
+    doneAll(state) {
+      state.isDoneAll = true;
+    },
   },
 });
 
-export const { setSbps, setEbps, setWeapons } = gameDataSlice.actions;
+export const { setSbps, setEbps, setWeapons, doneSbps, doneEbps, doneWeapons, doneAll } = gameDataSlice.actions;
 
 export default gameDataSlice.reducer;

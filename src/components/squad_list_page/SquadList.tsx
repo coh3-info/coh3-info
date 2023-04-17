@@ -71,8 +71,10 @@ export default SquadList;
 
 const SquadListWrapper = styled.div`
   max-width: 1170px;
+  //200px = header height(75px) + footer height(125px);
+  min-height: calc(100vh - 200px);
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 40px 0 60px;
   display: flex;
 `;
 

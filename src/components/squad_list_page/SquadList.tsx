@@ -22,6 +22,11 @@ const SquadList = () => {
   });
 
   const sbps = useSelector((state: RootState) => state.gameData.sbps);
+  const isDoneSbps = useSelector((state: RootState) => state.gameData.isDoneSbps);
+  const isDoneEbps = useSelector((state: RootState) => state.gameData.isDoneEbps);
+  const isDoneWeapons = useSelector((state: RootState) => state.gameData.isDoneWeapons);
+  const isDoneAll = useSelector((state: RootState) => state.gameData.isDoneAll);
+
   const _squads: Squad[] = Object.values(sbps);
 
   const squads = _squads.filter((squad) => {
@@ -46,7 +51,7 @@ const SquadList = () => {
     <SquadListWrapper>
       <ContentsContainer>
         <SquadListHeader filters={filters} setFilters={setFilters} />
-        {squads.length > 0 ? (
+        {isDoneAll ? (
           <ListContainer>
             <List>
               {squads.map((squad) => {
@@ -57,6 +62,16 @@ const SquadList = () => {
         ) : (
           <LoaderContainer>
             <Loader />
+            {/* ProgressBar와 LoadingMassage는 초기로딩속도가 너무 오래 걸려 좀더 나은 사용성을 위해 추가했습니다. 추후 로딩속도문제가 해결되면 없어도 됩니다. */}
+            <ProgressBar>
+              <Progress isDone={isDoneSbps}>{isDoneSbps ? '완료' : '분대 데이터 불러오는 중...'}</Progress>
+              <Progress isDone={isDoneEbps}>{isDoneEbps ? '완료' : '객체 데이터 불러오는 중...'}</Progress>
+              <Progress isDone={isDoneWeapons}>{isDoneWeapons ? '완료' : '무기 데이터 불러오는 중...'}</Progress>
+            </ProgressBar>
+            <LoadingMassage>
+              불러오는 데이터의 양이 많아 처음 페이지 방문이시라면 로딩이 매우 오래 걸릴 수 있습니다. 이후 방문하실 땐
+              캐싱처리가 되어 좀 더 빠르게 로딩 될 것입니다. 추후에 로딩속도를 개선하겠습니다.
+            </LoadingMassage>
           </LoaderContainer>
         )}
       </ContentsContainer>
@@ -99,7 +114,9 @@ const List = styled.ul`
 const LoaderContainer = styled.div`
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 `;
 
 const Loader = styled.div`
@@ -120,4 +137,43 @@ const Loader = styled.div`
       transform: rotate(359deg);
     }
   }
+`;
+
+const ProgressBar = styled.div`
+  width: 100%;
+  max-width: 500px;
+  height: fit-content;
+  border: solid 1px #979797;
+  border-radius: 100px;
+  display: flex;
+`;
+
+const Progress = styled.div<{ isDone?: boolean }>`
+  font-size: 0.75rem;
+  background-color: ${({ isDone }) => (isDone ? '#45FF7A' : 'transparent')};
+  flex-basis: 33.34%;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:first-child {
+    border-right: solid 1px #979797;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+  }
+
+  &:last-child {
+    border-left: solid 1px #979797;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+`;
+
+const LoadingMassage = styled.p`
+  color: #979797;
+  font-size: 0.875rem;
+  max-width: 500px;
+  text-align: center;
+  word-break: keep-all;
 `;

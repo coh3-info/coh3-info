@@ -138,6 +138,7 @@ const SquadListHeader = ({ filters, setFilters }: SquadListHeaderProps) => {
           {Object.values(FILTER_TABLE).map((filter) => {
             return (
               <SelectButton
+                key={filter.en}
                 id={`filter-${filter.en}`}
                 value={filter.en}
                 onSelect={onSelectFilter}

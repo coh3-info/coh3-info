@@ -1,7 +1,7 @@
 import type { PayloadAction, CaseReducer } from '@reduxjs/toolkit';
 import type { SquadBookmark } from '../../../../types/bookmark/bookmark';
 import type { SquadBookmarkManagerInitialState } from '..';
-import UnitStats from '../../../../types/stats/unitStats';
+import type { UnitStats } from '../../../../types/stats/unitStats';
 
 interface Payload {
   unit: UnitStats;

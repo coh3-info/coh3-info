@@ -87,5 +87,3 @@ export interface WeaponEntity extends Entity {
 export interface Ebps {
   [key: string]: Entity | WeaponEntity;
 }
-
-export default Entity;

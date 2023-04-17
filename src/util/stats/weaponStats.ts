@@ -1,5 +1,5 @@
 import { WeaponEntity } from '../../types/game_data/entity';
-import type Weapon from '../../types/game_data/weapon';
+import type { Weapon } from '../../types/game_data/weapon';
 import type { WeaponStats } from '../../types/stats/weaponStats';
 
 export const createWeaponStats = (weaponEntity: WeaponEntity, weapon: Weapon): WeaponStats => {

@@ -1,8 +1,8 @@
-import type Squad from '../../types/game_data/squad';
-import type Entity from '../../types/game_data/entity';
-import type SquadStats from '../../types/stats/squadStats';
+import type { Squad } from '../../types/game_data/squad';
+import type { Entity } from '../../types/game_data/entity';
+import type { SquadStats } from '../../types/stats/squadStats';
 import type { WeaponEntity } from '../../types/game_data/entity';
-import { UnitLoadout } from '../../types/game_data/unit';
+import type { UnitLoadout } from '../../types/game_data/unit';
 
 const calcHitpoints = (entities: (Entity | WeaponEntity)[]) => {
   return 0;

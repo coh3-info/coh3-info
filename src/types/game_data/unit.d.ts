@@ -1,6 +1,6 @@
-import Entity, { WeaponEntity } from './entity';
-import Squad from './squad';
-import Weapon from './weapon';
+import type { Entity, WeaponEntity } from './entity';
+import type { Squad } from './squad';
+import type { Weapon } from './weapon';
 
 interface UnitLoadOutData {
   num: number;

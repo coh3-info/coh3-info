@@ -27,7 +27,7 @@ interface RectangleArea {
 
 export type Area = NoneArea | CircleArea | RectangleArea;
 
-interface Weapon {
+export interface Weapon {
   /** 데이터 파일이름 */
   id: string;
 
@@ -208,10 +208,6 @@ interface Weapon {
   };
 }
 
-interface Weapons {
+export interface Weapons {
   [key: string]: Weapon;
 }
-
-export { Weapons };
-
-export default Weapon;

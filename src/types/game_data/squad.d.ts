@@ -7,7 +7,7 @@ interface LoadoutData {
   .../type 값이 'ebps/races/american/infantry/rifleman_us'라면 entityId = 'rifleman_us' */;
 }
 
-interface Squad {
+export interface Squad {
   id: string; // 데이터의 파일 이름
   name: string; // squad 영어 이름
   nameKO: string; // squad 한글 이름
@@ -48,5 +48,3 @@ interface Squad {
 export interface Sbps {
   [key: string]: Squad;
 }
-
-export default Squad;

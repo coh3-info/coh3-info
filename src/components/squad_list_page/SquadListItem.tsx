@@ -4,7 +4,7 @@ import { addBookmark } from '../../state_store/slice/squad_bookmark_manager';
 import getRaceMarkUrl from '../../util/getRaceMarksUrl';
 
 import { useCreateUnit } from '../../hooks/game_data/gameData';
-import type Squad from '../../types/game_data/squad';
+import type { Squad } from '../../types/game_data/squad';
 import { createUnitStats } from '../../util/stats/unitStats';
 
 type SquadListItemProps = {

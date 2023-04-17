@@ -1,4 +1,4 @@
-import type EntityStats from '../../../types/stats/entityStats';
+import type { EntityStats } from '../../../types/stats/entityStats';
 import { WeaponStats } from '../../../types/stats/weaponStats';
 import type {
   SeparatorOfStat,

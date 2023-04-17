@@ -1,6 +1,6 @@
 import { Armor, EntityCategory } from '../game_data/entity';
 
-interface EntityStats {
+export interface EntityStats {
   id: string;
   category: EntityCategory;
   reinforce: {
@@ -30,5 +30,3 @@ interface EntityStats {
     unit: number;
   };
 }
-
-export default EntityStats;

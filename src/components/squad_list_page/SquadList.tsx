@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type Squad from '../../types/game_data/squad';
+import type { Squad } from '../../types/game_data/squad';
 
 import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
 import SquadListHeader from './SquadListHeader';

@@ -6,7 +6,7 @@ import SelectButton from '../../../../common/buttons/SelectButton';
 import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
-import type EntityStats from '../../../../../types/stats/entityStats';
+import type { EntityStats } from '../../../../../types/stats/entityStats';
 
 const RADIO_NAME = 'dps-radio-buton';
 

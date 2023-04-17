@@ -1,7 +1,7 @@
-import type Squad from '../../types/game_data/squad';
+import type { Squad } from '../../types/game_data/squad';
 import type { Sbps } from '../../types/game_data/squad';
 import type { Ebps, Entity, WeaponEntity } from '../../types/game_data/entity';
-import type Weapon from '../../types/game_data/weapon';
+import type { Weapon } from '../../types/game_data/weapon';
 import type { Weapons } from '../../types/game_data/weapon';
 import type { Unit, UnitLoadout, WeaponPair } from '../../types/game_data/unit';
 

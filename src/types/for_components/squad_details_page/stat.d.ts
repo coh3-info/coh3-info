@@ -2,26 +2,26 @@ export type StatValue = string | number | boolean | undefined;
 export type UnitOfStat = 'percentage' | 'degree';
 export type SeparatorOfStat = '/' | '~';
 
-type BasicStat = {
+interface BasicStat {
   name: string;
   unit?: UnitOfStat;
   decimalPlaces?: number;
-};
+}
 
-type StatOfValues = {
+interface StatOfValues extends BasicStat {
   leftValue: StatValue[];
   rightValue: StatValue[];
   separator: SeparatorOfStat;
-} & BasicStat;
+}
 
-type StatOfSingleValue = {
+interface StatOfSingleValue extends BasicStat {
   leftValue: StatValue;
   rightValue: StatValue;
-} & BasicStat;
+}
 
 export type Stat = StatOfSingleValue | StatOfValues;
 
-export type StatGroup = {
+export interface StatGroup {
   name: string;
   stats: Stat[];
-};
+}

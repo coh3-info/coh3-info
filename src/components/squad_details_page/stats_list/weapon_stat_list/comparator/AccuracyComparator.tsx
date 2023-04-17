@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { getAccuracyReadingsByDistance } from '../../../../../util/calculator/weapon';
 
-import EntityStats from '../../../../../types/stats/entityStats';
 import SelectButton from '../../../../common/buttons/SelectButton';
 import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 
+import type { EntityStats } from '../../../../../types/stats/entityStats';
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
 
 interface AccuracyComparatorProps {

@@ -1,5 +1,5 @@
 import type { Unit } from '../../types/game_data/unit';
-import type UnitStats from '../../types/stats/unitStats';
+import type { UnitStats } from '../../types/stats/unitStats';
 import { createEntityStats } from './entityStats';
 import { createSquadStats } from './squadStats';
 import { createWeaponStats } from './weaponStats';

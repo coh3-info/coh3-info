@@ -1,9 +1,9 @@
-import type Squad from '../../../types/game_data/squad';
-import type Entity from '../../../types/game_data/entity';
-import type Weapon from '../../../types/game_data/weapon';
+import type { Squad } from '../../../types/game_data/squad';
+import type { Entity } from '../../../types/game_data/entity';
+import type { Weapon } from '../../../types/game_data/weapon';
 import { WeaponEntity } from '../../../types/game_data/entity';
 
-const createInitSquad = (id: string): Squad => {
+export const createInitSquad = (id: string): Squad => {
   return {
     id,
     name: '',
@@ -42,7 +42,7 @@ const createInitSquad = (id: string): Squad => {
   };
 };
 
-const createInitEntity = (id: string): Entity => {
+export const createInitEntity = (id: string): Entity => {
   return {
     id,
     category: 'normal',
@@ -93,7 +93,7 @@ const createInitEntity = (id: string): Entity => {
   };
 };
 
-const createInitWeaponEntity = (id: string): WeaponEntity => {
+export const createInitWeaponEntity = (id: string): WeaponEntity => {
   const entity = createInitEntity(id);
   return {
     ...entity,
@@ -102,7 +102,7 @@ const createInitWeaponEntity = (id: string): WeaponEntity => {
   };
 };
 
-const createInitWeapon = (id: string): Weapon => {
+export const createInitWeapon = (id: string): Weapon => {
   return {
     id,
     name: '',
@@ -261,5 +261,3 @@ const createInitWeapon = (id: string): Weapon => {
     },
   };
 };
-
-export { createInitSquad, createInitEntity, createInitWeaponEntity, createInitWeapon };

@@ -1,6 +1,6 @@
 import type { SquadCategory, Race } from '../game_data/squad';
 
-interface SquadStats {
+export interface SquadStats {
   id: string;
   name: string;
   nameKO: string;
@@ -22,5 +22,3 @@ interface SquadStats {
     population: number;
   };
 }
-
-export default SquadStats;

@@ -1,5 +1,5 @@
-import EntityStats from '../../types/stats/entityStats';
-import { WeaponStats } from '../../types/stats/weaponStats';
+import type { EntityStats } from '../../types/stats/entityStats';
+import type { WeaponStats } from '../../types/stats/weaponStats';
 
 interface MinMax {
   min: number;

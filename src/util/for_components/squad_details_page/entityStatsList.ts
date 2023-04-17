@@ -2,7 +2,7 @@ import { StatGroup } from '../../../types/for_components/squad_details_page/stat
 import { Stat } from '../../../types/for_components/squad_details_page/stat';
 
 import { StatListFormat, createStatList } from './stat';
-import EntityStats from '../../../types/stats/entityStats';
+import type { EntityStats } from '../../../types/stats/entityStats';
 
 const getArmor = (entity: EntityStats | undefined) => {
   const armor = entity?.armor;

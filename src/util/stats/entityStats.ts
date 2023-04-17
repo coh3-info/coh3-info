@@ -1,7 +1,7 @@
-import type Entity from '../../types/game_data/entity';
+import type { Entity } from '../../types/game_data/entity';
 import type { WeaponEntity } from '../../types/game_data/entity';
-import type Squad from '../../types/game_data/squad';
-import type EntityStats from '../../types/stats/entityStats';
+import type { Squad } from '../../types/game_data/squad';
+import type { EntityStats } from '../../types/stats/entityStats';
 
 const calcReinforce = (base: number, multiplier: number): number => {
   return Math.round(base * multiplier);

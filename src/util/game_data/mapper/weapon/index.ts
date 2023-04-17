@@ -2,7 +2,7 @@ import { fetchWeapons } from '../common/fetchData';
 import { traverseData } from '../common/traversingData';
 import { createInitWeapon } from '../../init_data_creator/initDataCreator';
 
-import type Weapon from '../../../../types/game_data/weapon';
+import type { Weapon } from '../../../../types/game_data/weapon';
 import type { Weapons } from '../../../../types/game_data/weapon';
 
 const mapWeapons = async (): Promise<Weapons> => {

@@ -4,7 +4,7 @@ import { createInitSquad } from '../../init_data_creator/initDataCreator';
 import { getMissingSquadData } from './missingSquadDataTable';
 
 import type { MissingSquadData } from './missingSquadDataTable';
-import type Squad from '../../../../types/game_data/squad';
+import type { Squad } from '../../../../types/game_data/squad';
 import type { Sbps } from '../../../../types/game_data/squad';
 
 const mapSbps = async (): Promise<Sbps> => {

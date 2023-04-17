@@ -23,14 +23,16 @@ const SquadDetails = () => {
     <SquadDetailsWrapper>
       <InfoWrapper>
         <ControllersContainer>
-          <Controller isLeft />
-          <Controller />
+          <Controller position="left" />
+          <Controller position="right" />
         </ControllersContainer>
         <EntityStatsList />
         <WeaponStatsList />
       </InfoWrapper>
       <SquadBookmarkManagerTrack>
-        <SquadBookmarkManager />
+        <SquadBookmarkManagerWrapper>
+          <SquadBookmarkManager />
+        </SquadBookmarkManagerWrapper>
       </SquadBookmarkManagerTrack>
     </SquadDetailsWrapper>
   );
@@ -41,7 +43,7 @@ export default SquadDetails;
 const SquadDetailsWrapper = styled.div`
   max-width: 1170px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 10px 0 60px;
   display: flex;
 `;
 
@@ -51,10 +53,22 @@ const InfoWrapper = styled.div`
 `;
 
 const ControllersContainer = styled.div`
+  padding-top: 10px;
+  background-color: #fff;
+  position: sticky;
+  z-index: 10;
+  top: 0;
   display: flex;
   gap: 10px;
 `;
 
 const SquadBookmarkManagerTrack = styled.div`
+  position: relative;
   margin-left: 10px;
+`;
+
+const SquadBookmarkManagerWrapper = styled.div`
+  padding-top: 10px;
+  position: sticky;
+  top: 0;
 `;

@@ -76,7 +76,9 @@ const SquadList = () => {
         )}
       </ContentsContainer>
       <SquadBookmarkManagerTrack>
-        <SquadBookmarkManager />
+        <SquadBookmarkManagerWrapper>
+          <SquadBookmarkManager />
+        </SquadBookmarkManagerWrapper>
       </SquadBookmarkManagerTrack>
     </SquadListWrapper>
   );
@@ -89,17 +91,25 @@ const SquadListWrapper = styled.div`
   //200px = header height(75px) + footer height(125px);
   min-height: calc(100vh - 200px);
   margin: 0 auto;
-  padding: 40px 0 60px;
+  padding: 10px 0 60px;
   display: flex;
 `;
 
 const ContentsContainer = styled.section`
   width: 100%;
   max-width: 920px;
+  padding-top: 10px;
 `;
 
 const SquadBookmarkManagerTrack = styled.div`
+  position: relative;
   margin-left: 10px;
+`;
+
+const SquadBookmarkManagerWrapper = styled.div`
+  padding-top: 10px;
+  position: sticky;
+  top: 0;
 `;
 
 const ListContainer = styled.div`

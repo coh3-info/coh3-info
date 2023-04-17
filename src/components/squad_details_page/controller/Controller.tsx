@@ -15,12 +15,12 @@ const SQUAD_CATEGORY_KO_TABLE = {
 };
 
 interface ControllerProps {
-  isLeft?: boolean;
+  position?: 'left' | 'right';
 }
 
-const Controller = ({ isLeft = false }: ControllerProps) => {
+const Controller = ({ position = 'left' }: ControllerProps) => {
   const bookmark = useSelector((state: RootState) => {
-    if (isLeft) {
+    if (position === 'left') {
       return state.squadBookmarkManager.bookmarkOnLeft;
     } else {
       return state.squadBookmarkManager.bookmarkOnRight;
@@ -32,24 +32,23 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
   return (
     <ControllerWrapper>
       {squad !== undefined && bookmark !== undefined ? (
-        <>
+        <Inner>
           <Info>
             <Portrait>
               <img src={squad.imageUrl.icon} alt="초상화" />
             </Portrait>
             <BasicInfo>
-              <div>
-                <SquadTitle>
-                  <SquadSymbol>
-                    <img src={squad.imageUrl.symbolIcon} alt="분대 심볼" />
-                  </SquadSymbol>
-                  <SquadNameContainer>
-                    <SquadNameKO>{squad.nameKO}</SquadNameKO>
-                    <SquadName>{squad.name}</SquadName>
-                  </SquadNameContainer>
-                </SquadTitle>
-                <div>{SQUAD_CATEGORY_KO_TABLE[squad.category]}</div>
-              </div>
+              <SquadTitle>
+                <SquadSymbol>
+                  <img src={squad.imageUrl.symbolIcon} alt="분대 심볼" />
+                </SquadSymbol>
+                <SquadNameContainer>
+                  <SquadNameKO>{squad.nameKO}</SquadNameKO>
+                  <SquadName>{squad.name}</SquadName>
+                </SquadNameContainer>
+              </SquadTitle>
+              <div>{SQUAD_CATEGORY_KO_TABLE[squad.category]}</div>
+
               <ResourcesContainer>
                 <ResourceCard type="manpower" value={squad.cost.manpower} />
                 <ResourceCard type="fuel" value={squad.cost.fuel} />
@@ -70,10 +69,11 @@ const Controller = ({ isLeft = false }: ControllerProps) => {
               </ul>
             </Options> */}
           </Info>
-        </>
+        </Inner>
       ) : (
         <EmptyText>분대를 선택해 주세요.</EmptyText>
       )}
+      <ColorBar position={position} />
     </ControllerWrapper>
   );
 };
@@ -84,13 +84,23 @@ const ControllerWrapper = styled.div`
   width: 100%;
   border: solid 1px #979797;
   border-radius: 6px;
-  padding: 16px;
   font-size: 0.875rem;
+  overflow: hidden;
+`;
+
+const Inner = styled.div`
+  padding: 16px;
+`;
+
+const ColorBar = styled.div<{ position: 'left' | 'right' }>`
+  background-color: ${({ position }) => (position === 'left' ? '#5f68c8' : '#ff5e5e')};
+  width: 100%;
+  height: 3px;
 `;
 
 const Info = styled.div`
   display: grid;
-  grid-template: repeat(4, max-content) / max-content 1fr 1fr max-content;
+  grid-template: repeat(1, max-content) / max-content 1fr 1fr max-content;
   column-gap: 20px;
 `;
 
@@ -109,7 +119,7 @@ const BasicInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 4px;
+  gap: 4px;
 `;
 
 const SquadSymbol = styled.div`

@@ -73,8 +73,6 @@ const SquadBookmarkManagerWrapper = styled.div`
   padding: 8px;
   border: solid 1px #979797;
   border-radius: 6px;
-  position: sticky;
-  top: 0;
 `;
 
 const Title = styled.h2`

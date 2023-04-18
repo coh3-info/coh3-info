@@ -8,11 +8,11 @@ import {
 } from '../../../../util/for_components/squad_comparator/weaponStatList';
 
 import type { RootState } from '../../../../state_store/store';
-import RPMComparator from './charts/RPMComparator';
+import RPMComparator from './charts/RPMChart';
 import AccuracyComparator from './charts/AccuracyChart';
 import { useState } from 'react';
-import DPSComparator from './charts/DPSComparator';
-import PenetrationComparator from './charts/PenetrationComparator';
+import DPSComparator from './charts/DPSChart';
+import PenetrationComparator from './charts/PenetrationChart';
 import SelectButton from '../../../common/buttons/SelectButton';
 
 const WeaponStatsList = () => {

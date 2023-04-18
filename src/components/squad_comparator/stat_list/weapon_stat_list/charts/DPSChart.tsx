@@ -10,7 +10,7 @@ import type { EntityStats } from '../../../../../types/stats/entityStats';
 
 const RADIO_NAME = 'dps-radio-buton';
 
-interface DPSComparatorProps {
+interface DPSChartProps {
   data1: {
     entity: EntityStats | undefined;
     weapon: WeaponStats | undefined;
@@ -22,7 +22,7 @@ interface DPSComparatorProps {
   };
 }
 
-const DPSComparator = ({ data1, data2 }: DPSComparatorProps) => {
+const DPSChart = ({ data1, data2 }: DPSChartProps) => {
   const [isAppliedMoving, setIsAppliedMoving] = useState(false);
   const [selectedArmor, setSlectedArmor] = useState('none');
   let weapon1DPSReadings: number[] = [];
@@ -64,8 +64,8 @@ const DPSComparator = ({ data1, data2 }: DPSComparatorProps) => {
   };
 
   return (
-    <DPSComparatorWrapper>
-      <ComparatorHeader>
+    <DPSChartWrapper>
+      <ChartHeader>
         <SelectButtonContainer>
           <SelectButton id="apply-moving-to-accuracy" onSelect={onApplyMoving} checked={isAppliedMoving}>
             이동중
@@ -111,7 +111,7 @@ const DPSComparator = ({ data1, data2 }: DPSComparatorProps) => {
             후면
           </SelectButton>
         </SelectButtonContainer>
-      </ComparatorHeader>
+      </ChartHeader>
       <LineChartOfTwo
         labels={(weapon1DPSReadings.length > weapon2DPSReadings.length ? weapon1DPSReadings : weapon2DPSReadings).map(
           (_, i) => i
@@ -128,19 +128,19 @@ const DPSComparator = ({ data1, data2 }: DPSComparatorProps) => {
           },
         }}
       />
-    </DPSComparatorWrapper>
+    </DPSChartWrapper>
   );
 };
 
-export default DPSComparator;
+export default DPSChart;
 
-const DPSComparatorWrapper = styled.div`
+const DPSChartWrapper = styled.div`
   border: solid 1px #979797;
   border-radius: 6px;
   padding: 20px;
 `;
 
-const ComparatorHeader = styled.div`
+const ChartHeader = styled.div`
   display: grid;
   grid-template: repeat(2, max-content) / repeat(2, max-content);
   column-gap: 10px;

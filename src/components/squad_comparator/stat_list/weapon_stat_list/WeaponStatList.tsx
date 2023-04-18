@@ -5,14 +5,14 @@ import WeaponSelector from './WeaponSelector';
 import {
   createWeaponStatList1,
   createWeaponStatList2,
-} from '../../../../util/for_components/squad_details_page/weaponStatList';
+} from '../../../../util/for_components/squad_comparator/weaponStatList';
 
 import type { RootState } from '../../../../state_store/store';
-import RPMComparator from './comparator/RPMComparator';
-import AccuracyComparator from './comparator/AccuracyComparator';
+import RPMComparator from './charts/RPMComparator';
+import AccuracyComparator from './charts/AccuracyChart';
 import { useState } from 'react';
-import DPSComparator from './comparator/DPSComparator';
-import PenetrationComparator from './comparator/PenetrationComparator';
+import DPSComparator from './charts/DPSComparator';
+import PenetrationComparator from './charts/PenetrationComparator';
 import SelectButton from '../../../common/buttons/SelectButton';
 
 const WeaponStatsList = () => {

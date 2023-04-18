@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import StatsList from '../StatList';
+import StatList from '../StatList';
 import EntitySelector from './EntitySelector';
 import type { RootState } from '../../../../state_store/store';
 
 import {
   createEntityStatList1,
   createEntityStatList2,
-} from '../../../../util/for_components/squad_details_page/entityStatsList';
+} from '../../../../util/for_components/squad_comparator/entityStatList';
 
-const EntityStatsList = () => {
+const EntityStatList = () => {
   const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
   const selectedEntityIdOnLeft = bookmarkOnLeft?.selectedEntityId ?? '';
   const selectedEntityIdOnRight = bookmarkOnRight?.selectedEntityId ?? '';
@@ -31,20 +31,20 @@ const EntityStatsList = () => {
   const statList2 = createEntityStatList2([leftEntity, rightEntity]);
 
   return (
-    <EntityStatsListWrapper>
+    <EntityStatListWrapper>
       <Title>분대 구성원</Title>
       <EntitySelectorContainer>
         <EntitySelector options={entityOptionsOnLeft} defaultValue={selectedEntityIdOnLeft} position="left" />
         <EntitySelector options={entityOptionsOnRight} defaultValue={selectedEntityIdOnRight} position="right" />
       </EntitySelectorContainer>
-      <StatsList statList1={statList1} statList2={statList2} />
-    </EntityStatsListWrapper>
+      <StatList statList1={statList1} statList2={statList2} />
+    </EntityStatListWrapper>
   );
 };
 
-export default EntityStatsList;
+export default EntityStatList;
 
-const EntityStatsListWrapper = styled.section`
+const EntityStatListWrapper = styled.section`
   margin-top: 20px;
 `;
 

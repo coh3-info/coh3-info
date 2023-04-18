@@ -8,14 +8,14 @@ import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 import type { EntityStats } from '../../../../../types/stats/entityStats';
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
 
-interface AccuracyComparatorProps {
+interface AccuracyChartProps {
   weapon1: WeaponStats | undefined;
   weapon2: WeaponStats | undefined;
   entity1: EntityStats | undefined;
   entity2: EntityStats | undefined;
 }
 
-const AccuracyComparator = ({ weapon1, weapon2, entity1, entity2 }: AccuracyComparatorProps) => {
+const AccuracyChart = ({ weapon1, weapon2, entity1, entity2 }: AccuracyChartProps) => {
   const [isAppliedTargetSize, setIsAppliedTargetSize] = useState(true);
   const [isAppliedMoving, setIsAppliedMoving] = useState(false);
   let weapon1AccuracyReadings: number[] = [];
@@ -47,8 +47,8 @@ const AccuracyComparator = ({ weapon1, weapon2, entity1, entity2 }: AccuracyComp
   };
 
   return (
-    <AccuracyComparatorWrapper>
-      <ComparatorHeader>
+    <AccuracyChartWrapper>
+      <ChartHeader>
         <SelectButtonContainer>
           <SelectButton id="apply-target-size-to-accuracy" onSelect={onApplyTargetSize} checked={isAppliedTargetSize}>
             피격률 적용
@@ -57,7 +57,7 @@ const AccuracyComparator = ({ weapon1, weapon2, entity1, entity2 }: AccuracyComp
             이동중
           </SelectButton>
         </SelectButtonContainer>
-      </ComparatorHeader>
+      </ChartHeader>
       <LineChartOfTwo
         labels={(weapon1AccuracyReadings.length > weapon2AccuracyReadings.length
           ? weapon1AccuracyReadings
@@ -75,19 +75,19 @@ const AccuracyComparator = ({ weapon1, weapon2, entity1, entity2 }: AccuracyComp
           },
         }}
       />
-    </AccuracyComparatorWrapper>
+    </AccuracyChartWrapper>
   );
 };
 
-export default AccuracyComparator;
+export default AccuracyChart;
 
-const AccuracyComparatorWrapper = styled.div`
+const AccuracyChartWrapper = styled.div`
   border: solid 1px #979797;
   border-radius: 6px;
   padding: 20px;
 `;
 
-const ComparatorHeader = styled.div`
+const ChartHeader = styled.div`
   display: grid;
   grid-template: repeat(2, max-content) / repeat(2, max-content);
   column-gap: 10px;

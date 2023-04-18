@@ -5,12 +5,12 @@ import styled from 'styled-components';
 
 import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
 import Controller from './controller/Controller';
-import EntityStatsList from './stats_list/entity_stats_list/EntityStatsList';
-import WeaponStatsList from './stats_list/weapon_stat_list/WeaponStatsList';
+import EntityStatList from './stat_list/entity_stat_list/EntityStatList';
+import WeaponStatList from './stat_list/weapon_stat_list/WeaponStatList';
 
 import type { RootState } from '../../state_store/store';
 
-const SquadDetails = () => {
+const SquadCompartor = () => {
   const navigate = useNavigate();
   const { bookmarkList } = useSelector((state: RootState) => state.squadBookmarkManager);
 
@@ -20,27 +20,27 @@ const SquadDetails = () => {
     }
   }, [bookmarkList, navigate]);
   return (
-    <SquadDetailsWrapper>
+    <SquadCompartorWrapper>
       <InfoWrapper>
         <ControllersContainer>
           <Controller position="left" />
           <Controller position="right" />
         </ControllersContainer>
-        <EntityStatsList />
-        <WeaponStatsList />
+        <EntityStatList />
+        <WeaponStatList />
       </InfoWrapper>
       <SquadBookmarkManagerTrack>
         <SquadBookmarkManagerWrapper>
           <SquadBookmarkManager />
         </SquadBookmarkManagerWrapper>
       </SquadBookmarkManagerTrack>
-    </SquadDetailsWrapper>
+    </SquadCompartorWrapper>
   );
 };
 
-export default SquadDetails;
+export default SquadCompartor;
 
-const SquadDetailsWrapper = styled.div`
+const SquadCompartorWrapper = styled.div`
   max-width: 1170px;
   margin: 0 auto;
   padding: 10px 0 60px;

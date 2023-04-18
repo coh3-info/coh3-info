@@ -10,7 +10,7 @@ import type { EntityStats } from '../../../../../types/stats/entityStats';
 
 const RADIO_NAME = 'penetration-radio-buton';
 
-interface PenetrationComparatorProps {
+interface PenetrationChartProps {
   data1: {
     entity: EntityStats | undefined;
     weapon: WeaponStats | undefined;
@@ -22,7 +22,7 @@ interface PenetrationComparatorProps {
   };
 }
 
-const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => {
+const PenetrationChart = ({ data1, data2 }: PenetrationChartProps) => {
   const [selected, setSlected] = useState('penetration');
   let weapon1PenetrationReadings: number[] = [];
   let weapon2PenetrationReadings: number[] = [];
@@ -54,8 +54,8 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
   };
 
   return (
-    <PenetrationComparatorWrapper>
-      <ComparatorHeader>
+    <PenetrationChartWrapper>
+      <ChartHeader>
         <SelectorCategory>관통력</SelectorCategory>
         <SelectButtonContainer>
           <SelectButton
@@ -102,7 +102,7 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
             후면
           </SelectButton>
         </SelectButtonContainer>
-      </ComparatorHeader>
+      </ChartHeader>
 
       <LineChartOfTwo
         labels={(weapon1PenetrationReadings.length > weapon2PenetrationReadings.length
@@ -121,19 +121,19 @@ const PenetrationComparator = ({ data1, data2 }: PenetrationComparatorProps) => 
           },
         }}
       />
-    </PenetrationComparatorWrapper>
+    </PenetrationChartWrapper>
   );
 };
 
-export default PenetrationComparator;
+export default PenetrationChart;
 
-const PenetrationComparatorWrapper = styled.article`
+const PenetrationChartWrapper = styled.article`
   border: solid 1px #979797;
   border-radius: 6px;
   padding: 20px;
 `;
 
-const ComparatorHeader = styled.div`
+const ChartHeader = styled.div`
   display: grid;
   grid-template: repeat(2, max-content) / repeat(2, max-content);
   column-gap: 10px;

@@ -221,6 +221,7 @@ const getBurstDurationReadingsByDitance = (weapon: WeaponStats, isMoving = false
   const burstDurationMultipliers = getReadingsByDistance(range, range.distance, durationMultiplier);
   const burstDurationReadings = burstDurationMultipliers.map((multiplier) => {
     let burstDurationReading = modifyStat(burstDurationAverage, canBurst ? multiplier : 0);
+
     if (isMoving) {
       burstDurationReading = modifyStat(burstDurationReading, canFireWhileMoving ? burstMultiplier : 0);
     }
@@ -331,13 +332,17 @@ const getFireCycleTimeReadingsByDistance = (weapon: WeaponStats, isMoving = fals
 };
 
 const getRoundsPerFireReadingsByDistance = (weapon: WeaponStats, isMoving = false) => {
-  const { canBurst } = weapon.burst;
+  const {
+    burst: { canBurst },
+    moving: { canFireWhileMoving },
+  } = weapon;
 
   const burstDurationReadings = getBurstDurationReadingsByDitance(weapon, isMoving);
   const ratesOfFire = getRateOfFireReadingsByDitance(weapon);
   const roundsPerFireReadings = burstDurationReadings.map((burstDuration, i) => {
     const rateOfFire = ratesOfFire[i];
-    return calcRoundsPerFire(canBurst, rateOfFire, burstDuration);
+
+    return isMoving && !canFireWhileMoving ? 0 : calcRoundsPerFire(canBurst, rateOfFire, burstDuration);
   });
 
   return roundsPerFireReadings;
@@ -395,7 +400,7 @@ export const getDPSReadingsByDistance = (weapon: WeaponStats, options?: DPSOptio
   const penetrationChanceReadings =
     armorDirection && target ? getPenetrationChanceReadings(weapon, target, armorDirection) : [];
 
-  const rpmReadings = getRPMReadingsByDistance(weapon);
+  const rpmReadings = getRPMReadingsByDistance(weapon, isMoving);
 
   const dpsReadings = rpmReadings.map((rpm, i) => {
     const accuracy = accuracyReadings[i];

@@ -16,7 +16,7 @@ const SquadDetails = () => {
 
   useEffect(() => {
     if (bookmarkList.length === 0) {
-      navigate('/');
+      navigate('/compare/squad-list');
     }
   }, [bookmarkList, navigate]);
   return (

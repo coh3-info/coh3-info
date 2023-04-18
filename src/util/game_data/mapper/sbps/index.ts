@@ -119,8 +119,8 @@ const mapUI = (squad: Squad, squadexts: any) => {
   const info = squadexts.race_list[0].race_data.info;
   const { icon_name, symbol_icon_name } = info;
 
-  squad.imageUrl.icon = `images/icons/${icon_name}.png`;
-  squad.imageUrl.symbolIcon = `images/icons/${symbol_icon_name}.png`;
+  squad.imageUrl.icon = `/images/icons/${icon_name}.png`;
+  squad.imageUrl.symbolIcon = `/images/icons/${symbol_icon_name}.png`;
 };
 
 const mapType = (squad: Squad, squadexts: any) => {

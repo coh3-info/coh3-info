@@ -4,10 +4,10 @@ const getRaceMarkUrl = (race: Race) => {
   if (race === '') {
     return '';
   }
-  const afrikaKorpsMark = 'images/icons/common/races/afrika_korps.png';
-  const americansMark = 'images/icons/common/races/american.png';
-  const britishMark = 'images/icons/common/races/british.png';
-  const germansMark = 'images/icons/common/races/german.png';
+  const afrikaKorpsMark = '/images/icons/common/races/afrika_korps.png';
+  const americansMark = '/images/icons/common/races/american.png';
+  const britishMark = '/images/icons/common/races/british.png';
+  const germansMark = '/images/icons/common/races/german.png';
 
   const raceUrlTable = {
     americans: americansMark,

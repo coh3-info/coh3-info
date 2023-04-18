@@ -57,10 +57,10 @@ const SquadBookmarkManager = () => {
           <EmptyMassage>목록에서 분대를 선택해 주세요.</EmptyMassage>
         )}
       </SquadListWrapper>
-      {path === '/' ? (
-        <LinkToSquadListButton to="/details">분대 상세 보기</LinkToSquadListButton>
+      {path === '/compare/squad-list' ? (
+        <LinkToSquadListButton to="/compare/comparator">분대 상세 보기</LinkToSquadListButton>
       ) : (
-        <LinkToSquadListButton to="/">분대 목록 보기</LinkToSquadListButton>
+        <LinkToSquadListButton to="/compare/squad-list">분대 목록 보기</LinkToSquadListButton>
       )}
     </SquadBookmarkManagerWrapper>
   );

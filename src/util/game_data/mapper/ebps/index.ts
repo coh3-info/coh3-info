@@ -9,7 +9,6 @@ const mapEbps = async (): Promise<Ebps> => {
 
   const ebps = await fetchEbps();
 
-  const start = Date.now();
   for (const race in ebps.races) {
     if (
       race === 'afrika_korps' ||
@@ -43,8 +42,6 @@ const mapEbps = async (): Promise<Ebps> => {
       }
     }
   }
-  const end = Date.now();
-  console.log('ebps mapping time: ', end - start, 'ms');
 
   return mappedEbps;
 };

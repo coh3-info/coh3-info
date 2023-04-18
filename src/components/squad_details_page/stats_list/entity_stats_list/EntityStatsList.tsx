@@ -10,13 +10,7 @@ import {
 } from '../../../../util/for_components/squad_details_page/entityStatsList';
 
 const EntityStatsList = () => {
-  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => {
-    const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state.squadBookmarkManager;
-    const bookmarkOnLeft = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
-    const bookmarkOnRight = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
-
-    return { bookmarkOnLeft, bookmarkOnRight };
-  });
+  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
   const selectedEntityIdOnLeft = bookmarkOnLeft?.selectedEntityId ?? '';
   const selectedEntityIdOnRight = bookmarkOnRight?.selectedEntityId ?? '';
 

@@ -20,11 +20,10 @@ interface ControllerProps {
 
 const Controller = ({ position = 'left' }: ControllerProps) => {
   const bookmark = useSelector((state: RootState) => {
-    const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state.squadBookmarkManager;
     if (position === 'left') {
-      return bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
+      return state.squadBookmarkManager.bookmarkOnLeft;
     } else {
-      return bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
+      return state.squadBookmarkManager.bookmarkOnRight;
     }
   });
 

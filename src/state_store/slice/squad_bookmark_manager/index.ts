@@ -9,14 +9,14 @@ import _removeAllBookmarks from './reducers/removeAllBookmarks';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 
 export type SquadBookmarkManagerInitialState = {
-  bookmarkIdOnLeft: string;
-  bookmarkIdOnRight: string;
+  bookmarkOnLeft: SquadBookmark | undefined;
+  bookmarkOnRight: SquadBookmark | undefined;
   bookmarkList: SquadBookmark[];
 };
 
 const initialState: SquadBookmarkManagerInitialState = {
-  bookmarkIdOnLeft: '',
-  bookmarkIdOnRight: '',
+  bookmarkOnLeft: undefined,
+  bookmarkOnRight: undefined,
   bookmarkList: [],
 };
 

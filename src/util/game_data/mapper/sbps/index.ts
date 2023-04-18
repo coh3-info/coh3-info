@@ -12,7 +12,6 @@ const mapSbps = async (): Promise<Sbps> => {
 
   const sbps = await fetchSbps();
 
-  const start = Date.now();
   for (const race in sbps.races) {
     if (race === 'afrika_korps' || race === 'american' || race === 'british_africa' || race === 'german') {
       for (const category in sbps.races[race]) {
@@ -34,9 +33,6 @@ const mapSbps = async (): Promise<Sbps> => {
       }
     }
   }
-
-  const end = Date.now();
-  console.log('sbps mapping time: ', end - start, 'ms');
 
   return mappedSbps;
 };

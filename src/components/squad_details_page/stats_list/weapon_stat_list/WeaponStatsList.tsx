@@ -61,6 +61,7 @@ const WeaponStatsList = () => {
   };
   return (
     <WeaponStatsListWrapper>
+      <Title>무기</Title>
       <WeaponSelectorContainer>
         <WeaponSelector options={weaponOptionsOnLeft} defaultValue={leftWeaponId} position="left" />
         <WeaponSelector options={weaponOptionsOnRight} defaultValue={rightWeaponId} position="right" />
@@ -102,8 +103,13 @@ const WeaponStatsListWrapper = styled.section`
   margin-top: 20px;
 `;
 
+const Title = styled.h2`
+  font-size: 1.25rem;
+  font-weight: 600;
+`;
+
 const WeaponSelectorContainer = styled.div`
-  margin-bottom: 10px;
+  margin: 10px 0 10px;
   display: flex;
   gap: 10px;
 `;

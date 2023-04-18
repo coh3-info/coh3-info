@@ -32,6 +32,7 @@ const EntityStatsList = () => {
 
   return (
     <EntityStatsListWrapper>
+      <Title>분대 구성원</Title>
       <EntitySelectorContainer>
         <EntitySelector options={entityOptionsOnLeft} defaultValue={selectedEntityIdOnLeft} position="left" />
         <EntitySelector options={entityOptionsOnRight} defaultValue={selectedEntityIdOnRight} position="right" />
@@ -47,8 +48,13 @@ const EntityStatsListWrapper = styled.section`
   margin-top: 20px;
 `;
 
+const Title = styled.h2`
+  font-size: 1.25rem;
+  font-weight: 600;
+`;
+
 const EntitySelectorContainer = styled.div`
-  margin-bottom: 10px;
+  margin: 10px 0 10px;
   display: flex;
   gap: 10px;
 `;

@@ -11,9 +11,13 @@ import {
 import SquadBookmarkItem from './SquadBookmarkItem';
 
 const SquadBookmarkManager = () => {
-  const { bookmarkList, bookmarkOnLeft, bookmarkOnRight } = useSelector(
-    (state: RootState) => state.squadBookmarkManager
-  );
+  const { bookmarkList, bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => {
+    const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state.squadBookmarkManager;
+    const bookmarkOnLeft = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
+    const bookmarkOnRight = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
+
+    return { bookmarkList, bookmarkOnLeft, bookmarkOnRight };
+  });
   const dispatch = useDispatch();
   const location = useLocation();
   const path = location.pathname;

@@ -5,18 +5,20 @@ const selectEntity: CaseReducer<
   SquadBookmarkManagerInitialState,
   PayloadAction<{ id: string; position: 'left' | 'right' }>
 > = (state, action) => {
-  const { id, position } = action.payload;
+  const { id: entityId, position } = action.payload;
+
+  let bookmark;
   switch (position) {
     case 'left':
-      if (state.bookmarkOnLeft !== undefined) {
-        state.bookmarkOnLeft.selectedEntityId = id;
-      }
+      bookmark = state.bookmarkList.find((bookmark) => bookmark.id === state.bookmarkIdOnLeft);
       break;
     case 'right':
-      if (state.bookmarkOnRight !== undefined) {
-        state.bookmarkOnRight.selectedEntityId = id;
-      }
+      bookmark = state.bookmarkList.find((bookmark) => bookmark.id === state.bookmarkIdOnRight);
       break;
+  }
+
+  if (bookmark !== undefined) {
+    bookmark.selectedEntityId = entityId;
   }
 };
 

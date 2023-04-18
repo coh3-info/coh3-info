@@ -10,6 +10,12 @@ const removeBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadActio
     return bookmark.id !== id;
   });
 
+  if (state.bookmarkIdOnLeft === id) {
+    state.bookmarkIdOnLeft = '';
+  } else if (state.bookmarkIdOnRight === id) {
+    state.bookmarkIdOnRight = '';
+  }
+
   state.bookmarkList = bookmarkListWithoutBookmarkOfId;
 };
 

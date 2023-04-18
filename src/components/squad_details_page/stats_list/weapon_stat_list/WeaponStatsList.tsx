@@ -18,7 +18,13 @@ import SelectButton from '../../../common/buttons/SelectButton';
 const WeaponStatsList = () => {
   const [comparator, setComparator] = useState<'rpm' | 'accuracy' | 'dps' | 'penetration'>('dps');
   const [isBriefly, setIsBriefly] = useState(true);
-  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
+  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => {
+    const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state.squadBookmarkManager;
+    const bookmarkOnLeft = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
+    const bookmarkOnRight = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
+
+    return { bookmarkOnLeft, bookmarkOnRight };
+  });
 
   const leftEntityId = bookmarkOnLeft?.selectedEntityId ?? '';
   const rightEntityId = bookmarkOnRight?.selectedEntityId ?? '';

@@ -5,18 +5,21 @@ const selectWeapon: CaseReducer<
   SquadBookmarkManagerInitialState,
   PayloadAction<{ id: string; position: 'left' | 'right' }>
 > = (state, action) => {
-  const { id, position } = action.payload;
+  const { id: weaponId, position } = action.payload;
+  const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state;
+
+  let bookmark;
   switch (position) {
     case 'left':
-      if (state.bookmarkOnLeft !== undefined) {
-        state.bookmarkOnLeft.selectedWeaponId = id;
-      }
+      bookmark = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
       break;
     case 'right':
-      if (state.bookmarkOnRight !== undefined) {
-        state.bookmarkOnRight.selectedWeaponId = id;
-      }
+      bookmark = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
       break;
+  }
+
+  if (bookmark !== undefined) {
+    bookmark.selectedWeaponId = weaponId;
   }
 };
 

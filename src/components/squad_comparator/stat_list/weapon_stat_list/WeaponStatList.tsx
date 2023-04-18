@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import StatsList from '../StatList';
+import StatList from '../StatList';
 import styled from 'styled-components';
 import WeaponSelector from './WeaponSelector';
 import {
@@ -15,10 +15,15 @@ import DPSComparator from './charts/DPSChart';
 import PenetrationComparator from './charts/PenetrationChart';
 import SelectButton from '../../../common/buttons/SelectButton';
 
-const WeaponStatsList = () => {
+const WeaponStatList = () => {
   const [comparator, setComparator] = useState<'rpm' | 'accuracy' | 'dps' | 'penetration'>('dps');
   const [isBriefly, setIsBriefly] = useState(true);
-  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
+  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => {
+    const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state.squadBookmarkManager;
+    const bookmarkOnLeft = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
+    const bookmarkOnRight = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
+    return { bookmarkOnLeft, bookmarkOnRight };
+  });
 
   const leftEntityId = bookmarkOnLeft?.selectedEntityId ?? '';
   const rightEntityId = bookmarkOnRight?.selectedEntityId ?? '';
@@ -60,7 +65,7 @@ const WeaponStatsList = () => {
     ),
   };
   return (
-    <WeaponStatsListWrapper>
+    <WeaponStatListWrapper>
       <Title>무기</Title>
       <WeaponSelectorContainer>
         <WeaponSelector options={weaponOptionsOnLeft} defaultValue={leftWeaponId} position="left" />
@@ -84,7 +89,7 @@ const WeaponStatsList = () => {
 
       <ComparatorContainter>{comparatorsTable[comparator]}</ComparatorContainter>
 
-      <StatsList statList1={statList1} statList2={statList2} />
+      <StatList statList1={statList1} statList2={statList2} />
       <MoreButtonContainer>
         <SelectButton type="radio" id="weapon-stat-list-brief" onSelect={() => setIsBriefly(true)} checked={isBriefly}>
           간략히
@@ -93,13 +98,13 @@ const WeaponStatsList = () => {
           자세히
         </SelectButton>
       </MoreButtonContainer>
-    </WeaponStatsListWrapper>
+    </WeaponStatListWrapper>
   );
 };
 
-export default WeaponStatsList;
+export default WeaponStatList;
 
-const WeaponStatsListWrapper = styled.section`
+const WeaponStatListWrapper = styled.section`
   margin-top: 20px;
 `;
 

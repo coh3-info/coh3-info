@@ -6,11 +6,18 @@ const removeBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadActio
   action
 ) => {
   const { id } = action.payload;
-  const bookmarkListWithoutBookmarkOfId = state.bookmarkList.filter((bookmark) => {
+  const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state;
+  const bookmarkListWithoutBookmarkOfId = bookmarkList.filter((bookmark) => {
     return bookmark.id !== id;
   });
 
   state.bookmarkList = bookmarkListWithoutBookmarkOfId;
+
+  if (bookmarkIdOnLeft === id) {
+    state.bookmarkIdOnLeft = '';
+  } else if (bookmarkIdOnRight === id) {
+    state.bookmarkIdOnRight = '';
+  }
 };
 
 export default removeBookmark;

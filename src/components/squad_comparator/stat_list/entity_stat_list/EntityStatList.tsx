@@ -10,7 +10,12 @@ import {
 } from '../../../../util/for_components/squad_comparator/entityStatList';
 
 const EntityStatList = () => {
-  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => state.squadBookmarkManager);
+  const { bookmarkOnLeft, bookmarkOnRight } = useSelector((state: RootState) => {
+    const { bookmarkList, bookmarkIdOnLeft, bookmarkIdOnRight } = state.squadBookmarkManager;
+    const bookmarkOnLeft = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnLeft);
+    const bookmarkOnRight = bookmarkList.find((bookmark) => bookmark.id === bookmarkIdOnRight);
+    return { bookmarkOnLeft, bookmarkOnRight };
+  });
   const selectedEntityIdOnLeft = bookmarkOnLeft?.selectedEntityId ?? '';
   const selectedEntityIdOnRight = bookmarkOnRight?.selectedEntityId ?? '';
 

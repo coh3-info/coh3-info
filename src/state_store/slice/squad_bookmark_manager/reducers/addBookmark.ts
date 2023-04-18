@@ -23,11 +23,11 @@ const addBookmark: CaseReducer<SquadBookmarkManagerInitialState, PayloadAction<P
   };
 
   if (state.bookmarkList.length === 0) {
-    state.bookmarkOnLeft = newBookmark;
+    state.bookmarkIdOnLeft = newBookmark.id;
   }
 
   if (state.bookmarkList.length === 1) {
-    state.bookmarkOnRight = newBookmark;
+    state.bookmarkIdOnRight = newBookmark.id;
   }
 
   state.bookmarkList = [...state.bookmarkList, newBookmark];

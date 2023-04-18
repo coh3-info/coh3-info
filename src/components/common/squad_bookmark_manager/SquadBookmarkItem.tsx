@@ -8,7 +8,7 @@ import { ImgContainer } from '../styles/ImgContainer.style';
 type SelectedSquadItemProps = {
   bookmark: SquadBookmark;
   removeBookmark: (id: string) => void;
-  selectBookmark: (id: string, isLeft: boolean) => void;
+  selectBookmark: (id: string, position: 'left' | 'right') => void;
   checkedLeft: boolean;
   checkedRight: boolean;
 };
@@ -29,13 +29,13 @@ const SquadBookmarkItem = ({
 
   return (
     <SquadBookmarkItemWrapper>
-      {path === '/details' && (
+      {path === '/compare/comparator' && (
         <RadioButtonsContainer>
           <SelectButton
             type="radio"
             id={`${bookmark.id}left`}
             name="bookmark-left"
-            onSelect={() => selectBookmark(id, true)}
+            onSelect={() => selectBookmark(id, 'left')}
             checked={checkedLeft}
             color="#5f68c8"
           />
@@ -43,7 +43,7 @@ const SquadBookmarkItem = ({
             type="radio"
             id={`${bookmark.id}right`}
             name="bookmark-right"
-            onSelect={() => selectBookmark(id, false)}
+            onSelect={() => selectBookmark(id, 'right')}
             checked={checkedRight}
             color="#ff5e5e"
           />

@@ -9,6 +9,7 @@ const mapEbps = async (): Promise<Ebps> => {
 
   const ebps = await fetchEbps();
 
+  const start = Date.now();
   for (const race in ebps.races) {
     if (
       race === 'afrika_korps' ||
@@ -42,6 +43,8 @@ const mapEbps = async (): Promise<Ebps> => {
       }
     }
   }
+  const end = Date.now();
+  console.log('ebps mapping time: ', end - start, 'ms');
 
   return mappedEbps;
 };
@@ -154,7 +157,7 @@ const mapCombat = (entity: Entity | WeaponEntity, exts: any) => {
     const splitedEbpPath = ebpPath.split('/');
 
     /* 현재 추출된 ebps.json에 ebps/races/[race]/campaign과 ebps/races/[race]/weapon/special의 폴더가 누락되어 있습니다.
-      해당폴더에 있는 Entity를 참조할 경우 오류가 생깁니다. 추후에 추출된 ebps.json에서 두개의 폴더가 누락되지 않는다면 아래의 조건문을 일요없을 것 입니다. */
+      해당폴더에 있는 Entity를 참조할 경우 오류가 생깁니다. 추후에 추출된 ebps.json에서 두개의 폴더가 누락되지 않는다면 아래의 조건문은 필요없을 것 입니다. */
     if (
       splitedEbpPath[splitedEbpPath.length - 3] === 'campaign' ||
       splitedEbpPath[splitedEbpPath.length - 2] === 'special'

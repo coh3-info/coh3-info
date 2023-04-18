@@ -9,6 +9,7 @@ const mapWeapons = async (): Promise<Weapons> => {
   const mappedWeapons: Weapons = {};
   const weapons = await fetchWeapons();
 
+  const start = Date.now();
   for (const race in weapons) {
     if (
       race === 'afrika_korps' ||
@@ -25,6 +26,9 @@ const mapWeapons = async (): Promise<Weapons> => {
       });
     }
   }
+
+  const end = Date.now();
+  console.log('weapons mapping time: ', end - start, 'ms');
 
   return mappedWeapons;
 };

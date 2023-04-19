@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { StatGroup } from '../../../types/for_components/squad_details_page/stat';
+import { StatGroup } from '../../../types/for_components/squad_comparator/stat';
+
 import StatItem from './StatItem';
 
 type StatItemsGroupProps = {

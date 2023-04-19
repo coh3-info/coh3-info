@@ -1,6 +1,6 @@
 import { createStatList } from './stat';
 
-import type { Stat, StatGroup } from '../../../types/for_components/squad_details_page/stat';
+import type { Stat, StatGroup } from '../../../types/for_components/squad_comparator/stat';
 import type { StatListFormat } from './stat';
 import type { WeaponStats } from '../../../types/stats/weaponStats';
 

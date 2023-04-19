@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { getAccuracyReadingsByDistance } from '../../../../../util/calculator/weapon';
 
 import SelectButton from '../../../../common/buttons/SelectButton';
@@ -7,53 +6,69 @@ import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 
 import type { EntityStats } from '../../../../../types/stats/entityStats';
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
+import type { AccuracyChartOption } from '../../../../../types/for_components/squad_comparator/weaponStatsChart';
 
 interface AccuracyChartProps {
-  weapon1: WeaponStats | undefined;
-  weapon2: WeaponStats | undefined;
-  entity1: EntityStats | undefined;
-  entity2: EntityStats | undefined;
+  data1: {
+    weapon: WeaponStats | undefined;
+    entity: EntityStats | undefined;
+  };
+  data2: {
+    weapon: WeaponStats | undefined;
+    entity: EntityStats | undefined;
+  };
+  option: AccuracyChartOption;
+  setOption: (newOption: AccuracyChartOption) => void;
 }
 
-const AccuracyChart = ({ weapon1, weapon2, entity1, entity2 }: AccuracyChartProps) => {
-  const [isAppliedTargetSize, setIsAppliedTargetSize] = useState(true);
-  const [isAppliedMoving, setIsAppliedMoving] = useState(false);
+const AccuracyChart = ({ data1, data2, option, setOption }: AccuracyChartProps) => {
+  const { isAppliedMoving, isAppliedTargetSize } = option;
   let weapon1AccuracyReadings: number[] = [];
   let weapon2AccuracyReadings: number[] = [];
 
-  if (weapon1 !== undefined && entity2 !== undefined) {
+  if (data1.weapon !== undefined && data2.entity !== undefined) {
     const options = {
-      target: isAppliedTargetSize ? entity2 : undefined,
+      target: isAppliedTargetSize ? data2.entity : undefined,
       isMoving: isAppliedMoving,
     };
 
-    weapon1AccuracyReadings = getAccuracyReadingsByDistance(weapon1, options).map((accuracy) => accuracy * 100);
+    weapon1AccuracyReadings = getAccuracyReadingsByDistance(data1.weapon, options).map((accuracy) => accuracy * 100);
   }
 
-  if (weapon2 !== undefined && entity1 !== undefined) {
+  if (data2.weapon !== undefined && data1.entity !== undefined) {
     const options = {
-      target: isAppliedTargetSize ? entity1 : undefined,
+      target: isAppliedTargetSize ? data1.entity : undefined,
       isMoving: isAppliedMoving,
     };
-    weapon2AccuracyReadings = getAccuracyReadingsByDistance(weapon2, options).map((accuracy) => accuracy * 100);
+    weapon2AccuracyReadings = getAccuracyReadingsByDistance(data2.weapon, options).map((accuracy) => accuracy * 100);
   }
 
-  const onApplyTargetSize = () => {
-    setIsAppliedTargetSize((prev) => !prev);
+  const onToggleTargetSize = () => {
+    const newOption: AccuracyChartOption = {
+      ...option,
+      isAppliedTargetSize: !isAppliedTargetSize,
+    };
+
+    setOption(newOption);
   };
 
-  const onApplyMoving = () => {
-    setIsAppliedMoving((prev) => !prev);
+  const onToggleMoving = () => {
+    const newOption: AccuracyChartOption = {
+      ...option,
+      isAppliedMoving: !isAppliedMoving,
+    };
+
+    setOption(newOption);
   };
 
   return (
     <AccuracyChartWrapper>
       <ChartHeader>
         <SelectButtonContainer>
-          <SelectButton id="apply-target-size-to-accuracy" onSelect={onApplyTargetSize} checked={isAppliedTargetSize}>
+          <SelectButton id="apply-target-size-to-accuracy" onSelect={onToggleTargetSize} checked={isAppliedTargetSize}>
             피격률 적용
           </SelectButton>
-          <SelectButton id="apply-moving-to-accuracy" onSelect={onApplyMoving} checked={isAppliedMoving}>
+          <SelectButton id="apply-moving-to-accuracy" onSelect={onToggleMoving} checked={isAppliedMoving}>
             이동중
           </SelectButton>
         </SelectButtonContainer>
@@ -63,8 +78,8 @@ const AccuracyChart = ({ weapon1, weapon2, entity1, entity2 }: AccuracyChartProp
           ? weapon1AccuracyReadings
           : weapon2AccuracyReadings
         ).map((_, i) => i)}
-        data1={{ label: weapon1?.id ?? '', data: weapon1AccuracyReadings }}
-        data2={{ label: weapon2?.id ?? '', data: weapon2AccuracyReadings }}
+        data1={{ label: data1.weapon?.id ?? '', data: weapon1AccuracyReadings }}
+        data2={{ label: data2.weapon?.id ?? '', data: weapon2AccuracyReadings }}
         axesOptions={{
           x: {
             title: '거리',
@@ -81,11 +96,7 @@ const AccuracyChart = ({ weapon1, weapon2, entity1, entity2 }: AccuracyChartProp
 
 export default AccuracyChart;
 
-const AccuracyChartWrapper = styled.div`
-  border: solid 1px #979797;
-  border-radius: 6px;
-  padding: 20px;
-`;
+const AccuracyChartWrapper = styled.div``;
 
 const ChartHeader = styled.div`
   display: grid;

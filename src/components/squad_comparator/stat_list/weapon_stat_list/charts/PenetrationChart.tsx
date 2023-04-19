@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { getPenetrationChanceReadings, getPenetrationReadingsByDistance } from '../../../../../util/calculator/weapon';
-import { useState } from 'react';
 
 import SelectButton from '../../../../common/buttons/SelectButton';
 import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
 import type { EntityStats } from '../../../../../types/stats/entityStats';
+import type { PenetrationChartOption } from '../../../../../types/for_components/squad_comparator/weaponStatsChart';
 
 const RADIO_NAME = 'penetration-radio-buton';
 
@@ -15,15 +15,16 @@ interface PenetrationChartProps {
     entity: EntityStats | undefined;
     weapon: WeaponStats | undefined;
   };
-
   data2: {
     entity: EntityStats | undefined;
     weapon: WeaponStats | undefined;
   };
+  option: PenetrationChartOption;
+  setOption: (newOption: PenetrationChartOption) => void;
 }
 
-const PenetrationChart = ({ data1, data2 }: PenetrationChartProps) => {
-  const [selected, setSlected] = useState('penetration');
+const PenetrationChart = ({ data1, data2, option, setOption }: PenetrationChartProps) => {
+  const { selected } = option;
   let weapon1PenetrationReadings: number[] = [];
   let weapon2PenetrationReadings: number[] = [];
 
@@ -50,7 +51,12 @@ const PenetrationChart = ({ data1, data2 }: PenetrationChartProps) => {
   }
 
   const onSelect = (value: string) => {
-    setSlected(value);
+    const newOption: PenetrationChartOption = {
+      ...option,
+      selected: value,
+    };
+
+    setOption(newOption);
   };
 
   return (
@@ -127,21 +133,19 @@ const PenetrationChart = ({ data1, data2 }: PenetrationChartProps) => {
 
 export default PenetrationChart;
 
-const PenetrationChartWrapper = styled.article`
-  border: solid 1px #979797;
-  border-radius: 6px;
-  padding: 20px;
-`;
+const PenetrationChartWrapper = styled.article``;
 
 const ChartHeader = styled.div`
   display: grid;
   grid-template: repeat(2, max-content) / repeat(2, max-content);
+  row-gap: 5px;
   column-gap: 10px;
 `;
 
 const SelectorCategory = styled.h3`
   font-size: 0.875rem;
   font-weight: 500;
+  text-align: right;
 `;
 
 const SelectButtonContainer = styled.div`

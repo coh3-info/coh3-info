@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import { getRPMReadingsByDistance } from '../../../../../util/calculator/weapon';
-import { useState } from 'react';
 
 import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 import SelectButton from '../../../../common/buttons/SelectButton';
 
 import type { WeaponStats } from '../../../../../types/stats/weaponStats';
+import type { RPMChartOption } from '../../../../../types/for_components/squad_comparator/weaponStatsChart';
 
 interface RPMChartProps {
   weapon1: WeaponStats | undefined;
   weapon2: WeaponStats | undefined;
+  option: RPMChartOption;
+  setOption: (newOption: RPMChartOption) => void;
 }
 
-const RPMChart = ({ weapon1, weapon2 }: RPMChartProps) => {
-  const [isAppliedMoving, setIsAppliedMoving] = useState(false);
+const RPMChart = ({ weapon1, weapon2, option, setOption }: RPMChartProps) => {
+  const { isAppliedMoving } = option;
   let weapon1RPMReadings: number[] = [];
   let weapon2RPMReadings: number[] = [];
   if (weapon1 !== undefined) {
@@ -24,15 +26,18 @@ const RPMChart = ({ weapon1, weapon2 }: RPMChartProps) => {
     weapon2RPMReadings = getRPMReadingsByDistance(weapon2, isAppliedMoving);
   }
 
-  const onApplyMoving = () => {
-    setIsAppliedMoving((prev) => !prev);
+  const onToggleMoving = () => {
+    const newOption: RPMChartOption = {
+      isAppliedMoving: !isAppliedMoving,
+    };
+    setOption(newOption);
   };
 
   return (
     <RPMChartWrapper>
       <ChartHeader>
         <SelectButtonContainer>
-          <SelectButton id="apply-moving-to-accuracy" onSelect={onApplyMoving} checked={isAppliedMoving}>
+          <SelectButton id="apply-moving-to-accuracy" onSelect={onToggleMoving} checked={isAppliedMoving}>
             이동중
           </SelectButton>
         </SelectButtonContainer>
@@ -59,11 +64,7 @@ const RPMChart = ({ weapon1, weapon2 }: RPMChartProps) => {
 
 export default RPMChart;
 
-const RPMChartWrapper = styled.div`
-  border: solid 1px #979797;
-  border-radius: 6px;
-  padding: 20px;
-`;
+const RPMChartWrapper = styled.div``;
 
 const ChartHeader = styled.div`
   display: grid;

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import StatItem from './StatItem';
 
-import type { Stat, StatGroup } from '../../../types/for_components/squad_details_page/stat';
+import StatItem from './StatItem';
 import StatItemGroup from './StatItemGroup';
+
+import type { Stat, StatGroup } from '../../../types/for_components/squad_comparator/stat';
 
 type StatListProps = {
   statList1: (Stat | StatGroup)[];

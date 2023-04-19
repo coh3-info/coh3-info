@@ -1,5 +1,5 @@
-import { StatGroup } from '../../../types/for_components/squad_details_page/stat';
-import { Stat } from '../../../types/for_components/squad_details_page/stat';
+import { StatGroup } from '../../../types/for_components/squad_comparator/stat';
+import { Stat } from '../../../types/for_components/squad_comparator/stat';
 
 import { StatListFormat, createStatList } from './stat';
 import type { EntityStats } from '../../../types/stats/entityStats';

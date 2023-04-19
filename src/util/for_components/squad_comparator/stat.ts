@@ -6,7 +6,7 @@ import type {
   StatGroup,
   StatValue,
   UnitOfStat,
-} from '../../../types/for_components/squad_details_page/stat';
+} from '../../../types/for_components/squad_comparator/stat';
 
 type Target = EntityStats | WeaponStats | undefined;
 type GetValue<T extends Target> = (target: T) => StatValue | StatValue[];

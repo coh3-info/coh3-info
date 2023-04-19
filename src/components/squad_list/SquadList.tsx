@@ -11,14 +11,18 @@ import { useState } from 'react';
 export interface Filters {
   race: string[];
   category: string[];
-  filter: string[];
+  anti: string[];
+  role: string[];
+  vehicleClassification: string[];
 }
 
 const SquadList = () => {
   const [filters, setFilters] = useState<Filters>({
     race: [],
     category: [],
-    filter: [],
+    anti: [],
+    role: [],
+    vehicleClassification: [],
   });
 
   const sbps = useSelector((state: RootState) => state.gameData.sbps);
@@ -35,16 +39,32 @@ const SquadList = () => {
 
     const isMatchRace = raceFilters.length > 0 ? raceFilters.includes(squad.race) : true;
     const isMatchCategory = categoryFilters.length > 0 ? categoryFilters.includes(squad.category) : true;
-    let isMatchFilter = filters.filter.length > 0 ? false : true;
+    let isMatchAnti = filters.anti.length > 0 ? false : true;
+    let isMatchRole = filters.role.length > 0 ? false : true;
+    let isMatchVehicleClassification = filters.vehicleClassification.length > 0 ? false : true;
 
-    for (const filter of filters.filter) {
+    for (const filter of filters.anti) {
       if (squad.filters.includes(filter)) {
-        isMatchFilter = true;
+        isMatchAnti = true;
         break;
       }
     }
 
-    return isMatchRace && isMatchCategory && isMatchFilter;
+    for (const filter of filters.role) {
+      if (squad.filters.includes(filter)) {
+        isMatchRole = true;
+        break;
+      }
+    }
+
+    for (const filter of filters.vehicleClassification) {
+      if (squad.filters.includes(filter)) {
+        isMatchVehicleClassification = true;
+        break;
+      }
+    }
+
+    return isMatchRace && isMatchCategory && isMatchAnti && isMatchRole && isMatchVehicleClassification;
   });
 
   return (
@@ -53,11 +73,15 @@ const SquadList = () => {
         <SquadListHeader filters={filters} setFilters={setFilters} />
         {isDoneAll ? (
           <ListContainer>
-            <List>
-              {squads.map((squad) => {
-                return <SquadListItem key={squad.id} squad={squad} />;
-              })}
-            </List>
+            {squads.length > 0 ? (
+              <List>
+                {squads.map((squad) => {
+                  return <SquadListItem key={squad.id} squad={squad} />;
+                })}
+              </List>
+            ) : (
+              <ListEmptyMessage>해당 조건에 맞는 분대가 없습니다.</ListEmptyMessage>
+            )}
           </ListContainer>
         ) : (
           <LoaderContainer>
@@ -114,11 +138,17 @@ const SquadBookmarkManagerWrapper = styled.div`
 
 const ListContainer = styled.div`
   margin-top: 20px;
-`;
-
-const List = styled.ul`
   border: solid 1px #c4c4c4;
   border-radius: 4px;
+`;
+
+const List = styled.ul``;
+
+const ListEmptyMessage = styled.p`
+  color: #979797;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 20px 0;
 `;
 
 const LoaderContainer = styled.div`

@@ -419,7 +419,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     id: 'm29_weasal_us',
     name: 'M29 Weasel Recon Vehicle',
     nameKO: 'M29 위즐 정찰 차량',
-    filters: [FILTER_TABLE.NON_COMBATANT.en, FILTER_TABLE.RECON.en],
+    filters: [FILTER_TABLE.NON_COMBATANT.en, FILTER_TABLE.RECON.en, FILTER_TABLE.LIGHT_VEHICLE.en],
     briefText: '비전투 / 정찰',
   },
   recovery_vehicle_us: {

@@ -56,7 +56,7 @@ const Controller = ({ position = 'left' }: ControllerProps) => {
               </ResourcesContainer>
               <CaptureStats>
                 <CaptureIcon>
-                  <img src="/images/icons/common/orders/rally.png" />
+                  <img src="/images/icons/common/orders/rally.png" alt="깃발아이콘" />
                 </CaptureIcon>
                 <span>점령</span> {squad.captureRate.capture} <span>중립화</span> {squad.captureRate.revert}
               </CaptureStats>

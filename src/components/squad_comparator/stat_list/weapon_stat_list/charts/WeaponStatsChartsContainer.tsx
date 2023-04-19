@@ -15,9 +15,10 @@ import type {
   RPMChartOption,
   WeaponStatsChartOptions,
 } from '../../../../../types/for_components/squad_comparator/weaponStatsChart';
+import AreaEffectChart from './AreaEffectChart';
 
 const WeaponStatsChartsContainer = () => {
-  const [chartName, setChartName] = useState<'rpm' | 'accuracy' | 'dps' | 'penetration'>('dps');
+  const [chartName, setChartName] = useState<'rpm' | 'accuracy' | 'dps' | 'penetration' | 'area_effect'>('dps');
   const [chartOptions, setChartOptions] = useState<WeaponStatsChartOptions>({
     dps: { isAppliedMoving: false, selectedArmor: 'none' },
     rpm: { isAppliedMoving: false },
@@ -86,6 +87,7 @@ const WeaponStatsChartsContainer = () => {
         setOption={setPenetrationChartOption}
       />
     ),
+    area_effect: <AreaEffectChart weapon1={leftWeapon} weapon2={rightWeapon} />,
   };
   return (
     <WeaponStatsChartsContainerWrapper>
@@ -101,6 +103,9 @@ const WeaponStatsChartsContainer = () => {
         </NavButton>
         <NavButton onClick={() => setChartName('penetration')} isSelected={chartName === 'penetration'}>
           관통력
+        </NavButton>
+        <NavButton onClick={() => setChartName('area_effect')} isSelected={chartName === 'area_effect'}>
+          범위피해
         </NavButton>
       </ChartNav>
       <ChartContainter>{chartsTable[chartName]}</ChartContainter>

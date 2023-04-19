@@ -412,3 +412,29 @@ export const getDPSReadingsByDistance = (weapon: WeaponStats, options?: DPSOptio
 
   return dpsReadings;
 };
+
+export const getAreaDamageReadingsByDistance = (weapon: WeaponStats) => {
+  const {
+    damage,
+    areaEffect: { areaInfo, distance, damageMultiplier },
+  } = weapon;
+  const damageAverage = calcAverage(damage.min, damage.max);
+  let damageMultiplierReadings: number[] = [];
+  if (areaInfo.areaType === 'circle') {
+    damageMultiplierReadings = getReadingsByDistance(
+      { min: 0, max: Math.round(areaInfo.radius * 100) },
+      {
+        near: Math.round(distance.near * 100),
+        mid: Math.round(distance.mid * 100),
+        far: Math.round(distance.far * 100),
+      },
+      damageMultiplier
+    );
+
+    if (damageMultiplierReadings.length > areaInfo.radius * 100 + 1) {
+      damageMultiplierReadings = damageMultiplierReadings.splice(0, areaInfo.radius * 100 + 1);
+    }
+  }
+
+  return damageMultiplierReadings.map((multiplier) => modifyStat(damageAverage, multiplier));
+};

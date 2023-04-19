@@ -49,12 +49,17 @@ const Controller = ({ position = 'left' }: ControllerProps) => {
                 </SquadNameContainer>
               </SquadTitle>
               <div>{SQUAD_CATEGORY_KO_TABLE[squad.category]}</div>
-
               <ResourcesContainer>
                 <ResourceCard type="manpower" value={squad.cost.manpower} />
                 <ResourceCard type="fuel" value={squad.cost.fuel} />
                 <ResourceCard type="population" value={squad.cost.population} />
               </ResourcesContainer>
+              <CaptureStats>
+                <CaptureIcon>
+                  <img src="/images/icons/common/orders/rally.png" />
+                </CaptureIcon>
+                <span>점령</span> {squad.captureRate.capture} <span>중립화</span> {squad.captureRate.revert}
+              </CaptureStats>
             </BasicInfo>
             <RaceMark>
               <img src={getRaceMarkUrl(squad.race)} alt="진영 마크" />
@@ -156,6 +161,30 @@ const SquadNameKO = styled.div`
 const ResourcesContainer = styled.div`
   display: flex;
   gap: 8px;
+`;
+
+const CaptureStats = styled.div`
+  display: flex;
+  align-items: center;
+
+  > span {
+    color: #979797;
+    margin-right: 3px;
+
+    &:last-child {
+      margin-left: 6px;
+    }
+  }
+`;
+
+const CaptureIcon = styled.div`
+  width: 24px;
+  height: 24px;
+
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const RaceMark = styled.div`

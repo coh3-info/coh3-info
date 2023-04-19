@@ -148,6 +148,11 @@ const DPSChart = ({ data1, data2, option, setOption }: DPSChartProps) => {
           },
         }}
       />
+      <Description>
+        DPS에 영향을 주는 데이터는 아주 많으며, 이 그래프에서는 정확하게 계산할 수 있는 데이터만을 고려하였습니다.
+        <br />
+        따라서, 범위피해같은 계산에서 제외된 요소가 있을 수 있습니다.
+      </Description>
     </DPSChartWrapper>
   );
 };
@@ -172,4 +177,11 @@ const SelectorCategory = styled.h3`
 const SelectButtonContainer = styled.div`
   display: flex;
   gap: 10px;
+`;
+
+const Description = styled.p`
+  margin-top: 10px;
+  color: #979797;
+  font-size: 0.875rem;
+  text-align: center;
 `;

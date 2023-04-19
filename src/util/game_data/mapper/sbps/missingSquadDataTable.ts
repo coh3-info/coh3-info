@@ -122,8 +122,8 @@ const missingSquadDataTable: MissingSquadDataTable = {
     id: 'halftrack_250_20mm_ak',
     name: '250/9 Armored Half-Track',
     nameKO: '250/9 반궤도장갑차',
-    filters: [FILTER_TABLE.ARMORED_CAR.en],
-    briefText: '--dev--briefText 확인필요',
+    filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARMORED_CAR.en],
+    briefText: '대보병',
   },
   halftrack_250_ak: {
     id: 'halftrack_250_ak',
@@ -136,8 +136,13 @@ const missingSquadDataTable: MissingSquadDataTable = {
     id: 'halftrack_250_mortar_ak',
     name: '250 Mortar_Half-Track',
     nameKO: '박격포 반궤도차량',
-    filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en, FILTER_TABLE.ARMORED_CAR.en],
-    briefText: '--dev--briefText 확인필요',
+    filters: [
+      FILTER_TABLE.ANTI_INFANTRY.en,
+      FILTER_TABLE.ANTI_STRUCTURE.en,
+      FILTER_TABLE.ARTILLERY.en,
+      FILTER_TABLE.ARMORED_CAR.en,
+    ],
+    briefText: '대보병 / 구조물 철거',
   },
   halftrack_251_stuka_ak: {
     id: 'halftrack_251_stuka_ak',
@@ -497,7 +502,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     name: 'Commando LMG Section',
     nameKO: '코만도 경기관총 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
-    briefText: '--dev- 인게임에서 brieftext 확인',
+    briefText: '대보병 / 정예',
   },
   guards_africa_uk: {
     id: 'guards_africa_uk',

@@ -26,21 +26,32 @@ const AccuracyChart = ({ data1, data2, option, setOption }: AccuracyChartProps) 
   let weapon1AccuracyReadings: number[] = [];
   let weapon2AccuracyReadings: number[] = [];
 
-  if (data1.weapon !== undefined && data2.entity !== undefined) {
-    const options = {
-      target: isAppliedTargetSize ? data2.entity : undefined,
-      isMoving: isAppliedMoving,
-    };
-
-    weapon1AccuracyReadings = getAccuracyReadingsByDistance(data1.weapon, options).map((accuracy) => accuracy * 100);
+  if (data1.weapon !== undefined) {
+    if (data2.entity !== undefined) {
+      const options = {
+        target: isAppliedTargetSize ? data2.entity : undefined,
+        isMoving: isAppliedMoving,
+      };
+      weapon1AccuracyReadings = getAccuracyReadingsByDistance(data1.weapon, options).map((accuracy) => accuracy * 100);
+    } else {
+      weapon1AccuracyReadings = getAccuracyReadingsByDistance(data1.weapon, { isMoving: isAppliedMoving }).map(
+        (accuracy) => accuracy * 100
+      );
+    }
   }
 
-  if (data2.weapon !== undefined && data1.entity !== undefined) {
-    const options = {
-      target: isAppliedTargetSize ? data1.entity : undefined,
-      isMoving: isAppliedMoving,
-    };
-    weapon2AccuracyReadings = getAccuracyReadingsByDistance(data2.weapon, options).map((accuracy) => accuracy * 100);
+  if (data2.weapon !== undefined) {
+    if (data1.entity !== undefined) {
+      const options = {
+        target: isAppliedTargetSize ? data1.entity : undefined,
+        isMoving: isAppliedMoving,
+      };
+      weapon2AccuracyReadings = getAccuracyReadingsByDistance(data2.weapon, options).map((accuracy) => accuracy * 100);
+    } else {
+      weapon2AccuracyReadings = getAccuracyReadingsByDistance(data2.weapon, { isMoving: isAppliedMoving }).map(
+        (accuracy) => accuracy * 100
+      );
+    }
   }
 
   const onToggleTargetSize = () => {

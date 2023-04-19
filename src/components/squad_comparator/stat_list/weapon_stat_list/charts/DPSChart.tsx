@@ -41,6 +41,8 @@ const DPSChart = ({ data1, data2, option, setOption }: DPSChartProps) => {
           : undefined,
       isMoving: isAppliedMoving,
     });
+  } else if (data1.weapon !== undefined) {
+    weapon1DPSReadings = getDPSReadingsByDistance(data1.weapon, { isMoving: isAppliedMoving });
   }
 
   if (data2.weapon !== undefined && data1.entity !== undefined) {
@@ -55,6 +57,8 @@ const DPSChart = ({ data1, data2, option, setOption }: DPSChartProps) => {
           : undefined,
       isMoving: isAppliedMoving,
     });
+  } else if (data2.weapon !== undefined) {
+    weapon2DPSReadings = getDPSReadingsByDistance(data2.weapon, { isMoving: isAppliedMoving });
   }
 
   const onToggleMoving = () => {

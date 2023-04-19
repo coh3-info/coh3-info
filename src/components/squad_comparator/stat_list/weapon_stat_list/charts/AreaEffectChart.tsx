@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getAreaDamageReadingsByDistance, getRPMReadingsByDistance } from '../../../../../util/calculator/weapon';
+import { getAreaDamageReadingsByDistance } from '../../../../../util/calculator/weapon';
 
 import LineChartOfTwo from '../../../../common/charts/LineChartOfTwo';
 

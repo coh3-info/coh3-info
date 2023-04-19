@@ -4,6 +4,7 @@ import StatItem from './StatItem';
 import StatItemGroup from './StatItemGroup';
 
 import type { Stat, StatGroup } from '../../../types/for_components/squad_comparator/stat';
+import ColorLabelContainer from './ColorLabelContainer';
 
 type StatListProps = {
   statList1: (Stat | StatGroup)[];
@@ -14,6 +15,7 @@ const StatList = ({ statList1 = [], statList2 = [] }: StatListProps) => {
   return (
     <StatListWrapper>
       <List>
+        <ColorLabelContainer />
         {statList1.map((stat) => {
           if ('stats' in stat) {
             return <StatItemGroup key={stat.name} statGroup={stat} />;
@@ -22,6 +24,7 @@ const StatList = ({ statList1 = [], statList2 = [] }: StatListProps) => {
         })}
       </List>
       <List>
+        <ColorLabelContainer />
         {statList2.map((stat) => {
           if ('stats' in stat) {
             return <StatItemGroup key={stat.name} statGroup={stat} />;

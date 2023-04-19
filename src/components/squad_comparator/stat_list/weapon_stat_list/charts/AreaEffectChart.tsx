@@ -40,6 +40,10 @@ const AreaEffectChart = ({ weapon1, weapon2 }: AreaEffectChartProps) => {
           },
         }}
       />
+      <Description>
+        범위형태가 원형인 범위효과의 피해량 그래프입니다. 범위형태가 사각형이거나 범위피해가 없는 무기는 표시되지
+        않습니다.
+      </Description>
     </AreaEffectChartWrapper>
   );
 };
@@ -47,3 +51,10 @@ const AreaEffectChart = ({ weapon1, weapon2 }: AreaEffectChartProps) => {
 export default AreaEffectChart;
 
 const AreaEffectChartWrapper = styled.div``;
+
+const Description = styled.p`
+  margin-top: 10px;
+  color: #979797;
+  font-size: 0.875rem;
+  text-align: center;
+`;

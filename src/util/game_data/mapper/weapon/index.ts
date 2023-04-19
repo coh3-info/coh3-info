@@ -165,7 +165,7 @@ const mapWeapon = (weaponId: string, file: any): Weapon => {
 
   if (deflection !== undefined) {
     weapon.deflection.deflectionDamageMultiplier = deflection.deflection_damage_multiplier;
-    weapon.deflection.hasDeflectionDamage = deflection.has_deflection_damage;
+    weapon.deflection.hasDeflectionDamage = deflection.has_deflection_damage === 'True' ? true : false;
   }
 
   if (fire !== undefined) {

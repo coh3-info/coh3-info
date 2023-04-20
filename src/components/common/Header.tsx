@@ -1,13 +1,16 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = () => {
   return (
     <HeaderWrapper>
       <HeaderInner>
-        <Title>
-          COH3 <span>INFO</span>
-          <BetaLabel>.BETA</BetaLabel>
-        </Title>
+        <TitleLink to="/">
+          <Title>
+            COH3 <span>INFO</span>
+            <BetaLabel>.BETA</BetaLabel>
+          </Title>
+        </TitleLink>
         <div>
           <GameDataVersion>
             GameData <br />
@@ -23,6 +26,7 @@ export default Header;
 
 const HeaderWrapper = styled.header`
   background-color: #353535;
+  padding: 0 12px;
 `;
 
 const HeaderInner = styled.div`
@@ -33,6 +37,10 @@ const HeaderInner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const TitleLink = styled(Link)`
+  text-decoration: none;
 `;
 
 const Title = styled.h1`

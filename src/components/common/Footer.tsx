@@ -22,6 +22,7 @@ export default Footer;
 const FooterWrapper = styled.header`
   background-color: #353535;
   height: 125px;
+  padding: 0 12px;
 `;
 
 const FooterInner = styled.div`

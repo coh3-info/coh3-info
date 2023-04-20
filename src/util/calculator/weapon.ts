@@ -145,9 +145,9 @@ export const getReadingsByDistanceOfOneSection = (
 };
 
 export const getReadingsByDistance = (range: MinMax, distance: Distance, multiplier: Distance) => {
-  const nearDistance = distance.near >= 0 ? distance.near : range.min;
-  const midDistance = distance.mid >= 0 ? distance.mid : Math.round((range.min + range.max) / 2);
-  const farDistance = distance.far >= 0 ? distance.far : range.max;
+  const nearDistance = distance.near >= 0 ? Math.round(distance.near) : range.min;
+  const midDistance = distance.mid >= 0 ? Math.round(distance.mid) : Math.round((range.min + range.max) / 2);
+  const farDistance = distance.far >= 0 ? Math.round(distance.far) : range.max;
 
   const fromZeroToMin = getReadingsByDistanceOfOneSection(0, range.min, NaN, NaN);
   const fromMinToNear = getReadingsByDistanceOfOneSection(range.min, nearDistance, multiplier.near, multiplier.near);

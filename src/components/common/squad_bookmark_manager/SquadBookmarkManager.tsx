@@ -66,9 +66,9 @@ const SquadBookmarkManager = () => {
         )}
       </SquadListWrapper>
       {path === '/compare/squad-list' ? (
-        <LinkToSquadListButton to="/compare/comparator">분대 상세 보기</LinkToSquadListButton>
+        <LinkToSquadListButton to="/compare/comparator">상세보기</LinkToSquadListButton>
       ) : (
-        <LinkToSquadListButton to="/compare/squad-list">분대 목록 보기</LinkToSquadListButton>
+        <LinkToSquadListButton to="/compare/squad-list">분대 목록</LinkToSquadListButton>
       )}
     </SquadBookmarkManagerWrapper>
   );

@@ -93,8 +93,8 @@ const SquadList = () => {
               <Progress isDone={isDoneWeapons}>{isDoneWeapons ? '완료' : '무기 데이터 불러오는 중...'}</Progress>
             </ProgressBar>
             <LoadingMassage>
-              불러오는 데이터의 양이 많아 처음 페이지 방문이시라면 로딩이 매우 오래 걸릴 수 있습니다. 이후 방문하실 땐
-              캐싱처리가 되어 좀 더 빠르게 로딩 될 것입니다. 추후에 로딩속도를 개선하겠습니다.
+              불러오는 데이터의 양이 많아 로딩이 매우 오래 걸릴 수 있습니다. <br />
+              추후에 빠른 로딩을 위해 노력하겠습니다.
             </LoadingMassage>
           </LoaderContainer>
         )}

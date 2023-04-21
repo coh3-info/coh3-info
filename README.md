@@ -1,3 +1,3 @@
 # COH3 Info
 
-game_data version - 1.1.3
+game_data version - 1.1.4

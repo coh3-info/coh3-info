@@ -38,16 +38,22 @@ Company of Heroe3(이하 coh3)는 게임 내 유닛의 능력치를 자세히 �
  ## 개발 아키택쳐
  이 프로젝트는 데이터를 추출하여 나온 json파일을 맵핑하여 사용합니다. 
  
- json파일의 데이터는 정의된 인터페이스로 맵핑되어야합니다. 데이터 인터페이스는 src/types/game_data/ 폴더 내부에 있습니다. (Unit은 맵핑된 데이터를 하나로 통합하는 인터페이스 입니다. 자세한 내용은 (`추후 노션링크 넣기 ...!!!`)에서 확인해주세요.)
+ json파일의 데이터는 정의된 인터페이스에 따라 맵핑되어야합니다. 데이터 인터페이스는 src/types/game_data/ 폴더에 위치해 있습니다. (Unit은 맵핑된 데이터를 하나로 통합하는 인터페이스 입니다. 자세한 내용은 `추후 노션링크 넣기 ...!!!`에서 확인해주세요.)
  ### 데이터 인터페이스 예시
  
- [Squad](https://github.com/coh3-info/coh3-info/blob/75e83910fc1debe1267ad73aaec6d6bd720a98c7/src/types/game_data/squad.d.ts#L10)
- 
- [Entity](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/entity.d.ts#L13)
- 
+ [Squad](https://github.com/coh3-info/coh3-info/blob/75e83910fc1debe1267ad73aaec6d6bd720a98c7/src/types/game_data/squad.d.ts#L10),
+ [Entity](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/entity.d.ts#L13),
  [Weapon](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/weapon.d.ts#L30)
  
- 이 외에도 다른 데이터 인터페이스가 있을 수 있고 추후에 추가될 수 있습니다. (Upgrade, Ablity, BattleGroup 등)
+
+ 맵핑된 데이터로 Stats객체를 생성해 사용합니다. Stats 인터페이스는 src/types/stats/ 폴더에 위치해 있습니다.
+ ### Stats 인터페이스 예시
+ 
+ [SquadStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/squadStats.d.ts#L3),
+ [EntityStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/entityStats.d.ts#L3),
+ [WeaponStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/weaponStats.d.ts#L14)
+ 
+ 
  
  ## 게임 데이터와 이미지
  게임 데이터와 이미지는 추출기 가이드에 따라 추출하여 사용합니다.

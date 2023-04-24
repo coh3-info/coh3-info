@@ -35,25 +35,47 @@ Company of Heroe3(이하 coh3)는 게임 내 유닛의 능력치를 자세히 �
  npm start
  ```
  
- ## 개발 아키택쳐
+ ## 개발 큰 틀
  이 프로젝트는 데이터를 추출하여 나온 json파일을 맵핑하여 사용합니다. 
  
- json파일의 데이터는 정의된 인터페이스에 따라 맵핑되어야합니다. 데이터 인터페이스는 src/types/game_data/ 폴더에 위치해 있습니다. (Unit은 맵핑된 데이터를 하나로 통합하는 인터페이스 입니다. 자세한 내용은 `추후 노션링크 넣기 ...!!!`에서 확인해주세요.)
- ### 데이터 인터페이스 예시
+ ### 데이터 맵핑 흐름도
+![data_map_flow drawio](https://user-images.githubusercontent.com/78804014/233899523-ecb9c97f-ac9b-4e2e-996f-07257d978cd6.png)
  
+ ### 데이터 인터페이스
+ json파일의 데이터는 정의된 인터페이스에 따라 맵핑됩니다.
+ ([예:sbps 맵핑 코드](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/util/game_data/mapper/sbps/index.ts#L10))
+ 
+ 이는 게임 데이터를 JS환경에서 좀 더 편하게 사용할 수 있게 가공하는 과정이라 생각할 수 있습니다.
+ 
+ 데이터 인터페이스는 src/types/game_data/ 폴더에 위치해 있습니다. (Unit은 맵핑된 데이터를 하나로 통합하는 인터페이스 입니다. 자세한 내용은 `추후 노션링크 넣기 ...!!!`에서 확인해주세요.)
+ 
+ 
+ #### 데이터 인터페이스 예시
  [Squad](https://github.com/coh3-info/coh3-info/blob/75e83910fc1debe1267ad73aaec6d6bd720a98c7/src/types/game_data/squad.d.ts#L10),
  [Entity](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/entity.d.ts#L13),
  [Weapon](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/weapon.d.ts#L30)
  
-
- 맵핑된 데이터로 Stats객체를 생성해 사용합니다. Stats 인터페이스는 src/types/stats/ 폴더에 위치해 있습니다.
- ### Stats 인터페이스 예시
+ ### Stats 인터페이스
+ 게임 데이터는 복잡하게 서로 연결되어 있습니다. 컴포넌트에서 좀 더 편하게 사용하기 위해 맵핑된 데이터로 Stats객체를 생성하여 사용합니다.
+  ([createUnitStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/util/stats/unitStats.ts#L7))
+  
+  예를들어 한 분대구성원의 충원비를 구하려면 Squad.reinforce.costPercentage와 Entity.cost.manpower를 곱하여 구해야 합니다. coh3의 게임데이터는 이와같이 계산하여 능력치를 구하는 경우가 많습니다. 이를 편하게 하기 위해 Stats객체를 생성할 때 계산을 해주고 이후에는 해당 속성을 참조하면 바로 능력치 값을 얻을 수 있게 하였습니다. 위의 예시에서 EntityStats객체를 생성하면 EntityStats.reinforce.manpower를 참조하여 간단하게 능력치 값을 구할 수 있습니다.
+ 
+ Stats 인터페이스는 src/types/stats/ 폴더에 위치해 있습니다.
+ 
+ #### Stats 예시
  
  [SquadStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/squadStats.d.ts#L3),
  [EntityStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/entityStats.d.ts#L3),
  [WeaponStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/weaponStats.d.ts#L14)
  
- 
+
+
+
+
+이 프로젝트에서 모든 유닛의 정보는 최종적으로 생성된 UnitStats객체로 다룹니다.
+
+
  
  ## 게임 데이터와 이미지
  게임 데이터와 이미지는 추출기 가이드에 따라 추출하여 사용합니다.

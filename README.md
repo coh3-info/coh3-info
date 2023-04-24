@@ -31,4 +31,15 @@ Company of Heroe3(이하 coh3)는 게임 내 유닛의 능력치를 자세히 �
  
  ## 개발 아키택쳐
  
+ ## 게임 데이터와 이미지
+ 게임 데이터와 이미지는 추출기 가이드에 따라 추출하여 사용합니다.
+ 추출기 가이드 : (추후 노션링크 추가하기..!!!)
+ 
+ (추출기 제작자분이 사용해도 좋다고 허락해주셨습니다.)
+ ### 데이터 추출기
+ https://github.com/cohstats/coh3-data
+ 
+ ### 이미지 추출기
+ https://github.com/cohstats/coh3-image-extractor
+ 
  

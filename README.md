@@ -3,10 +3,10 @@
 ![release version label](https://img.shields.io/static/v1?label=release&message=v0.1.1&color=blue&style=flat-square)
 ![game data version label](https://img.shields.io/static/v1?label=game_data&message=v1.1.4&color=green&style=flat-square)
 
-게임 Company of heroes3 유닛 정보 웹앱 프로젝트
+게임 Company of heroes3의 유닛 정보 웹앱 프로젝트입니다.
 
 웹 사이트 : https://coh3info.com
-
+노션 문서 : https://depv.notion.site/CoH3-info-50ca36fc84484aff9851099eb9928050
 
 ## 목표
 

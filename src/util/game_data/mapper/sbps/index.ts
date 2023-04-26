@@ -50,6 +50,7 @@ const mapSquad = (squadId: string, file: any, additionalData: AdditionalData): S
   squad.category = additionalData.category;
   squad.filters = additionalData.filters ?? [];
   squad.ui.briefText = additionalData.briefText ?? '';
+  squad.defaultWeapons = additionalData.defaultWeapons ?? [];
 
   if (file.extensions === undefined) {
     throw new Error(`extensions가 존재하지 않는 객체입니다. id: ${squadId}`);

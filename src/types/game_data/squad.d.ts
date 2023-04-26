@@ -46,6 +46,7 @@ export interface Squad {
     };
   };
   filters: string[];
+  defaultWeapons: string[];
 }
 
 export interface Sbps {

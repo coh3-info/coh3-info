@@ -119,9 +119,25 @@ export const createUnit = (squadId: string, data: Data): Unit | undefined => {
   const entities = getEntitiesOfSquad(squad, ebps);
   if (entities === undefined) return undefined;
 
-  const weaponPairs = getWeaponPairsOfSquad(entities, ebps, weapons);
+  const defaultWeaponEntities = squad.defaultWeapons.map((weaponEntityId) => {
+    const weaponEntity = ebps[weaponEntityId];
+    if (weaponEntity === undefined) {
+      throw new Error(`${weaponEntityId}가 ebps에 없습니다.`);
+    }
 
+    if (weaponEntity.category !== 'weapon') {
+      throw new Error(`${weaponEntityId}는 WeaponEntity가 아닙니다.`);
+    }
+
+    return weaponEntity;
+  });
+
+  const weaponPairs = getWeaponPairsOfSquad([...entities, ...defaultWeaponEntities], ebps, weapons);
   if (weaponPairs === undefined) return undefined;
+  console.log(squadId);
+  weaponPairs.forEach((pair) => {
+    console.log(`  ${pair[0].id} -> ${pair[1].id}`);
+  });
 
   const loadout = getLoadout(squad, { ebps: data.ebps, weapons: data.weapons });
   if (loadout === undefined) return undefined;

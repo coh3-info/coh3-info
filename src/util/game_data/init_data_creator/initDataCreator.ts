@@ -42,6 +42,7 @@ export const createInitSquad = (id: string): Squad => {
       },
     },
     filters: [],
+    defaultWeapons: [],
   };
 };
 

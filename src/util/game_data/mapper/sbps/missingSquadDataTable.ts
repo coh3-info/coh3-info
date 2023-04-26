@@ -8,6 +8,7 @@ export interface MissingSquadData {
   nameKO: string;
   briefText?: string;
   filters?: string[];
+  defaultWeapons?: string[];
 }
 
 //key는 squad의 id(데이터 파일이름)입니다.
@@ -30,6 +31,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '베르살리에리',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.MAINLINE.en],
     briefText: '대보병 / 주력',
+    defaultWeapons: ['w_lmg_breda_m30_bersaglieri_ak'],
   },
   guastatori_ak: {
     id: 'guastatori_ak',
@@ -37,6 +39,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '이탈리아 공병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_flamethrower_guastatori_ak'],
   },
   panzergrenadier_ak: {
     id: 'panzergrenadier_ak',
@@ -44,6 +47,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '기갑척탄병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.MAINLINE.en],
     briefText: '대보병 / 주력',
+    defaultWeapons: ['w_lmg_panzergrenadier_ak'],
   },
   panzerjaeger_inf_ak: {
     id: 'panzerjaeger_inf_ak',
@@ -51,6 +55,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '기갑엽병 분대',
     filters: [FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.SUPPORT.en],
     briefText: '대차량 / 지원',
+    defaultWeapons: ['w_panzerbuchse39_at_rifle_ak', 'w_lmg_panzerjaeger_ak'],
   },
   panzerpioneer_ak: {
     id: 'panzerpioneer_ak',
@@ -58,6 +63,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '기갑공병대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_flamethrower_panzerpioneer_ak', 'w_grb_39_grenade_launcher_he_ak'],
   },
 
   //afrika_korps - team_weapons
@@ -89,6 +95,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '카노네 다 105/28 곡사포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '중형포',
+    defaultWeapons: ['w_105mm_howitzer_cannone_barrage_ak'],
   },
   leig_75mm_ak: {
     id: 'leig_75mm_ak',
@@ -96,6 +103,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'le.IG 18 경포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '대보병 / 중화기',
+    defaultWeapons: ['w_75mm_barrage_leig_ak'],
   },
 
   //afrika_korps - vehicles
@@ -143,6 +151,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
       FILTER_TABLE.ARMORED_CAR.en,
     ],
     briefText: '대보병 / 구조물 철거',
+    defaultWeapons: ['w_81mm_barrage_mortar_halftrack_ak'],
   },
   halftrack_251_stuka_ak: {
     id: 'halftrack_251_stuka_ak',
@@ -150,6 +159,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '워킹 슈투카 로켓 발사대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en, FILTER_TABLE.ARMORED_CAR.en],
     briefText: '로켓포',
+    defaultWeapons: ['w_280mm_stuka_zufuss_rocket_ak'],
   },
   halftrack_7_flak_ak: {
     id: 'halftrack_7_flak_ak',
@@ -178,6 +188,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'L6/40 경전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.LIGHT_TANK.en],
     briefText: '대보병',
+    defaultWeapons: ['w_flamethrower_l6_40_ak'],
   },
   m13_40_ak: {
     id: 'm13_40_ak',
@@ -199,6 +210,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '3호 L형 중형전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 대차량',
+    defaultWeapons: ['w_mg34_panzer_iii_50mm_long_ak'],
   },
   panzer_iii_flame_ak: {
     id: 'panzer_iii_flame_ak',
@@ -213,6 +225,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '4호전차 Sd.Kfz. 161/1',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 대차량',
+    defaultWeapons: ['w_mg42_panzer_iv_ak'],
   },
   panzer_iv_command_ak: {
     id: 'panzer_iv_command_ak',
@@ -227,6 +240,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '세모벤테 다 75/18 돌격포',
     filters: [FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.ASSAULT_GUN.en],
     briefText: '대전차',
+    defaultWeapons: ['w_75mm_semovente_barrage_ak'],
   },
   stug_iii_ak: {
     id: 'stug_iii_ak',
@@ -234,6 +248,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '스터그 III 돌격포 Sd.Kfz. 142',
     filters: [FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.ASSAULT_GUN.en],
     briefText: '대전차',
+    defaultWeapons: ['w_mg42_stug_iii_ak'],
   },
   stug_iii_d_ak: {
     id: 'stug_iii_d_ak',
@@ -241,6 +256,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '스터그 III D형 돌격포',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_STRUCTURE.en, FILTER_TABLE.ASSAULT_GUN.en],
     briefText: '대보병 / 구조물 철거',
+    defaultWeapons: ['w_mg42_stug_iii_d_ak'],
   },
   tiger_ak: {
     id: 'tiger_ak',
@@ -276,6 +292,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '돌격 공병',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_flamethrower_engineer_us'],
   },
   bazooka_team_us: {
     id: 'bazooka_team_us',
@@ -283,6 +300,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '바주카 분대',
     filters: [FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.SUPPORT.en],
     briefText: '대차량 / 지원',
+    defaultWeapons: ['w_bazooka_bazooka_team_us'],
   },
   captain_us: {
     id: 'captain_us',
@@ -290,6 +308,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '대위 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_m1919a6_paratrooper_us'],
   },
   engineer_us: {
     id: 'engineer_us',
@@ -297,6 +316,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '공병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_flamethrower_engineer_us'],
   },
   paratrooper_us: {
     id: 'paratrooper_us',
@@ -304,6 +324,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '낙하산병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_m1919a6_paratrooper_us', 'w_bazooka_paratroopers_us'],
   },
   pathfinder_us: {
     id: 'pathfinder_us',
@@ -318,8 +339,8 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '소총병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.MAINLINE.en],
     briefText: '대보병 / 주력',
+    defaultWeapons: ['w_bar_riflemen_us'],
   },
-
   scout_us: {
     id: 'scout_us',
     name: 'Scout Squad',
@@ -340,6 +361,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'SSF 코만도 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_m1941_lmg_devils_brigade_us', 'w_bazooka_devils_brigade_us'],
   },
 
   //american - team_weapons
@@ -363,6 +385,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M1 박격포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '대보병 / 중화기',
+    defaultWeapons: ['w_81mm_barrage_mortar_us'],
   },
 
   //american - vehicles
@@ -379,6 +402,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M8 그레이하운드 장갑차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.ARMORED_CAR.en],
     briefText: '대보병 / 대차량',
+    defaultWeapons: ['w_50cal_greyhound_us'],
   },
   halftrack_75mm_us: {
     id: 'halftrack_75mm_us',
@@ -386,6 +410,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M3 75mm 주포 무장 장갑차',
     filters: [FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.ARMORED_CAR.en],
     briefText: '대전차',
+    defaultWeapons: ['w_75mm_howitzer_barrage_halftrack_75mm_us'],
   },
   halftrack_medical_us: {
     id: 'halftrack_medical_us',
@@ -419,6 +444,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M18 헬캣 구축 전차',
     filters: [FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.TANK_DESTROYER.en],
     briefText: '대전차',
+    defaultWeapons: ['w_50cal_hellcat_us'],
   },
   m29_weasal_us: {
     id: 'm29_weasal_us',
@@ -426,6 +452,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M29 위즐 정찰 차량',
     filters: [FILTER_TABLE.NON_COMBATANT.en, FILTER_TABLE.RECON.en, FILTER_TABLE.LIGHT_VEHICLE.en],
     briefText: '비전투 / 정찰',
+    defaultWeapons: ['w_30cal_weasal_us'],
   },
   recovery_vehicle_us: {
     id: 'recovery_vehicle_us',
@@ -445,6 +472,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
       FILTER_TABLE.SELF_PROPELLED_ARTILLERY.en,
     ],
     briefText: '대보병 / 구조물 철거',
+    defaultWeapons: ['w_75mm_howitzer_barrage_scott_us'],
   },
   sherman_76mm_us: {
     id: 'sherman_76mm_us',
@@ -452,6 +480,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M4A1(76) 셔먼 중형전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 대전차',
+    defaultWeapons: ['w_50cal_sherman_us'],
   },
   sherman_bulldozer_us: {
     id: 'sherman_bulldozer_us',
@@ -459,6 +488,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M4(105) 셔먼 불도저',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_STRUCTURE.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 구조물 철거',
+    defaultWeapons: ['w_50cal_sherman_us_bulldozer'],
   },
   sherman_easy_8_us: {
     id: 'sherman_easy_8_us',
@@ -466,6 +496,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M4A3E8 셔먼 이지 에잇',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 대전차',
+    defaultWeapons: ['w_50cal_sherman_us_base'],
   },
   sherman_us: {
     id: 'sherman_us',
@@ -473,6 +504,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M4A1 셔먼 중형전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 대차량',
+    defaultWeapons: ['w_50cal_sherman_us'],
   },
   sherman_whizbang_us: {
     id: 'sherman_whizbang_us',
@@ -480,6 +512,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M4A1 셔먼 위즈뱅',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '로켓포',
+    defaultWeapons: ['w_180mm_rocket_barrage_whizbang_us'],
   },
   truck_4x4_us: {
     id: 'truck_4x4_us',
@@ -503,6 +536,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '코만도 경기관총 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_bren_lmg_uk'],
   },
   guards_africa_uk: {
     id: 'guards_africa_uk',
@@ -515,6 +549,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
       FILTER_TABLE.ELITE.en,
     ],
     briefText: '범용',
+    defaultWeapons: ['w_bazooka_guards_africa_uk'],
   },
   gurkhas_africa_uk: {
     id: 'gurkhas_africa_uk',
@@ -522,6 +557,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '구르카 소총병대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_thompson_gurkhas_uk', 'w_bren_lmg_gurkhas_uk'],
   },
   sapper_africa_uk: {
     id: 'sapper_africa_uk',
@@ -529,6 +565,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '왕립 공병대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_flamethrower_sapper_africa_uk'],
   },
   tommy_africa_uk: {
     id: 'tommy_africa_uk',
@@ -536,6 +573,11 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '보병대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.MAINLINE.en],
     briefText: '대보병 / 주력',
+    defaultWeapons: [
+      'w_scoped_lee_enfield_tommy_africa_uk',
+      'w_boys_anti_tank_rifle_africa_uk',
+      'w_bren_lmg_africa_uk',
+    ],
   },
 
   //british_africa - team_weapons
@@ -566,6 +608,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'ML 3인치 박격포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '대보병 / 중화기',
+    defaultWeapons: ['w_81mm_barrage_mortar_uk'],
   },
   mortar_heavy_4_2_africa_uk: {
     id: 'mortar_heavy_4_2_africa_uk',
@@ -573,6 +616,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'ML 4.2인치 중박격포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '경포',
+    defaultWeapons: ['w_4_2_inch_barrage_heavy_mortar_uk'],
   },
   pack_howitzer_75mm_africa_uk: {
     id: 'pack_howitzer_75mm_africa_uk',
@@ -580,6 +624,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'M1 경야포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '경포',
+    defaultWeapons: ['w_75mm_pack_howitzer_barrage_us'],
   },
 
   //british_africa - vehicles
@@ -589,6 +634,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '비숍 자주포',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en, FILTER_TABLE.SELF_PROPELLED_ARTILLERY.en],
     briefText: '중형포',
+    defaultWeapons: ['w_25pdr_bishop_uk'],
   },
   centaur_africa_uk: {
     id: 'centaur_africa_uk',
@@ -610,6 +656,13 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '처칠 블랙 프린스 중전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.HEAVY_TANK.en],
     briefText: '대보병 / 대전차',
+  },
+  crusader_57mm_africa_uk: {
+    id: 'crusader_57mm_africa_uk',
+    name: 'Crusader III Medium Tank',
+    nameKO: '크루세이더 III 중형전차',
+    filters: [FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.MEDIUM_TANK.en],
+    briefText: '대전차',
   },
   crusader_aa_africa_uk: {
     id: 'crusader_aa_africa_uk',
@@ -701,6 +754,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '강하공병대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_mg15_jaeger_ger', 'w_grb_39_grenade_launcher_he_ger'],
   },
   grenadier_ger: {
     id: 'grenadier_ger',
@@ -708,6 +762,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '척탄병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.MAINLINE.en],
     briefText: '대보병 / 주력',
+    defaultWeapons: ['w_mp40_grenadier_ger'],
   },
   jaeger_ger: {
     id: 'jaeger_ger',
@@ -715,6 +770,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '엽병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_panzerschrek_stormtrooper_ger', 'w_g43_scoped_jaeger_ger'],
   },
   panzergrenadier_ger: {
     id: 'panzergrenadier_ger',
@@ -729,6 +785,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '공병대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.SUPPORT.en, FILTER_TABLE.ENGINEER.en],
     briefText: '대보병 / 지원',
+    defaultWeapons: ['w_flamethrower_pioneer_ger'],
   },
   sniper_ger: {
     id: 'sniper_ger',
@@ -743,6 +800,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '충격보병 분대',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ELITE.en],
     briefText: '대보병 / 정예',
+    defaultWeapons: ['w_mg42_stormtrooper_ger', 'w_mp44_stormtrooper_ger'],
   },
 
   //german - team_weapons
@@ -780,6 +838,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: 'GrW 34 박격포 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '대보병 / 중화기',
+    defaultWeapons: ['w_81mm_mortar_barrage_ger'],
   },
   nebelwerfer_150mm_ger: {
     id: 'nebelwerfer_150mm_ger',
@@ -787,6 +846,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '네벨베르퍼 42 로켓발사기 운용반',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en],
     briefText: '로켓포',
+    defaultWeapons: ['w_150mm_nebelwerfer_ger'],
   },
 
   //german - vehicles
@@ -803,6 +863,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '221 정찰 차량',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.RECON.en, FILTER_TABLE.ARMORED_CAR.en],
     briefText: '대보병 / 정찰',
+    defaultWeapons: ['w_20mm_panzerbuchse_armored_car_ger'],
   },
   brummbar_ger: {
     id: 'brummbar_ger',
@@ -831,6 +892,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '스툼멜 반궤도차량',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_STRUCTURE.en, FILTER_TABLE.ARMORED_CAR.en],
     briefText: '대보병 / 구조물 철거',
+    defaultWeapons: ['w_75mm_barrage_halftrack_stummel_ger'],
   },
   kettenkrad_ger: {
     id: 'kettenkrad_ger',
@@ -871,6 +933,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '4호 중형전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.MEDIUM_TANK.en],
     briefText: '대보병 / 대차량',
+    // defaultWeapons: ['w_mg42_panzer_iv_ger'] mg42 이미 맵핑 되어있음
   },
   stug_iii_d_ger: {
     id: 'stug_iii_d_ger',
@@ -878,6 +941,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '스터그 III D형 돌격포',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_VEHICLE.en, FILTER_TABLE.ASSAULT_GUN.en],
     briefText: '대보병 / 구조물 철거',
+    defaultWeapons: ['w_mg42_stug_iii_ger'],
   },
   stug_iii_ger: {
     id: 'stug_iii_ger',
@@ -885,6 +949,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '스터그 III G형 돌격포',
     filters: [FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.ASSAULT_GUN.en],
     briefText: '대전차',
+    defaultWeapons: ['w_mg42_stug_iii_ger'],
   },
   tiger_ger: {
     id: 'tiger_ger',
@@ -892,6 +957,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '티거 중전차',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ANTI_TANK.en, FILTER_TABLE.HEAVY_TANK.en],
     briefText: '대보병 / 대전차',
+    defaultWeapons: ['w_mg34_tiger_ger'],
   },
 
   truck_2_5_ger: {
@@ -908,6 +974,7 @@ const missingSquadDataTable: MissingSquadDataTable = {
     nameKO: '베스페 자주포',
     filters: [FILTER_TABLE.ANTI_INFANTRY.en, FILTER_TABLE.ARTILLERY.en, FILTER_TABLE.SELF_PROPELLED_ARTILLERY.en],
     briefText: '중형포',
+    defaultWeapons: ['w_105mm_wespe_ger'],
   },
 
   wirbelwind_ger: {

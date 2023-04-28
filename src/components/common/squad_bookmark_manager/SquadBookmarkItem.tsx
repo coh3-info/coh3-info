@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 import SelectButton from '../buttons/SelectButton';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
@@ -20,6 +20,7 @@ const SquadBookmarkItem = ({
   checkedLeft,
   checkedRight,
 }: SelectedSquadItemProps) => {
+  const theme = useTheme();
   const location = useLocation();
   const path = location.pathname;
   const {
@@ -37,7 +38,7 @@ const SquadBookmarkItem = ({
             name="bookmark-left"
             onSelect={() => selectBookmark(id, 'left')}
             checked={checkedLeft}
-            color="#5f68c8"
+            color={theme.colors.main.blue}
           />
           <SelectButton
             type="radio"
@@ -45,7 +46,7 @@ const SquadBookmarkItem = ({
             name="bookmark-right"
             onSelect={() => selectBookmark(id, 'right')}
             checked={checkedRight}
-            color="#ff5e5e"
+            color={theme.colors.main.red}
           />
         </RadioButtonsContainer>
       )}
@@ -75,7 +76,7 @@ const RemoveButton = styled.button`
   visibility: hidden;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: ${({ theme }) => theme.colors.main.hoverBg};
   }
 `;
 
@@ -84,7 +85,7 @@ const SquadBookmarkItemWrapper = styled.li`
   align-items: center;
   gap: 4px;
   padding: 4px 4px 4px 8px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
 
   &:hover > ${RemoveButton} {

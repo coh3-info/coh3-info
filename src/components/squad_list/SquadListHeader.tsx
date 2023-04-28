@@ -250,7 +250,7 @@ export default SquadListHeader;
 
 const SquadListHeaderWrapper = styled.div`
   padding: 20px;
-  border: solid 1px #c4c4c4;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
@@ -264,14 +264,14 @@ const FiltersContainer = styled.div`
 
 const ResetFilterButton = styled.button`
   background-color: transparent;
-  border: 1px solid #c4c4c4;
+  border: 1px solid ${({ theme }) => theme.colors.main.border};
   border-radius: 4px;
   height: min-content;
   padding: 5px;
   font-size: 0.75rem;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: ${({ theme }) => theme.colors.main.hoverBg};
   }
 `;
 

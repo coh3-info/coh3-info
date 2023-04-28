@@ -41,7 +41,7 @@ export default StatList;
 const StatListWrapper = styled.section`
   width: 100%;
   padding: 16px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
   display: flex;
 
@@ -51,7 +51,7 @@ const StatListWrapper = styled.section`
     display: block;
     width: 1px;
     height: 100%;
-    background-color: #c4c4c4;
+    background-color: ${({ theme }) => theme.colors.main.line};
     position: absolute;
     left: 50%;
     top: 0;

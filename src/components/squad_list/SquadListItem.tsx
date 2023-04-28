@@ -63,11 +63,11 @@ const SquadListItemWrapper = styled.li`
   cursor: pointer;
 
   &:not(:last-child) {
-    border-bottom: solid 1px #c4c4c4;
+    border-bottom: solid 1px ${({ theme }) => theme.colors.main.border};
   }
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: ${({ theme }) => theme.colors.main.hoverBg};
   }
 `;
 
@@ -101,7 +101,7 @@ const SquadNameKO = styled.div``;
 
 const SquadName = styled.div`
   font-size: 0.75rem;
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
 `;
 
 const SquadType = styled.div`

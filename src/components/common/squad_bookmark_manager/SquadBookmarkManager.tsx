@@ -79,7 +79,7 @@ export default SquadBookmarkManager;
 const SquadBookmarkManagerWrapper = styled.div`
   width: 240px;
   padding: 8px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
 `;
 
@@ -97,12 +97,12 @@ const Header = styled.div`
 const RemoveAllButton = styled.button`
   padding: 1px 3px;
   font-size: 12px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 3px;
   background-color: transparent;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: ${({ theme }) => theme.colors.main.hoverBg};
   }
 `;
 
@@ -119,7 +119,7 @@ const SquadList = styled.ul`
 
   > li {
     display: flex;
-    border: solid 1px #979797;
+    border: solid 1px ${({ theme }) => theme.colors.main.border};
     border-radius: 6px;
     font-size: 0.875rem;
   }
@@ -129,23 +129,23 @@ const EmptyMassage = styled.div`
   padding: 10px 0;
   text-align: center;
   font-size: 0.875rem;
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
 `;
 
 const LinkToSquadListButton = styled(Link)`
   width: 100%;
   height: 30px;
   margin-top: 20px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #000;
+  color: ${({ theme }) => theme.colors.main.textBlack};
   font-size: 0.875rem;
   text-decoration: none;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: ${({ theme }) => theme.colors.main.hoverBg};
   }
 `;

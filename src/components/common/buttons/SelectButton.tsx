@@ -48,8 +48,8 @@ const Input = styled.input<{ color?: string }>`
   display: none;
 
   &:checked + label::before {
-    background: radial-gradient(${({ color }) => color ?? '#000'} 3px, transparent 3px);
-    border-color: ${({ color }) => color ?? '#000'};
+    background: radial-gradient(${({ color, theme }) => color ?? theme.colors.main.textBlack} 3px, transparent 3px);
+    border-color: ${({ color, theme }) => color ?? theme.colors.main.textBlack};
   }
 `;
 
@@ -70,7 +70,8 @@ const Label = styled.label<{ type: SelectButtonType }>`
     display: block;
     width: 12px;
     height: 12px;
-    border: solid 1px #000;
+
+    border: solid 1px ${({ theme }) => theme.colors.main.textBlack};
     border-radius: ${({ type }) => (type === 'radio' ? '10px' : '3px')};
     box-sizing: border-box;
   }

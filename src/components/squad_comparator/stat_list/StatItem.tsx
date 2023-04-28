@@ -70,7 +70,7 @@ const StatName = styled.div<{ isInGroup: boolean }>`
   ${({ isInGroup }) =>
     isInGroup &&
     css`
-      color: #979797;
+      color: ${({ theme }) => theme.colors.main.subTextGray};
       font-size: 0.815rem;
     `}
 `;

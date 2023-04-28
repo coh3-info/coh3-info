@@ -20,20 +20,19 @@ const Footer = () => {
 export default Footer;
 
 const FooterWrapper = styled.header`
-  background-color: #353535;
+  background-color: ${({ theme }) => theme.colors.main.bgBlack};
   height: 125px;
   padding: 0 12px;
 `;
 
 const FooterInner = styled.div`
-  color: #fff;
   max-width: 1170px;
   margin: 0 auto;
   padding: 30px 0;
 `;
 
 const Paragraph = styled.p`
-  color: #b3b3b3;
+  color: ${({ theme }) => theme.colors.main.textGray};
   font-size: 0.8125rem;
   font-weight: 300;
   line-height: 1.4;

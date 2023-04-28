@@ -1,5 +1,6 @@
 import { Line } from 'react-chartjs-2';
 import type { ChartOptions } from 'chart.js';
+import { useTheme } from 'styled-components';
 
 interface Data {
   label: string;
@@ -29,6 +30,8 @@ interface LineChartOfTwoProps {
 }
 
 const LineChartOfTwo = ({ labels, data1, data2, axesOptions }: LineChartOfTwoProps) => {
+  const theme = useTheme();
+
   const defaultOptionOfData = { borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHitRadius: 10 };
   const options: ChartOptions<'line'> = {
     animation: false,
@@ -65,13 +68,13 @@ const LineChartOfTwo = ({ labels, data1, data2, axesOptions }: LineChartOfTwoPro
             ...defaultOptionOfData,
             label: data1.label,
             data: data1.data,
-            borderColor: '#5f68c8',
+            borderColor: theme.colors.main.blue,
           },
           {
             ...defaultOptionOfData,
             label: data2.label,
             data: data2.data,
-            borderColor: '#ff5e5e',
+            borderColor: theme.colors.main.red,
           },
         ],
       }}

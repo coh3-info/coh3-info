@@ -54,7 +54,7 @@ const InfoWrapper = styled.div`
 
 const ControllersContainer = styled.div`
   padding-top: 10px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.main.bgWhite};
   position: sticky;
   z-index: 10;
   top: 0;

@@ -25,7 +25,7 @@ const Header = () => {
 export default Header;
 
 const HeaderWrapper = styled.header`
-  background-color: #353535;
+  background-color: ${({ theme }) => theme.colors.main.bgBlack};
   padding: 0 12px;
 `;
 
@@ -41,10 +41,10 @@ const HeaderInner = styled.div`
 
 const TitleLink = styled(Link)`
   text-decoration: none;
+  color: ${({ theme }) => theme.colors.main.textWhite};
 `;
 
 const Title = styled.h1`
-  color: #ffffff;
   font-size: 1.75rem;
   font-weight: 300;
 
@@ -54,17 +54,16 @@ const Title = styled.h1`
   }
 `;
 
-const GameDataVersion = styled.div`
-  font-size: 13px;
-  font-weight: 100;
-  text-align: center;
-  color: #ffffff;
-`;
-
 const BetaLabel = styled.div`
   display: inline-block;
   font-size: 0.875rem;
-  color: #ffffff;
   font-weight: 300;
   margin-left: 3px;
+`;
+
+const GameDataVersion = styled.div`
+  font-size: 13px;
+  font-weight: 100;
+  color: ${({ theme }) => theme.colors.main.textWhite};
+  text-align: center;
 `;

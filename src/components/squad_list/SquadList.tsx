@@ -128,6 +128,10 @@ const ContentsContainer = styled.section`
 const SquadBookmarkManagerTrack = styled.div`
   position: relative;
   margin-left: 10px;
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
+    display: none;
+  }
 `;
 
 const SquadBookmarkManagerWrapper = styled.div`

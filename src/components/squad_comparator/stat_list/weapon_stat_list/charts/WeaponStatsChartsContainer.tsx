@@ -122,6 +122,7 @@ const WeaponStatsChartsContainerWrapper = styled.div`
 `;
 
 const ChartContainter = styled.div`
+  width: 100%;
   padding: 20px;
 `;
 

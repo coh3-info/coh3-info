@@ -1,6 +1,6 @@
 import { Line } from 'react-chartjs-2';
 import type { ChartOptions } from 'chart.js';
-import { useTheme } from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 interface Data {
   label: string;
@@ -57,30 +57,38 @@ const LineChartOfTwo = ({ labels, data1, data2, axesOptions }: LineChartOfTwoPro
         title: { display: true, text: axesOptions?.y?.title },
       },
     },
+    maintainAspectRatio: false,
   };
 
   return (
-    <Line
-      data={{
-        labels: labels,
-        datasets: [
-          {
-            ...defaultOptionOfData,
-            label: data1.label,
-            data: data1.data,
-            borderColor: theme.colors.main.blue,
-          },
-          {
-            ...defaultOptionOfData,
-            label: data2.label,
-            data: data2.data,
-            borderColor: theme.colors.main.red,
-          },
-        ],
-      }}
-      options={options}
-    />
+    <LineChartOfTwoWrapper>
+      <Line
+        data={{
+          labels: labels,
+          datasets: [
+            {
+              ...defaultOptionOfData,
+              label: data1.label,
+              data: data1.data,
+              borderColor: theme.colors.main.blue,
+            },
+            {
+              ...defaultOptionOfData,
+              label: data2.label,
+              data: data2.data,
+              borderColor: theme.colors.main.red,
+            },
+          ],
+        }}
+        options={options}
+      />
+    </LineChartOfTwoWrapper>
   );
 };
 
 export default LineChartOfTwo;
+
+const LineChartOfTwoWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: 16/ 9;
+`;

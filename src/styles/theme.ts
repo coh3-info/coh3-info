@@ -1,5 +1,4 @@
 import 'styled-components';
-import styled from 'styled-components';
 
 declare module 'styled-components' {
   type InitTheme = typeof theme;
@@ -41,8 +40,11 @@ const theme = {
       green: baseColors.green[0],
     },
   },
+  /**단위 px */
+  screenSize: {
+    mobile: 768,
+    tablet: 1024,
+  },
 } as const;
 
 export default theme;
-
-const a = styled.div``;

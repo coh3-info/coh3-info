@@ -41,6 +41,7 @@ const SquadCompartor = () => {
 export default SquadCompartor;
 
 const SquadCompartorWrapper = styled.div`
+  /* width: 100%; */
   max-width: 1170px;
   margin: 0 auto;
   padding: 10px 0 60px;
@@ -60,11 +61,20 @@ const ControllersContainer = styled.div`
   top: 0;
   display: flex;
   gap: 10px;
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
+    flex-direction: column;
+    position: static;
+  }
 `;
 
 const SquadBookmarkManagerTrack = styled.div`
   position: relative;
   margin-left: 10px;
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
+    display: none;
+  }
 `;
 
 const SquadBookmarkManagerWrapper = styled.div`

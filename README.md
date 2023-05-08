@@ -7,7 +7,7 @@
 
 웹 사이트 : https://coh3info.com
 
-노션 문서 : https://depv.notion.site/CoH3-info-50ca36fc84484aff9851099eb9928050
+노션 문서 : https://coh3-info.notion.site/CoH3-info-3ef3b44376764a2aab28d68d65d8896f
 
 ## 목표
 
@@ -46,7 +46,7 @@ npm start
 
 이 프로젝트는 게임데이터를 추출하여 나온 json파일을 맵핑하여 사용합니다.
 
-(게임데이터에 대한 설명을 보시려면 노션문서의 [게임데이터](https://depv.notion.site/68e28bc4850c491397a5e39e6a1143c6)를 읽어보세요.)
+(게임데이터에 대한 설명을 보시려면 노션문서의 [게임데이터](https://coh3-info.notion.site/1e71dddcd0b44711b665f9c2a5927a28)를 읽어보세요.)
 
 ### 데이터 맵핑 흐름도
 

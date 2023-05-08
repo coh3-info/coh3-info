@@ -1,6 +1,6 @@
 # COH3 Info
 
-![release version label](https://img.shields.io/static/v1?label=release&message=v0.1.2&color=blue&style=flat-square)
+![release version label](https://img.shields.io/static/v1?label=release&message=v0.1.3&color=blue&style=flat-square)
 ![game data version label](https://img.shields.io/static/v1?label=game_data&message=v1.1.4&color=green&style=flat-square)
 
 게임 Company of heroes3의 유닛 정보 웹앱 프로젝트입니다.

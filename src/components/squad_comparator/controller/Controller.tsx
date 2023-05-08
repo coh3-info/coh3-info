@@ -88,7 +88,7 @@ export default Controller;
 
 const ControllerWrapper = styled.div`
   width: 100%;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
   font-size: 0.875rem;
   overflow: hidden;
@@ -99,7 +99,7 @@ const Inner = styled.div`
 `;
 
 const ColorBar = styled.div<{ position: 'left' | 'right' }>`
-  background-color: ${({ position }) => (position === 'left' ? '#5f68c8' : '#ff5e5e')};
+  background-color: ${({ position, theme }) => (position === 'left' ? theme.colors.main.blue : theme.colors.main.red)};
   width: 100%;
   height: 3px;
 `;
@@ -149,7 +149,7 @@ const SquadTitle = styled.div`
 
 const SquadName = styled.div`
   font-size: 0.75rem;
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
 `;
 
 const SquadNameContainer = styled.div``;
@@ -168,7 +168,7 @@ const CaptureStats = styled.div`
   align-items: center;
 
   > span {
-    color: #979797;
+    color: ${({ theme }) => theme.colors.main.subTextGray};
     margin-right: 3px;
 
     &:last-child {
@@ -237,6 +237,6 @@ const EmptyText = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
   font-size: 24px;
 `;

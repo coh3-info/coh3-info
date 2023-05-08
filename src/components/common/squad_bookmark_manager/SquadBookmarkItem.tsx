@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import type { SquadBookmark } from '../../../types/bookmark/bookmark';
 import SelectButton from '../buttons/SelectButton';
 import getRaceMarkUrl from '../../../util/getRaceMarksUrl';
@@ -20,6 +20,7 @@ const SquadBookmarkItem = ({
   checkedLeft,
   checkedRight,
 }: SelectedSquadItemProps) => {
+  const theme = useTheme();
   const location = useLocation();
   const path = location.pathname;
   const {
@@ -37,7 +38,7 @@ const SquadBookmarkItem = ({
             name="bookmark-left"
             onSelect={() => selectBookmark(id, 'left')}
             checked={checkedLeft}
-            color="#5f68c8"
+            color={theme.colors.main.blue}
           />
           <SelectButton
             type="radio"
@@ -45,7 +46,7 @@ const SquadBookmarkItem = ({
             name="bookmark-right"
             onSelect={() => selectBookmark(id, 'right')}
             checked={checkedRight}
-            color="#ff5e5e"
+            color={theme.colors.main.red}
           />
         </RadioButtonsContainer>
       )}
@@ -56,40 +57,20 @@ const SquadBookmarkItem = ({
         <img src={squad.imageUrl.symbolIcon} alt={`${squad.nameKO} 심볼 아이콘`} />
       </SymbolIcon>
       <SquadName>{squad.nameKO}</SquadName>
-      <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
+      <RemoveButton onClick={() => removeBookmark(id)}>X</RemoveButton>
     </SquadBookmarkItemWrapper>
   );
 };
 
 export default SquadBookmarkItem;
 
-const RemoveButton = styled.button`
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: transparent;
-  visibility: hidden;
-
-  &:hover {
-    background-color: #dfdfdf;
-  }
-`;
-
 const SquadBookmarkItemWrapper = styled.li`
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 4px 4px 4px 8px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
-
-  &:hover > ${RemoveButton} {
-    visibility: visible;
-  }
 `;
 
 const RadioButtonsContainer = styled.div`
@@ -117,4 +98,21 @@ const SquadName = styled.div`
   font-size: 0.75rem;
   flex-grow: 1;
   word-break: keep-all;
+`;
+
+const RemoveButton = styled.button`
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+
+  font-size: 0.625rem;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.main.red};
+  }
 `;

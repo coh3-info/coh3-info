@@ -38,7 +38,7 @@ const EntitySelectorWrapper = styled.select`
   width: 100%;
   height: 30px;
   padding: 0 8px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
   display: flex;
   align-items: center;

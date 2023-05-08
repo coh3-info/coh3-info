@@ -117,16 +117,17 @@ export default WeaponStatsChartsContainer;
 
 const WeaponStatsChartsContainerWrapper = styled.div`
   margin-bottom: 10px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
 `;
 
 const ChartContainter = styled.div`
+  width: 100%;
   padding: 20px;
 `;
 
 const ChartNav = styled.nav`
-  border-bottom: solid 2px #c4c4c4;
+  border-bottom: solid 2px ${({ theme }) => theme.colors.main.line};
   padding: 0 20px;
   display: flex;
   gap: 10px;
@@ -151,6 +152,6 @@ const NavButton = styled.button<{ isSelected: boolean }>`
   }
 
   &:hover::after {
-    background-color: #ff5e5e;
+    background-color: ${({ theme }) => theme.colors.main.red};
   }
 `;

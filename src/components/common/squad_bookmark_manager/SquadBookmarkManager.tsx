@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../state_store/store';
 import {
@@ -23,8 +22,6 @@ const SquadBookmarkManager = () => {
     };
   });
   const dispatch = useDispatch();
-  const location = useLocation();
-  const path = location.pathname;
 
   const removeBookmark = (id: string) => {
     dispatch(_removeBookmark({ id }));
@@ -65,11 +62,6 @@ const SquadBookmarkManager = () => {
           <EmptyMassage>목록에서 분대를 선택해 주세요.</EmptyMassage>
         )}
       </SquadListWrapper>
-      {path === '/compare/squad-list' ? (
-        <LinkToSquadListButton to="/compare/comparator">상세보기</LinkToSquadListButton>
-      ) : (
-        <LinkToSquadListButton to="/compare/squad-list">분대 목록</LinkToSquadListButton>
-      )}
     </SquadBookmarkManagerWrapper>
   );
 };
@@ -77,9 +69,8 @@ const SquadBookmarkManager = () => {
 export default SquadBookmarkManager;
 
 const SquadBookmarkManagerWrapper = styled.div`
-  width: 240px;
   padding: 8px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
 `;
 
@@ -97,12 +88,12 @@ const Header = styled.div`
 const RemoveAllButton = styled.button`
   padding: 1px 3px;
   font-size: 12px;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 3px;
   background-color: transparent;
 
   &:hover {
-    background-color: #dfdfdf;
+    background-color: ${({ theme }) => theme.colors.main.hoverBg};
   }
 `;
 
@@ -119,7 +110,7 @@ const SquadList = styled.ul`
 
   > li {
     display: flex;
-    border: solid 1px #979797;
+    border: solid 1px ${({ theme }) => theme.colors.main.border};
     border-radius: 6px;
     font-size: 0.875rem;
   }
@@ -129,23 +120,5 @@ const EmptyMassage = styled.div`
   padding: 10px 0;
   text-align: center;
   font-size: 0.875rem;
-  color: #979797;
-`;
-
-const LinkToSquadListButton = styled(Link)`
-  width: 100%;
-  height: 30px;
-  margin-top: 20px;
-  border: solid 1px #979797;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #000;
-  font-size: 0.875rem;
-  text-decoration: none;
-
-  &:hover {
-    background-color: #dfdfdf;
-  }
+  color: ${({ theme }) => theme.colors.main.subTextGray};
 `;

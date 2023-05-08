@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import type { Squad } from '../../types/game_data/squad';
-
-import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
-import SquadListHeader from './SquadListHeader';
-import SquadListItem from './SquadListItem';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state_store/store';
 import { useState } from 'react';
+
+import SquadListHeader from './SquadListHeader';
+import SquadListItem from './SquadListItem';
+import SquadBookmarkManagerTrack from '../common/squad_bookmark_manager/SquadBookmarkTrack';
+
+import type { Squad } from '../../types/game_data/squad';
 
 export interface Filters {
   race: string[];
@@ -69,6 +70,7 @@ const SquadList = () => {
 
   return (
     <SquadListWrapper>
+      <SquadBookmarkManagerTrack />
       <ContentsContainer>
         <SquadListHeader filters={filters} setFilters={setFilters} />
         {isDoneAll ? (
@@ -99,11 +101,6 @@ const SquadList = () => {
           </LoaderContainer>
         )}
       </ContentsContainer>
-      <SquadBookmarkManagerTrack>
-        <SquadBookmarkManagerWrapper>
-          <SquadBookmarkManager />
-        </SquadBookmarkManagerWrapper>
-      </SquadBookmarkManagerTrack>
     </SquadListWrapper>
   );
 };
@@ -117,6 +114,16 @@ const SquadListWrapper = styled.div`
   margin: 0 auto;
   padding: 10px 0 60px;
   display: flex;
+  gap: 10px;
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.tablet}px`}) {
+    padding-left: 6px;
+    padding-right: 3px;
+  }
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
+    flex-direction: column;
+  }
 `;
 
 const ContentsContainer = styled.section`
@@ -125,27 +132,16 @@ const ContentsContainer = styled.section`
   padding-top: 10px;
 `;
 
-const SquadBookmarkManagerTrack = styled.div`
-  position: relative;
-  margin-left: 10px;
-`;
-
-const SquadBookmarkManagerWrapper = styled.div`
-  padding-top: 10px;
-  position: sticky;
-  top: 0;
-`;
-
 const ListContainer = styled.div`
   margin-top: 20px;
-  border: solid 1px #c4c4c4;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 4px;
 `;
 
 const List = styled.ul``;
 
 const ListEmptyMessage = styled.p`
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
   font-size: 1.25rem;
   text-align: center;
   padding: 20px 0;
@@ -162,7 +158,7 @@ const LoaderContainer = styled.div`
 const Loader = styled.div`
   height: 50px;
   width: 50px;
-  border: 3px solid #979797;
+  border: 3px solid ${({ theme }) => theme.colors.main.border};
   border-right-color: transparent;
   border-top-color: transparent;
   border-radius: 100%;
@@ -183,14 +179,14 @@ const ProgressBar = styled.div`
   width: 100%;
   max-width: 500px;
   height: fit-content;
-  border: solid 1px #979797;
+  border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 100px;
   display: flex;
 `;
 
 const Progress = styled.div<{ isDone?: boolean }>`
   font-size: 0.75rem;
-  background-color: ${({ isDone }) => (isDone ? '#45FF7A' : 'transparent')};
+  background-color: ${({ isDone, theme }) => (isDone ? theme.colors.main.green : 'transparent')};
   flex-basis: 33.34%;
   display: flex;
   justify-content: center;
@@ -198,20 +194,20 @@ const Progress = styled.div<{ isDone?: boolean }>`
   overflow: hidden;
 
   &:first-child {
-    border-right: solid 1px #979797;
+    border-right: solid 1px ${({ theme }) => theme.colors.main.border};
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
   }
 
   &:last-child {
-    border-left: solid 1px #979797;
+    border-left: solid 1px ${({ theme }) => theme.colors.main.border};
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
   }
 `;
 
 const LoadingMassage = styled.p`
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
   font-size: 0.875rem;
   max-width: 500px;
   text-align: center;

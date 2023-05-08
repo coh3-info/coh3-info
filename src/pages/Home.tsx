@@ -8,7 +8,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate('/compare/squad-list');
+    console.log('무한');
+    navigate('/compare/squad-list', { replace: true });
   }, [navigate]);
   return (
     <>

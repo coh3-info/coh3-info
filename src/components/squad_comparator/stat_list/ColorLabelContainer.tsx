@@ -49,9 +49,9 @@ const Label = styled.div`
 `;
 
 const LeftLabel = styled(Label)`
-  background-color: #5f68c8;
+  background-color: ${({ theme }) => theme.colors.main.blue};
 `;
 
 const RightLabel = styled(Label)`
-  background-color: #ff5e5e;
+  background-color: ${({ theme }) => theme.colors.main.red};
 `;

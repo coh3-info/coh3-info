@@ -185,7 +185,7 @@ const SelectButtonContainer = styled.div`
 
 const Description = styled.p`
   margin-top: 10px;
-  color: #979797;
+  color: ${({ theme }) => theme.colors.main.subTextGray};
   font-size: 0.875rem;
   text-align: center;
 `;

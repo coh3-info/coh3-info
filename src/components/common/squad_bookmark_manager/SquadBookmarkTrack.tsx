@@ -63,9 +63,14 @@ const SquadBookmarkManagerThumbHeader = styled.div`
 `;
 
 const BookmarkToggleButton = styled.button`
+  display: none;
   background-color: transparent;
   border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
+    display: block;
+  }
 `;
 
 const SquadBookmarkManagerWrapper = styled.div<{ isVisible: boolean }>`

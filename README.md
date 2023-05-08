@@ -92,7 +92,7 @@ Stats 인터페이스는 src/types/stats/ 폴더에 위치해 있습니다.
 
 게임 데이터와 이미지는 추출기 가이드에 따라 추출하여 사용합니다.
 
-[추출기 가이드](https://depv.notion.site/83bc75c8b4ea40a1adf7ad7789b04f73)
+[게임 자원 추출기 가이드](https://coh3-info.notion.site/2eb8d301aa9f402cb51d31fccbfedafa)
 
 (추출기 제작자분이 사용해도 좋다고 허락해주셨습니다.)
 

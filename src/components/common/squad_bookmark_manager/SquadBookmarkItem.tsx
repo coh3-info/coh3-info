@@ -57,28 +57,12 @@ const SquadBookmarkItem = ({
         <img src={squad.imageUrl.symbolIcon} alt={`${squad.nameKO} 심볼 아이콘`} />
       </SymbolIcon>
       <SquadName>{squad.nameKO}</SquadName>
-      <RemoveButton onClick={() => removeBookmark(id)}>×</RemoveButton>
+      <RemoveButton onClick={() => removeBookmark(id)}>X</RemoveButton>
     </SquadBookmarkItemWrapper>
   );
 };
 
 export default SquadBookmarkItem;
-
-const RemoveButton = styled.button`
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: transparent;
-  visibility: hidden;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.main.hoverBg};
-  }
-`;
 
 const SquadBookmarkItemWrapper = styled.li`
   display: flex;
@@ -87,10 +71,6 @@ const SquadBookmarkItemWrapper = styled.li`
   padding: 4px 4px 4px 8px;
   border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
-
-  &:hover > ${RemoveButton} {
-    visibility: visible;
-  }
 `;
 
 const RadioButtonsContainer = styled.div`
@@ -118,4 +98,21 @@ const SquadName = styled.div`
   font-size: 0.75rem;
   flex-grow: 1;
   word-break: keep-all;
+`;
+
+const RemoveButton = styled.button`
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+
+  font-size: 0.625rem;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.main.red};
+  }
 `;

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import type { Squad } from '../../types/game_data/squad';
-
-import SquadBookmarkManager from '../common/squad_bookmark_manager/SquadBookmarkManager';
-import SquadListHeader from './SquadListHeader';
-import SquadListItem from './SquadListItem';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state_store/store';
 import { useState } from 'react';
+
+import SquadListHeader from './SquadListHeader';
+import SquadListItem from './SquadListItem';
+import SquadBookmarkManagerTrack from '../common/squad_bookmark_manager/SquadBookmarkTrack';
+
+import type { Squad } from '../../types/game_data/squad';
 
 export interface Filters {
   race: string[];
@@ -69,6 +70,7 @@ const SquadList = () => {
 
   return (
     <SquadListWrapper>
+      <SquadBookmarkManagerTrack />
       <ContentsContainer>
         <SquadListHeader filters={filters} setFilters={setFilters} />
         {isDoneAll ? (
@@ -99,11 +101,6 @@ const SquadList = () => {
           </LoaderContainer>
         )}
       </ContentsContainer>
-      <SquadBookmarkManagerTrack>
-        <SquadBookmarkManagerWrapper>
-          <SquadBookmarkManager />
-        </SquadBookmarkManagerWrapper>
-      </SquadBookmarkManagerTrack>
     </SquadListWrapper>
   );
 };
@@ -117,27 +114,22 @@ const SquadListWrapper = styled.div`
   margin: 0 auto;
   padding: 10px 0 60px;
   display: flex;
+  gap: 10px;
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.tablet}px`}) {
+    padding-left: 6px;
+    padding-right: 3px;
+  }
+
+  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
+    flex-direction: column;
+  }
 `;
 
 const ContentsContainer = styled.section`
   width: 100%;
   max-width: 920px;
   padding-top: 10px;
-`;
-
-const SquadBookmarkManagerTrack = styled.div`
-  position: relative;
-  margin-left: 10px;
-
-  @media screen and (max-width: ${({ theme }) => `${theme.screenSize.mobile}px`}) {
-    display: none;
-  }
-`;
-
-const SquadBookmarkManagerWrapper = styled.div`
-  padding-top: 10px;
-  position: sticky;
-  top: 0;
 `;
 
 const ListContainer = styled.div`

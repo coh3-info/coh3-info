@@ -9,7 +9,8 @@ export const fetchSbps = async () => {
 };
 
 export const fetchEbps = async () => {
-  return await fetchData('/game_data/ebps.json');
+  const res = await fetch('/game_data/ebps.json', { headers: { 'Cache-Control': 'no-store' } });
+  return await res.json();
 };
 
 export const fetchWeapons = async () => {

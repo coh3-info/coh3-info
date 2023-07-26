@@ -14,7 +14,7 @@ const Header = () => {
         <div>
           <GameDataVersion>
             GameData <br />
-            v1.1.4
+            v1.1.6
           </GameDataVersion>
         </div>
       </HeaderInner>

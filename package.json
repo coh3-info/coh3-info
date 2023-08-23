@@ -1,6 +1,6 @@
 {
   "name": "coh3-info",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",

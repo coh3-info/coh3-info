@@ -1,3 +1,18 @@
+- [COH3 Info](#coh3-info)
+  - [목표](#--)
+  - [기술 스택](#-----)
+    - [클라이언트](#-----)
+    - [배포](#--)
+  - [개발 환경 실행법](#---------)
+  - [게임 데이터를 다루는 법](#-------------)
+    - [데이터 맵핑 흐름도](#----------)
+    - [추출된 데이터 json파일](#--------json--)
+    - [모델 객체](#-----)
+    - [Stats 객체](#stats---)
+  - [게임 데이터와 이미지](#-----------)
+    - [데이터 추출기](#-------)
+    - [이미지 추출기](#-------)
+
 # COH3 Info
 
 ![release version label](https://img.shields.io/static/v1?label=release&message=v0.1.5&color=blue&style=flat-square)
@@ -57,15 +72,26 @@ npm start
 
 ![data_map_flow drawio](https://user-images.githubusercontent.com/78804014/233899523-ecb9c97f-ac9b-4e2e-996f-07257d978cd6.png)
 
+1. 게임데이터 파일을 데이터추출기를 통해 추출합니다. 추출된 데이터는 json파일에 담깁니다.
+2. 웹페이지에 접속하면 json파일을 서버에 요청하여 가져옵니다.
+3. 응답으로 json파일을 받으면 json파일을 맵핑하여 모델객체를 생성합니다. (Squad, Entity 등)
+4. 맵핑이 완료되면 전역 state로 저장됩니다.
+5. 하나의 유닛을 구성하는 모든 모델객체를 참조하고 있는 Unit을 생성합니다.
+6. Unit를 이용해 UnitStats를 생성합니다.
+   1. UnitStats는 생성될 때 Stats객체들을 생성하고 참조합니다.
+   2. Stats객체는 Unit에 포함된 모델객체를 기반으로 생성됩니다.
+7. UnitStats통해 Stats객체를 참조할 수 있고 이 Stats객체의 속성을 통해 게임유닛의 정보를 알 수 있습니다.
+
 ### 추출된 데이터 json파일
 
 게임 데이터는 추출기를 통해 json파일형태로 추출됩니다. 게임의 거의 모든 데이터가 포함됩니다. 이중에는 이 프로젝트에서 필요없는 데이터도 모두 포함합니다.
 
-소총병 분대를 예로 들어보겠습니다. (실제로는 아주 많은 속성이 있습니다. 예시를 위해 간략화 하여 실제와 다를 수 있습니다.)
+소총병 분대를 예로 들어보겠습니다. (실제로는 아주 많은 속성이 있습니다. 예시를 위해 간략화하여 실제와 다를 수 있습니다.)
+
+sbps.json
 
 ```json
 {
-  //sbps.json
   "riflemen_us": {
     "name": "Riflemen Squad",
     "faction": "america",
@@ -100,7 +126,7 @@ npm start
 
 데이터는 정의된 인터페이스에 따라 맵핑됩니다.
 
-다음은 맵핑된 모델 객체의 간략화된 예시입니다.
+다음은 맵핑된 모델 객체 예시입니다.
 
 ```ts
 interface Squad {
@@ -114,22 +140,26 @@ interface Squad {
   }[];
 }
 
-const riflemenSquad: Squad = {
-  id: 'riflemen_us',
-  name: 'Riflemen Squad',
-  faction: 'america',
-  canCapture: true,
-  loadout: [
-    {
-      entity: 'ebps/rifleman_squad_leader_us',
-      num: 1,
-    },
-    {
-      entity: 'ebps/rifleman_us',
-      num: 5,
-    },
-  ],
-};
+//state를 가져오는 예시입니다. 실제 코드는 다릅니다.
+const riflemenSquad: Squad = squadsState.get('riflemen_us');
+/* 
+  {
+    id: 'riflemen_us',
+    name: 'Riflemen Squad',
+    faction: 'america',
+    canCapture: true,
+    loadout: [
+      {
+        entity: 'ebps/rifleman_squad_leader_us',
+        num: 1,
+      },
+      {
+        entity: 'ebps/rifleman_us',
+        num: 5,
+      },
+    ],
+  };
+*/
 ```
 
 `canCapture`속성이 문자열 "True"에서 부울값 true로 변경되었고, `voice`속성은 걸러진 것을 볼 수 있습니다. 추가로 `id`속성으로 'riflemen_us'값이 설정되었습니다.
@@ -138,7 +168,7 @@ const riflemenSquad: Squad = {
 [Entity](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/entity.d.ts#L13),
 [Weapon](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/game_data/weapon.d.ts#L30)
 
-이제 데이터 맵핑까지 했으니 필요한 정보를 구해보겠습니다. 필요한 정보는 분대이름, 분대진영, 분대체력, 분대가격 등이 있습니다.
+이제 데이터 맵핑까지 했으니 필요한 정보를 구해보겠습니다. 필요한 정보는 분대이름, 분대진영, 분대체력, 분대비용 등이 있습니다.
 
 그전에 분대구성원 객체인 Entity 모델 객체의 예시를 보겠습니다. (Enity 모델 객체는 ebps.json을 맵핑하여 생성합니다.)
 
@@ -148,24 +178,31 @@ interface Entity {
   hitpoint: number;
   cost: number;
   speed: number;
-  hardpoint: string[]
+  hardpoint: string[];
 }
 
-const riflemanSquadLeader: Entity = {
-  id: 'rifleman_squad_leader_us'
-  hitpoint: 100,
-  cost: 60,
-  speed: 3.6,
-  hardpoint: []
-}
+//state를 가져오는 예시입니다. 실제 코드는 다릅니다.
+const riflemanSquadLeader: Entity = entitiesState.get('rifleman_squad_leader_us');
+/*
+  {
+    id: 'rifleman_squad_leader_us',
+    hitpoint: 100,
+    cost: 60,
+    speed: 3.6,
+    hardpoint: [],
+  };
+*/
 
-const rifleman: Entity = {
-  id: 'rifleman_us'
-  hitpoint: 100,
-  cost: 50,
-  speed: 3.6,
-  hardpoint: []
-}
+const rifleman: Entity = entitiesState.get('rifleman_us');
+/*
+  {
+    id: 'rifleman_us',
+    hitpoint: 100,
+    cost: 50,
+    speed: 3.6,
+    hardpoint: [],
+  };
+*/
 ```
 
 Squad 모델 객체는 loadout속성을 통해 이 Entity 모델 객체를 참조합니다.
@@ -174,7 +211,7 @@ Squad 모델 객체는 loadout속성을 통해 이 Entity 모델 객체를 참�
 
 우선 분대이름과 분대진영은 `riflmenSquad.name`, `riflemenSquad.faction`으로 구할 수 있습니다.
 
-분대가격은 해당 분대를 구성하는 분대구성원들의 가격의 합으로 구할 수 있습니다.
+분대비용은 해당 분대를 구성하는 각 분대구성원의 비용을 합해 구할 수 있습니다.
 
 ```ts
 const riflemenSquadCost =
@@ -202,7 +239,7 @@ interface SquadStats {
   name: string;
   faction: string;
   canCapture: boolean;
-  health: number;
+  hitpoint: number;
   cost: number;
   loadout: {
     entity: string;
@@ -210,27 +247,32 @@ interface SquadStats {
   }[];
 }
 
-const riflemenSquad: SquadStats = {
-  id: 'riflemen_us',
-  name: 'Riflemen Squad',
-  faction: 'america',
-  canCapture: true,
-  health: 600;
-  cost: 260;
-  loadout: [
-    {
-      entity: 'ebps/rifleman_squad_leader_us',
-      num: 1,
-    },
-    {
-      entity: 'ebps/rifleman_us',
-      num: 5,
-    },
-  ],
-}
+const riflemenSquad: SquadStats = createUnit(unit).squad;
+/*
+  {
+    id: 'riflemen_us',
+    name: 'Riflemen Squad',
+    faction: 'america',
+    canCapture: true,
+    hitpoint: 600,
+    cost: 260,
+    loadout: [
+      {
+        entity: 'ebps/rifleman_squad_leader_us',
+        num: 1,
+      },
+      {
+        entity: 'ebps/rifleman_us',
+        num: 5,
+      },
+    ],
+  };
+*/
 ```
 
-생성된 SquadStats객체를 통해 계산과정을 신경쓰지 않고 체력과 가격 정보를 구할 수 있습니다.
+이제 `riflemenSquad.hitpoint`, `riflemeneSquad.cost`로 간단하게 체력과 비용을 구할 수 있습니다.
+
+계산식이 바뀐다고 하여도 Stats객체를 생성하는 코드만 수정해주면 됩니다.
 
 Stats객체 생성 코드:
 [createUnitStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/util/stats/unitStats.ts#L7)

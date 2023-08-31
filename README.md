@@ -281,6 +281,114 @@ Stats 인터페이스: [SquadStats](https://github.com/coh3-info/coh3-info/blob/
 [EntityStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/entityStats.d.ts#L3),
 [WeaponStats](https://github.com/coh3-info/coh3-info/blob/010b86d8737325fb2dbc1c5537a16fdf917f77a9/src/types/stats/weaponStats.d.ts#L14)
 
+## 필터
+
+사용자들이 특정 상황에 적절한 유닛을 쉽게 찾을 수 있도록 리스트를 필터링 해주는 기능이 있습니다.
+<br>
+만약 '미국 진영의 대전차가 가능한 유닛'을 찾고싶다면 '미국', '대전차' 필터를 체크해주면 쉽게 찾을 수 있습니다.
+
+더 다양한 상황에 필터링 할 수 있도록 게임에서 역할이 분명 있지만 데이터상으로는 그 분류가 명시되어 있지 않는 기준을 추가로 제공하고 있습니다.
+<br>
+위에서 '미국'은 데이터상에 명시되어 있지만 '대전차'는 명시되어 있지 않습니다. 그러므로 '대전차'를 기준으로 필터링 할 수 있게 필터 데이터를 제공해야합니다. 필터데이터를 커스텀필터라고합니다.
+
+### 커스텀 필터 구조
+
+커스텀필터를 제공하기위해 아래와 같은 객체구조를 사용합니다.
+
+```ts
+interface Filter {
+  type: 'anti' | 'role' | 'vehicle-classification';
+  en: string;
+  ko: string;
+}
+
+interface FilterTable {
+  [key: string]: Filter;
+}
+
+export const FILTER_TABLE: FilterTable = {
+  //대응
+  ANTI_INFANTRY: { type: 'anti', en: 'anti_infantry', ko: '대보병' },
+  ANTI_TANK: { type: 'anti', en: 'anti_tank', ko: '대전차' },
+  //...
+
+  //역할
+  ENGINEER: { type: 'role', en: 'engineer', ko: '공병' },
+  MEDIC: { type: 'role', en: 'medic', ko: '치료' },
+  //...
+
+  //차량 종류
+  MEDIUM_TANK: { type: 'vehicle-classification', en: 'medium_tank', ko: '중형전차' },
+  TANK_DESTROYER: { type: 'vehicle-classification', en: 'tank_destroyer', ko: '구축전차' },
+
+  //...
+};
+```
+
+`type`속성은 커스텀필터의 분류입니다. 필터링할 때 `type`속성이 같을경우 OR, 다를경우 AND로 처리됩니다.
+<br>
+예를들어 '대보병', '대전차'를 체크하면 대보병 유닛과 대전차 유닛이 한번에 검색됩니다.
+<br>
+'대전차', '중형전차'를 체크하면 대전차 유닛이면서 중형전차인 유닛만 검색됩니다.
+
+`en`과 `ko`속성은 필터의 영어이름과 한글이름입니다.
+
+### 커스텀필터 제공
+
+json파일을 맵핑하여 모델객체를 생성하는 과정에서 게임데이터에 없는 데이터를 추가하는 단계가 있습니다. 이 단계에서 모델객체에 커스텀필터가 추가됩니다.
+
+```ts
+const mapSquad = (squadId: string, file: any, additionalData: AdditionalData): Squad => {
+  const squad: Squad = createInitSquad(squadId);
+  //mapping...
+  squad.filters = additionalData.filters ?? [];
+  //mapping...
+};
+```
+
+### 필터링
+
+```ts
+const filters: { anti: string[]; role: string[] } = {
+  anti: [],
+  role: [],
+};
+
+const addFilter = (filter: Filter) => {
+  if (filter.type === 'anti') fiters.anit.push(filter.en);
+  if (filter.type === 'role') fiters.role.push(filter.en);
+};
+
+addFilter(FILTER_TABLE.ANTI_INFANTRY);
+addFilter(FILTER_TABLE.ANTI_TANK);
+addFilter(FILTER_TABLE.MEDIUM_TANK);
+
+//필터링
+const squads = getSquads().filter((squad) => {
+  let isMatchAnti = filters.anti.length > 0 ? false : true;
+  let isMatchRole = filters.role.length > 0 ? false : true;
+
+  for (const filter of filters.anti) {
+    if (squad.filters.includes(filter)) {
+      isMatchAnti = true;
+      break;
+    }
+  }
+
+  for (const filter of filters.role) {
+    if (squad.filters.includes(filter)) {
+      isMatchRole = true;
+      break;
+    }
+  }
+
+  return isMatchAnti && isMatchRole;
+});
+```
+
+filters는 체크된 필터를 담는 객체입니다. addFilter로 필터를 추가합니다.<br>
+filters에 추가된 필터를 기반으로 필터링 됩니다.
+
 ## 게임 데이터와 이미지
 
 게임 데이터와 이미지는 추출기 가이드에 따라 추출하여 사용합니다.

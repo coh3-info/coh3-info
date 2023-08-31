@@ -1,18 +1,3 @@
-- [COH3 Info](#coh3-info)
-  - [목표](#--)
-  - [기술 스택](#-----)
-    - [클라이언트](#-----)
-    - [배포](#--)
-  - [개발 환경 실행법](#---------)
-  - [게임 데이터를 다루는 법](#-------------)
-    - [데이터 맵핑 흐름도](#----------)
-    - [추출된 데이터 json파일](#--------json--)
-    - [모델 객체](#-----)
-    - [Stats 객체](#stats---)
-  - [게임 데이터와 이미지](#-----------)
-    - [데이터 추출기](#-------)
-    - [이미지 추출기](#-------)
-
 # COH3 Info
 
 ![release version label](https://img.shields.io/static/v1?label=release&message=v0.1.5&color=blue&style=flat-square)
@@ -388,6 +373,10 @@ const squads = getSquads().filter((squad) => {
 
 filters는 체크된 필터를 담는 객체입니다. addFilter로 필터를 추가합니다.<br>
 filters에 추가된 필터를 기반으로 필터링 됩니다.
+
+### 유연한 수정
+
+이렇게 구조를 잡은 이유는 좀 더 유연하게 수정하기 위함입니다. 필터의 `type`을 바꾸고싶다면 FILTER_TABLE내부에서 바꾸면 됩니다. 필터를 상징하는 icon을 넣고싶다면 icon속성을 추가해주면 됩니다.
 
 ## 게임 데이터와 이미지
 

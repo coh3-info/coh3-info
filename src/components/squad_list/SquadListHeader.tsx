@@ -269,6 +269,7 @@ const ResetFilterButton = styled.button`
   height: min-content;
   padding: 5px;
   font-size: 0.75rem;
+  word-break: keep-all;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.main.hoverBg};

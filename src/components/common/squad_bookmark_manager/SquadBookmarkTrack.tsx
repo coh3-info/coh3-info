@@ -73,7 +73,7 @@ const BookmarkToggleButton = styled.button<{ isVisible: boolean }>`
   height: 30px;
   aspect-ratio: 1/1;
   background: url(${toggleArrow}) no-repeat center / 14px;
-  ${({ isVisible }) => isVisible && 'transform: rotate(180deg);'}
+  transform: rotate(${({ isVisible }) => (isVisible ? '0' : '180deg')});
   border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
 

@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import SquadBookmarkManager from './SquadBookmarkManager';
+
+import toggleArrow from '../../../images/icons/common/toggle-arrow.svg';
 
 const SquadBookmarkManagerTrack = () => {
   const [isBookmarkVisible, setIsBokkmarkVisible] = useState(false);
@@ -18,7 +21,10 @@ const SquadBookmarkManagerTrack = () => {
           ) : (
             <LinkToSquadListButton to="/compare/squad-list">유닛 목록보기</LinkToSquadListButton>
           )}
-          <BookmarkToggleButton onClick={() => setIsBokkmarkVisible((prev) => !prev)}>O</BookmarkToggleButton>
+          <BookmarkToggleButton
+            isVisible={isBookmarkVisible}
+            onClick={() => setIsBokkmarkVisible((prev) => !prev)}
+          ></BookmarkToggleButton>
         </SquadBookmarkManagerThumbHeader>
         <SquadBookmarkManagerWrapper isVisible={isBookmarkVisible}>
           <SquadBookmarkManager />
@@ -62,9 +68,12 @@ const SquadBookmarkManagerThumbHeader = styled.div`
   margin-bottom: 10px;
 `;
 
-const BookmarkToggleButton = styled.button`
+const BookmarkToggleButton = styled.button<{ isVisible: boolean }>`
   display: none;
-  background-color: transparent;
+  height: 30px;
+  aspect-ratio: 1/1;
+  background: url(${toggleArrow}) no-repeat center / 14px;
+  ${({ isVisible }) => isVisible && 'transform: rotate(180deg);'}
   border: solid 1px ${({ theme }) => theme.colors.main.border};
   border-radius: 6px;
 
